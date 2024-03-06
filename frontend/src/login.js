@@ -11,12 +11,13 @@ function Login() {
             .then(res => console.log(res))
             .catch(err => console.log(err))
     }
+
   return (
     <div className='d-flex vh-100 justify-content-center align-items-center'>
       <div className='p-5 bg-white w-25'>
             <form onSubmit={handleSubmit}>
                 <div className='mb-3'>
-                    <label htmlFor='email' className=''>Email </label>
+                    <label htmlFor='email' className=''>Email: </label>
                     <input type= 'email' placeholder='vv:email@gmai.com' className='form-control' onChange={e =>setEmail(e.target.value)}/>
                 </div>
 
