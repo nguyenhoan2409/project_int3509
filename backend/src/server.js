@@ -18,6 +18,7 @@ require('./routes/account.router')(app)
 //app.use(_AuthMiddleWare.isAuth)
 require('./routes/product.router')(app)
 require('./routes/user.router')(app)
+require('./routes/score.router')(app)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

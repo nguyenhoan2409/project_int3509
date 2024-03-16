@@ -84,7 +84,7 @@ exports.register = function(req, res) {
     const phone_number = req.body.phone_number
     const address = req.body.address
     const role_id = 2
-    db.query("INSERT INTO users (password, fullname, email, phone_number, address, role_id) VALUES (?,?,?,?,?,?)", [password, fullname, email, phone_number, address, role_id], (err, ressult) => {
+    db.query("INSERT INTO users (password, fullname, email, phone_number, address, role_id) VALUES (?,?,?,?,?,?)", [password, fullname, email, phone_number, address, role_id], (err, res) => {
             if(err) {console.log(err)}
             else res.json("Bạn đã tạo tài khoản thành công")
     })
