@@ -1,44 +1,63 @@
-var user = require('../models/user.model')
 var JWT = require("../common/jwt")
-var db = require("../common/connect")
-exports.get_list = function (req, res) {
-    db.query("SELECT *FROM users", function(err, users){
-        if(err) {
-           return res.json("Không có người dùng nào")
-        } else
-            return res.send(users)
-    })
-}
-exports.detail = function (req, res) {
-    const user_id = req.params.id
-    db.query("SELECT * FROM users WHERE user_id = ?",user_id, function(err, user) {
-        if(err || user.length == 0) {
-           return res.json("Không tồn tại người dùng")
-        } else {
-           return res.send(user)
-        }
-       })
+var { database } = require("../common/connect")
+const { QueryTypes } = require("sequelize")
+
+exports.get_list = async function (req, res) {
+    try {
+        const users = await database.query("SELECT * FROM users", { type: QueryTypes.SELECT })
+        return res.status(200).json(users);
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
 }
 
-exports.remove_user = function (req, res) {
-    var user_id = req.params.id
-    db.query("DELETE FROM users WHERE user_id=?", user_id, function(err) {
-        if(err) {
-            return res.json(null)
-        } else {
-            return res.json("Xóa người dùng thành công")
-        }
-    }) 
+exports.userDetail = async function (req, res) {
+    try {
+        const user_id = req.params.id
+        const userDetail = await database.query("SELECT * FROM users WHERE user_id = :user_id", {
+            replacements: {
+                user_id: user_id
+            }, type: QueryTypes.SELECT
+        })
+        return res.status(200).json(userDetail);
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
 }
 
-exports.update_user = function (req, res) {
-    db.query("UPDATE users SET password=?, fullname=?, email=?, phone_number=?, address=?, role_id=? WHERE user_id = ?", [req.body.password, req.body.fullname, req.boy.email, req.body.phone_number, req.body.address, req.body.role_id, req.body.user_id], function(err, users) {
-        if(err) {
-            return res.json(err,null)
-        } else {
-            return res.send("Cập nhật người dùng thành công")
-        }
-    }) 
+exports.remove_user = async function (req, res) {
+    try {
+        var user_id = req.params.id
+        await database.query("DELETE FROM users WHERE user_id=:user_id", {
+            replacements: {
+                user_id: user_id
+            }, type: QueryTypes.DELETE
+        })
+        return res.status(200).json({ msg: "Đã xóa người dùng thành công" });
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
+
+}
+
+exports.update_user = async function (req, res) {
+    try {
+        await database.query("UPDATE users SET password=:password, fullname=:fullname, email=:email, phone_number=:phone_number, address=:address, role_id =:role_id WHERE user_id =: user_id ",
+            {
+                replacements: {
+                    password: req.body.password,
+                    fullname: req.body.fullname,
+                    email: req.body.email,
+                    phone_number: req.body.phone_number,
+                    address: req.body.address,
+                    role_id: req.body.role_id,
+                    user_id: req.params.id
+                }, type: QueryTypes.UPDATE
+            })
+        return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" })
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
 }
 
 /*  
@@ -54,38 +73,52 @@ exports.login = function (req, res) {
 }
 */
 
-exports.login = function(req,res) {
-    const sql = "SELECT * FROM users WHERE email=? AND password=?"
-    db.query(sql,[req.body.email, req.body.password], (err, data) => {
-        if(err) return res.json("Lỗi đăng nhập")
-        if(data.length > 0 ) {
-            return res.json("Đăng nhập thành công")
-        } else {
-            return res.json("Bạn chưa tạo tài khoản")
-        }
-    })
-       
+exports.login = async function (req, res) {
+    try {
+        const user = await database.query("SELECT * FROM users WHERE email=:email AND password=:password",
+            {
+                replacements: {
+                    email: req.body.email,
+                    password: req.body.password
+                },
+                type: QueryTypes.SELECT
+            })
+        if (user.length > 0) return res.status(200).json({ msg: "Bạn đã đăng nhập thành công" })
+        else return res.status(200).json({ msg: "Bạn chưa tạo tài khoản" })
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
 }
-/*
-user.check_login = function(data, result) {
-    db.query("SELECT * FROM users WHERE email = ? AND password = ?", [data.email, data.password], function(err, user) {
-        if(err || user.length == 0) {
-            result(null)
-        } else {
-            result(user)
-        }
-       })
-}*/
 
-exports.register = function(req, res) {
-    const password = req.body.password
-    const fullname = req.body.fullname
-    const email = req.body.email
-    const phone_number = req.body.phone_number
-    const address = req.body.address
-    const role_id = 2
-    db.query("INSERT INTO users (password, fullname, email, phone_number, address, role_id) VALUES (?,?,?,?,?,?)", [password, fullname, email, phone_number, address, role_id], (err, res) => {
-            if(err) {console.log(err)}
-            else res.json("Bạn đã tạo tài khoản thành công")
-    })
-}
+exports.register = async function (req, res) {
+    try {
+        var checkEmail = await database.query("SELECT *FROM users WHERE email=:email", {
+            replacements: {
+                email : req.body.email
+            }, type: QueryTypes.SELECT
+        })
+        console.log(checkEmail)
+        if(checkEmail.length > 0 ) {
+            return res.status(200).json({ msg: "Tài khoản đã tồn tại" })
+        } 
+        else {
+             try {
+                await database.query("INSERT INTO users (password, fullname, email, phone_number, address, role_id) VALUES (:password, :fullname, :email, :phone_number, :address, :role_id)", {
+                    replacements: {
+                        password: req.body.password,
+                        fullname: req.body.fullname,
+                        email: req.body.email,
+                        phone_number: req.body.phone_number,
+                        address: req.body.address,
+                        role_id: 2
+                    }, type: QueryTypes.INSERT
+                })
+                return res.status(200).json({ msg: "Bạn đã tạo tài khoản thành công" })}
+             catch(error) {
+                return res.status(400).json({ msg: error })
+            }
+        }
+    } catch {
+        return res.status(400).json({ msg: error })
+    }
+    }
