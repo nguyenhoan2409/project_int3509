@@ -118,7 +118,7 @@ exports.register = async function (req, res) {
                 return res.status(400).json({ msg: error })
             }
         }
-    } catch {
+    } catch(error) {
         return res.status(400).json({ msg: error })
     }
     }
