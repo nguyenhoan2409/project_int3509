@@ -1,13 +1,43 @@
-const db = require('../common/connect')
-const user = function(user) {
-        this.user_id = user.user_id
-        this.username = user.username
-        this.password = user.password
-        this.fullname = user.fullname
-        this.email = user.email
-        this.phone_number = user.password
-        this.address = user.address
-        this.role_id = user.role_id
-}
+const { database } = require("../common/connect");
+
+const { DataTypes } = require("sequelize");
+const user = database.define(
+        "users",
+        {
+                user_id: {
+                        type: DataTypes.INTEGER, 
+                        allowNull: false, 
+                        primaryKey: true
+                },
+                username: {
+                        type: DataTypes.STRING, 
+                        allowNull: true,
+                },
+                password: {
+                        type: DataTypes.STRING, 
+                        allowNull: true,
+                },
+                fullname: {
+                        type: DataTypes.STRING, 
+                        allowNull: true,
+                },
+                email: {
+                        type: DataTypes.STRING, 
+                        allowNull: true,
+                },
+                phone_number: {
+                        type: DataTypes.STRING, 
+                        allowNull: true,
+                },
+                address: {
+                        type: DataTypes.STRING, 
+                        allowNull: true,
+                },
+                role_id: {
+                        type: DataTypes.INTEGER, 
+                        allowNull: true,
+                }
+        }
+)
 
 module.exports = user
