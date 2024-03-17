@@ -1,14 +1,23 @@
-var mysql = require('mysql')
+const { Sequelize } = require("sequelize");
+const dotenv = require('dotenv'); 
+ 
 
-var connection = mysql.createConnection({
-    host : 'localhost',
-    user: 'root',
-    password: '',
-    database: 'duan'
+dotenv.config(); 
+const database = new Sequelize(
+    process.env.DATABASE_NAME, 
+    process.env.DATABASE_USERNAME, 
+    process.env.DATABASE_PASSWORD, 
+    {
+        dialect:'mysql',
+        host:'localhost'
+    }
+); 
+
+database.authenticate().then(() => {
+    console.log('Successfully connected to the databse!')
+}).catch(err => {
+    console.log('Unable to connect to the databse: '+ err)
 })
 
-connection.connect(function(err, connection) {
-    if(err) console.log("Kết nối CSDL không thành công")
-})
 
-module.exports = connection
+module.exports = {database}; 
