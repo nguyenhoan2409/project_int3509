@@ -1,15 +1,46 @@
-const db = require('../common/connect')
-const product = function(product) {
-    this.product_id = product.product_id
-    this.category_id = product.category_id
-    this.product_name = product.product_name
-    this.price = product.price
-    this.quantity = product.quantity
-    this.thumbnail = product.thumbnail
-    this.description = product.description
-    this.status = product.status
-}
+const { DataTypes } = require("sequelize");
+const { database } = require("../common/connect");
 
+const Products = database.define(
+  "products",
+  {
+    product_id: {
+        type: DataTypes.INTEGER, 
+        allowNull: false, 
+        primaryKey: true
+    },
+    category_id: {
+        type: DataTypes.INTEGER, 
+        allowNull: true,
+    },
+    product_name: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
+    price: {
+        type: DataTypes.INTEGER, 
+        allowNull: true,
+    },
+    quantity: {
+        type: DataTypes.INTEGER, 
+        allowNull: true,
+    },
+    thumbnail: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
+    description: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
+    status: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
 
-module.exports = product
-
+module.exports = Products
