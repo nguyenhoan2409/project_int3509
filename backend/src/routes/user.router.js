@@ -6,7 +6,7 @@ module.exports = function (router) {
 
     router.get('/user/list', userController.get_list)
 
-    router.get('/user/detail/:id', userController.detail)
+    router.get('/user/detail/:id', userController.userDetail)
 
     router.delete('/user/delete/:id', userController.remove_user)
 
