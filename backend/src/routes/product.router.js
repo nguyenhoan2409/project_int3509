@@ -10,7 +10,7 @@ module.exports = function (router) {
 
     router.post('/product/add', productController.add_product)
 
-    router.delete('/product/delete/:id', productController.remove_product)
+    //router.delete('/product/delete/:id', productController.remove_product)
 
     router.put('/product/update', productController.update_product)
 
