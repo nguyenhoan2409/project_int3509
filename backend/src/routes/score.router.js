@@ -8,6 +8,7 @@ module.exports = function (router) {
     router.get('/score/list', scoreController.getAllScore)
     router.get('/score/search/:id', scoreController.searchScore)
     router.put('/score/update', scoreController.updateScore)
-    router.put('/score/CDR', scoreController.getCDR)
+    router.put('/score/CDR', scoreController.updateCDR)
     router.get('/score/check/:id',scoreController.checkCDR)
+    router.delete('/score/delete/list', scoreController.deleteSTudentList)
 }
