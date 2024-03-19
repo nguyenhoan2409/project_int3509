@@ -17,7 +17,7 @@ export const Navbar = () => {
       <ul className="nav-menu">
         <li onClick={()=> {setMenu("home")}}><Link style={{textDecoration: 'none'}} to = '/'>Trang chủ</Link>{menu==="home"?<hr/>:<></>}</li>
         <li onClick={()=> {setMenu("product")}}><Link style={{textDecoration: 'none'}} to = '/product'>Dụng cụ</Link>{menu==="product"?<hr/>:<></>}</li>
-        <li onClick={()=> {setMenu("uniform")}}><Link style={{textDecoration: 'none'}} to = '/uniform'>Đồng phục</Link>{menu==="uniform"?<hr/>:<></>}</li>
+        <li onClick={()=> {setMenu("score")}}><Link style={{textDecoration: 'none'}} to = '/score'>Điểm</Link>{menu==="score"?<hr/>:<></>}</li>
         <li onClick={()=> {setMenu("request")}}><Link style={{textDecoration: 'none'}} to = '/request'>Yêu cầu</Link>{menu==="request"?<hr/>:<></>}</li>
         <li onClick={()=> {setMenu("profile")}}><Link style={{textDecoration: 'none'}} to = '/profile'>Thông tin cá nhân</Link>{menu==="profile"?<hr/>:<></>}</li>
       </ul>
