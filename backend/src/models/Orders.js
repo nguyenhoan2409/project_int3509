@@ -26,6 +26,10 @@ const Orders = database.define(
         type: DataTypes.INTEGER, 
         allowNull: true,
     },
+    timeline: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
     rental_time: {
         type: DataTypes.STRING, 
         allowNull: true,

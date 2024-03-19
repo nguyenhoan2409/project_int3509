@@ -13,6 +13,10 @@ const Products = database.define(
         type: DataTypes.INTEGER, 
         allowNull: true,
     },
+    product_type: {
+        type: DataTypes.INTEGER, 
+        allowNull: true,
+    },
     product_name: {
         type: DataTypes.STRING, 
         allowNull: true,
