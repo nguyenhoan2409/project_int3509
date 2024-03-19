@@ -1,28 +1,35 @@
 .hero {
-    height: 150vh;
+    height: 350vh;
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(180deg, #94b4eb, #e1ffea22 60%);
+    background: linear-gradient(450deg, #94b4eb, #e1ffea22 100%);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
-
+.hero-main {
+    margin-top: 25px;
+    margin-left: 35px;
+    margin-right: 35px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 .hero-title {
     justify-content: center;
     align-items: center;
     line-height: 1.1;
-    gap: 20px;
     padding-left: 200;
-}
-
-.hero h2 {
-    color: #090909;
-    font-size: 26px ;
     font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20px;
 }
-
+.hero-text {
+    font-weight: 600;
+    font-size: 18px;
+}
 .hero-left p {
     color: #171717;
     font-size: 100px;
