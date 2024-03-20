@@ -10,6 +10,7 @@ import { ShopCategory } from "./Pages/Shop/ShopCategory";
 import { Footer } from "./Components/Footer/Footer";
 import uniform_banner from "~/Components/Assets/banner_uniform.png"
 import { LoginSignup } from "./Pages/LoginSignup/LoginSignup";
+import { CreateRequest } from "./Pages/Request/CreateRequest";
 
 
 
@@ -22,6 +23,7 @@ function App() {
               <Route path='/uniforms' element={<ShopCategory banner={uniform_banner} category="uniform"/>}></Route>
               <Route path='/tools' element={<ShopCategory banner={uniform_banner} category="tool"/>}></Route>
               <Route path='/request' element={<Request/>}></Route>
+              <Route path='/create-request' element={<CreateRequest/>}></Route>
               <Route path='/schedule' element={<Schedule/>}></Route>
               <Route path='/profile' element={<Profile/>}></Route>
 

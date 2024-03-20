@@ -57,7 +57,7 @@
   width: 100%;
 }
 
-ul {
+.nav-menu-container ul {
   margin: 0;
   padding: 0;
   display: flex;
@@ -65,7 +65,7 @@ ul {
   gap: 3rem;
 }
 
-li {
+.nav-menu-container li {
   list-style-type: none;
   position: relative;
   padding: 0.625rem 0 0.5rem;
@@ -73,7 +73,7 @@ li {
   position: relative;
 }
 
-li ul {
+.nav-menu-container li ul {
   flex-direction: column;
   position: absolute;
   background-color: white;
@@ -92,8 +92,8 @@ li ul {
   z-index: 100;
 }
 
-ul li:hover > ul,
-ul li ul:hover {
+.nav-menu-container ul li:hover > ul,
+.nav-menu-container ul li ul:hover {
   visibility: visible;
   opacity: 1;
   display: flex;

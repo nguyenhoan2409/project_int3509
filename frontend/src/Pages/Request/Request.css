@@ -11,3 +11,13 @@
     font-weight: 600;
     margin: 20px 0 10px 10px;
 }
+
+.createRequestContainer {
+    font-family: "Work Sans", sans-serif;
+    margin: 10px 100px 0 100px;
+}
+
+.createRequestTitle {
+    margin-bottom: 10px;
+    font-size: large;
+}

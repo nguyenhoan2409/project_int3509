@@ -4,7 +4,7 @@ import "./Navbar.css";
 import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
 import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
 import { Link } from "react-router-dom";
-import { AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineUser, AiOutlineLogout, AiFillCaretDown } from "react-icons/ai";
 
 export const Navbar = () => {
   return (
@@ -37,6 +37,7 @@ export const Navbar = () => {
           </li>
           <li>
             <img src={defaultAvatar} class="img-profile" />
+            <AiFillCaretDown color="rgba(186, 149, 149, 0.4)" size={18} style={{paddingBottom: 10}}/>
             <ul className="sub-item-container">
               <li class="sub-item">
                 <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
