@@ -9,15 +9,13 @@ export const Footer = () => {
     <div className='footer'>
         <div className="footer-logo">
             <img src={footer_logo} alt="" />
-            <p>PHYSICAL EDUCATION</p>
+            <p>TRUNG TÂM GIÁO DỤC THỂ CHẤT & THỂ THAO VNU</p>
         </div>
         
         <ul className="footer-links">
-            <li>About</li>
-            <li>Contact</li>
-            <li>Contact</li>
-            <li>Contact</li>
-            <li>Contact</li>
+            <li>Địa chỉ: 144 Xuân Thủy, Cầu Giấy, Hà Nội </li>
+            <li>Website: ttgdtc.vnu.edu.vn </li>
+            
         </ul>
 
         <div className="footer-social-icon">
@@ -32,7 +30,7 @@ export const Footer = () => {
 
         <div className="footer-copyright">
             <hr/>
-            <p>Copyright @ 2023 - All Right Reserverd</p>
+            <p>Copyright @ 2024 - All Right Reserverd</p>
         </div>
     </div>
   )

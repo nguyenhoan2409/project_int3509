@@ -1,47 +1,37 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./Components/Navbar/Navbar";
-import { Shop } from "~/Pages/Shop/Shop";
+import { Home } from "~/Pages/Home/home";
 import { Request } from "./Pages/Request/Request";
-import { Schedule } from "./Pages/Schedule/Schedule";
+import { Score } from "./Pages/Score/Score";
 import { Profile } from "./Pages/Profile/Profile";
+import { ShopCategory } from "./Pages/Product/ShopCategory";
 import { Product } from "./Pages/Product/Product";
-import { ShopCategory } from "./Pages/Shop/ShopCategory";
 import { Footer } from "./Components/Footer/Footer";
-import uniform_banner from "~/Components/Assets/banner_uniform.png"
-import { LoginSignup } from "./Pages/LoginSignup/LoginSignup";
+import {Signup } from "./Pages/LoginSignup/Signup";
+import {Login} from "./Pages/LoginSignup/Login";
 import { CreateRequest } from "./Pages/Request/CreateRequest";
-
-
-import React from "react";
-
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+        <Navbar />
         <Routes>
-              <Route path='/' element={<Shop/>}></Route>
-              <Route path='/uniforms' element={<ShopCategory banner={uniform_banner} category="uniform"/>}></Route>
-              <Route path='/tools' element={<ShopCategory banner={uniform_banner} category="tool"/>}></Route>
-              <Route path='/request' element={<Request/>}></Route>
-              <Route path='/create-request' element={<CreateRequest/>}></Route>
-              <Route path='/schedule' element={<Schedule/>}></Route>
-              <Route path='/profile' element={<Profile/>}></Route>
+          <Route path='/home' element={<Home/>}></Route>
+          <Route path='/score' element={<Score/>}></Route>
+          <Route path='/request' element={<Request/>}></Route>
+          <Route path='/create-request' element={<CreateRequest/>}></Route>
+          <Route path='/profile' element={<Profile/>}></Route>
+          <Route path='/product' element={<ShopCategory />}>  
+             <Route path=':productId' element={<Product />}> </Route>
+          </Route>
 
-              <Route path='/product' element={<Product/>}>
-                <Route path=':productId' element={<Product/>}></Route>
-              </Route>
-
-              <Route path='/login' element={<LoginSignup/>}>
-                
-              </Route>
+          <Route path='/login' element={<Login />}> </Route>
+          <Route path='/signup' element={<Signup />}> </Route>
         </Routes>
-        <Footer/>
-    </BrowserRouter>
+        <Footer />
+      </BrowserRouter>
     </div>
-    
-  
   );
 }
 

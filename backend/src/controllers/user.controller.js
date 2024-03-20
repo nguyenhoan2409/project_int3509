@@ -97,7 +97,6 @@ exports.register = async function (req, res) {
                 email : req.body.email
             }, type: QueryTypes.SELECT
         })
-        console.log(checkEmail)
         if(checkEmail.length > 0 ) {
             return res.status(200).json({ msg: "Tài khoản đã tồn tại" })
         } 
@@ -108,8 +107,8 @@ exports.register = async function (req, res) {
                         password: req.body.password,
                         fullname: req.body.fullname,
                         email: req.body.email,
-                        phone_number: req.body.phone_number,
-                        address: req.body.address,
+                        phone_number: '' ,
+                        address: '' ,
                         role_id: 2
                     }, type: QueryTypes.INSERT
                 })

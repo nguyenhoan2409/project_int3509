@@ -127,7 +127,8 @@ exports.score = async function (req, res) {
 exports.getAllScore = async function (req, res) {
     try {
        var data = await database.query("SELECT *FROM physicalscore", {type: QueryTypes.SELECT})
-       return res.status(200).json({ data })
+       console.log(data.length)
+       return res.status(200).json(data)
     }  catch(error) {
         return res.status(400).json({ msg: error })
     }
@@ -142,7 +143,7 @@ exports.searchScore = async function (req, res) {
                 mssv : mssv
             }, type : QueryTypes.SELECT
         })
-        return res.status(200).json({ student })
+        return res.status(200).json(student)
     } catch(error) {
         return res.status(400).json({ msg: error })
     }
@@ -162,7 +163,7 @@ exports.updateScore = async function (req, res) {
             golf_score: req.body.golf_score,
             mssv: req.body.mssv
         }, type: QueryTypes.UPDATE})
-        return res.status(200).json({ student })
+        return res.status(200).json(student)
     } catch(error) {
         return res.status(400).json({ msg: error })
     }
@@ -185,7 +186,7 @@ exports.updateCDR = async function (req, res) {
         if(list[i].taekwondo_score >= 4) count++
         if(list[i].golf_score >= 4) count++
         if(count >= 4) {
-            let CDR = 1
+            let CDR = 'Đạt'
             database.query("UPDATE physicalscore SET CDR=:CDR WHERE mssv =:mssv", {
                 replacements: {
                     mssv: mssv,
@@ -208,7 +209,7 @@ exports.checkCDR = async function (req, res) {
             }, type: QueryTypes.SELECT
         })
         let CDR = check[0].CDR
-        if (CDR == 1) {
+        if (CDR == 'Đạt') {
             return res.status(200).json({ msg: "Bạn đã đạt chuẩn đầu ra" })
         } else {
             return res.status(200).json({ msg: "Bạn chưa đạt chuẩn đầu ra" })
