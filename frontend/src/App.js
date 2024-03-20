@@ -10,6 +10,8 @@ import { Product } from "./Pages/Product/Product";
 import { Footer } from "./Components/Footer/Footer";
 import {Signup } from "./Pages/LoginSignup/Signup";
 import {Login} from "./Pages/LoginSignup/Login";
+import { AccountSetting } from "./Components/UserProfile/AccountSettings";
+
 
 
 
@@ -19,15 +21,14 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path='/login' element={<Login />}> </Route>
           <Route path='/home' element={<Home/>}></Route>
           <Route path='/score' element={<Score/>}></Route>
           <Route path='/request' element={<Request/>}></Route>
-          <Route path='/profile' element={<Profile/>}></Route>
+          <Route path='/user/:activepage' element={<Profile/>}></Route>
           <Route path='/product' element={<ShopCategory />}>  
              <Route path=':productId' element={<Product />}> </Route>
           </Route>
-
-          <Route path='/login' element={<Login />}> </Route>
           <Route path='/signup' element={<Signup />}> </Route>
         </Routes>
         <Footer />
