@@ -14,8 +14,7 @@ import { CreateRequest } from "./Pages/Request/CreateRequest";
 
 
 import React from "react";
-import Login from "./login";
-import Register from "./register";
+
 
 function App() {
   return (
@@ -40,7 +39,6 @@ function App() {
         </Routes>
         <Footer/>
     </BrowserRouter>
-      <Register/>
     </div>
     
   
