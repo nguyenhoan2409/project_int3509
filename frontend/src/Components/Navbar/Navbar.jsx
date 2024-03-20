@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
 
-  const [menu, setMenu] = useState("home");
+  const [menu, setMenu] = useState("login");
   return (
     <div className="navbar">
       <div className="nav-logo">
@@ -19,7 +19,7 @@ export const Navbar = () => {
         <li onClick={()=> {setMenu("product")}}><Link style={{textDecoration: 'none'}} to = '/product'>Sản phẩm</Link>{menu==="product"?<hr/>:<></>}</li>
         <li onClick={()=> {setMenu("score")}}><Link style={{textDecoration: 'none'}} to = '/score'>Tra cứu điểm</Link>{menu==="score"?<hr/>:<></>}</li>
         <li onClick={()=> {setMenu("request")}}><Link style={{textDecoration: 'none'}} to = '/request'>Yêu cầu</Link>{menu==="request"?<hr/>:<></>}</li>
-        <li onClick={()=> {setMenu("profile")}}><Link style={{textDecoration: 'none'}} to = '/profile'>Hi, Trang</Link>{menu==="profile"?<hr/>:<></>}</li>
+        <li onClick={()=> {setMenu("profile")}}><Link style={{textDecoration: 'none'}} to = '/user/:activepage'>Thông tin cá nhân</Link>{menu==="profile"?<hr/>:<></>}</li>
       </ul>
 
       <div className="nav-login-cart">
