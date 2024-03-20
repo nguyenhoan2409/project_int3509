@@ -9,7 +9,8 @@ import { ShopCategory } from "./Pages/Product/ShopCategory";
 import { Product } from "./Pages/Product/Product";
 import { Footer } from "./Components/Footer/Footer";
 import uniform_banner from "~/Components/Assets/banner_uniform.png"
-import { LoginSignup } from "./Pages/LoginSignup/LoginSignup";
+import {Signup } from "./Pages/LoginSignup/Signup";
+import {Login} from "./Pages/LoginSignup/Login";
 
 
 
@@ -19,16 +20,15 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />}></Route>
+          <Route path='/home' element={<Home/>}></Route>
           <Route path='/score' element={<Score/>}></Route>
           <Route path='/request' element={<Request/>}></Route>
           <Route path='/profile' element={<Profile/>}></Route>
           <Route path='/product' element={<ShopCategory banner={uniform_banner} category="uniform" />}>  <Route path=':productId' element={<Product />}></Route>
           </Route>
 
-          <Route path='/login' element={<LoginSignup />}>
-
-          </Route>
+          <Route path='/login' element={<Login />}> </Route>
+          <Route path='/signup' element={<Signup />}> </Route>
         </Routes>
         <Footer />
       </BrowserRouter>
