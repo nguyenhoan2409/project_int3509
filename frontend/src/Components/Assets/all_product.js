@@ -1,168 +1,105 @@
-import p1_img from "./product_1.png";
-import p2_img from "./product_2.png";
-import p3_img from "./product_3.png";
-import p4_img from "./product_4.png";
-import p5_img from "./product_5.png";
-import p6_img from "./product_6.png";
-import p7_img from "./product_7.png";
-import p8_img from "./product_8.png";
-import p9_img from "./product_9.png";
-import p10_img from "./product_10.png";
-import p11_img from "./product_11.png";
-import p12_img from "./product_12.png";
-import p13_img from "./product_13.png";
-import p14_img from "./product_14.png";
-import p15_img from "./product_15.png";
-import p16_img from "./product_16.png";
-import p17_img from "./product_17.png";
-import p18_img from "./product_18.png";
-import p19_img from "./product_19.png";
-import p20_img from "./product_20.png";
+import p1_img from "./bongro.png";
+import p2_img from "./bongda.png";
+import p3_img from "./bongban.png";
+import p4_img from "./bongchuyenhoi.png";
+import p5_img from "./bongchuyenda.png";
+import p6_img from "./day.png";
+import p7_img from "./sanbongdaA.png";
+import p8_img from "./sanbongdaB.png";
+import p9_img from "./sanbongroA.png";
+import p10_img from "./sanbongroB.png";
+import p11_img from "./sanbongroC.png";
+import p12_img from "./uniform.jpg"
+
 
 
 let all_product = [
   {
     id: 1,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Bóng rổ",
+    category: "product",
     image: p1_img,
-    price: 50.0
+    order: "Mượn"
   },
   {
     id: 2,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Bóng đá",
+    category: "product",
     image: p2_img,
-    price: 85.0,
+    order: "Mượn"
   },
   {
     id: 3,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Bóng bàn",
+    category: "product",
     image: p3_img,
-    price: 60.0,
+    order: "Mượn"
   },
   {
     id: 4,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Bóng chuyền hơi",
+    category: "product",
     image: p4_img,
-    price: 100.0,
+    order: "Mượn"
   },
   {
     id: 5,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "bóng chuyền da",
+    category: "product",
     image: p5_img,
-    price: 85.0,
+    order: "Mượn"
   },
   {
     id: 6,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Dây nhảy",
+    category: "product",
     image: p6_img,
-    price: 85.0,
+    order: "Mượn"
   },
   {
     id: 7,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Sân bóng đá A",
+    category: "football_ground",
     image: p7_img,
-    price: 85.0,
+    order: "Thuê"
 
   },
   {
     id: 8,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Sân bóng đá B",
+    category: "football_ground",
     image: p8_img,
-    price: 85.0,
+    order: "Thuê"
   },
   {
     id: 9,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Sân bóng rổ A",
+    category: "basketball_yard",
     image: p9_img,
-    price: 85.0,
+    order: "Thuê"
   },
   {
     id: 10,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Sân bóng rổ B",
+    category: "basketball_yard",
     image: p10_img,
-    price: 85.0,
+    order: "Thuê"
   },
   {
     id: 11,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Sân bóng rổ C",
+    category: "basketball_yard",
     image: p11_img,
-    price: 85.0,
+    order: "Thuê"
   },
   {
     id: 12,
-    name: "Striped Flutter Sleeve Overlap Collar Peplum Hem Blouse",
-    category: "uniform",
+    name: "Đồng phục VNU",
+    category: "product",
     image: p12_img,
-    price: 85.0,
-  },
-  {
-    id: 13,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p13_img,
-    price: 85.0,
-  },
-  {
-    id: 14,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p14_img,
-    price: 85.0,
-  },
-  {
-    id: 15,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p15_img,
-    price: 85.0,
-  },
-  {
-    id: 16,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p16_img,
-    price: 85.0,
-  },
-  {
-    id: 17,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p17_img,
-    price: 85.0,
-  },
-  {
-    id: 18,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p18_img,
-    price: 85.0,
-    old_price: 120.5,
-  },
-  {
-    id: 19,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p19_img,
-    price: 85.0,
-  },
-  {
-    id: 20,
-    name: "tool Green Solid Zippered Full-Zip Slim Fit Bomber Jacket",
-    category: "tool",
-    image: p20_img,
-    price: 85.0,
-  },
+    order: "Mua"
+  }, 
+ 
 ];
 
 export default all_product;

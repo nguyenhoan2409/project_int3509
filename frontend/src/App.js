@@ -24,7 +24,8 @@ function App() {
           <Route path='/score' element={<Score/>}></Route>
           <Route path='/request' element={<Request/>}></Route>
           <Route path='/profile' element={<Profile/>}></Route>
-          <Route path='/product' element={<ShopCategory banner={uniform_banner} category="uniform" />}>  <Route path=':productId' element={<Product />}></Route>
+          <Route path='/product' element={<ShopCategory />}>  
+             <Route path=':productId' element={<Product />}> </Route>
           </Route>
 
           <Route path='/login' element={<Login />}> </Route>

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom';
-import { Breadcum } from '~/Components/Breadcrums/Breadcum';
 import { ProductDisplay } from '~/Components/ProductDisplay/ProductDisplay';
 import { ShopContext } from '~/Context/ShopContext'
 
@@ -10,7 +9,6 @@ export const Product = () => {
   const product = all_product.find((e) => e.id === Number(productId))
   return (
     <div>
-      <Breadcum product={product}/>
       <ProductDisplay product={product}/>
     </div>
   )
