@@ -2,12 +2,14 @@ import React, { useContext } from 'react'
 import './ShopCategory.css'
 import { ShopContext } from '~/Context/ShopContext'
 import { Item } from '~/Components/Item/Item'
+import { Navbar } from '~/Components/Navbar/Navbar'
 
 export const ShopCategory = (props) => {
   const {all_product} = useContext(ShopContext);
 
   return (
     <div className="shop-category">
+      <Navbar />
       <img className='shopcategory-banner' src={props.banner} alt="" />
       <div className="shopcategory-products">
         {all_product.map((item, i)=> {

@@ -17,7 +17,6 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar/>
         <Routes>
               <Route path='/' element={<Shop/>}></Route>
               <Route path='/uniforms' element={<ShopCategory banner={uniform_banner} category="uniform"/>}></Route>

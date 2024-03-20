@@ -2,15 +2,22 @@ const Orders = require("../models/Orders");
 const Products = require("../models/Products");
 const moment = require('moment/moment');
 const Timeline = require("../models/Timeline");
-const { Op, or } = require("sequelize");
+const { Op, or, QueryTypes } = require("sequelize");
+const { database } = require("../config/database");
 
 exports.getAllOrder = async (req, res) => {
   try {
-    const orderList = await Orders.findAll({});
-    return res.status(200).json(orderList);
-  } catch (error) {
-    return res.status(500).json({ msg: "Lỗi không lấy được các order." });
-  }
+    const orders = await database.query(`
+        SELECT o.*, p.product_name, s.description
+        FROM orders o
+        LEFT JOIN products p ON o.product_id = p.product_id
+        LEFT JOIN status s ON o.status = s.status_id
+    `, { type: QueryTypes.SELECT });
+
+    return res.status(200).json(orders);
+} catch (error) {
+    return res.status(400).json({ msg: error });
+}
 };
 
 exports.getOrderById = async (req, res) => {

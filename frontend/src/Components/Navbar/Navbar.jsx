@@ -1,31 +1,55 @@
-import React, {useState} from 'react'
-import './Navbar.css'
+import React, { useState } from "react";
+import "./Navbar.css";
 
-import logo from  '~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png'
-import { Link } from 'react-router-dom';
-
+import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
+import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
+import { Link } from "react-router-dom";
+import { AiOutlineUser, AiOutlineLogout } from "react-icons/ai";
 
 export const Navbar = () => {
-
-  const [menu, setMenu] = useState("shop");
   return (
-    <div className="navbar">
+    <div className="navbar-container">
       <div className="nav-logo">
-        <img src={logo} alt="" />
+        <img src={logo} alt="" className="logo-img" />
       </div>
-        
-      <ul className="nav-menu">
-        <li onClick={()=> {setMenu("shop")}}><Link style={{textDecoration: 'none'}} to = '/'>Shop</Link>{menu==="shop"?<hr/>:<></>}</li>
-        <li onClick={()=> {setMenu("uniform")}}><Link style={{textDecoration: 'none'}} to = '/uniforms'>Uniforms</Link>{menu==="uniform"?<hr/>:<></>}</li>
-        <li onClick={()=> {setMenu("tool")}}><Link style={{textDecoration: 'none'}} to = '/tools'>Tools</Link>{menu==="tool"?<hr/>:<></>}</li>
-        <li onClick={()=> {setMenu("request")}}><Link style={{textDecoration: 'none'}} to = '/request'>Create Request</Link>{menu==="request"?<hr/>:<></>}</li>
-        <li onClick={()=> {setMenu("schedule")}}><Link style={{textDecoration: 'none'}} to = '/schedule'>Schedule</Link>{menu==="schedule"?<hr/>:<></>}</li>
-        <li onClick={()=> {setMenu("profile")}}><Link style={{textDecoration: 'none'}} to = '/profile'>Profile</Link>{menu==="profile"?<hr/>:<></>}</li>
-      </ul>
 
-      <div className="nav-login-cart">
-        <Link to ='/login'><button>Login</button></Link>
+      <div className="nav-menu-container">
+        <ul className="nav-menu">
+          <li>
+            <Link to="/" className="nav-link">
+              Trang chủ
+            </Link>
+          </li>
+          <li>
+            <Link to="/uniforms" className="nav-link">
+              Dụng cụ
+            </Link>
+          </li>
+          <li>
+            <Link to="/tools" className="nav-link">
+              Điểm
+            </Link>
+          </li>
+          <li>
+            <Link to="/request" className="nav-link">
+              Yêu cầu
+            </Link>
+          </li>
+          <li>
+            <img src={defaultAvatar} class="img-profile" />
+            <ul className="sub-item-container">
+              <li class="sub-item">
+                <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
+                <Link to="/profile"> Thông tin cá nhân </Link>
+              </li>
+              <li class="sub-item">
+                <AiOutlineLogout color="black" size={18} style={{marginLeft: 5}}/>
+                <Link to="/login"> Đăng xuất </Link>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
-  )
-}
+  );
+};
