@@ -91,7 +91,8 @@ export const CreateRequest = () => {
               type="date"
               variant="outlined"
               color="secondary"
-              label="Ngày bắt đầu yêu cầu"
+              
+              helperText ="Ngày bắt đầu yêu cầu"
               onChange={(e) => setDateOfBirth(e.target.value)}
               value={dateOfBirth}
               fullWidth
@@ -119,7 +120,7 @@ export const CreateRequest = () => {
               type="date"
               variant="outlined"
               color="secondary"
-              label="Ngày kết thúc yêu cầu dự kiến"
+              helperText ="Ngày kết thúc yêu cầu dự kiến"
               onChange={(e) => setDateOfBirth(e.target.value)}
               value={dateOfBirth}
               fullWidth
@@ -132,6 +133,9 @@ export const CreateRequest = () => {
               label="Lựa chọn"
               defaultValue=""
               helperText="Vui lòng chọn giờ kết thúc yêu cầu"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+              }}
             >
               {currencies.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -140,10 +144,10 @@ export const CreateRequest = () => {
               ))}
             </TextField>
           </Stack>
-
-          <Button variant="outlined" color="success" type="submit">
+          <Button variant="outlined" type="submit" className="createRequestBtn">
             Tạo yêu cầu
           </Button>
+          
         </form>
       </div>
     </div>
