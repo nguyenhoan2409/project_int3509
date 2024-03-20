@@ -8,7 +8,6 @@ import { Profile } from "./Pages/Profile/Profile";
 import { ShopCategory } from "./Pages/Product/ShopCategory";
 import { Product } from "./Pages/Product/Product";
 import { Footer } from "./Components/Footer/Footer";
-import uniform_banner from "~/Components/Assets/banner_uniform.png"
 import {Signup } from "./Pages/LoginSignup/Signup";
 import {Login} from "./Pages/LoginSignup/Login";
 
