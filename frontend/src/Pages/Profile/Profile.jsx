@@ -6,6 +6,7 @@ import { AccountSetting } from '~/Components/UserProfile/AccountSettings'
 import { ChangePassword } from '~/Components/UserProfile/ChangePassword'
 import { YourOrders } from '~/Components/UserProfile/YourOrders'
 import AvatarEditor from 'react-avatar-editor'
+import { Navbar } from '~/Components/Navbar/Navbar'
 
 export const Profile = () => {
 
@@ -13,6 +14,7 @@ export const Profile = () => {
    
   return (
     <div className='userprofile'>
+      <Navbar />
         <div className='userprofilein'>
             <div className='left'>
               <AvatarEditor

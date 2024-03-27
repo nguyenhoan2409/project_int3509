@@ -2,6 +2,7 @@
 var xlsx = require('xlsx')
 var fs = require('fs')
 const { database } = require('../config/database')
+const { QueryTypes } = require('sequelize')
 // var db = require("../common/connect")
 
 exports.importStudentList = async function (req, res) {
@@ -40,7 +41,7 @@ exports.importStudentList = async function (req, res) {
  
  exports.score = async function (req, res) {
      try {
-         let workbook = xlsx.readFile('C:\\Workspace\\project_int3509\\backend\\src\\controllers\\test\\football.xlsx')
+         let workbook = xlsx.readFile('C:/Workspace/project_int3509/backend/src/controllers/test/football.xlsx')
          let workSheet = workbook.Sheets[workbook.SheetNames[0]]
          let range = xlsx.utils.decode_range(workSheet["!ref"])
          let i = 0
@@ -124,8 +125,9 @@ exports.importStudentList = async function (req, res) {
  
  exports.getAllScore = async function (req, res) {
      try {
-        var data = await database.query("SELECT *FROM physicalscore", {type: QueryTypes.SELECT})
-        return res.status(200).json({ data })
+        const data = await database.query("SELECT * FROM physicalscore", {type: QueryTypes.SELECT})
+        console.log(data); 
+        return res.status(200).json(data)
      }  catch(error) {
          return res.status(400).json({ msg: error })
      }

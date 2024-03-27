@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 
 import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
 import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineUser, AiOutlineLogout, AiFillCaretDown } from "react-icons/ai";
+import axios from "axios";
 
 export const Navbar = () => {
+  const navigate = useNavigate(); 
+  const logout = async () => {
+    try {
+      await axios.delete('http://localhost:8080/logout', {withCredentials: true}); 
+      navigate('/'); 
+      alert('Đăng xuất thành công')
+    } catch(error) {
+      console.log(error); 
+    }
+  }
+
   return (
     <div className="navbar-container">
       <div className="nav-logo">
@@ -16,18 +28,18 @@ export const Navbar = () => {
       <div className="nav-menu-container">
         <ul className="nav-menu">
           <li>
-            <Link to="/" className="nav-link">
+            <Link to="/home" className="nav-link">
               Trang chủ
             </Link>
           </li>
           <li>
-            <Link to="/uniforms" className="nav-link">
+            <Link to="/product" className="nav-link">
               Dụng cụ
             </Link>
           </li>
           <li>
-            <Link to="/tools" className="nav-link">
-              Điểm
+            <Link to="/score" className="nav-link">
+              Tra cứu điểm
             </Link>
           </li>
           <li>
@@ -41,11 +53,11 @@ export const Navbar = () => {
             <ul className="sub-item-container">
               <li class="sub-item">
                 <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
-                <Link to="/profile"> Thông tin cá nhân </Link>
+                <Link to="/user/:activepage"> Thông tin cá nhân </Link>
               </li>
-              <li class="sub-item">
+              <li class="sub-item" onClick={logout}>
                 <AiOutlineLogout color="black" size={18} style={{marginLeft: 5}}/>
-                <Link to="/login"> Đăng xuất </Link>
+                <span> Đăng xuất </span>
               </li>
             </ul>
           </li>

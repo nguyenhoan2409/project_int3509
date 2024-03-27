@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './home.css'
+import { Navbar } from '~/Components/Navbar/Navbar'
+import Cookies from "universal-cookie";
+import { Footer } from '~/Components/Footer/Footer';
+const cookies = new Cookies();
 
 export const Home = () => {
   return (
     <div className="hero">
+      <Navbar />
       <div className="hero-main">
         <div className="hero-title">
           GIỚI THIỆU VỀ TRUNG TÂM GIÁO DỤC THỂ CHẤT VÀ THỂ THAO, ĐẠI HỌC QUỐC GIA HÀ NỘI
@@ -61,6 +66,7 @@ export const Home = () => {
         <div className="hero-text">IV.2. Trung tâm được hợp tác với các cơ sở đào tạo, các tổ chức khác trong và ngoài ĐHQGHN về đào tạo, NCKH và bồi dưỡng đội ngũ giảng viên Giáo dục Thể chất, được quan hệ với các tổ chức và cá nhân nước ngoài, ký kết các văn bản hợp tác, trao đổi khoa học và đào tạo phù hợp các quy định của Nhà nước và của ĐHQGHN./.</div>
        
       </div>
+      <Footer />
     </div>
   )
 }

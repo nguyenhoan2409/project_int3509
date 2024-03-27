@@ -1,25 +1,39 @@
-const express = require('express')
-const path = require('path')
+const express = require('express');
+const dotenv = require('dotenv'); 
+const moment = require('moment/moment');
+const cors = require('cors'); 
+const { database } = require('./config/database');
+const cookieParser = require('cookie-parser'); 
 
-const app = express()
-const port = 8080 
-const cors = require('cors')
-const _AuthMiddleWare = require("./common/_AuthMiddleWare")
 
-// Cấu hình body - parser
-var bodyParser= require('body-parser')
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
-app.use(express.json())
-app.use(cors())
+dotenv.config(); 
+const app = express(); 
+const port = 8080; 
 
-require('./routes/home.router')(app)
-require('./routes/account.router')(app)
-//app.use(_AuthMiddleWare.isAuth)
-require('./routes/product.router')(app)
-require('./routes/user.router')(app)
-require('./routes/score.router')(app)
+app.use(cookieParser())
+app.use(express.json()); 
+app.use(cors({
+  credentials: true, 
+  origin: 'http://localhost:3000'
+}));
+
+app.use(function(req, res, next) {
+  res.header('Content-Type', 'application/json;charset=UTF-8')
+  res.header('Access-Control-Allow-Credentials', 'true')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  next()
+})
+
+require('./routes/HomeRoutes')(app); 
+require('./routes/AccountRoutes')(app); 
+require('./routes/ProductRoutes')(app); 
+require('./routes/ScoreRoute')(app); 
+require('./routes/OrderRoutes')(app); 
+require('./routes/UserRoute')(app); 
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+  console.log(`App listening at http://localhost:${port}`); 
+}); 

@@ -3,11 +3,14 @@ import './ShopCategory.css'
 import { Item } from './../../Components/Item/Item'
 import image from '../../Components/Assets/banner_uniform.png'
 import productList from "./../../Components/Assets/all_product"
+import { Navbar } from '~/Components/Navbar/Navbar'
+import { Footer } from '~/Components/Footer/Footer'
 
 export const ShopCategory = () => {
 
   return (
     <div className="shop-category">
+      <Navbar />
        <img className='shopcategory-banner' src={image} />
       <div className="shopcategory-products">
         {productList.map(product => (
@@ -15,6 +18,7 @@ export const ShopCategory = () => {
 
         )}
       </div>
+      <Footer />
     </div>
 
   )

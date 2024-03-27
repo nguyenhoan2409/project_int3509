@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Navbar } from "~/Components/Navbar/Navbar";
 import axios from "axios";
 import "./Request.css";
+import { Footer } from "~/Components/Footer/Footer";
 
 export const Request = () => {
   const [orderList, setOrderList] = useState([]);
@@ -14,11 +15,9 @@ export const Request = () => {
     const getAllOrder = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/order/getAllOrder`
+          `http://localhost:8080/user/getMe`, {withCredentials: true}
         );
-        setOrderList(response.data);
-        console.log(response.data);
-        console.log(orderList);
+        setOrderList(response.data.orderList);
       } catch (error) {
         if (error.response) {
           setMsg(error.response.data.msg);
@@ -26,7 +25,6 @@ export const Request = () => {
       }
     };
     getAllOrder();
-    console.log("hello");
   }, []);
   const autoSizeStrategy = {
     type: 'fitCellContents'
@@ -70,6 +68,8 @@ export const Request = () => {
           paginationPageSizeSelector={[5, 10, 100]}
         />
       </div>
+
+      <Footer />
     </div>
   );
 };

@@ -3,6 +3,7 @@
 const { QueryTypes } = require("sequelize")
 const { database } = require("../config/database")
 const Orders = require("../models/Orders");
+const User = require("../models/Users");
 
 
 
@@ -11,7 +12,7 @@ const Orders = require("../models/Orders");
 exports.get_list = async function (req, res) {
     try {
         const users = await database.query("SELECT * FROM users", { type: QueryTypes.SELECT })
-        return res.status(200).json(users);
+        return res.status(200).json({user: users});
     } catch (error) {
         return res.status(400).json({ msg: error })
     }
@@ -43,6 +44,38 @@ exports.userDetail = async function (req, res) {
 
         userDetail[0].orders = orderListOfUser; 
         return res.status(200).json(userDetail);
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
+}
+
+exports.getMe = async function (req, res) {
+    try {
+        const user = await User.findOne({
+            where: {
+                user_id: req.authData.data.user_id
+            }
+        })
+        if (!user) return res.status(400).json({msg: 'Không lấy được thông tin người dùng'}); 
+        const orderListOfMe = await database.query(`
+            SELECT o.order_id, p.product_name, o.quantity, o.total_money, o.rental_time, o.return_time, s.description
+            FROM orders o
+            LEFT JOIN products p ON o.product_id = p.product_id
+            LEFT JOIN status s ON o.status = s.status_id
+            WHERE o.user_id = :user_id
+            `, {replacements: {
+                user_id: user.user_id
+            }}, { type: QueryTypes.SELECT });
+        const result = {
+            user_id: user.user_id,
+            fullname: user.fullname,
+            email: user.email,
+            phone_number: user.phone_number,
+            address: user.address,
+            role_id: user.role_id,
+            orderList: orderListOfMe[0]
+        }
+        return res.status(200).json(result); 
     } catch (error) {
         return res.status(400).json({ msg: error })
     }
@@ -95,52 +128,3 @@ exports.login = function (req, res) {
     })
 }
 */
-
-exports.login = async function (req, res) {
-    try {
-        const user = await database.query("SELECT * FROM users WHERE email=:email AND password=:password",
-            {
-                replacements: {
-                    email: req.body.email,
-                    password: req.body.password
-                },
-                type: QueryTypes.SELECT
-            })
-        if (user.length > 0) return res.status(200).json({ msg: "Bạn đã đăng nhập thành công" })
-        else return res.status(200).json({ msg: "Bạn chưa tạo tài khoản" })
-    } catch (error) {
-        return res.status(400).json({ msg: error })
-    }
-}
-
-exports.register = async function (req, res) {
-    try {
-        var checkEmail = await database.query("SELECT *FROM users WHERE email=:email", {
-            replacements: {
-                email : req.body.email
-            }, type: QueryTypes.SELECT
-        })
-        console.log(checkEmail)
-        if(checkEmail.length > 0 ) {
-            return res.status(200).json({ msg: "Tài khoản đã tồn tại" })
-        } 
-        else {
-             try {
-                await database.query("INSERT INTO users (password, fullname, email, phone_number, address, role_id) VALUES (:password, :fullname, :email, :phone_number, :address, :role_id)", {
-                    replacements: {
-                        password: req.body.password,
-                        fullname: req.body.fullname,
-                        email: req.body.email,
-                        phone_number: req.body.phone_number,
-                        address: req.body.address,
-                        role_id: 2
-                    }, type: QueryTypes.INSERT
-                })
-                return res.status(200).json({ msg: "Bạn đã tạo tài khoản thành công" })}
-             catch(error) {
-                return res.status(400).json({ msg: error })
-            }
-        }
-    } catch(error) {
-        return res.status(400).json({ msg: error })
-    }}

@@ -1,8 +1,9 @@
 module.exports = function (router) {
 
-    var userController = require('../controllers/UserControllers')
+    var authController = require('../controllers/AuthController')
     var JWT = require("../middleware/jwt")
 
-    router.post('/login', userController.login)
-    router.post('/register', userController.register)
+    router.post('/login', authController.login)
+    router.post('/register', authController.register)
+    router.delete('/logout', authController.logOut); 
 }
