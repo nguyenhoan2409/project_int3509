@@ -9,6 +9,7 @@ import { FaRegAddressCard } from "react-icons/fa";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import logoLogin from "../../assets/images/logo.svg";
 
 export const Signup = () => {
   const [mssv, setMssv] = useState();
@@ -27,7 +28,6 @@ export const Signup = () => {
   const [errorAddress, setErrorAddress] = useState("");
   const [errorPhone, setErrorPhone] = useState("");
 
-  const [user, setUser] = useState({});
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export const Signup = () => {
         break;
       case "email":
         if (!email) {
-          setErrorEmail("Vui lòng nhập email.");
+          setErrorEmail("Vui lòng nhập email");
         } else {
           if (!email.includes("@")) {
             setErrorEmail("Định dạng email cần có @");
@@ -60,28 +60,31 @@ export const Signup = () => {
       case "password":
         if (!password) {
           setErrorPassword("Vui lòng nhập mật khẩu.");
-        } 
+        }
         if (!confirmPassword) {
           setErrorConfirmPassword("Vui lòng nhập lại mật khẩu");
-        } 
+        }
         if (password && confirmPassword && password != confirmPassword) {
-          setErrorConfirmPassword('Mật khẩu nhập lại không trùng khớp');
+          setErrorConfirmPassword("Mật khẩu nhập lại không trùng khớp");
         }
         break;
-      case "fullname": {
-        if (!fullname) {
-          setErrorFullName("Vui lòng nhập họ và tên");
-        } else {
-          setFullname(fullname.replace(/\s+/g, ' ')); 
+      case "fullname":
+        {
+          if (!fullname) {
+            setErrorFullName("Vui lòng nhập họ và tên");
+          } else {
+            setFullname(fullname.replace(/\s+/g, " "));
+          }
         }
-      }
-      break;
+        break;
       case "phone":
         if (!phone) {
           setErrorPhone("Vui lòng nhập số điện thoại");
         } else {
-          if (!(/^(0\d{9}|(\+84|\(84\))\d{9})$/.test(phone))) {
-            setErrorPhone("Số điện thoại không hợp lệ, định dạng chuẩn 10 số dạng 0xxxx.. hoặc +84xxxx..")
+          if (!/^(0\d{9}|(\+84|\(84\))\d{9})$/.test(phone)) {
+            setErrorPhone(
+              "Số điện thoại không hợp lệ, định dạng chuẩn 10 số dạng 0xxxx.. hoặc +84xxxx.."
+            );
           }
         }
         break;
@@ -90,60 +93,55 @@ export const Signup = () => {
           setErrorAddress("Vui lòng nhập địa chỉ");
         }
         break;
-      default: 
-        alert('Type không hợp lệ'); 
+      default:
+        alert("Type không hợp lệ");
     }
   };
   const Register = async (e) => {
-    e.preventDefault();
-    validate("mssv"); 
-    validate("email");
-    validate("password");
-    validate("fullname");
-    validate("phone");
-    validate("address");
-
     try {
-      const response = await axios.post('http://localhost:8080/register', {
-        user_id: parseInt(mssv), 
-        password: password, 
-        fullname: fullname, 
-        email: email, 
-        phone_number: phone, 
-        address: address, 
-        role_id: 2
-      }, {withCredentials: true})
-      if (response.data) {
-        navigate('/'); 
-        console.log('Tạo tài khoản thành công'); 
-      }
-      return response.data; 
-    } catch(err) {
-      setMsg(err.response.data.msg); 
+      e.preventDefault(); 
+      validate("mssv");
+      validate("email");
+      validate("password");
+      validate("fullname");
+      validate("phone");
+      validate("address");
+      if (email &&
+         mssv &&
+         password &&
+         confirmPassword &&
+         address &&
+         fullname &&
+         phone) {
+          const response = await axios.post(
+            "http://localhost:8080/register",
+            {
+              user_id: parseInt(mssv),
+              password: password,
+              fullname: fullname,
+              email: email,
+              phone_number: phone,
+              address: address,
+              role_id: 2,
+            },
+            { withCredentials: true }
+          );
+          if (response.data) {
+            console.log(response.data);
+            navigate("/");
+            console.log("Tạo tài khoản thành công");
+          }
+          return response.data;
+         } 
+    } catch (err) {
+      console.log(err.response.data);
+      setMsg(err.response.data.msg);
     }
   };
   return (
     <div className="loginsignup">
       <div className="loginsignup-container-left">
-        <h2>THÔNG BÁO</h2>
-        <p>Hệ thống đã được nâng cấp vào ngày 04/05/2023.</p>
-
-        <ul>
-          <li>
-            Thời gian sử dụng hệ thống mỗi lần đăng nhập sẽ chỉ giới hạn trong
-            20 phút.{" "}
-          </li>
-          <li>
-            Hệ thống sẽ tạm dừng để bảo trì định kỳ từ 1h đến muộn nhất là 4h
-            sáng hàng ngày.
-          </li>
-          <li>
-            Sau khi ghi nhận đăng ký học thành công hoặc hết thời gian 20 phút
-            sử dụng, hệ thống sẽ tự động đăng xuất tài khoản (dành vị trí cho
-            các bạn khác đăng ký). Khi đăng xuất tài khoản, sinh viên chỉ có thể
-            đăng nhập lại sau 30 phút kể từ lần login cuối cùng.{" "}
-          </li>
-        </ul>
+        <img src={logoLogin} alt="logo" />
       </div>
 
       <div className="signup-container-right">
@@ -151,7 +149,6 @@ export const Signup = () => {
         <form onSubmit={Register} className="signup-fields">
           <div style={{ display: "flex", flexDirection: "row" }}>
             <TextField
-              id="input-with-icon-textfield"
               label="Mã số sinh viên"
               type="number"
               InputProps={{
@@ -173,9 +170,10 @@ export const Signup = () => {
               sx={{ flex: "50%", marginRight: "10px" }}
               size="small"
               fullWidth
+              
             />
             <TextField
-              id="input-with-icon-textfield"
+              
               label="Email"
               // type="email"
               InputProps={{
@@ -193,7 +191,7 @@ export const Signup = () => {
                 setMsg("");
               }}
               onBlur={() => {
-                validate('email')
+                validate("email");
               }}
               variant="outlined"
               className="signUpInput"
@@ -204,7 +202,7 @@ export const Signup = () => {
           </div>
 
           <TextField
-            id="input-with-icon-textfield"
+            
             label="Mật khẩu"
             type="password"
             InputProps={{
@@ -228,7 +226,7 @@ export const Signup = () => {
           />
 
           <TextField
-            id="input-with-icon-textfield"
+            
             label="Nhập lại mật khẩu"
             type="password"
             InputProps={{
@@ -246,7 +244,7 @@ export const Signup = () => {
               setMsg("");
             }}
             onBlur={() => {
-              validate('password'); 
+              validate("password");
             }}
             variant="outlined"
             className="signUpInput"
@@ -255,7 +253,7 @@ export const Signup = () => {
           />
 
           <TextField
-            id="input-with-icon-textfield"
+            
             label="Họ và tên"
             type="text"
             value={fullname}
@@ -274,7 +272,7 @@ export const Signup = () => {
               setMsg("");
             }}
             onBlur={() => {
-              validate('fullname'); 
+              validate("fullname");
             }}
             variant="outlined"
             className="signUpInput"
@@ -283,7 +281,7 @@ export const Signup = () => {
           />
 
           <TextField
-            id="input-with-icon-textfield"
+            
             label="Số điện thoại"
             type="tel"
             InputProps={{
@@ -301,7 +299,7 @@ export const Signup = () => {
               setMsg("");
             }}
             onBlur={() => {
-              validate('phone'); 
+              validate("phone");
             }}
             variant="outlined"
             className="signUpInput"
@@ -310,7 +308,7 @@ export const Signup = () => {
           />
 
           <TextField
-            id="input-with-icon-textfield"
+            
             label="Địa chỉ"
             type="text"
             InputProps={{
@@ -339,7 +337,7 @@ export const Signup = () => {
             className="signUpBtn"
             size="large"
           >
-            Đăng nhập
+            Đăng ký
           </Button>
         </form>
         <p className="loginsignup-login">

@@ -5,18 +5,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import backgroundLogin from "../../assets/images/backgroungLogin.png"
-
+import logoLogin from "../../assets/images/logo.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { LoginUser, reset } from "~/features/authSlice";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
-  const [user, setUser] = useState({});
+
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
+  const dispatch= useDispatch();
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
 
   const validate = (type) => {
     switch (type) {
@@ -42,119 +47,137 @@ export const Login = () => {
       case "password":
         if (!password) {
           setErrorPassword("Vui lòng nhập mật khẩu.");
-        } 
+        }
         break;
-      default: 
-        alert('Type không hợp lệ'); 
+      default:
+        alert("Type không hợp lệ");
     }
   };
-  const Login = async (e) => {
-    try {
-      e.preventDefault(); 
-      validate('email'); 
-      validate('password'); 
-      const response = await axios.post(
-        "http://localhost:8080/login",
-        {
-          email: email,
-          password: password,
-        },
-        { withCredentials: true }
-      );
-      setUser(response.data.user);
-      if (response.data.user.role_id == 1) {
+
+  useEffect(() => {
+    if (user || isSuccess) {
+      if (user.role_id == 1) {
         navigate("/admin/dashboard");
       } else {
         navigate("/home");
       }
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      setMsg(error.response.data.msg);
     }
+    if (isError) {
+      setMsg(message); 
+    }
+    dispatch(reset());
+  }, [user, isSuccess, isError, dispatch, navigate]);
+
+  const Login = async (e) => {
+      e.preventDefault();
+      validate("email");
+      validate("password");
+      if (email && password) {
+        dispatch(
+          LoginUser({
+            email: email,
+            password: password,
+          })
+        );
+      }
+      
   };
+  // const Login = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     validate('email');
+  //     validate('password');
+  //     const response = await axios.post(
+  //       "http://localhost:8080/login",
+  //       {
+  //         email: email,
+  //         password: password,
+  //       },
+  //       { withCredentials: true }
+  //     );
+  //     setUser(response.data.user);
+  //     if (response.data.user.role_id == 1) {
+  //       navigate("/admin/dashboard");
+  //     } else {
+  //       navigate("/home");
+  //     }
+  //     return response.data;
+  //   } catch (error) {
+  //     console.log(error);
+  //     setMsg(error.response.data.msg);
+  //   }
+  // };
   return (
     <div className="loginsignup">
       <div className="loginsignup-container-left">
-        <h2>THÔNG BÁO</h2>
-        <p>Hệ thống đã được nâng cấp vào ngày 04/05/2023.</p>
-
-        <ul>
-          <li>
-            Thời gian sử dụng hệ thống mỗi lần đăng nhập sẽ chỉ giới hạn trong
-            20 phút.{" "}
-          </li>
-          <li>
-            Hệ thống sẽ tạm dừng để bảo trì định kỳ từ 1h đến muộn nhất là 4h
-            sáng hàng ngày.
-          </li>
-          <li>
-            Sau khi ghi nhận đăng ký học thành công hoặc hết thời gian 20 phút
-            sử dụng, hệ thống sẽ tự động đăng xuất tài khoản (dành vị trí cho
-            các bạn khác đăng ký). Khi đăng xuất tài khoản, sinh viên chỉ có thể
-            đăng nhập lại sau 30 phút kể từ lần login cuối cùng.{" "}
-          </li>
-        </ul>
-      </div> 
+        <img src={logoLogin} alt="logo" />
+      </div>
       <div className="loginsignup-container-right">
         <h1>Đăng nhập</h1>
         <form onSubmit={Login} className="loginsignup-fields">
           <TextField
-            id="input-with-icon-textfield"
+          
             label="Email"
             // type="email"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <MdOutlineMail size={24}/>
+                  <MdOutlineMail size={24} />
                 </InputAdornment>
               ),
             }}
             error={!!errorEmail}
             helperText={errorEmail}
             onChange={(e) => {
-              setEmail(e.target.value); 
-              setErrorEmail(''); 
-              setMsg(''); 
+              setEmail(e.target.value);
+              setErrorEmail("");
+              setMsg("");
             }}
             onBlur={() => {
-              validate('email'); 
+              validate("email");
             }}
             variant="outlined"
             className="loginInput"
             size="medium"
             fullWidth
           />
-      
+
           <TextField
-            id="input-with-icon-textfield"
+          
             label="Mật khẩu"
             type="password"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <RiLockPasswordLine  size={24}/>
+                  <RiLockPasswordLine size={24} />
                 </InputAdornment>
               ),
             }}
             error={!!errorPassword}
             helperText={errorPassword}
             onChange={(e) => {
-              setPassword(e.target.value); 
-              setErrorPassword(''); 
-              setMsg(''); 
+              setPassword(e.target.value);
+              setErrorPassword("");
+              setMsg("");
             }}
             variant="outlined"
             className="loginInput"
             size="medium"
           />
           {!errorEmail && !errorPassword && <p className="erroInfo">{msg}</p>}
-          <Button type="submit" variant="outlined" className="loginBtn" size="large">Đăng nhập</Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            className="loginBtn"
+            size="large"
+          >
+            Đăng nhập
+          </Button>
         </form>
         <p className="loginsignup-login">
-          Bạn chưa có tài khoản ?
-          <Link style={{ textDecoration: "none"}} to="/signup">
-            <span style={{color: 'blue'}}>Đăng ký</span>
+          Bạn chưa có tài khoản?
+          <Link style={{ textDecoration: "none" }} to="/signup">
+            <span style={{ color: "blue" }}>Đăng ký</span>
           </Link>
         </p>
       </div>

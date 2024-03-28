@@ -4,13 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ShopContextProvider from "./Context/ShopContext";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 console.log(React);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ShopContextProvider>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </ShopContextProvider>
   
 );

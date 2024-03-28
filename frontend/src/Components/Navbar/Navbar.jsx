@@ -6,12 +6,16 @@ import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineUser, AiOutlineLogout, AiFillCaretDown } from "react-icons/ai";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { LogOut, reset } from "~/features/authSlice";
 
 export const Navbar = () => {
   const navigate = useNavigate(); 
+  const dispatch = useDispatch(); 
   const logout = async () => {
     try {
-      await axios.delete('http://localhost:8080/logout', {withCredentials: true}); 
+      dispatch(reset()); 
+      dispatch(LogOut()); 
       navigate('/'); 
       alert('Đăng xuất thành công')
     } catch(error) {

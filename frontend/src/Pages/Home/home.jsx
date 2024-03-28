@@ -3,9 +3,16 @@ import './home.css'
 import { Navbar } from '~/Components/Navbar/Navbar'
 import Cookies from "universal-cookie";
 import { Footer } from '~/Components/Footer/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMe } from '~/features/authSlice';
 const cookies = new Cookies();
 
 export const Home = () => {
+  const dispatch = useDispatch(); 
+  
+  useEffect(() => {
+     dispatch(getMe()); 
+  }, [])
   return (
     <div className="hero">
       <Navbar />

@@ -46,7 +46,7 @@ exports.login = async function (req, res) {
 
 exports.register = async function (req, res) {
   try {
-    var checkEmail = await database.query(
+    const checkEmail = await database.query(
       "SELECT *FROM users WHERE email=:email",
       {
         replacements: {
@@ -94,7 +94,7 @@ exports.register = async function (req, res) {
         phone_number: req.body.phone_number,
         address: req.body.address,
         role_id: 2,
-      } });
+      }});
   } catch (error) {
     return res.status(400).json({ msg: "Tạo tài khoản thất bại"});
   }
