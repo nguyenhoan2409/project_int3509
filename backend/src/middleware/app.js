@@ -1,5 +1,5 @@
 const ACCESS_TOKEN = "ABCDEF"
-const TOKEN_TIMELIFE = "15m"
+const TOKEN_TIMELIFE = "45m"
 
 module.exports = {
     ACCESS_TOKEN : ACCESS_TOKEN,

@@ -2,13 +2,13 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridReact } from "ag-grid-react";
-import React, { useEffect, useState , useMemo} from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Navbar } from "~/Components/Navbar/Navbar";
 import axios from "axios";
 import "./Request.css";
 import { Footer } from "~/Components/Footer/Footer";
 import { AG_GRID_LOCALE_EN } from "~/assets/localeFile/locale";
-
+import Layout from "../Layout/Layout";
 
 export const Request = () => {
   const [orderList, setOrderList] = useState([]);
@@ -40,7 +40,7 @@ export const Request = () => {
     },
     {
       field: "product_name",
-      filter: true, 
+      filter: true,
       headerName: "Tên sản phẩm",
     },
     { field: "quantity", headerName: "Số lượng" },
@@ -74,24 +74,22 @@ export const Request = () => {
 
   return (
     <div className="request-container">
-      <Navbar />
+      <Layout>
+        <div className="title">Danh sách các yêu cầu</div>
 
-      <div className="title">Danh sách các yêu cầu</div>
-
-      <div className="ag-theme-alpine" style={{ height: 500 }}>
-        <AgGridReact
-          rowData={orderList}
-          columnDefs={columnDefs}
-          defaultColDef={defaultColDef}
-          autoSizeStrategy={autoSizeStrategy}
-          localeText={AG_GRID_LOCALE_EN}
-          pagination={true}
-          paginationPageSize={5}
-          paginationPageSizeSelector={[5, 10, 100]}
-        />
-      </div>
-
-      <Footer />
+        <div className="ag-theme-alpine" style={{ height: 500 }}>
+          <AgGridReact
+            rowData={orderList}
+            columnDefs={columnDefs}
+            defaultColDef={defaultColDef}
+            autoSizeStrategy={autoSizeStrategy}
+            localeText={AG_GRID_LOCALE_EN}
+            pagination={true}
+            paginationPageSize={5}
+            paginationPageSizeSelector={[5, 10, 100]}
+          />
+        </div>
+      </Layout>
     </div>
   );
 };

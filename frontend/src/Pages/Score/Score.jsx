@@ -3,6 +3,7 @@ import "./Score.css";
 import axios from "axios";
 import { Navbar } from "~/Components/Navbar/Navbar";
 import { Footer } from "~/Components/Footer/Footer";
+import Layout from "../Layout/Layout";
 
 export const Score = () => {
   const [mssv, setMssv] = useState("");
@@ -29,7 +30,7 @@ export const Score = () => {
       const response = await axios.get(
         `http://localhost:8080/score/search/${mssv}`
       );
-      let st = (response.data.student);
+      let st = response.data.student;
       setScores(st);
     } catch (error) {
       console.error("Error searching:", error);
@@ -38,59 +39,59 @@ export const Score = () => {
   console.log(scores);
   return (
     <div className="score-container">
-      <Navbar />
-      <div className="main">
-        <div className="score-header">
-          <h2> Điểm học phần GDTC </h2>
-          <div className="search">
-            <input
-              type=""
-              placeholder="Tra cứu điểm..."
-              onChange={(e) => setMssv(e.target.value)}
-            />
-            <button onClick={searchHandle}>Tìm kiếm</button>
+      <Layout>
+        <div className="main">
+          <div className="score-header">
+            <h2> Điểm học phần GDTC </h2>
+            <div className="search">
+              <input
+                type=""
+                placeholder="Tra cứu điểm..."
+                onChange={(e) => setMssv(e.target.value)}
+              />
+              <button onClick={searchHandle}>Tìm kiếm</button>
+            </div>
           </div>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>MSSV</th>
-              <th>Họ và Tên</th>
-              <th>Lớp</th>
-              <th>Trường</th>
-              <th>Bóng đá</th>
-              <th>Cầu lông</th>
-              <th>Bóng bàn</th>
-              <th>Bóng rổ</th>
-              <th>Bóng chuyền hơi</th>
-              <th>Bóng chuyền</th>
-              <th>Taekwondo</th>
-              <th>Golf</th>
-              <th>CĐR</th>
-            </tr>
-          </thead>
-          <tbody>
-            {scores?.map((score, index) => (
-              <tr key={index}>
-                <td>{score.mssv}</td>
-                <td>{score.fullname}</td>
-                <td>{score.class}</td>
-                <td>{score.univercity}</td>
-                <td>{score.football_score}</td>
-                <td>{score.bedminton_score}</td>
-                <td>{score.tabletennis_score}</td>
-                <td>{score.basketball_score}</td>
-                <td>{score.volleyball_score}</td>
-                <td>{score.air_volleyball_score}</td>
-                <td>{score.taekwondo_score}</td>
-                <td>{score.golf_score}</td>
-                <td>{score.CDR}</td>
+          <table>
+            <thead>
+              <tr>
+                <th>MSSV</th>
+                <th>Họ và Tên</th>
+                <th>Lớp</th>
+                <th>Trường</th>
+                <th>Bóng đá</th>
+                <th>Cầu lông</th>
+                <th>Bóng bàn</th>
+                <th>Bóng rổ</th>
+                <th>Bóng chuyền hơi</th>
+                <th>Bóng chuyền</th>
+                <th>Taekwondo</th>
+                <th>Golf</th>
+                <th>CĐR</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <Footer />
+            </thead>
+            <tbody>
+              {scores?.map((score, index) => (
+                <tr key={index}>
+                  <td>{score.mssv}</td>
+                  <td>{score.fullname}</td>
+                  <td>{score.class}</td>
+                  <td>{score.univercity}</td>
+                  <td>{score.football_score}</td>
+                  <td>{score.bedminton_score}</td>
+                  <td>{score.tabletennis_score}</td>
+                  <td>{score.basketball_score}</td>
+                  <td>{score.volleyball_score}</td>
+                  <td>{score.air_volleyball_score}</td>
+                  <td>{score.taekwondo_score}</td>
+                  <td>{score.golf_score}</td>
+                  <td>{score.CDR}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Layout>
     </div>
   );
 };

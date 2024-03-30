@@ -1,8 +1,8 @@
 .hero {
-    height: 450vh;
-    flex: 1;
+    /* height: 450vh; */
+    /* flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; */
     background: #589f71;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
