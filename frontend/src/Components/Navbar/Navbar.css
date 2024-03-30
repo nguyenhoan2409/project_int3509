@@ -17,6 +17,13 @@
   z-index: 1000;
 }
 
+.scrolled {
+  background-color: #04AA6D;
+  transition: all ease-in-out 400ms;
+}
+
+
+
 .logo-img {
   width: 70%;
 }
@@ -28,6 +35,10 @@
 
 .nav-menu li {
   position: relative;
+}
+
+.nav-menu-container .nav-menu .nav-link-scrolled {
+  color: white;
 }
 
 .nav-menu li a {
@@ -57,6 +68,22 @@
   width: 100%;
 }
 
+.nav-menu li .nav-link-scrolled::before {
+  content: "";
+  display: block;
+  height: 5px;
+  background-color: #fff;
+
+  position: absolute;
+  top: -15px;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+.nav-menu li .nav-link-scrolled:hover::before {
+  width: 100%;
+}
 .nav-menu-container ul {
   margin: 0;
   padding: 0;

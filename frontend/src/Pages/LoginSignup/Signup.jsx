@@ -112,8 +112,8 @@ export const Signup = () => {
          confirmPassword &&
          address &&
          fullname &&
-         phone) {
-          const response = await axios.post(
+         phone && !errorEmail && !errorConfirmPassword && !errorPhone) {
+            const response = await axios.post(
             "http://localhost:8080/register",
             {
               user_id: parseInt(mssv),

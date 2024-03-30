@@ -23,8 +23,29 @@ export const Navbar = () => {
     }
   }
 
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleTabClick = () => {
+    window.scrollTo(0, 0); 
+  };
+
   return (
-    <div className="navbar-container">
+    <div className={`navbar-container ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-logo">
         <img src={logo} alt="" className="logo-img" />
       </div>
@@ -32,32 +53,32 @@ export const Navbar = () => {
       <div className="nav-menu-container">
         <ul className="nav-menu">
           <li>
-            <Link to="/home" className="nav-link">
+            <Link to="/home" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Trang chủ
             </Link>
           </li>
           <li>
-            <Link to="/product" className="nav-link">
+            <Link to="/product" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Dụng cụ
             </Link>
           </li>
           <li>
-            <Link to="/score" className="nav-link">
+            <Link to="/score" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Tra cứu điểm
             </Link>
           </li>
           <li>
-            <Link to="/request" className="nav-link">
+            <Link to="/request" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Yêu cầu
             </Link>
           </li>
           <li>
             <img src={defaultAvatar} class="img-profile" />
-            <AiFillCaretDown color="rgba(186, 149, 149, 0.4)" size={18} style={{paddingBottom: 10}}/>
+            <AiFillCaretDown color={scrolled ? 'white' : "rgba(186, 149, 149, 0.4)"} size={18} style={{paddingBottom: 10}}/>
             <ul className="sub-item-container">
               <li class="sub-item">
                 <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
-                <Link to="/user/:activepage"> Thông tin cá nhân </Link>
+                <Link to="/user/:activepage" onClick={handleTabClick}> Thông tin cá nhân </Link>
               </li>
               <li class="sub-item" onClick={logout}>
                 <AiOutlineLogout color="black" size={18} style={{marginLeft: 5}}/>

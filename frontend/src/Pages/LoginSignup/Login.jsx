@@ -72,7 +72,7 @@ export const Login = () => {
       e.preventDefault();
       validate("email");
       validate("password");
-      if (email && password) {
+      if (email && password && !errorEmail) {
         dispatch(
           LoginUser({
             email: email,
