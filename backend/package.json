@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.js"
   },
@@ -18,14 +19,16 @@
   },
   "homepage": "https://github.com/nguyenhoan2409/project_int3509#readme",
   "dependencies": {
+    "argon2": "^0.40.1",
     "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.18.3",
     "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
     "multer": "^1.4.5-lts.1",
-    "mysql": "^2.18.1",
     "mysql2": "^3.9.2",
     "nodemon": "^3.1.0",
     "read-excel-file": "^5.7.1",
