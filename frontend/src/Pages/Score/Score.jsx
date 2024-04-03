@@ -52,22 +52,23 @@ export const Score = () => {
               <button onClick={searchHandle}>Tìm kiếm</button>
             </div>
           </div>
+          <div className="score-table">
           <table>
             <thead>
               <tr>
-                <th>MSSV</th>
-                <th>Họ và Tên</th>
-                <th>Lớp</th>
-                <th>Trường</th>
-                <th>Bóng đá</th>
-                <th>Cầu lông</th>
-                <th>Bóng bàn</th>
-                <th>Bóng rổ</th>
-                <th>Bóng chuyền hơi</th>
-                <th>Bóng chuyền</th>
-                <th>Taekwondo</th>
-                <th>Golf</th>
-                <th>CĐR</th>
+                <th className="mssv">MSSV</th>
+                <th className="fullname">Họ và Tên</th>
+                <th className="class">Lớp</th>
+                <th className="univercity">Trường</th>
+                <th className="football">Bóng đá</th>
+                <th className="bedminton">Cầu lông</th>
+                <th className="tabletennis">Bóng bàn</th>
+                <th className="basketball">Bóng rổ</th>
+                <th className="volleyball">Bóng chuyền hơi</th>
+                <th className="air_volleyball">Bóng chuyền</th>
+                <th className="taekwondo">Taekwondo</th>
+                <th className="golf">Golf</th>
+                <th className="CDR">CĐR</th>
               </tr>
             </thead>
             <tbody>
@@ -90,6 +91,7 @@ export const Score = () => {
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </Layout>
     </div>
