@@ -25,6 +25,8 @@
 .createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
     background-color: #006d3a;
     color: white;
+    width: 150px;
+    margin-bottom: 10px;
 }
 
 .createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {

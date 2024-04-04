@@ -1,15 +1,16 @@
 import React from 'react'
 import './Item.css'
-import { Link, useNavigate } from "react-router-dom";
-
-export const Item = ({ image, name, order }) => {
+import { Link } from "react-router-dom";
+export const Item = ({ image, name, order, id }) => {
 
   return (
-    <div className="product">
+    <Link to= {`/product/detail/${id}`} >
+      <div className="product">
       <img src={image} alt={name} />
-      <h2>{name}</h2>
+      <p className='name'>{name}</p>
       <button>{order}</button>
     </div>
+    </Link>
 
   );
 };
