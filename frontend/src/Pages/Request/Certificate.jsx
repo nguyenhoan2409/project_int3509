@@ -6,14 +6,16 @@ import "./Request.css";
 
 export const Certificate = () => {
     const [name, setName] = useState("");
+    const [mssv, setMSSV] = useState("");
     const [classs, setClass] = useState("");
     const [univercity, setUnivercity] = useState("");
     const [email, setEmail] = useState("");
-    const [price, setPrice] = useState("");
+    const [phonenumber, setPhonenumber] = useState("");
+    const [code, setCode] = useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(name, classs, univercity, email,price);
+        console.log(name, mssv, classs, univercity, email, phonenumber, code);
     }
 
     return (
@@ -25,12 +27,23 @@ export const Certificate = () => {
                     <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
 
                         <TextField
-                            type="number"
+                            type="text"
                             variant="outlined"
                             color="secondary"
                             label="Họ và tên "
                             onChange={(e) => setName(e.target.value)}
-                            value={classs}
+                            value={name}
+                            fullWidth
+                            required
+                        />
+
+                        <TextField
+                            type="number"
+                            variant="outlined"
+                            color="secondary"
+                            label="Mã sinh viên "
+                            onChange={(e) => setMSSV(e.target.value)}
+                            value={mssv}
                             fullWidth
                             required
                         />
@@ -39,7 +52,7 @@ export const Certificate = () => {
                     <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
 
                         <TextField
-                            type="number"
+                            type="text"
                             variant="outlined"
                             color="secondary"
                             label="Lớp "
@@ -59,25 +72,39 @@ export const Certificate = () => {
                             required
                         />
                     </Stack>
+                    <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
+
+                        <TextField
+                            type="email"
+                            variant="outlined"
+                            color="secondary"
+                            label="Email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            fullWidth
+                            required
+                            sx={{ mb: 4 }}
+                        />
+                        <TextField
+                            type="number"
+                            variant="outlined"
+                            color="secondary"
+                            label="Số điện thoại"
+                            onChange={(e) => setPhonenumber(e.target.value)}
+                            value={phonenumber}
+                            fullWidth
+                            required
+                            sx={{ mb: 4 }}
+                        />
+                    </Stack>
 
                     <TextField
-                        type="email"
+                        type="text"
                         variant="outlined"
                         color="secondary"
-                        label="Email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        value={email}
-                        fullWidth
-                        required
-                        sx={{ mb: 4 }}
-                    />
-                    <TextField
-                        type="number"
-                        variant="outlined"
-                        color="secondary"
-                        label="Chi phí cấp GCN"
-                        onChange={(e) => setPrice(e.target.value)}
-                        value={price}
+                        label="Mã xác nhận"
+                        onChange={(e) => setCode(e.target.value)}
+                        value={code}
                         required
                         fullWidth
                         sx={{ mb: 4 }}
