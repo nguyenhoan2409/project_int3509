@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Score.css";
 import axios from "axios";
-import { Navbar } from "~/Components/Navbar/Navbar";
 import { Footer } from "~/Components/Footer/Footer";
 import Layout from "../Layout/Layout";
+import { Link } from "react-router-dom";
 
 export const Score = () => {
   const [mssv, setMssv] = useState("");
@@ -49,7 +49,14 @@ export const Score = () => {
                 placeholder="Tra cứu điểm..."
                 onChange={(e) => setMssv(e.target.value)}
               />
+              <div className="search-btn">
               <button onClick={searchHandle}>Tìm kiếm</button>
+              </div>
+              <Link to = {"/certificate"} >
+                <div className="request-btn">
+                <button>Yêu cầu cấp GCN</button>
+                </div>
+                </Link>
             </div>
           </div>
           <div className="score-table">

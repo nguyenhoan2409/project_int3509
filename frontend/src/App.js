@@ -12,7 +12,7 @@ import { Login } from "./Pages/LoginSignup/Login";
 import { CreateRequest } from "./Pages/Request/CreateRequest";
 import { DashBoard } from "./Pages/AdminPages/DashBoard";
 import { ProductDetail } from "./Pages/Product/ProductDetail";
-
+import { Certificate } from "./Pages/Request/Certificate";
 
 
 
@@ -29,6 +29,7 @@ function App() {
           <Route path="/score" element={<Score />}></Route>
           <Route path="/request" element={<Request />}></Route>
           <Route path="/create-request" element={<CreateRequest />}></Route>
+          <Route path="/certificate" element={<Certificate/>}></Route>
           <Route path="/user/:activepage" element={<Profile />}></Route>
           <Route path= "/product/detail/:id" element={<ProductDetail />}></Route>
           <Route path="/product" element={<ShopCategory />}></Route>
