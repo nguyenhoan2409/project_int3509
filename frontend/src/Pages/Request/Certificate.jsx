@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navbar } from "~/Components/Navbar/Navbar";
-import { TextField, Button, Container, Stack, MenuItem } from "@mui/material";
+import { TextField, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./Request.css";
 
@@ -10,8 +10,6 @@ export const Certificate = () => {
     const [univercity, setUnivercity] = useState("");
     const [email, setEmail] = useState("");
     const [price, setPrice] = useState("");
-    const [dateOfBirth, setDateOfBirth] = useState("");
-    const [password, setPassword] = useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
