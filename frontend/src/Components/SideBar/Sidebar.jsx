@@ -16,17 +16,22 @@ export const Sidebar = () => {
           </li>
           <li>
             <Link to={"/admin/products"}>
-              <FcDocument /> Sản phẩm
+              <FcDocument /> Quản lý sản phẩm
             </Link>
           </li>
           <li>
-            <Link to={"/admin/products"}>
-              <FcDocument /> Yêu cầu 
+            <Link to={"/admin/requests"}>
+              <FcDocument /> Quản lý yêu cầu 
             </Link>
           </li>
           <li>
-            <Link to={"/admin/products"}>
-              <FcDocument /> Người dùng
+            <Link to={"/admin/scores"}>
+              <FcDocument /> Quản lý điểm 
+            </Link>
+          </li>
+          <li>
+            <Link to={"/admin/users"}>
+              <FcDocument /> Quản lý người dùng
             </Link>
           </li>
         </ul>

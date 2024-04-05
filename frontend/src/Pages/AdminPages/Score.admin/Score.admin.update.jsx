@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../Layout/Layout'
 import { useDispatch, useSelector } from 'react-redux';
 import { getMe } from '~/features/authSlice';
+import { Link } from 'react-router-dom';
 
-
-export const DashBoard = () => {
+export const UpdateScores = () => {
   const dispatch = useDispatch(); 
   useEffect(() => {
     dispatch(getMe());
   }, []);
   return (
-    <Layout>
       <div>
-        Dashboard
+        Chỉnh sửa điểm
       </div>
-    </Layout>
+
   )
 }
