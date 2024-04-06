@@ -1,0 +1,80 @@
+
+.create-product-form {
+    margin-left: 250px;
+    margin-top: 50px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-product-left img {
+    height: 400px;
+    width: 400px;
+}
+
+.create-product-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
+}
+
+.create-product-right {
+    display: flex;
+    align-items: center;
+}
+.create-product-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.create-product-row p {
+    font-weight: 500;
+    font-size: 18px;
+    width: 130px;
+}
+
+.create-product-row input {
+    font-size: 18px;
+    height: 40px;
+    width: 250px;
+    margin-right: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    margin-left: 10px; 
+}
+
+.create-product-row select {
+    font-size: 18px;
+    height: 40px;
+    width: 260px;
+    margin-right: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    margin-left: 10px; 
+}
+
+.create-product-right button {
+    height: 40px;
+    width: 170px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.msg-create {
+    color: green;
+    font-size: 18px;
+}
+.msg-create-error {
+    color: red;
+    font-size: 18px;
+}

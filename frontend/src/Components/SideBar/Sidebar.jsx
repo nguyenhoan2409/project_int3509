@@ -15,7 +15,7 @@ export const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/admin/products"}>
+            <Link to={"/admin/products/list"}>
               <FcDocument /> Quản lý sản phẩm
             </Link>
           </li>

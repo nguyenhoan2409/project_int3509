@@ -11,7 +11,7 @@ module.exports = function (router) {
 
     router.delete('/product/delete/:id', productController.remove_product)
 
-    router.put('/product/update', productController.update_product)
+    router.put('/product/update/:id', productController.update_product)
 
     router.get('/token', async function(req, res) {
         var user = {

@@ -11,13 +11,14 @@ import { DashBoard } from "./Pages/AdminPages/DashBoard/DashBoard";
 import { ProductDetail } from "./Pages/Product/ProductDetail";
 import { Certificate } from "./Pages/Request/Certificate";
 import { Sidebar } from "./Components/SideBar/Sidebar";
-import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct.admin";
-import { ProductsManagement } from "./Pages/AdminPages/Products.admin/Product.admin";
-import { UpdateProduct } from "./Pages/AdminPages/Products.admin/UpdateProduct.admin";
+import { ProductsManagement } from "./Pages/AdminPages/Products.admin/ProductsLayout/Products.admin";
+import { UpdateProduct } from "./Pages/AdminPages/Products.admin/UpdateProduct/UpdateProduct";
+import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct/CreateProduct";
 import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreManagement";
 import { UpdateScores } from "./Pages/AdminPages/Score.admin/Score.admin.update";
 import { AddScores } from "./Pages/AdminPages/Score.admin/AddScores";
 import { AddStudents } from "./Pages/AdminPages/Score.admin/AddStudents";
+import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
 function App() {
   return (
     <div>
@@ -39,13 +40,14 @@ function App() {
           {/* Admin routes */}
           <Route path="/admin/dashboard" element={<DashBoard />}></Route>
           <Route path="/admin/sidebar" element={<Sidebar />}></Route>
-          <Route path="/admin/products" element={<ProductsManagement />}></Route>
-          <Route path="/admin/products/update" element={<UpdateProduct />}></Route>
-          <Route path="/admin/products/create" element={<CreateProduct />}></Route>
-          <Route path="/admin/scores" element={<ScoresManagement />}></Route>
-          <Route path="/admin/scores/update" element={<UpdateScores />}></Route>
-          <Route path="/admin/scores/add" element={<AddScores />}></Route>
-          <Route path="/admin/students/add" element={<AddStudents />}></Route>
+          <Route path="/admin/products" element={<ProductsManagement/>}></Route>
+          <Route path="/admin/products/list" element={<ProductsList/>}></Route>
+          <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>
+          <Route path="/admin/products/add" element={<CreateProduct/>}></Route>
+          <Route path="/admin/scores" element={<ScoresManagement/>}></Route>
+          <Route path="/admin/scores/update" element={<UpdateScores/>}></Route>
+          <Route path="/admin/scores/add" element={<AddScores/>}></Route>
+          <Route path="/admin/students/add" element={<AddStudents/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
