@@ -24,6 +24,45 @@ export const CreateProduct = () => {
     }
   }
 
+  const handleNameChange = (event) => {
+    if(event.target.value.length <= 30 && event.target.value.length > 0) {
+      setProductName(event.target.value);
+    } else {
+      if(event.target.value.length == 0) {
+        alert("Tên sản phẩm không được để trống")
+      } else alert("Tên sản phẩm phải nhỏ hoặc bằng 30 ký tự")
+    } 
+  }
+  const handlePriceChange = (event) => {
+    if(event.target.value >= 0) {
+      setPrice(event.target.value);
+    } else {
+      alert("Giá phải lớn hơn hoặc bằng 0")
+      setPrice(0)
+    }
+  }
+  const handleQuantityChange = (event) => {
+    if(event.target.value >= 0) {
+      setQuantity(event.target.value);
+    } else {
+      alert("Số lượng trong kho phải lớn hơn hoặc bằng 0")
+      setQuantity(0)
+    }
+  }
+  const handleDescriptionChange = (event) => {
+      setDescription(event.target.value);
+  }
+  const handleThumbnailChange = (event) => {
+    if(event.target.value !== "" ) {
+      setThumbnail(event.target.value);
+    } else {
+      alert("Thêm link ảnh")
+    }
+  }
+  const handleOrderTypeChange = (event) => {
+      setOrderType(event.target.value);
+  }
+
   const addProduct = async () => {
     try {
       const response = await axios.post("http://localhost:8080/product/add", {
@@ -52,14 +91,14 @@ export const CreateProduct = () => {
           <img src={thumbnail} alt="" />
         </div>
         <div className="create-product-right">
-          <div className="create-product-row"> <p> Tên sản phẩm : </p> <input type="text" onChange={e => setProductName(e.target.value)} /></div>
-          <div className="create-product-row"> <p> Giá : </p> <input type="number" onChange={e => setPrice(e.target.value)} /></div>
-          <div className="create-product-row"> <p> Số lượng kho: </p> <input type="number" onChange={e => setQuantity(e.target.value)} /></div>
-          <div className="create-product-row"> <p> Link ảnh : </p> <input type="text" onChange={e => setThumbnail(e.target.value)} /></div>
-          <div className="create-product-row"> <p> Mô tả : </p> <input type="text" onChange={e => setDescription(e.target.value)} /></div>
+          <div className="create-product-row"> <p> Tên sản phẩm : </p> <input type="text" onChange={handleNameChange} /></div>
+          <div className="create-product-row"> <p> Giá : </p> <input type="number" onChange={handlePriceChange} /></div>
+          <div className="create-product-row"> <p> Số lượng kho: </p> <input type="number" onChange={handleQuantityChange} /></div>
+          <div className="create-product-row"> <p> Link ảnh : </p> <input type="text" onChange={handleThumbnailChange} /></div>
+          <div className="create-product-row"> <p> Mô tả : </p> <input type="text" onChange={handleDescriptionChange} /></div>
           <div className="create-product-row"> 
             <p> Loại : </p> 
-            <select value={order_type} onChange={e => setOrderType(e.target.value)}>
+            <select value={order_type} onChange={handleOrderTypeChange}>
               <option value="Mua">Mua</option>
               <option value="Mượn">Mượn</option>
               <option value="Thuê">Thuê</option>

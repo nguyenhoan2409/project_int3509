@@ -24,6 +24,39 @@ export const UpdateProduct = () => {
        getUpdate()
     }
   }
+
+  const handlePriceChange = (event) => {
+    const value = event.target.value
+    if(value >= 0 ) {
+      setPrice(value)
+    } else {
+      alert("Giá phải lớn hơn hoặc bằng 0")
+      setPrice(0)
+    }
+  }
+  const handleDescriptionChange = (event) => {
+    const value = event.target.value
+    setDescription(value)
+  }
+
+  const handleQuantityChange = (event) => {
+    const value = event.target.value
+    if(value >= 0 ) {
+      setQuantity(value)
+    } else {
+      alert("Số lượng kho phải lớn hơn hoặc bằng 0")
+      setQuantity(0)
+    }
+  }
+
+  const handleThumbnailChange = (event) => {
+    const value = event.target.value
+    if(value !== "" ) {
+      setThumbnail(value)
+    } else {
+      alert("Bạn chưa nhập link ảnh")
+    }
+  }
   const getDetail = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/product/detail/${id}`);
@@ -71,10 +104,10 @@ export const UpdateProduct = () => {
           </div>
           <div className="update-product-right">
             <div className="update-product-row"> <p> Tên sản phẩm : </p> <input type="text" value={product.product_name} /></div>
-            <div className="update-product-row"> <p> Giá : </p> <input type="number" value={price} onChange={e => setPrice(e.target.value)} /></div>
-            <div className="update-product-row"> <p> Mô tả : </p> <input type="text" value={description} onChange={e => setDescription(e.target.value)} /></div>
-            <div className="update-product-row"> <p> Số lượng : </p> <input type="number" value={quantity} onChange={e => setQuantity(e.target.value)} /></div>
-            <div className="update-product-row"> <p> Ảnh : </p> <input type="text" value={thumbnail} onChange={e => setThumbnail(e.target.value)} /></div>
+            <div className="update-product-row"> <p> Giá : </p> <input type="number" value={price} onChange={handlePriceChange} /></div>
+            <div className="update-product-row"> <p> Mô tả : </p> <input type="text" value={description} onChange={handleDescriptionChange} /></div>
+            <div className="update-product-row"> <p> Số lượng : </p> <input type="number" value={quantity} onChange={handleQuantityChange} /></div>
+            <div className="update-product-row"> <p> Ảnh : </p> <input type="text" value={thumbnail} onChange={handleThumbnailChange} /></div>
             <div className="update-product-row"> 
             <p> Loại : </p> 
             <select value={order_type} onChange={e => setOrderType(e.target.value)}>
