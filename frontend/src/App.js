@@ -16,7 +16,7 @@ import { UpdateProduct } from "./Pages/AdminPages/Products.admin/UpdateProduct/U
 import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct/CreateProduct";
 import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreLayout/ScoreLayout";
 import { ScoresList } from "./Pages/AdminPages/Score.admin/ScoreList/ScoresList";
-import { UpdateScores } from "./Pages/AdminPages/Score.admin/ScoresUpdate/Score.admin.update";
+import { UpdateScores } from "./Pages/AdminPages/Score.admin/ScoresUpdate/ScoresUpdate";
 import { AddScores } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddScores";
 import { AddStudents } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddStudents";
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
