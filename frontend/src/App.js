@@ -14,7 +14,8 @@ import { Sidebar } from "./Components/SideBar/Sidebar";
 import { ProductsManagement } from "./Pages/AdminPages/Products.admin/ProductsLayout/Products.admin";
 import { UpdateProduct } from "./Pages/AdminPages/Products.admin/UpdateProduct/UpdateProduct";
 import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct/CreateProduct";
-import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreManagement";
+import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreLayout/ScoreLayout";
+import { ScoresList } from "./Pages/AdminPages/Score.admin/ScoreList/ScoresList";
 import { UpdateScores } from "./Pages/AdminPages/Score.admin/Score.admin.update";
 import { AddScores } from "./Pages/AdminPages/Score.admin/AddScores";
 import { AddStudents } from "./Pages/AdminPages/Score.admin/AddStudents";
@@ -45,6 +46,7 @@ function App() {
           <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>
           <Route path="/admin/products/add" element={<CreateProduct/>}></Route>
           <Route path="/admin/scores" element={<ScoresManagement/>}></Route>
+          <Route path="/admin/scores/list" element={<ScoresList/>}></Route>
           <Route path="/admin/scores/update" element={<UpdateScores/>}></Route>
           <Route path="/admin/scores/add" element={<AddScores/>}></Route>
           <Route path="/admin/students/add" element={<AddStudents/>}></Route>
