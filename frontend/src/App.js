@@ -16,9 +16,9 @@ import { UpdateProduct } from "./Pages/AdminPages/Products.admin/UpdateProduct/U
 import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct/CreateProduct";
 import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreLayout/ScoreLayout";
 import { ScoresList } from "./Pages/AdminPages/Score.admin/ScoreList/ScoresList";
-import { UpdateScores } from "./Pages/AdminPages/Score.admin/Score.admin.update";
-import { AddScores } from "./Pages/AdminPages/Score.admin/AddScores";
-import { AddStudents } from "./Pages/AdminPages/Score.admin/AddStudents/AddStudents";
+import { UpdateScores } from "./Pages/AdminPages/Score.admin/ScoresUpdate/Score.admin.update";
+import { AddScores } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddScores";
+import { AddStudents } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddStudents";
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
 function App() {
   return (
@@ -47,7 +47,7 @@ function App() {
           <Route path="/admin/products/add" element={<CreateProduct/>}></Route>
           <Route path="/admin/scores" element={<ScoresManagement/>}></Route>
           <Route path="/admin/scores/list" element={<ScoresList/>}></Route>
-          <Route path="/admin/scores/update" element={<UpdateScores/>}></Route>
+          <Route path="/admin/scores/update/:id" element={<UpdateScores/>}></Route>
           <Route path="/admin/scores/add" element={<AddScores/>}></Route>
           <Route path="/admin/students/add" element={<AddStudents/>}></Route>
         </Routes>

@@ -89,7 +89,7 @@ export const ScoresList = () => {
                                         <td>{score.taekwondo_score}</td>
                                         <td>{score.golf_score}</td>
                                         <td>{score.CDR}</td>
-                                        <td><FaEdit /></td>
+                                        <td> <Link to= {`/admin/scores/update/${score.mssv}`}><FaEdit /></Link> </td>
                                     </tr>
                                 ))}
                             </tbody>
