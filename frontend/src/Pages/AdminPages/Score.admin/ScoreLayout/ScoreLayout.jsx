@@ -10,10 +10,12 @@ export const ScoresManagement = () => {
   }
   return (
     <div className='scores-management'>
+       <div className="scores-header">
+       <div className='icon' onClick={handleClick}><FaHome /></div>
       <div className="scores-tittle"> Quản lý điểm </div>
+       </div>
       <div className='scores-container'>
         <div className="scores-left">
-          <p onClick={handleClick}><FaHome /></p>
           {sideBarClick ? <Sidebar /> : null}
         </div>
         <div className="scores-right">
@@ -24,7 +26,6 @@ export const ScoresManagement = () => {
           </div>
         </div>
       </div>
-      <div className="line"></div>
     </div>
 
   )

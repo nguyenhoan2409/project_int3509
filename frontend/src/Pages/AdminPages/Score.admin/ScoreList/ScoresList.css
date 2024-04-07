@@ -1,4 +1,4 @@
-.score-list-admin {
+.scores-list-admin {
     width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -8,7 +8,7 @@
 
 .score-header-admin {
     width: 100%;
-    height: 200px;
+    height: 100px;
     justify-content: center;
     align-items: center;
     gap: 20px;
@@ -17,28 +17,27 @@
 }
 
 .search-admin {
-    margin-top: 10px;
     gap: 20px;
     display: flex;
     flex-direction: row;
 }
 
 .search-btn-admin button {
-    height: 50px;
+    height: 40px;
     width: 80px;
     border: 1px solid #c9c9c9;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: 15px;
     background: #007e43;
 }
 
 .search-admin input {
-    height: 50px;
+    height: 40px;
     width: 300px;
-    padding-left:20px;
+    padding-left:10px;
     border: 1px solid #252323;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #5c5c5c;
     font-size: 15px;
 }
@@ -78,7 +77,7 @@
     width: 200px;
 }
 .univercity-admin {
-    width: 60px;
+    width: 80px;
 }
 .football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
     width: 60px;

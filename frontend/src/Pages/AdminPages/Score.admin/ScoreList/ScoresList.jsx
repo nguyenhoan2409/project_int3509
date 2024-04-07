@@ -41,7 +41,6 @@ export const ScoresList = () => {
             <div className="scores-list-admin">
                 <div className="main-admin">
                     <div className="score-header-admin">
-                        <h2> Điểm học phần GDTC </h2>
                         <div className="search-admin">
                             <input
                                 type=""
