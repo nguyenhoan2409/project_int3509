@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMe } from '~/features/authSlice';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { FaEdit } from "react-icons/fa";
 import "./ProductsList.css"
 import { ProductsManagement } from '../ProductsLayout/Products.admin';
 export const ProductsList = () => {
@@ -40,7 +41,7 @@ export const ProductsList = () => {
                                 <th className="products-2">Số lượng hiện có</th>
                                 <th className="descriptions">Mô tả</th>
                                 <th className="order-type">Mua/Mượn/Thuê</th>
-                                <th className="products-update">Chỉnh sửa</th>
+                                <th className="products-update">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,7 +55,7 @@ export const ProductsList = () => {
                                 <td>{product.quantity}</td>
                                 <td>{product.description}</td>
                                 <td>{product.order_type}</td>
-                                <td><Link to= {`/admin/products/update/${product.product_id}`}><button>Chỉnh sửa</button></Link></td>
+                                <td className='products-update-icon'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit /></Link></td>
                                 </tr>
                             ))}
                         </tbody>

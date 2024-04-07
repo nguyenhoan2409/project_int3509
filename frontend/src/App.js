@@ -18,7 +18,7 @@ import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreLayout/Sco
 import { ScoresList } from "./Pages/AdminPages/Score.admin/ScoreList/ScoresList";
 import { UpdateScores } from "./Pages/AdminPages/Score.admin/Score.admin.update";
 import { AddScores } from "./Pages/AdminPages/Score.admin/AddScores";
-import { AddStudents } from "./Pages/AdminPages/Score.admin/AddStudents";
+import { AddStudents } from "./Pages/AdminPages/Score.admin/AddStudents/AddStudents";
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
 function App() {
   return (

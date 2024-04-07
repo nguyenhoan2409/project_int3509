@@ -2,6 +2,7 @@ import { ScoresManagement } from "../ScoreLayout/ScoreLayout";
 import React, { useEffect, useState } from "react";
 import "./ScoresList.css";
 import axios from "axios";
+import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 export const ScoresList = () => {
     const [mssv, setMssv] = useState("");
@@ -69,6 +70,7 @@ export const ScoresList = () => {
                                     <th className="taekwondo-admin">Taekwondo</th>
                                     <th className="golf-admin">Golf</th>
                                     <th className="CDR-admin">CĐR</th>
+                                    <th className="action-admin">Thao tác</th>       
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,6 +89,7 @@ export const ScoresList = () => {
                                         <td>{score.taekwondo_score}</td>
                                         <td>{score.golf_score}</td>
                                         <td>{score.CDR}</td>
+                                        <td><FaEdit /></td>
                                     </tr>
                                 ))}
                             </tbody>

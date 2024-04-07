@@ -74,12 +74,15 @@
     width: 200px;
 }
 .class-admin {
-    width: 200px;
+    width: 170px;
 }
 .univercity-admin {
-    width: 80px;
+    width: 60px;
 }
 .football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
+    width: 60px;
+}
+.action-admin {
     width: 60px;
 }
 
