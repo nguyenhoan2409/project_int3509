@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Score.css";
 import axios from "axios";
-import { Footer } from "~/Components/Footer/Footer";
 import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 

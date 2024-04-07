@@ -1,0 +1,52 @@
+.scores-management {
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+.scores-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    margin-top: 5px;
+}
+.scores-left {
+    left: 0;
+    color: #099d5e;
+    font-size: 20px;
+    width: 250px;
+}
+.scores-tittle {
+    background-color:#EFEFEF;
+    color: #099d5e;
+    font-size: 30px;
+    font-weight: 600px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.score-right {
+    display: flex;
+    justify-content: flex-end;
+}
+.scores-navbar {
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+}
+.scores-navbar button {
+    float: right;
+}
+
+.line {
+    height: 1px;
+    background-color: black;
+}
+
+.scores-navbar button:hover {
+    background-color: #EFEFEF;
+}
