@@ -25,11 +25,15 @@ export const ProductsList = () => {
         dispatch(getMe());
         getProducts();
     }, []);
-
+    const [sideBarClick, setSideBarClick] = useState(false);
+    const handleClick = () => {
+      setSideBarClick(!sideBarClick);
+    }
+    console.log(sideBarClick)
     return (
         <div>
-            <ProductsManagement/>
-                <div className="products-list">
+            <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
+                <div className="products-list" style={{marginLeft: sideBarClick ? "210px" : "0px"}}>
                     <table>
                         <thead>
                             <tr>

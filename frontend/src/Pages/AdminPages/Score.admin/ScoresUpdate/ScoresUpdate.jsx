@@ -50,11 +50,15 @@ export const UpdateScores = () => {
       setCheckCDR(true)
     }
   }
-
+  const [sideBarClick, setSideBarClick] = useState(false);
+  const handleClick = () => {
+      setSideBarClick(!sideBarClick);
+    }
+    console.log(sideBarClick)
   return (
     <div className="score-update-container">
-      <ScoresManagement />
-      <div className="score-main">
+      <ScoresManagement sideBarClick={sideBarClick} handleClick={handleClick} />
+      <div className="score-main" style={{marginLeft: sideBarClick ? "250px" : "0px"}}>
         <div className="profile-student">
           <p className="profile-title"> Thông tin sinh viên </p>
           <div className="avatar"><PiStudentDuotone /></div>

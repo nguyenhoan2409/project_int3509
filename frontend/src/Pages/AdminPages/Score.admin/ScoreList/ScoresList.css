@@ -68,22 +68,17 @@
 }
 .score-table-admin tr:nth-child(even){background-color: #f2f2f2;}
 .mssv-admin {
-    width: 100px;
+    width: 10%;
 }
 .fullname-admin {
-    width: 200px;
+    width: 20%;
 }
 .class-admin {
-    width: 170px;
+    width: 15%;
 }
-.univercity-admin {
-    width: 60px;
-}
-.football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
-    width: 60px;
-}
-.action-admin {
-    width: 60px;
+
+.action-admin, .univercity-admin, .football-admin, .bedminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
+    width: 5%;
 }
 
 

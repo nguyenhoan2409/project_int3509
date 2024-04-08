@@ -82,11 +82,14 @@ export const CreateProduct = () => {
       }
     }
   }
-  console.log(msg)
+  const [sideBarClick, setSideBarClick] = useState(false);
+  const handleClick = () => {
+      setSideBarClick(!sideBarClick);
+    }
   return (
     <div>
-      <ProductsManagement />
-      <div className="create-product-form">
+      <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
+      <div className="create-product-form" style={{marginLeft: sideBarClick ? "200px" : "0px", width: sideBarClick ? "calc(100% - 200px)" : "100%"}}>
         <div className="create-product-left">
           <img src={thumbnail} alt="" />
         </div>

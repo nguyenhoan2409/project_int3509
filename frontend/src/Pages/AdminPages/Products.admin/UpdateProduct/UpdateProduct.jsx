@@ -95,10 +95,16 @@ export const UpdateProduct = () => {
   useEffect(() => {
     getDetail();
   }, []);
+
+  const [sideBarClick, setSideBarClick] = useState(false);
+    const handleClick = () => {
+      setSideBarClick(!sideBarClick);
+    }
+    console.log(sideBarClick)
   return (
     <div className="">
-      <ProductsManagement />
-        <div className="update-product-form">
+      <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
+        <div className="update-product-form" style={{marginLeft: sideBarClick ? "200px" : "0px", width: sideBarClick ? "calc(100% - 200px)" : "100%"}}>
           <div className="update-product-left">
             <img src={thumbnail} alt="" />
           </div>
