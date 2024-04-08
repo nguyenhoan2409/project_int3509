@@ -1,38 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "~/Components/Navbar/Navbar";
 import { TextField, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./Request.css";
+import { useParams } from 'react-router-dom';
+import axios from "axios";
 
 export const Certificate = () => {
-    const [name, setName] = useState("");
-    const [mssv, setMSSV] = useState("");
-    const [classs, setClass] = useState("");
-    const [univercity, setUnivercity] = useState("");
+    const { id } = useParams();
+    const [scores, setScores] = useState([]);
+  const [footballScore, setFootballScore] = useState();
+  const [basketballScore, setBasketballScore] = useState();
+  const [tabletennisScore, setTabletennisScore] = useState();
+  const [bedmintonScore, setBedmintonScore] = useState();
+  const [airVolleyballScore, setAirVolleyballScore] = useState();
+  const [volleyballScore, setVolleyballScore] = useState();
+  const [taekwondoScore, setTaekwondoScore] = useState();
+  const [golfScore, setGolfScore] = useState();
+  const [CDR, setCDR] = useState();
+  const [checkCDR, setCheckCDR] = useState(false);
+  const [univercity, setUnivercity] = useState("");
+  const [fullname, setFullname] = useState("");
+  const [mssv, setMssv] = useState("");
+  const [classs, setClasss] = useState("");
     const [email, setEmail] = useState("");
     const [phonenumber, setPhonenumber] = useState("");
     const [code, setCode] = useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(name, mssv, classs, univercity, email, phonenumber, code);
     }
+    const getScoreDetail = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8080/score/search/${id}`);
+          const scores = response.data.student;
+          const score = scores[0];
+          setScores(score);
+          setFullname(score.fullname);
+          setMssv(score.mssv);
+          setClasss(score.class);
+          setUnivercity(score.univercity);
+          setFootballScore(score.football_score);
+          setBasketballScore(score.basketball_score);
+          setTabletennisScore(score.tabletennis_score);
+          setBedmintonScore(score.bedminton_score);
+          setAirVolleyballScore(score.air_volleyball_score);
+          setVolleyballScore(score.volleyball_score);
+          setTaekwondoScore(score.taekwondo_score);
+          setGolfScore(score.golf_score);
+          setCDR(score.CDR);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          if (error.response) {
+            console.error("Server responded with:", error.response.data);
+          }
+        }
+      }
+      useEffect(() => {
+        getScoreDetail();
+      }, [])
+    
 
     return (
         <div>
             <Navbar />
             <div className="createRequestContainer">
-                <h2 className="createRequestTitle">Tạo yêu cầu</h2>
-                <form onSubmit={handleSubmit} action={<Link to="/login" />}>
+                <h2 className="createRequestTitle" style = {{textAlign: 'center'}}>Tạo yêu cầu </h2>
+                <form onSubmit={handleSubmit} action={<Link to="/login" />} style = {{marginTop: '20px', textAlign: 'center'}}>
                     <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
 
                         <TextField
                             type="text"
                             variant="outlined"
                             color="secondary"
-                            label="Họ và tên "
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
+                            label="Họ và tên"
+                            value={fullname}
                             fullWidth
                             required
                         />
@@ -41,8 +83,7 @@ export const Certificate = () => {
                             type="number"
                             variant="outlined"
                             color="secondary"
-                            label="Mã sinh viên "
-                            onChange={(e) => setMSSV(e.target.value)}
+                            label="MSSV"
                             value={mssv}
                             fullWidth
                             required
@@ -55,8 +96,7 @@ export const Certificate = () => {
                             type="text"
                             variant="outlined"
                             color="secondary"
-                            label="Lớp "
-                            onChange={(e) => setClass(e.target.value)}
+                            label="Lớp"
                             value={classs}
                             fullWidth
                             required
@@ -66,7 +106,6 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="Trường"
-                            onChange={(e) => setUnivercity(e.target.value)}
                             value={univercity}
                             fullWidth
                             required
@@ -98,17 +137,19 @@ export const Certificate = () => {
                         />
                     </Stack>
 
-                    <TextField
-                        type="text"
-                        variant="outlined"
-                        color="secondary"
-                        label="Mã xác nhận"
-                        onChange={(e) => setCode(e.target.value)}
-                        value={code}
-                        required
-                        fullWidth
-                        sx={{ mb: 4 }}
-                    />
+                    <div className="score-detail-user">
+                        <p> Bóng đá : {footballScore} .</p>
+                        <p> Bóng rổ: {basketballScore} .</p>
+                        <p> Bóng bàn: {tabletennisScore} .</p>
+                        <p> Cầu lông: {bedmintonScore} .</p>
+                    </div>
+
+                    <div className="score-detail-user">
+                        <p> Bóng chuyền hơi: {airVolleyballScore} .</p>
+                        <p> Bóng chuyền da: {volleyballScore} .</p>
+                        <p> Taekwondo: {taekwondoScore} .</p>
+                        <p> Golf: {golfScore} .</p>
+                    </div>
 
                     <Button variant="outlined" type="submit" className="createRequestBtn">
                         Tạo yêu cầu

@@ -83,14 +83,7 @@
 .football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR{
     width: 60px;
 }
-
-.request-btn button {
-    height: 50px;
-    width: 150px;
-    border: 1px solid #c9c9c9;
-    border-radius: 10px;
-    color: white;
-    font-size: 15px;
-    background: #007e43;
+.certificate-icons {
+    font-size: 25px;
 }
 
