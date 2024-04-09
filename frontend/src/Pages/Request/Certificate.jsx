@@ -8,25 +8,22 @@ import axios from "axios";
 
 export const Certificate = () => {
     const { id } = useParams();
-    const [scores, setScores] = useState([]);
-  const [footballScore, setFootballScore] = useState();
-  const [basketballScore, setBasketballScore] = useState();
-  const [tabletennisScore, setTabletennisScore] = useState();
-  const [bedmintonScore, setBedmintonScore] = useState();
-  const [airVolleyballScore, setAirVolleyballScore] = useState();
-  const [volleyballScore, setVolleyballScore] = useState();
-  const [taekwondoScore, setTaekwondoScore] = useState();
-  const [golfScore, setGolfScore] = useState();
-  const [CDR, setCDR] = useState();
-  const [checkCDR, setCheckCDR] = useState(false);
-  const [univercity, setUnivercity] = useState("");
-  const [fullname, setFullname] = useState("");
-  const [mssv, setMssv] = useState("");
-  const [classs, setClasss] = useState("");
-    const [email, setEmail] = useState("");
-    const [phonenumber, setPhonenumber] = useState("");
-    const [code, setCode] = useState("");
-
+    const [footballScore, setFootballScore] = useState();
+    const [basketballScore, setBasketballScore] = useState();
+    const [tabletennisScore, setTabletennisScore] = useState();
+    const [bedmintonScore, setBedmintonScore] = useState();
+    const [airVolleyballScore, setAirVolleyballScore] = useState();
+    const [volleyballScore, setVolleyballScore] = useState();
+    const [taekwondoScore, setTaekwondoScore] = useState();
+    const [golfScore, setGolfScore] = useState();
+    const [checkCDR, setCheckCDR] = useState(false);
+    const [univercity, setUnivercity] = useState();
+    const [fullname, setFullname] = useState();
+    const [mssv, setMssv] = useState();
+    const [classs, setClasss] = useState();
+    const [email, setEmail] = useState();
+    const [phonenumber, setPhonenumber] = useState();
+ 
     function handleSubmit(event) {
         event.preventDefault();
     }
@@ -35,7 +32,6 @@ export const Certificate = () => {
           const response = await axios.get(`http://localhost:8080/score/search/${id}`);
           const scores = response.data.student;
           const score = scores[0];
-          setScores(score);
           setFullname(score.fullname);
           setMssv(score.mssv);
           setClasss(score.class);
@@ -48,7 +44,9 @@ export const Certificate = () => {
           setVolleyballScore(score.volleyball_score);
           setTaekwondoScore(score.taekwondo_score);
           setGolfScore(score.golf_score);
-          setCDR(score.CDR);
+          if(score.CDR === "Đ") {
+            setCheckCDR(true)
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
           if (error.response) {
@@ -59,8 +57,6 @@ export const Certificate = () => {
       useEffect(() => {
         getScoreDetail();
       }, [])
-    
-
     return (
         <div>
             <Navbar />
@@ -151,9 +147,15 @@ export const Certificate = () => {
                         <p> Golf: {golfScore} .</p>
                     </div>
 
-                    <Button variant="outlined" type="submit" className="createRequestBtn">
+                    {checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn">
                         Tạo yêu cầu
-                    </Button>
+                    </Button>}
+
+                    {!checkCDR && <p style = {{color: 'red', textAlign: 'center', marginTop: '10px', marginBottom: '10px', fontSize: '18px'}}>Bạn chưa đạt CĐR</p>}
+                    {!checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn" disabled>
+                        Tạo yêu cầu
+                    </Button>}
+
 
                 </form>
             </div>

@@ -25,7 +25,7 @@ export const Sidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/admin/scores"}>
+            <Link to={"/admin/scores/list"}>
               <FcDocument /> Quản lý điểm 
             </Link>
           </li>
