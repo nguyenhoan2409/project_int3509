@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { ProductsManagement } from '../ProductsLayout/Products.admin';
 import axios from 'axios';
 import './CreateProduct.css'
-import { Sidebar } from '~/Components/SideBar/Sidebar';
 export const CreateProduct = () => {
   const [product_name, setProductName] = useState();
   const [order_type, setOrderType] = useState();
@@ -20,6 +19,7 @@ export const CreateProduct = () => {
        setIsFilled(false)
     } else {
        setIsFilled(true)
+       setMsg("Cập nhật sản phẩm thành công")
        addProduct()
     }
   }

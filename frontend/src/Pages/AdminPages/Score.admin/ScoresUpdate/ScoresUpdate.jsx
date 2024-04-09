@@ -17,7 +17,7 @@ export const UpdateScores = () => {
   const [taekwondoScore, setTaekwondoScore] = useState();
   const [golfScore, setGolfScore] = useState();
   const [CDR, setCDR] = useState();
-  const [checkCDR, setCheckCDR] = useState(false);
+  const [checkCDR, setCheckCDR] = useState();
 
   const getScoreDetail = async () => {
     try {
@@ -48,6 +48,8 @@ export const UpdateScores = () => {
   const handleUpdate = async () => {
     if(CDR === "Đ") {
       setCheckCDR(true)
+    } else {
+      setCheckCDR(false)
     }
   }
   const [sideBarClick, setSideBarClick] = useState(false);
@@ -141,7 +143,8 @@ export const UpdateScores = () => {
         </form>
 
             <button onClick={handleUpdate} className="update-score-button"> Cập nhật </button>
-           {checkCDR &&  <p className="check-cdr-msg"> Sinh viên đã đạt CĐR </p>}
+           {checkCDR === true &&  <p className="check-cdr-msg"> Sinh viên đã đạt CĐR </p>}
+           {checkCDR === false &&  <p className="check-cdr-msg-error"> Sinh viên chưa đạt CĐR </p>}
         </div>
             
       </div>

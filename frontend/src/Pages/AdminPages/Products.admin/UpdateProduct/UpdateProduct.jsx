@@ -12,11 +12,11 @@ export const UpdateProduct = () => {
   const [price, setPrice] = useState();
   const [thumbnail, setThumbnail] = useState();
   const [order_type, setOrderType] = useState();
-  const [isFilled, setIsFilled] = useState(false);
+  const [isFilled, setIsFilled] = useState();
   const [msg, setMsg] = useState();
   const handleUpdate = () => {
     // Kiểm tra các trường bắt buộc trước khi cập nhật sản phẩm
-    if  (!price || !quantity || !thumbnail || !order_type) {
+    if  (price === ''|| quantity === '' || thumbnail === '' || order_type=== '') {
        setMsg("Vui lòng điền đầy đủ thông tin!")
        setIsFilled(false)
     } else {
@@ -24,7 +24,6 @@ export const UpdateProduct = () => {
        getUpdate()
     }
   }
-
   const handlePriceChange = (event) => {
     const value = event.target.value
     if(value >= 0 ) {
