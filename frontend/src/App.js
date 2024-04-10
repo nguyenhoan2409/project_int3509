@@ -10,9 +10,8 @@ import { Footer } from "./Components/Footer/Footer";
 import { Signup } from "./Pages/LoginSignup/Signup";
 import { Login } from "./Pages/LoginSignup/Login";
 import { CreateRequest } from "./Pages/Request/CreateRequest";
-import { DashBoard } from "./Pages/AdminPages/DashBoard";
-
-
+import { DashBoard } from "./Pages/AdminPages/DashBoard/DashBoard";
+import { RequestAdmin } from "./Pages/AdminPages/Request/ResquestAdmin";
 
 
 function App() {
@@ -37,6 +36,7 @@ function App() {
 
           {/* Admin routes */}
           <Route path="/admin/dashboard" element={<DashBoard />}></Route>
+          <Route path="/admin/request" element={<RequestAdmin />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

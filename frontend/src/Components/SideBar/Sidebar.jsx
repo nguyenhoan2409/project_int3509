@@ -1,36 +1,110 @@
-import React from "react";
 import "./Sidebar.css";
-import { Link } from "react-router-dom";
 import { FcHome, FcDocument, FcBusinessman } from "react-icons/fc";
+import React, { useEffect, useState } from "react";
+import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
+import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineUser, AiOutlineLogout, AiFillCaretDown } from "react-icons/ai";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { LogOut, reset } from "~/features/authSlice";
+import { FcStatistics } from "react-icons/fc";
+import { LiaProductHunt } from "react-icons/lia";
+import { GoGitPullRequest } from "react-icons/go";
+import { CiUser } from "react-icons/ci";
+import { useSelector } from 'react-redux';
+
 
 
 export const Sidebar = () => {
+  const navigate = useNavigate(); 
+  const dispatch = useDispatch(); 
+  const logout = async () => {
+    try {
+      dispatch(reset()); 
+      dispatch(LogOut()); 
+      navigate('/'); 
+      alert('Đăng xuất thành công')
+    } catch(error) {
+      console.log(error); 
+    }
+  }
+
+  const [userName, setUserName] = useState("");
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
+  const [msg, setMsg] = useState(''); 
+  useEffect(() => {
+    if (user) {
+      var arr = user.fullname.split(" "); 
+      setUserName(arr[arr.length - 1]);  
+    }
+    if (isError) {
+      setMsg(message); 
+    }
+  }, [user, isError]); 
+
+
   return (
     <div className="sidebar-container">
-      <aside className="menu pl-2 has-shadow">
-        <ul className="menu-list">
-          <li>
+      <div>
+        <img src={logo} alt="" className="sidebar-logo-img" />
+      </div>
+      <div className="menu-list-container">
+      <ul className="menu-list">
+          <li className="menu-list-item">
             <Link to={"/admin/dashboard"}>
-              <FcHome /> Dashboard
+              <div className="menu-list-item-container">
+                <FcStatistics className="menu-list-icon" size={24}/>
+                <div>Trang chủ</div>
+              </div>
             </Link>
           </li>
-          <li>
+          <li  className="menu-list-item">
             <Link to={"/admin/products"}>
-              <FcDocument /> Sản phẩm
+              <div className="menu-list-item-container">
+                <LiaProductHunt className="menu-list-icon" size={24}/>
+                <div>Sản phẩm</div>
+              </div>
             </Link>
           </li>
-          <li>
-            <Link to={"/admin/products"}>
-              <FcDocument /> Yêu cầu 
+          <li className="menu-list-item">
+            <Link to={"/admin/request"}>
+              <div className="menu-list-item-container">
+                <GoGitPullRequest className="menu-list-icon" size={24}/>
+                <div>Yêu cầu</div>
+              </div> 
             </Link>
           </li>
-          <li>
-            <Link to={"/admin/products"}>
-              <FcDocument /> Người dùng
+          <li className="menu-list-item">
+            <Link to={"/admin/users"}>
+              <div className="menu-list-item-container">
+                <CiUser className="menu-list-icon" size={24}/>
+                <div>Người dùng</div>
+              </div>
             </Link>
+          </li>
+
+          <li className="menu-list-item-profile-container">
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+              <img src={defaultAvatar} className="img-profile" />
+              <p style={{color: 'black', marginLeft: '5px', fontWeight: 600}}>Xin chào, {userName}</p>
+            </div>
+            <ul>
+              <li className="sub-item-sidebar">
+                <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
+                <Link to="/user/:activepage"> Thông tin cá nhân </Link>
+              </li>
+              <li className= "sub-item-sidebar" onClick={logout}>
+                <AiOutlineLogout color="black" size={18} style={{marginLeft: 5}}/>
+                <span> Đăng xuất </span>
+              </li>
+            </ul>
           </li>
         </ul>
-      </aside>
+      </div>
+        
     </div>
   );
 };

@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ShopContextProvider from "./Context/ShopContext";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { PersistGate } from "redux-persist/integration/react";
+import returnStoreAndPersistor from "./app/store"
 
 console.log(React);
-
+const {store, persistor} = returnStoreAndPersistor(); 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ShopContextProvider>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </ShopContextProvider>
   

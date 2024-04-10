@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Navbar } from "~/Components/Navbar/Navbar";
 import "./Layout.css"
 import { Footer } from "~/Components/Footer/Footer";
-import { NavbarAdmin } from "~/Components/Navbar/NavbarAdmin";
 import { Sidebar } from "~/Components/SideBar/Sidebar";
 
 const Layout = ({ children }) => {
@@ -22,11 +21,12 @@ const Layout = ({ children }) => {
   }, [user, isError]);
   return (
     <React.Fragment>
-      {(userInfo.role_id == 1) ? <NavbarAdmin /> : <Navbar />}
+      {(userInfo.role_id == 2) && <Navbar />}
       <div className={(userInfo.role_id == 1) ? 'main-container' : ''}>
         {(userInfo.role_id == 1) && <Sidebar />}
         <div className={(userInfo.role_id == 1) ? 'main-content' : ''}>
             <main>{children}</main>
+            {(userInfo.role_id == 1) && <Footer />}
         </div>
       </div>
       {(userInfo.role_id == 2) && <Footer />}

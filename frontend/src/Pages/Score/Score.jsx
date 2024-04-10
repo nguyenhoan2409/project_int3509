@@ -52,40 +52,40 @@ export const Score = () => {
               <button onClick={searchHandle}>Tìm kiếm</button>
             </div>
           </div>
-          <table>
+          <table className="score-table-container">
             <thead>
-              <tr>
-                <th>MSSV</th>
-                <th>Họ và Tên</th>
-                <th>Lớp</th>
-                <th>Trường</th>
-                <th>Bóng đá</th>
-                <th>Cầu lông</th>
-                <th>Bóng bàn</th>
-                <th>Bóng rổ</th>
-                <th>Bóng chuyền hơi</th>
-                <th>Bóng chuyền</th>
-                <th>Taekwondo</th>
-                <th>Golf</th>
-                <th>CĐR</th>
+              <tr className="score-table-row-container">
+                <th className="score-table-header">MSSV</th>
+                <th className="score-table-header">Họ và Tên</th>
+                <th className="score-table-header">Lớp</th>
+                <th className="score-table-header">Trường</th>
+                <th className="score-table-header">Bóng đá</th>
+                <th className="score-table-header">Cầu lông</th>
+                <th className="score-table-header">Bóng bàn</th>
+                <th className="score-table-header">Bóng rổ</th>
+                <th className="score-table-header">Bóng chuyền hơi</th>
+                <th className="score-table-header">Bóng chuyền</th>
+                <th className="score-table-header">Taekwondo</th>
+                <th className="score-table-header">Golf</th>
+                <th className="score-table-header">CĐR</th>
               </tr>
             </thead>
             <tbody>
               {scores?.map((score, index) => (
-                <tr key={index}>
-                  <td>{score.mssv}</td>
-                  <td>{score.fullname}</td>
-                  <td>{score.class}</td>
-                  <td>{score.univercity}</td>
-                  <td>{score.football_score}</td>
-                  <td>{score.bedminton_score}</td>
-                  <td>{score.tabletennis_score}</td>
-                  <td>{score.basketball_score}</td>
-                  <td>{score.volleyball_score}</td>
-                  <td>{score.air_volleyball_score}</td>
-                  <td>{score.taekwondo_score}</td>
-                  <td>{score.golf_score}</td>
-                  <td>{score.CDR}</td>
+                <tr key={index} className="score-table-row-container">
+                  <td className="score-table-data">{score.mssv}</td>
+                  <td className="score-table-data">{score.fullname}</td>
+                  <td className="score-table-data">{score.class}</td>
+                  <td className="score-table-data">{score.univercity}</td>
+                  <td className="score-table-data">{score.football_score}</td>
+                  <td className="score-table-data">{score.bedminton_score}</td>
+                  <td className="score-table-data">{score.tabletennis_score}</td>
+                  <td className="score-table-data">{score.basketball_score}</td>
+                  <td className="score-table-data">{score.volleyball_score}</td>
+                  <td className="score-table-data">{score.air_volleyball_score}</td>
+                  <td className="score-table-data">{score.taekwondo_score}</td>
+                  <td className="score-table-data">{score.golf_score}</td>
+                  <td className="score-table-data">{score.CDR}</td>
                 </tr>
               ))}
             </tbody>

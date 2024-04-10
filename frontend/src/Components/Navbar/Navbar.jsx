@@ -8,16 +8,32 @@ import { AiOutlineUser, AiOutlineLogout, AiFillCaretDown } from "react-icons/ai"
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { LogOut, reset } from "~/features/authSlice";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 export const Navbar = () => {
   const navigate = useNavigate(); 
   const dispatch = useDispatch(); 
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const logout = async () => {
     try {
       dispatch(reset()); 
       dispatch(LogOut()); 
+      handleOpen(); 
       navigate('/'); 
-      alert('Đăng xuất thành công')
     } catch(error) {
       console.log(error); 
     }
@@ -46,6 +62,16 @@ export const Navbar = () => {
 
   return (
     <div className={`navbar-container ${scrolled ? 'scrolled' : ''}`}>
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          Đăng xuất thành công
+        </Alert>
+      </Snackbar>
       <div className="nav-logo">
         <img src={logo} alt="" className="logo-img" />
       </div>
@@ -73,14 +99,14 @@ export const Navbar = () => {
             </Link>
           </li>
           <li>
-            <img src={defaultAvatar} class="img-profile" />
+            <img src={defaultAvatar} className="img-profile" />
             <AiFillCaretDown color={scrolled ? 'white' : "rgba(186, 149, 149, 0.4)"} size={18} style={{paddingBottom: 10}}/>
             <ul className="sub-item-container">
-              <li class="sub-item">
+              <li className="sub-item">
                 <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
                 <Link to="/user/:activepage" onClick={handleTabClick}> Thông tin cá nhân </Link>
               </li>
-              <li class="sub-item" onClick={logout}>
+              <li className="sub-item" onClick={logout}>
                 <AiOutlineLogout color="black" size={18} style={{marginLeft: 5}}/>
                 <span> Đăng xuất </span>
               </li>

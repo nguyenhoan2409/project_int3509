@@ -14,12 +14,47 @@
 
 .createRequestContainer {
     font-family: "Work Sans", sans-serif;
-    margin: 10px 100px 0 100px;
+    display: flex;
+    /* justify-content: center; */
+    margin: 0 40px 0 40px;
+  
+}
+
+.create-request-container-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-request-container-right {
+    flex: 1.2;
+}
+
+.create-request-productImg {
+    width: 400px;
+    border-radius: 10px;
 }
 
 .createRequestTitle {
-    margin-bottom: 10px;
-    font-size: large;
+    margin: 10px 0 20px 0;
+    font-size: 25px;
+    text-align: center;
+
+}
+
+.create-request-productName {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.create-request-changeQuantity.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+    color: black;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    height: 55px;
 }
 
 .createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
@@ -30,5 +65,9 @@
 .createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {
     background-color: #03924f;
     color: white;
+}
+
+.request-filter-container {
+    margin-left: 50px;
 }
 

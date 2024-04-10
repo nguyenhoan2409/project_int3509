@@ -1,8 +1,8 @@
-.score-container {
-    width: 100%;
+.score-container { 
+     width: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; 
     /* justify-content: center;
     align-items: center;
     display: flex; */
@@ -53,23 +53,30 @@
     align-items: center;
 }
 
-table, td, th {
+/* .score-container table, td, th {
     border: 1px solid;
-  }
+  } */
   
-table {
+.score-container .score-table-container {
+    border: 1px solid;
     border-collapse: collapse;
   }
-th{
+.score-container .score-table-header {
+    border: 1px solid;
     text-align: center;
     background-color: #04AA6D;
     color: white;
     padding-top: 12px;
     padding-bottom: 12px;
 }
-tr {
+
+.score-container .score-table-data {
+    border: 1px solid;
+}
+
+.score-container .score-table-row-container {
     padding-top: 8px;
     text-align: center;
     padding-bottom: 8px;
 }
-tr:nth-child(even){background-color: #f2f2f2;}
+.score-container .score-table-container .score-table-row-container:nth-child(even){background-color: #f2f2f2;} 

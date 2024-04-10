@@ -8,10 +8,11 @@ const { database } = require("../config/database");
 exports.getAllOrder = async (req, res) => {
   try {
     const orders = await database.query(`
-        SELECT o.*, p.product_name, s.description
+        SELECT o.*, p.product_name, p.thumbnail, s.description, u.fullname
         FROM orders o
         LEFT JOIN products p ON o.product_id = p.product_id
         LEFT JOIN status s ON o.status = s.status_id
+        LEFT JOIN users u ON u.user_id = o.user_id
     `, { type: QueryTypes.SELECT });
 
     return res.status(200).json(orders);
@@ -149,7 +150,7 @@ exports.createOrder = async (req, res) => {
     if (!product) {
       return res
         .status(404)
-        .json({ error: `Không tìm thấy sản phẩm với product_id: ${product_id}` });
+        .json({ message: `Không tìm thấy sản phẩm với product_id: ${product_id}` });
     }
 
     const timeLine = await Timeline.findOne({
@@ -165,7 +166,7 @@ exports.createOrder = async (req, res) => {
       if (quantity > product.quantity) {
         return res
         .status(400)
-        .json({ error: "Số lượng còn lại không đủ để đáp ứng yêu cầu. Vui lòng chọn số lượng nhỏ hơn." });
+        .json({ message: `Số lượng còn lại không đủ để đáp ứng yêu cầu. Vui lòng chọn số lượng nhỏ hơn ${product.quantity}` });
       }
     }
      
@@ -207,7 +208,7 @@ exports.createOrder = async (req, res) => {
       .json({ success: true, message: "Yêu cầu đã được tạo thành công và vui lòng đợi admin xác nhận.", order: order});
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Lỗi server" });
+    return res.status(500).json({ message: "Lỗi server" });
   }
 };
 

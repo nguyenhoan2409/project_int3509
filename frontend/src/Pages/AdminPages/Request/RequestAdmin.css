@@ -1,0 +1,10 @@
+.close-modal-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.close-modal-button:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
+} 

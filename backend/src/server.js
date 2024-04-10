@@ -33,6 +33,7 @@ require('./routes/ProductRoutes')(app);
 require('./routes/ScoreRoute')(app); 
 require('./routes/OrderRoutes')(app); 
 require('./routes/UserRoute')(app); 
+require('./routes/TimelineRoute')(app); 
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`); 

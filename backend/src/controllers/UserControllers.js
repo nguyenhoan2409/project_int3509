@@ -58,7 +58,7 @@ exports.getMe = async function (req, res) {
         })
         if (!user) return res.status(400).json({msg: 'Không lấy được thông tin người dùng'}); 
         const orderListOfMe = await database.query(`
-            SELECT o.order_id, p.product_name, o.quantity, o.total_money, o.rental_time, o.return_time, s.description
+            SELECT o.order_id, p.product_id, p.product_name, o.quantity, o.total_money, o.rental_time, o.return_time, s.description, o.status
             FROM orders o
             LEFT JOIN products p ON o.product_id = p.product_id
             LEFT JOIN status s ON o.status = s.status_id

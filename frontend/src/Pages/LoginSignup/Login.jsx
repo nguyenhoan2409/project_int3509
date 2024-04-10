@@ -82,31 +82,6 @@ export const Login = () => {
       }
       
   };
-  // const Login = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     validate('email');
-  //     validate('password');
-  //     const response = await axios.post(
-  //       "http://localhost:8080/login",
-  //       {
-  //         email: email,
-  //         password: password,
-  //       },
-  //       { withCredentials: true }
-  //     );
-  //     setUser(response.data.user);
-  //     if (response.data.user.role_id == 1) {
-  //       navigate("/admin/dashboard");
-  //     } else {
-  //       navigate("/home");
-  //     }
-  //     return response.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //     setMsg(error.response.data.msg);
-  //   }
-  // };
   return (
     <div className="loginsignup">
       <div className="loginsignup-container-left">
@@ -171,7 +146,7 @@ export const Login = () => {
             className="loginBtn"
             size="large"
           >
-            Đăng nhập
+            {isLoading ? 'Đang kiểm tra' : 'Đăng nhập'}
           </Button>
         </form>
         <p className="loginsignup-login">
