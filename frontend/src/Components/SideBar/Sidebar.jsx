@@ -5,9 +5,7 @@ import { BsBagCheckFill, BsGrid1X2Fill, BsFileEarmarkTextFill, BsFilePersonFill,
 
 export const Sidebar = () => {
   return (
-    <div className="sidebar">
-      
-      
+    <div className="sidebar">   
       <div className="bottom">
         <ul>
           <li>
