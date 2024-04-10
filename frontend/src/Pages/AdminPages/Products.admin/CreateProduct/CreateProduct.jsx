@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { ProductsManagement } from '../ProductsLayout/Products.admin';
 import axios from 'axios';
 import './CreateProduct.css'
-import { Sidebar } from '~/Components/SideBar/Sidebar';
 export const CreateProduct = () => {
   const [product_name, setProductName] = useState();
   const [order_type, setOrderType] = useState();
@@ -20,6 +19,7 @@ export const CreateProduct = () => {
        setIsFilled(false)
     } else {
        setIsFilled(true)
+       setMsg("Cập nhật sản phẩm thành công")
        addProduct()
     }
   }
@@ -82,11 +82,14 @@ export const CreateProduct = () => {
       }
     }
   }
-  console.log(msg)
+  const [sideBarClick, setSideBarClick] = useState(false);
+  const handleClick = () => {
+      setSideBarClick(!sideBarClick);
+    }
   return (
     <div>
-      <ProductsManagement />
-      <div className="create-product-form">
+      <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
+      <div className="create-product-form" style={{marginLeft: sideBarClick ? "200px" : "0px", width: sideBarClick ? "calc(100% - 200px)" : "100%"}}>
         <div className="create-product-left">
           <img src={thumbnail} alt="" />
         </div>

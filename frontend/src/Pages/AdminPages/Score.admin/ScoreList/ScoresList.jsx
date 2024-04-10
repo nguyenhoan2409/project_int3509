@@ -35,11 +35,15 @@ export const ScoresList = () => {
             console.error("Error searching:", error);
         }
     };
-    console.log(scores);
+    const [sideBarClick, setSideBarClick] = useState(false);
+    const handleClick = () => {
+      setSideBarClick(!sideBarClick);
+    }
+    console.log(sideBarClick)
     return (
         <div>
-            <ScoresManagement />
-            <div className="scores-list-admin">
+            <ScoresManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
+            <div className="scores-list-admin" style={{marginLeft: sideBarClick ? "200px" : "0px", width: sideBarClick ? "calc(100% - 200px)" : "100%"}}>
                 <div className="main-admin">
                     <div className="score-header-admin">
                         <div className="search-admin">

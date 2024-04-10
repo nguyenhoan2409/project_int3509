@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import "./Products.admin.css"
 import { FaHome } from "react-icons/fa";
 import { Sidebar } from '~/Components/SideBar/Sidebar';
-export const ProductsManagement = () => {
-  const [sideBarClick, setSideBarClick] = useState(false);
-  const handleClick = () => {
-    setSideBarClick(!sideBarClick);
-  }
+export const ProductsManagement = ({ sideBarClick, handleClick }) => {
+  
   return (
     <div className="products-management-admin">
       <div className="products-header">

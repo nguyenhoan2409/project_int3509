@@ -3,6 +3,7 @@ import "./Score.css";
 import axios from "axios";
 import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
+import { TbCertificate } from "react-icons/tb";
 
 export const Score = () => {
   const [mssv, setMssv] = useState("");
@@ -49,54 +50,52 @@ export const Score = () => {
                 onChange={(e) => setMssv(e.target.value)}
               />
               <div className="search-btn">
-              <button onClick={searchHandle}>Tìm kiếm</button>
+                <button onClick={searchHandle}>Tìm kiếm</button>
               </div>
-              <Link to = {"/certificate"} >
-                <div className="request-btn">
-                <button>Yêu cầu cấp GCN</button>
-                </div>
-                </Link>
             </div>
           </div>
           <div className="score-table">
-          <table>
-            <thead>
-              <tr>
-                <th className="mssv">MSSV</th>
-                <th className="fullname">Họ và Tên</th>
-                <th className="class">Lớp</th>
-                <th className="univercity">Trường</th>
-                <th className="football">Bóng đá</th>
-                <th className="bedminton">Cầu lông</th>
-                <th className="tabletennis">Bóng bàn</th>
-                <th className="basketball">Bóng rổ</th>
-                <th className="volleyball">Bóng chuyền hơi</th>
-                <th className="air_volleyball">Bóng chuyền</th>
-                <th className="taekwondo">Taekwondo</th>
-                <th className="golf">Golf</th>
-                <th className="CDR">CĐR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {scores?.map((score, index) => (
-                <tr key={index}>
-                  <td>{score.mssv}</td>
-                  <td>{score.fullname}</td>
-                  <td>{score.class}</td>
-                  <td>{score.univercity}</td>
-                  <td>{score.football_score}</td>
-                  <td>{score.bedminton_score}</td>
-                  <td>{score.tabletennis_score}</td>
-                  <td>{score.basketball_score}</td>
-                  <td>{score.volleyball_score}</td>
-                  <td>{score.air_volleyball_score}</td>
-                  <td>{score.taekwondo_score}</td>
-                  <td>{score.golf_score}</td>
-                  <td>{score.CDR}</td>
+            <table>
+              <thead>
+                <tr>
+                  <th className="mssv">MSSV</th>
+                  <th className="fullname">Họ và Tên</th>
+                  <th className="class">Lớp</th>
+                  <th className="univercity">Trường</th>
+                  <th className="football">Bóng đá</th>
+                  <th className="bedminton">Cầu lông</th>
+                  <th className="tabletennis">Bóng bàn</th>
+                  <th className="basketball">Bóng rổ</th>
+                  <th className="volleyball">Bóng chuyền hơi</th>
+                  <th className="air_volleyball">Bóng chuyền</th>
+                  <th className="taekwondo">Taekwondo</th>
+                  <th className="golf">Golf</th>
+                  <th className="CDR">CĐR</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {scores?.map((score, index) => (
+                  <tr key={index}>
+                    <td>{score.mssv}</td>
+                    <td>{score.fullname}</td>
+                    <td>{score.class}</td>
+                    <td>{score.univercity}</td>
+                    <td>{score.football_score}</td>
+                    <td>{score.bedminton_score}</td>
+                    <td>{score.tabletennis_score}</td>
+                    <td>{score.basketball_score}</td>
+                    <td>{score.volleyball_score}</td>
+                    <td>{score.air_volleyball_score}</td>
+                    <td>{score.taekwondo_score}</td>
+                    <td>{score.golf_score}</td>
+                    <td className="certificate-icons"><Link to={`/certificate/${score.mssv}`} >
+                          <TbCertificate />
+                        </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </Layout>

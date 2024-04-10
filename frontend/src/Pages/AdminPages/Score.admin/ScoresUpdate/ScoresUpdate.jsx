@@ -17,7 +17,7 @@ export const UpdateScores = () => {
   const [taekwondoScore, setTaekwondoScore] = useState();
   const [golfScore, setGolfScore] = useState();
   const [CDR, setCDR] = useState();
-  const [checkCDR, setCheckCDR] = useState(false);
+  const [checkCDR, setCheckCDR] = useState();
 
   const getScoreDetail = async () => {
     try {
@@ -48,13 +48,19 @@ export const UpdateScores = () => {
   const handleUpdate = async () => {
     if(CDR === "Đ") {
       setCheckCDR(true)
+    } else {
+      setCheckCDR(false)
     }
   }
-
+  const [sideBarClick, setSideBarClick] = useState(false);
+  const handleClick = () => {
+      setSideBarClick(!sideBarClick);
+    }
+    console.log(sideBarClick)
   return (
     <div className="score-update-container">
-      <ScoresManagement />
-      <div className="score-main">
+      <ScoresManagement sideBarClick={sideBarClick} handleClick={handleClick} />
+      <div className="score-main" style={{marginLeft: sideBarClick ? "250px" : "0px"}}>
         <div className="profile-student">
           <p className="profile-title"> Thông tin sinh viên </p>
           <div className="avatar"><PiStudentDuotone /></div>
@@ -137,7 +143,8 @@ export const UpdateScores = () => {
         </form>
 
             <button onClick={handleUpdate} className="update-score-button"> Cập nhật </button>
-           {checkCDR &&  <p className="check-cdr-msg"> Sinh viên đã đạt CĐR </p>}
+           {checkCDR === true &&  <p className="check-cdr-msg"> Sinh viên đã đạt CĐR </p>}
+           {checkCDR === false &&  <p className="check-cdr-msg-error"> Sinh viên chưa đạt CĐR </p>}
         </div>
             
       </div>
