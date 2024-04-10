@@ -18,6 +18,7 @@ exports.login = async function (req, res) {
     }
     
     const match = await argon2.verify(user.password, req.body.password);
+    console.log(match)
     if (!match) {
       return res
         .status(400)
