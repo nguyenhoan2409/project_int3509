@@ -58,7 +58,7 @@ export const ProductsList = () => {
                                 <td>{product.quantity}</td>
                                 <td>{product.quantity}</td>
                                 <td>{product.description}</td>
-                                <td>{product.order_type}</td>
+                                <td>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</td>
                                 <td className='products-update-icon'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit /></Link></td>
                                 </tr>
                             ))}

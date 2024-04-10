@@ -9,10 +9,12 @@ import axios from "axios";
 
 export const ShopCategory = () => {
   const [productList, setProducts] = useState([]);
+  const [orderType, setOrderType] = useState("");
   const getProducts = async () => {
     try {
       const res = await axios.get("http://localhost:8080/product/list");
       setProducts(res.data);
+      const productList = res.data
       console.log(res.data)
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -36,7 +38,7 @@ export const ShopCategory = () => {
                 id={product.product_id}
                 image={product.thumbnail}
                 name={product.product_name}
-                order={product.order_type}
+                order={product.product_type}
               />
           ))}
         </div>

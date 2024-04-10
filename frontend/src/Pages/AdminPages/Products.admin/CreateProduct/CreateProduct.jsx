@@ -4,7 +4,7 @@ import axios from 'axios';
 import './CreateProduct.css'
 export const CreateProduct = () => {
   const [product_name, setProductName] = useState();
-  const [order_type, setOrderType] = useState();
+  const [product_type, setProductType] = useState();
   const [quantity, setQuantity] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
@@ -14,7 +14,7 @@ export const CreateProduct = () => {
   
   const handleCreate = () => {
     // Kiểm tra các trường bắt buộc trước khi thêm sản phẩm
-    if (!product_name || !price || !quantity || !thumbnail || !order_type) {
+    if (!product_name || !price || !quantity || !thumbnail || !product_type) {
         setMsg("Vui lòng điền đầy đủ thông tin!")
        setIsFilled(false)
     } else {
@@ -59,8 +59,8 @@ export const CreateProduct = () => {
       alert("Thêm link ảnh")
     }
   }
-  const handleOrderTypeChange = (event) => {
-      setOrderType(event.target.value);
+  const handleProductTypeChange = (event) => {
+      setProductType(event.target.value);
   }
 
   const addProduct = async () => {
@@ -71,7 +71,7 @@ export const CreateProduct = () => {
         quantity,
         thumbnail,
         description,
-        order_type
+        product_type
       });
       setMsg(response.msg);  
     } catch (error) {
@@ -101,10 +101,10 @@ export const CreateProduct = () => {
           <div className="create-product-row"> <p> Mô tả : </p> <input type="text" onChange={handleDescriptionChange} /></div>
           <div className="create-product-row"> 
             <p> Loại : </p> 
-            <select value={order_type} onChange={handleOrderTypeChange}>
-              <option value="Mua">Mua</option>
-              <option value="Mượn">Mượn</option>
-              <option value="Thuê">Thuê</option>
+            <select value={product_type} onChange={handleProductTypeChange}>
+              <option value="2">Mua</option>
+              <option value="1">Mượn</option>
+              <option value="3">Thuê</option>
              </select>
           </div>
           <button onClick={handleCreate}>Thêm sản phẩm</button>

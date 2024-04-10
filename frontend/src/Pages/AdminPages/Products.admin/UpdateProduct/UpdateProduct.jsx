@@ -11,12 +11,12 @@ export const UpdateProduct = () => {
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
   const [thumbnail, setThumbnail] = useState();
-  const [order_type, setOrderType] = useState();
+  const [product_type, setOrderType] = useState();
   const [isFilled, setIsFilled] = useState();
   const [msg, setMsg] = useState();
   const handleUpdate = () => {
     // Kiểm tra các trường bắt buộc trước khi cập nhật sản phẩm
-    if  (price === ''|| quantity === '' || thumbnail === '' || order_type=== '') {
+    if  (price === ''|| quantity === '' || thumbnail === '' || product_type=== '') {
        setMsg("Vui lòng điền đầy đủ thông tin!")
        setIsFilled(false)
     } else {
@@ -66,7 +66,7 @@ export const UpdateProduct = () => {
       setDescription(product.description);
       setQuantity(product.quantity);
       setThumbnail(product.thumbnail);
-      setOrderType(product.order_type);
+      setOrderType(product.product_type);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
@@ -81,7 +81,7 @@ export const UpdateProduct = () => {
         description,
         quantity,
         thumbnail,
-        order_type
+        product_type
       });
       setMsg(response.data.msg);
     } catch (error) {
@@ -115,10 +115,10 @@ export const UpdateProduct = () => {
             <div className="update-product-row"> <p> Ảnh : </p> <input type="text" value={thumbnail} onChange={handleThumbnailChange} /></div>
             <div className="update-product-row"> 
             <p> Loại : </p> 
-            <select value={order_type} onChange={e => setOrderType(e.target.value)}>
-              <option value="Mua">Mua</option>
-              <option value="Mượn">Mượn</option>
-              <option value="Thuê">Thuê</option>
+            <select value={product_type} onChange={e => setOrderType(e.target.value)}>
+              <option value="2">Mua</option>
+              <option value="1">Mượn</option>
+              <option value="3">Thuê</option>
              </select>
           </div>
             <button onClick={handleUpdate}>Cập nhật</button>

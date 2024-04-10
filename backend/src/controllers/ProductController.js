@@ -33,7 +33,7 @@ exports.add_product = async function(req,res) {
         const quantity = req.body.quantity
         const thumbnail = req.body.thumbnail
         const description = req.body.description
-        const order_type = req.body.order_type
+        const product_type = req.body.product_type
         const check = await database.query("SELECT * FROM products WHERE product_name = :product_name", {
             replacements: {
                 product_name: product_name
@@ -42,14 +42,14 @@ exports.add_product = async function(req,res) {
         if(check.length != 0) {
             return res.status(400).json("Tên sản phẩm đã tồn tại, vui lòng nhập tên khác")
         }  
-        else await database.query("INSERT INTO products (product_name,price,quantity,thumbnail,description,order_type) VALUES (:product_name,:price,:quantity,:thumbnail,:description,:order_type)", {
+        else await database.query("INSERT INTO products (product_name,price,quantity,thumbnail,description,product_type) VALUES (:product_name,:price,:quantity,:thumbnail,:description,:product_type)", {
             replacements: {
                 product_name: product_name, 
                 price: price, 
                 quantity: quantity, 
                 thumbnail: thumbnail, 
                 description: description, 
-                order_type : order_type
+                product_type : product_type
             }, type: QueryTypes.INSERT
         })
         return res.status(200).json({msg: "Đã thêm sản phẩm thành công"});
@@ -75,14 +75,14 @@ exports.remove_product = async function(req,res) {
 
 exports.update_product = async function(req,res) {
     try {
-        await database.query("UPDATE products SET price=:price,order_type=:order_type, quantity=:quantity, thumbnail=:thumbnail, description=:description WHERE product_id = :product_id", 
+        await database.query("UPDATE products SET price=:price,product_type=:product_type, quantity=:quantity, thumbnail=:thumbnail, description=:description WHERE product_id = :product_id", 
         {
             replacements: {
                 price: req.body.price,
                 quantity: req.body.quantity, 
                 thumbnail: req.body.thumbnail, 
                 description: req.body.description, 
-                order_type : req.body.order_type,
+                product_type : req.body.product_type,
                 product_id: req.params.id
             }, type: QueryTypes.UPDATE
         })

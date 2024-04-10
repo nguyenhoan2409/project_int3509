@@ -43,7 +43,7 @@ export const ProductDetail = () => {
                 </div>
                 <div className = "review">
                     <FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalfAlt />
-                    <p> 2350 lượt {product.order_type} | 440 lượt đánh giá</p>
+                    <p> 2350 lượt {product.product_type} | 440 lượt đánh giá</p>
                    </div>
                 <div className="product-price">
                   <div className="icon">
@@ -61,7 +61,7 @@ export const ProductDetail = () => {
                 <p>{product.description}</p>
                 </div>
                 <Link to = {"/create-request"} >
-                <div className="order-button"><button>{product.order_type}</button></div>
+                <div className="order-button"><button>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</button></div>
                 </Link>
               </div>
 

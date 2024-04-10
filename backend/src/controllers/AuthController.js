@@ -11,7 +11,6 @@ exports.login = async function (req, res) {
         email: req.body.email,
       },
     });
-
     if (!user) {
       return res
         .status(400)
@@ -41,6 +40,7 @@ exports.login = async function (req, res) {
     });
   } catch (error) {
     return res.status(400).json({ msg: "Đăng nhập thất bại", error: error });
+    console.log(error);
   }
 };
 
