@@ -20,6 +20,8 @@ import { UpdateScores } from "./Pages/AdminPages/Score.admin/ScoresUpdate/Scores
 import { AddScores } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddScores";
 import { AddStudents } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddStudents";
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
+import { AdminHome } from "./Pages/AdminPages/AdminHome/AdminHome";
+import { AdminData } from "./Components/AdminData/AdminData";
 function App() {
   return (
     <div>
@@ -39,8 +41,10 @@ function App() {
           <Route path="/product" element={<ShopCategory />}></Route>
 
           {/* Admin routes */}
-          <Route path="/admin/dashboard" element={<DashBoard />}></Route>
+          <Route path="/admin/dashboard" element={<AdminHome />}></Route>
           <Route path="/admin/sidebar" element={<Sidebar />}></Route>
+          <Route path="/admin/home" element={<AdminHome />}></Route>
+          <Route path="/admin/users" element={<AdminData/>}></Route>
           <Route path="/admin/products" element={<ProductsManagement/>}></Route>
           <Route path="/admin/products/list" element={<ProductsList/>}></Route>
           <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>
