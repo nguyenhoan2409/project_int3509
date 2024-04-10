@@ -103,7 +103,7 @@ export const UpdateProduct = () => {
   return (
     <div className="">
       <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
-        <div className="update-product-form" style={{marginLeft: sideBarClick ? "200px" : "0px", width: sideBarClick ? "calc(100% - 200px)" : "100%"}}>
+        <div className="update-product-form" style={{marginLeft: sideBarClick ? "220px" : "0px", marginTop: sideBarClick? "-560px" : "10px", width : sideBarClick ? "calc(100% - 220px)" : "100%" }}>
           <div className="update-product-left">
             <img src={thumbnail} alt="" />
           </div>

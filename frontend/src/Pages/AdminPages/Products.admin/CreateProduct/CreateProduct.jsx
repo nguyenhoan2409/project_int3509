@@ -89,7 +89,7 @@ export const CreateProduct = () => {
   return (
     <div>
       <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
-      <div className="create-product-form" style={{marginLeft: sideBarClick ? "200px" : "0px", width: sideBarClick ? "calc(100% - 200px)" : "100%"}}>
+      <div className="create-product-form" style={{marginLeft: sideBarClick ? "220px" : "0px", marginTop: sideBarClick? "-560px" : "10px", width : sideBarClick ? "calc(100% - 220px)" : "100%" }}>
         <div className="create-product-left">
           <img src={thumbnail} alt="" />
         </div>

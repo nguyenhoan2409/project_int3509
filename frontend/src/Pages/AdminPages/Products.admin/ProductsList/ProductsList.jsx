@@ -33,7 +33,7 @@ export const ProductsList = () => {
     return (
         <div>
             <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
-                <div className="products-list" style={{marginLeft: sideBarClick ? "210px" : "0px"}}>
+                <div className="products-list" style={{marginLeft: sideBarClick ? "220px" : "0px", marginTop: sideBarClick? "-560px" : "10px", width : sideBarClick ? "calc(100% - 220px)" : "100%" }}>
                     <table>
                         <thead>
                             <tr>

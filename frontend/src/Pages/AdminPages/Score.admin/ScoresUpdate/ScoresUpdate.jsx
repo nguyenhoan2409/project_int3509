@@ -60,7 +60,7 @@ export const UpdateScores = () => {
   return (
     <div className="score-update-container">
       <ScoresManagement sideBarClick={sideBarClick} handleClick={handleClick} />
-      <div className="score-main" style={{marginLeft: sideBarClick ? "250px" : "0px"}}>
+      <div className="score-main" style={{marginLeft: sideBarClick ? "220px" : "0px", marginTop: sideBarClick? "-560px" : "10px", width : sideBarClick ? "calc(100% - 220px)" : "100%" }}>
         <div className="profile-student">
           <p className="profile-title"> Thông tin sinh viên </p>
           <div className="avatar"><PiStudentDuotone /></div>

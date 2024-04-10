@@ -43,7 +43,7 @@ export const ScoresList = () => {
     return (
         <div>
             <ScoresManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
-            <div className="scores-list-admin" style={{marginLeft: sideBarClick ? "200px" : "0px", width: sideBarClick ? "calc(100% - 200px)" : "100%"}}>
+            <div className="scores-list-admin" style={{marginLeft: sideBarClick ? "220px" : "0px", marginTop: sideBarClick? "-560px" : "10px", width : sideBarClick ? "calc(100% - 220px)" : "100%" }}>
                 <div className="main-admin">
                     <div className="score-header-admin">
                         <div className="search-admin">
