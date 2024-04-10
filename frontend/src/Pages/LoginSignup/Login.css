@@ -74,31 +74,6 @@
   align-self: center;
 }
 
-/* .loginsignup-fields input {
-    height: 50px;
-    width: 96%;
-    padding-left: 20px;
-    border: 1px solid #c9c9c9;
-    outline: none;
-    color: #5c5c5c;
-    font-size: 18px;
-} */
-
-/* .loginsignup-container-right button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 505px;
-    height: 62px;
-    color: white;
-    background: #131550;
-    margin-top: 30px;
-    border: none;
-    font-size: 24px;
-    font-weight: 500;
-    cursor: pointer;
-} */
-
 .loginsignup-login {
   margin-top: 20px;
   font-size: 16px;
@@ -115,6 +90,7 @@
 .loginBtn.MuiButton-root {
   background-color: #007e43;
   color: white;
+  width: 100%;
 }
 
 .loginBtn.MuiButton-root:hover {
@@ -124,6 +100,7 @@
 .signUpBtn.MuiButton-root {
   background-color: #007e43;
   color: white;
+  width: 100%;
 }
 
 .signUpBtn.MuiButton-root:hover {

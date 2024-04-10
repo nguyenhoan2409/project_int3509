@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Score.css";
 import axios from "axios";
-import { Navbar } from "~/Components/Navbar/Navbar";
-import { Footer } from "~/Components/Footer/Footer";
 import Layout from "../Layout/Layout";
+import { Link } from "react-router-dom";
+import { TbCertificate } from "react-icons/tb";
 
 export const Score = () => {
   const [mssv, setMssv] = useState("");
@@ -49,47 +49,54 @@ export const Score = () => {
                 placeholder="Tra cứu điểm..."
                 onChange={(e) => setMssv(e.target.value)}
               />
-              <button onClick={searchHandle}>Tìm kiếm</button>
+              <div className="search-btn">
+                <button onClick={searchHandle}>Tìm kiếm</button>
+              </div>
             </div>
           </div>
-          <table className="score-table-container">
-            <thead>
-              <tr className="score-table-row-container">
-                <th className="score-table-header">MSSV</th>
-                <th className="score-table-header">Họ và Tên</th>
-                <th className="score-table-header">Lớp</th>
-                <th className="score-table-header">Trường</th>
-                <th className="score-table-header">Bóng đá</th>
-                <th className="score-table-header">Cầu lông</th>
-                <th className="score-table-header">Bóng bàn</th>
-                <th className="score-table-header">Bóng rổ</th>
-                <th className="score-table-header">Bóng chuyền hơi</th>
-                <th className="score-table-header">Bóng chuyền</th>
-                <th className="score-table-header">Taekwondo</th>
-                <th className="score-table-header">Golf</th>
-                <th className="score-table-header">CĐR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {scores?.map((score, index) => (
-                <tr key={index} className="score-table-row-container">
-                  <td className="score-table-data">{score.mssv}</td>
-                  <td className="score-table-data">{score.fullname}</td>
-                  <td className="score-table-data">{score.class}</td>
-                  <td className="score-table-data">{score.univercity}</td>
-                  <td className="score-table-data">{score.football_score}</td>
-                  <td className="score-table-data">{score.bedminton_score}</td>
-                  <td className="score-table-data">{score.tabletennis_score}</td>
-                  <td className="score-table-data">{score.basketball_score}</td>
-                  <td className="score-table-data">{score.volleyball_score}</td>
-                  <td className="score-table-data">{score.air_volleyball_score}</td>
-                  <td className="score-table-data">{score.taekwondo_score}</td>
-                  <td className="score-table-data">{score.golf_score}</td>
-                  <td className="score-table-data">{score.CDR}</td>
+          <div className="score-table">
+            <table>
+              <thead>
+                <tr>
+                  <th className="mssv">MSSV</th>
+                  <th className="fullname">Họ và Tên</th>
+                  <th className="class">Lớp</th>
+                  <th className="univercity">Trường</th>
+                  <th className="football">Bóng đá</th>
+                  <th className="bedminton">Cầu lông</th>
+                  <th className="tabletennis">Bóng bàn</th>
+                  <th className="basketball">Bóng rổ</th>
+                  <th className="volleyball">Bóng chuyền hơi</th>
+                  <th className="air_volleyball">Bóng chuyền</th>
+                  <th className="taekwondo">Taekwondo</th>
+                  <th className="golf">Golf</th>
+                  <th className="CDR">CĐR</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {scores?.map((score, index) => (
+                  <tr key={index}>
+                    <td>{score.mssv}</td>
+                    <td>{score.fullname}</td>
+                    <td>{score.class}</td>
+                    <td>{score.univercity}</td>
+                    <td>{score.football_score}</td>
+                    <td>{score.bedminton_score}</td>
+                    <td>{score.tabletennis_score}</td>
+                    <td>{score.basketball_score}</td>
+                    <td>{score.volleyball_score}</td>
+                    <td>{score.air_volleyball_score}</td>
+                    <td>{score.taekwondo_score}</td>
+                    <td>{score.golf_score}</td>
+                    <td className="certificate-icons"><Link to={`/certificate/${score.mssv}`} >
+                          <TbCertificate />
+                        </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </Layout>
     </div>

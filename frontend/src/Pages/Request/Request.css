@@ -60,6 +60,9 @@
 .createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
     background-color: #006d3a;
     color: white;
+    width: 150px;
+    height: 50px;
+    margin-top: 10px;
 }
 
 .createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {
@@ -71,3 +74,13 @@
     margin-left: 50px;
 }
 
+.score-detail-user {
+    font-family: "Work Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
