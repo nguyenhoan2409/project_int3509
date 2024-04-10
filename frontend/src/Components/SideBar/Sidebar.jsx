@@ -13,6 +13,7 @@ import { LiaProductHunt } from "react-icons/lia";
 import { GoGitPullRequest } from "react-icons/go";
 import { CiUser } from "react-icons/ci";
 import { useSelector } from 'react-redux';
+import { BsBagCheckFill, BsGrid1X2Fill, BsFileEarmarkTextFill, BsFilePersonFill, BsListCheck } from "react-icons/bs"
 
 
 
@@ -62,26 +63,39 @@ export const Sidebar = () => {
             </Link>
           </li>
           <li  className="menu-list-item">
-            <Link to={"/admin/products"}>
+            <Link to={"/admin/products/list"}>
               <div className="menu-list-item-container">
-                <LiaProductHunt className="menu-list-icon" size={24}/>
-                <div>Sản phẩm</div>
+                <BsBagCheckFill className="menu-list-icon" size={24}/>
+                <div>Quản lý sản phẩm</div>
               </div>
             </Link>
           </li>
-          <li className="menu-list-item">
+
+          <li  className="menu-list-item">
             <Link to={"/admin/request"}>
               <div className="menu-list-item-container">
-                <GoGitPullRequest className="menu-list-icon" size={24}/>
-                <div>Yêu cầu</div>
+                <BsListCheck className="menu-list-icon" size={24}/>
+                <div>Quản lý yêu cầu</div>
+              </div>
+            </Link>
+          </li>
+
+
+
+          <li className="menu-list-item">
+            <Link to={"/admin/scores/list"}>
+              <div className="menu-list-item-container">
+                <BsFileEarmarkTextFill  className="menu-list-icon" size={24}/>
+                <div>Quản lý điểm</div>
               </div> 
             </Link>
           </li>
+
           <li className="menu-list-item">
             <Link to={"/admin/users"}>
               <div className="menu-list-item-container">
-                <CiUser className="menu-list-icon" size={24}/>
-                <div>Người dùng</div>
+                <BsFilePersonFill  className="menu-list-icon" size={24}/>
+                <div>Quản lý người dùng</div>
               </div>
             </Link>
           </li>

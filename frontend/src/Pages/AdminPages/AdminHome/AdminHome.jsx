@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./AdminHome.scss"
 import { Sidebar } from '~/Components/SideBar/Sidebar'
 import { Widget } from '~/Components/Widget/Widget'
 import List from '~/Components/List/List'
-import { NavbarAdmin } from '~/Components/Navbar/NavbarAdmin'
+import Layout from '~/Pages/Layout/Layout'
+import { useDispatch, useSelector } from 'react-redux';
+import { getMe } from '~/features/authSlice';
 
 export const AdminHome = () => {
+  const dispatch = useDispatch(); 
+  useEffect(() => {
+    dispatch(getMe());
+  }, []);
   return (
+    <Layout>
     <div className="home">
-        <NavbarAdmin/>
-        <Sidebar/>
         <div className="homeContainer">
            <div className="widget">
               <Widget type="customer" />
@@ -24,5 +29,6 @@ export const AdminHome = () => {
           </div>
         </div>
     </div>
+    </Layout>
   )
 }

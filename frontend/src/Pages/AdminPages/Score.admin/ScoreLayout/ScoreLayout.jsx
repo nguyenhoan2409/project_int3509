@@ -3,18 +3,15 @@ import { Link } from 'react-router-dom';
 import "./ScoreLayout.css"
 import { FaHome } from "react-icons/fa";
 import { Sidebar } from '~/Components/SideBar/Sidebar';
+import Layout from '~/Pages/Layout/Layout';
 export const ScoresManagement = ({ sideBarClick, handleClick }) => {
  
   return (
-    <div className='scores-management'>
+      <div className='scores-management'>
        <div className="scores-header">
-       <div className='icon' onClick={handleClick}><FaHome /></div>
-      <div className="scores-tittle"> Quản lý điểm </div>
+        <div className="scores-tittle"> Quản lý điểm </div>
        </div>
       <div className='scores-container'>
-        <div className="scores-left">
-          {sideBarClick ? <Sidebar /> : null}
-        </div>
         <div className="scores-right">
           <div className="scores-navbar">
             <Link to="/admin/scores/list"><button>Danh sách</button></Link>
@@ -23,7 +20,8 @@ export const ScoresManagement = ({ sideBarClick, handleClick }) => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    
 
   )
 }

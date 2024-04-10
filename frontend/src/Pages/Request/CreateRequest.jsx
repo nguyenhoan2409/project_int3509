@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import "./Request.css";
-import bongdaimg from "../../Components/Assets/bongda.png";
 import Layout from "../Layout/Layout";
 import { RiSubtractFill } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
@@ -132,11 +131,11 @@ export const CreateRequest = () => {
       <h2 className="createRequestTitle">Tạo yêu cầu</h2>
       <div className="createRequestContainer">
         <div className="create-request-container-left">
-          <img
-            src={bongdaimg}
+          {/* <img
+            src={}
             alt="thumbnail"
             className="create-request-productImg"
-          />
+          /> */}
           <p className="create-request-productName">Bóng đá</p>
         </div>
         <div className="create-request-container-right">

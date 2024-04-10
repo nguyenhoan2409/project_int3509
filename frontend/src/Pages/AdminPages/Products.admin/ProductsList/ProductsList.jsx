@@ -6,6 +6,7 @@ import axios from 'axios';
 import { FaEdit } from "react-icons/fa";
 import "./ProductsList.css"
 import { ProductsManagement } from '../ProductsLayout/Products.admin';
+import Layout from '~/Pages/Layout/Layout';
 export const ProductsList = () => {
     const [products, setProducts] = useState([]);
     const getProducts = async () => {
@@ -20,20 +21,15 @@ export const ProductsList = () => {
             }
         }
     }
-    const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getMe());
         getProducts();
     }, []);
-    const [sideBarClick, setSideBarClick] = useState(false);
-    const handleClick = () => {
-      setSideBarClick(!sideBarClick);
-    }
-    console.log(sideBarClick)
+    
     return (
-        <div>
-            <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
-                <div className="products-list" style={{marginLeft: sideBarClick ? "220px" : "0px", marginTop: sideBarClick? "-560px" : "10px", width : sideBarClick ? "calc(100% - 220px)" : "100%" }}>
+        <Layout>
+            <div>
+            <ProductsManagement/>
+                <div className="products-list">
                     <table>
                         <thead>
                             <tr>
@@ -67,6 +63,7 @@ export const ProductsList = () => {
                 </div>
             
         </div>
+        </Layout>
 
     )
 }

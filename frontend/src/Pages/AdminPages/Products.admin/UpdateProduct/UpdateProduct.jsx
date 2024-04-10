@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from 'react-router-dom';
 import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import './UpdateProduct.css'
+import Layout from "~/Pages/Layout/Layout";
 
 export const UpdateProduct = () => {
   const { id } = useParams();
@@ -95,15 +96,11 @@ export const UpdateProduct = () => {
     getDetail();
   }, []);
 
-  const [sideBarClick, setSideBarClick] = useState(false);
-    const handleClick = () => {
-      setSideBarClick(!sideBarClick);
-    }
-    console.log(sideBarClick)
   return (
-    <div className="">
-      <ProductsManagement sideBarClick={sideBarClick} handleClick={handleClick}/>
-        <div className="update-product-form" style={{marginLeft: sideBarClick ? "220px" : "0px", marginTop: sideBarClick? "-560px" : "10px", width : sideBarClick ? "calc(100% - 220px)" : "100%" }}>
+    <Layout>
+      <div className="">
+      <ProductsManagement />
+        <div className="update-product-form">
           <div className="update-product-left">
             <img src={thumbnail} alt="" />
           </div>
@@ -128,5 +125,7 @@ export const UpdateProduct = () => {
 
         </div>
       </div>
+    </Layout>
+    
   );
 };

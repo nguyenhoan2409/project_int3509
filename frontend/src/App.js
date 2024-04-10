@@ -13,7 +13,6 @@ import { RequestAdmin } from "./Pages/AdminPages/Request/ResquestAdmin";
 
 import { ProductDetail } from "./Pages/Product/ProductDetail";
 import { Certificate } from "./Pages/Request/Certificate";
-import { Sidebar } from "./Components/SideBar/Sidebar";
 import { ProductsManagement } from "./Pages/AdminPages/Products.admin/ProductsLayout/Products.admin";
 import { UpdateProduct } from "./Pages/AdminPages/Products.admin/UpdateProduct/UpdateProduct";
 import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct/CreateProduct";
@@ -24,7 +23,7 @@ import { AddScores } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddScores";
 import { AddStudents } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddStudents";
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
 import { AdminHome } from "./Pages/AdminPages/AdminHome/AdminHome";
-import { AdminData } from "./Components/AdminData/AdminData";
+import { UserManagement } from "./Pages/AdminPages/UserManagement/UserManagement";
 function App() {
   return (
     <div>
@@ -44,11 +43,10 @@ function App() {
           <Route path="/product" element={<ShopCategory />}></Route>
 
           {/* Admin routes */}
-          {/* <Route path="/admin/dashboard" element={<DashBoard />}></Route> */}
+          
           <Route path="/admin/request" element={<RequestAdmin />}></Route>
           <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
-          <Route path="/admin/sidebar" element={<Sidebar />}></Route>
-          <Route path="/admin/users" element={<AdminData/>}></Route>
+          <Route path="/admin/users" element={<UserManagement/>}></Route>
           <Route path="/admin/products" element={<ProductsManagement/>}></Route>
           <Route path="/admin/products/list" element={<ProductsList/>}></Route>
           <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>
