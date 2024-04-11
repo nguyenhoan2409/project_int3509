@@ -28,6 +28,13 @@
     height: 40px;
     width: 80px;
     font-size: 15px;
-    background-color: #04a06c;
+    background-color: #006d3a;
+    border: #006d3a;
+    border-radius: 2px;
     color: aliceblue;
+}
+
+.product button:hover {
+    background-color: #03924f;
+    color: white;
 }

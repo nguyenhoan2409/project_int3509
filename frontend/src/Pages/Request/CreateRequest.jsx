@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Navbar } from "~/Components/Navbar/Navbar";
 import {
   TextField,
   Button,
@@ -15,8 +14,10 @@ import { RiSubtractFill } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import {useParams} from 'react-router-dom'
 
 export const CreateRequest = () => {
+  const {id} = useParams()
   const [quantity, setQuantity] = useState(1);
   const [totalMoney, setTotalMoney] = useState("");
   const [timelineId, setTimelineId] = useState("");
@@ -30,6 +31,7 @@ export const CreateRequest = () => {
   const [errorReturnDate, setErrorReturnDate] = useState("");
   const [errorTimeline, setErrorTimeline] = useState("");
   const [errorTotalMoney, setErrorTotalMoney] = useState("");
+  const [product, setProduct] = useState([]);
 
   const navigate = useNavigate();
   const { user, isError, isSuccess, isLoading, message } = useSelector(
@@ -109,7 +111,7 @@ export const CreateRequest = () => {
           "http://localhost:8080/order/createOrder",
           {
             user_id: userInfo.user_id,
-            product_id: 1,
+            product_id: product.product_id,
             quantity: parseInt(quantity),
             total_money: totalMoney,
             timeline_id: parseInt(timelineId),
@@ -126,17 +128,33 @@ export const CreateRequest = () => {
     }
   };
 
+  const getDetail = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/product/detail/${id}`);
+      const product = response.data;
+      setProduct(product[0]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      if (error.response) {
+        console.error("Server responded with:", error.response.data);
+      }
+    }
+  }
+  useEffect(() => {
+    getDetail();
+  }, []);
+
   return (
     <Layout>
       <h2 className="createRequestTitle">Tạo yêu cầu</h2>
       <div className="createRequestContainer">
         <div className="create-request-container-left">
-          {/* <img
-            src={}
+           <img
+            src={product.thumbnail}
             alt="thumbnail"
             className="create-request-productImg"
-          /> */}
-          <p className="create-request-productName">Bóng đá</p>
+          /> 
+           <p className="create-request-productName">{product.product_name}</p>
         </div>
         <div className="create-request-container-right">
           <form onSubmit={handleSubmit}>

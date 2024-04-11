@@ -16,7 +16,7 @@ exports.login = async function (req, res) {
         .status(400)
         .json({ msg: "Tài khoản không tồn tại, vui lòng kiểm tra lại email" });
     }
-    
+    console.log(user.password,"và", req.body.password)
     const match = await argon2.verify(user.password, req.body.password);
     console.log(match)
     if (!match) {
@@ -40,8 +40,8 @@ exports.login = async function (req, res) {
       token: token,
     });
   } catch (error) {
-    return res.status(400).json({ msg: "Đăng nhập thất bại", error: error });
     console.log(error);
+    return  res.status(400).json({ msg: "Đăng nhập thất bại", error: error });
   }
 };
 

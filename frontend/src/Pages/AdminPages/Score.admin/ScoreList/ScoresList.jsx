@@ -58,10 +58,10 @@ export const ScoresList = () => {
                 </div>
               </div>
             </div>
-            <div className="score-table-admin">
-              <table>
+            <div className="table-admin">
+              <table className="score-table-admin">
                 <thead>
-                  <tr>
+                  <tr className="score-tr-admin">
                     <th className="mssv-admin">MSSV</th>
                     <th className="fullname-admin">Họ và Tên</th>
                     <th className="class-admin">Lớp</th>
@@ -80,21 +80,21 @@ export const ScoresList = () => {
                 </thead>
                 <tbody>
                   {scores?.map((score, index) => (
-                    <tr key={index}>
-                      <td>{score.mssv}</td>
-                      <td>{score.fullname}</td>
-                      <td>{score.class}</td>
-                      <td>{score.univercity}</td>
-                      <td>{score.football_score}</td>
-                      <td>{score.bedminton_score}</td>
-                      <td>{score.tabletennis_score}</td>
-                      <td>{score.basketball_score}</td>
-                      <td>{score.volleyball_score}</td>
-                      <td>{score.air_volleyball_score}</td>
-                      <td>{score.taekwondo_score}</td>
-                      <td>{score.golf_score}</td>
-                      <td>{score.CDR}</td>
-                      <td>
+                    <tr className="score-tr-admin" key={index}>
+                      <td className="mssv-admin-td">{score.mssv}</td>
+                      <td className="fullname-admin-td">{score.fullname}</td>
+                      <td className="class-admin-td">{score.class}</td>
+                      <td className="univercity-admin-td">{score.univercity}</td>
+                      <td className="football-admin-td">{score.football_score}</td>
+                      <td className="bedminton-admin-td">{score.bedminton_score}</td>
+                      <td className="tabletennis-admin-td">{score.tabletennis_score}</td>
+                      <td className="basketball-admin-td">{score.basketball_score}</td>
+                      <td className="volleyball-admin-td">{score.volleyball_score}</td>
+                      <td className="air_volleyball-admin-td">{score.air_volleyball_score}</td>
+                      <td className="taekwondo-admin-td">{score.taekwondo_score}</td>
+                      <td className="golf-admin-td">{score.golf_score}</td>
+                      <td className="CDR-admin-td">{score.CDR}</td>
+                      <td className="action-admin-td">
                         {" "}
                         <Link to={`/admin/scores/update/${score.mssv}`}>
                           <FaEdit />

@@ -26,7 +26,6 @@ export const ProductDetail = () => {
   useEffect(() => {
     getDetail();
   }, []);
-  console.log(product)
   return (
     <div className="">
       <Layout>
@@ -60,7 +59,7 @@ export const ProductDetail = () => {
                 <p>Mô tả:  </p>
                 <p>{product.description}</p>
                 </div>
-                <Link to = {"/create-request"} >
+                <Link to = {`/create-request/${id}`} >
                 <div className="order-button"><button>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</button></div>
                 </Link>
               </div>

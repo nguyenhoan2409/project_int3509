@@ -48,26 +48,26 @@
     align-items: center;
 }
 
- /* .score-table table, td, th {
+ .score-table .score-table-user, .mssv, .fullname, .class, .univercity, .football, .bedminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR, .certificate-icons {
     border: 1px solid;
   }
   
- .score-table table {
+ .score-table .score-table-user {
     border-collapse: collapse;
   }
- .score-table th{
+ .score-table .score-table-header{
     text-align: center;
     background-color: #04AA6D;
     color: white;
     padding-top: 12px;
     padding-bottom: 12px;
 }
-.score-table tr {
+.score-table .score-table-tr {
     padding-top: 8px;
     text-align: center;
     padding-bottom: 8px;
-} */
-.score-table tr:nth-child(even){background-color: #f2f2f2;}
+} 
+.score-table .score-table-tr:nth-child(even){background-color: #f2f2f2;}
 .mssv {
     width: 100px;
 }
@@ -80,7 +80,7 @@
 .univercity {
     width: 60px;
 }
-.football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR{
+.football, .bedminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR{
     width: 60px;
 }
 .certificate-icons {

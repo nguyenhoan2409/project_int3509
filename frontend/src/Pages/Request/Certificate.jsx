@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Navbar } from "~/Components/Navbar/Navbar";
 import { TextField, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./Request.css";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
+import Layout from "../Layout/Layout";
 
 export const Certificate = () => {
     const { id } = useParams();
@@ -58,11 +58,11 @@ export const Certificate = () => {
         getScoreDetail();
       }, [])
     return (
-        <div>
-            <Navbar />
-            <div className="createRequestContainer">
-                <h2 className="createRequestTitle" style = {{textAlign: 'center'}}>Tạo yêu cầu </h2>
-                <form onSubmit={handleSubmit} action={<Link to="/login" />} style = {{marginTop: '20px', textAlign: 'center'}}>
+            <Layout>
+            <h2 className="createRequestTitle">Tạo yêu cầu </h2>
+            <div className="createRequestMain">
+        
+                <form onSubmit={handleSubmit}>
                     <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
 
                         <TextField
@@ -147,7 +147,8 @@ export const Certificate = () => {
                         <p> Golf: {golfScore} .</p>
                     </div>
 
-                    {checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn">
+                </form>
+                {checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn">
                         Tạo yêu cầu
                     </Button>}
 
@@ -155,10 +156,7 @@ export const Certificate = () => {
                     {!checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn" disabled>
                         Tạo yêu cầu
                     </Button>}
-
-
-                </form>
             </div>
-        </div>
+        </Layout>
     );
 };

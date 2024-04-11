@@ -4,27 +4,32 @@
         sans-serif;
 }
 
-.products-list table{
+.products-list .products-list-table{
     border-collapse: collapse;
     margin-left: auto;
     margin-right: auto;
 }
 
-.products-list th{
+
+.products-list-tr .products-id, .products-thumbnails, .products-name, .products-price, .products-1, .products-2, .descriptions, .order-type, .products-update {
     text-align: center;
     background-color: #EFEFEF;
     color: black;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    border: 1px solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.products-list tr {
+.products-list-tr .products-id-data, .products-thumbnails-data, .products-name-data, .products-price-data, .products-1-data, .products-2-data, .descriptions-data, .order-type-data, .products-update-data {
+    text-align: center;
+    color: black;
+    border: 1px solid;
+}
+
+.products-list .products-list-tr {
     text-align: center;
 }
 
-.products-list td {
-    padding: 0px 0px 0px 0px;
-}
 .products-id {
     width: 5vw;
 }

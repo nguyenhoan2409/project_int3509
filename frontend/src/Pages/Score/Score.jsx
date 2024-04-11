@@ -55,39 +55,39 @@ export const Score = () => {
             </div>
           </div>
           <div className="score-table">
-            <table>
+            <table className="score-table-user">
               <thead>
-                <tr>
-                  <th className="mssv">MSSV</th>
-                  <th className="fullname">Họ và Tên</th>
-                  <th className="class">Lớp</th>
-                  <th className="univercity">Trường</th>
-                  <th className="football">Bóng đá</th>
-                  <th className="bedminton">Cầu lông</th>
-                  <th className="tabletennis">Bóng bàn</th>
-                  <th className="basketball">Bóng rổ</th>
-                  <th className="volleyball">Bóng chuyền hơi</th>
-                  <th className="air_volleyball">Bóng chuyền</th>
-                  <th className="taekwondo">Taekwondo</th>
-                  <th className="golf">Golf</th>
-                  <th className="CDR">CĐR</th>
+                <tr className="score-table-tr">
+                  <th className="mssv score-table-header">MSSV</th>
+                  <th className="fullname score-table-header">Họ và Tên</th>
+                  <th className="class score-table-header">Lớp</th>
+                  <th className="univercity score-table-header">Trường</th>
+                  <th className="football score-table-header">Bóng đá</th>
+                  <th className="bedminton score-table-header">Cầu lông</th>
+                  <th className="tabletennis score-table-header">Bóng bàn</th>
+                  <th className="basketball score-table-header">Bóng rổ</th>
+                  <th className="volleyball score-table-header">Bóng chuyền hơi</th>
+                  <th className="air_volleyball score-table-header">Bóng chuyền</th>
+                  <th className="taekwondo score-table-header">Taekwondo</th>
+                  <th className="golf score-table-header">Golf</th>
+                  <th className="CDR score-table-header">CĐR</th>
                 </tr>
               </thead>
               <tbody>
                 {scores?.map((score, index) => (
-                  <tr key={index}>
-                    <td>{score.mssv}</td>
-                    <td>{score.fullname}</td>
-                    <td>{score.class}</td>
-                    <td>{score.univercity}</td>
-                    <td>{score.football_score}</td>
-                    <td>{score.bedminton_score}</td>
-                    <td>{score.tabletennis_score}</td>
-                    <td>{score.basketball_score}</td>
-                    <td>{score.volleyball_score}</td>
-                    <td>{score.air_volleyball_score}</td>
-                    <td>{score.taekwondo_score}</td>
-                    <td>{score.golf_score}</td>
+                  <tr className="score-table-tr" key={index}>
+                    <td className="mssv">{score.mssv}</td>
+                    <td className="fullname">{score.fullname}</td>
+                    <td className="class">{score.class}</td>
+                    <td className="univercity">{score.univercity}</td>
+                    <td className="football">{score.football_score}</td>
+                    <td className="bedminton">{score.bedminton_score}</td>
+                    <td className="tabletennis">{score.tabletennis_score}</td>
+                    <td className="basketball">{score.basketball_score}</td>
+                    <td className="volleyball">{score.volleyball_score}</td>
+                    <td className="air_volleyball">{score.air_volleyball_score}</td>
+                    <td className="taekwondo">{score.taekwondo_score}</td>
+                    <td className="golf">{score.golf_score}</td>
                     <td className="certificate-icons"><Link to={`/certificate/${score.mssv}`} >
                           <TbCertificate />
                         </Link>

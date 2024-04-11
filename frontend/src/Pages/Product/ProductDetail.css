@@ -78,10 +78,15 @@
 .order-button button {
     height: 45px;
     width: 100px;
-    background-color: #04aa6d;
+    background-color: #006d3a;
     color: white;
     font-size: 20px;
-    border-radius: 5px;
-    border: #04aa6d;
+    border-radius: 2px;
+    border: #006d3a;
     margin-top: 10px;
+}
+
+.order-button button:hover {
+    background-color: #03924f;
+    color: white;
 }
