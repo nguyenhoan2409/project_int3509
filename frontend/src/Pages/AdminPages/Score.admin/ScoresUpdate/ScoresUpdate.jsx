@@ -37,6 +37,11 @@ export const UpdateScores = () => {
       setTaekwondoScore(score.taekwondo_score);
       setGolfScore(score.golf_score);
       setCDR(score.CDR);
+      if (score.CDR === "Đ") {
+        setCheckCDR(true);
+      } else {
+        setCheckCDR(false);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
@@ -48,14 +53,24 @@ export const UpdateScores = () => {
     getScoreDetail();
   }, []);
 
-  const handleUpdate = async () => {
-    if (CDR === "Đ") {
-      setCheckCDR(true);
-    } else {
-      setCheckCDR(false);
+  const getScoreUpdate = async () => {
+    try {
+        const response = await axios.patch("http://localhost:8080/score/update", {
+          football_score: footballScore,
+          basketball_score: basketballScore,
+          tabletennis_score: tabletennisScore,
+          bedminton_score: bedmintonScore,
+          air_volleyball_score: airVolleyballScore,
+          volleyball_score: volleyballScore,
+          taekwondo_score: taekwondoScore,
+          golf_score: golfScore,
+          mssv: id,
+        })
+        const cdr = await axios.patch("http://localhost:8080/score/CDR")
+    } catch(error) {
+      console.error("Error fetching data:", error);
     }
-  };
-  
+  }
   return (
     <Layout>
       <div className="score-update-container">
@@ -174,7 +189,7 @@ export const UpdateScores = () => {
               </div>
             </form>
 
-            <button onClick={handleUpdate} className="update-score-button">
+            <button onClick={getScoreUpdate} className="update-score-button">
               {" "}
               Cập nhật{" "}
             </button>

@@ -89,6 +89,11 @@
     border: 1px solid #099d5e;
 }
 
+.update-score-button:hover {
+    background-color: #099d5e;
+    color: white;
+}
+
 .check-cdr-msg {
     color: #099d5e;
 }

@@ -26,8 +26,7 @@ app.use(function(req, res, next) {
   )
   next()
 })
-
-require('./routes/HomeRoutes')(app); 
+ 
 require('./routes/AccountRoutes')(app); 
 require('./routes/ProductRoutes')(app); 
 require('./routes/ScoreRoute')(app); 

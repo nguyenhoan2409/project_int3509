@@ -35,9 +35,6 @@ export const ProductDetail = () => {
               <img src={product.thumbnail} />
               <div className="product-right">
                 <div className="product-name">
-                  <div className="icon">
-                    <RiProductHuntLine />
-                  </div>
                   <div className="text">{product.product_name}</div>
                 </div>
                 <div className = "review">

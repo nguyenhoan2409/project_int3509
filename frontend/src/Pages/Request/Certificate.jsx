@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Stack } from "@mui/material";
-import { Link } from "react-router-dom";
 import "./Request.css";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
@@ -27,6 +26,7 @@ export const Certificate = () => {
     function handleSubmit(event) {
         event.preventDefault();
     }
+
     const getScoreDetail = async () => {
         try {
           const response = await axios.get(`http://localhost:8080/score/search/${id}`);
@@ -57,6 +57,25 @@ export const Certificate = () => {
       useEffect(() => {
         getScoreDetail();
       }, [])
+      const CertificateRequest = async () => {
+        try {
+          const response = await axios.post("http://localhost:8080/score/certificate", {
+            mssv: mssv,
+            fullname: fullname,
+            class: classs,
+            univercity: univercity,
+            email: email,
+            phonenumber: phonenumber,
+          });
+
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          if (error.response) {
+            console.error("Server responded with:", error.response.data);
+          }
+        }
+      }
+      console.log(mssv, fullname, classs, univercity, email, phonenumber );
     return (
             <Layout>
             <h2 className="createRequestTitle">Tạo yêu cầu </h2>
@@ -148,7 +167,7 @@ export const Certificate = () => {
                     </div>
 
                 </form>
-                {checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn">
+                {checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn" onClick={CertificateRequest}>
                         Tạo yêu cầu
                     </Button>}
 

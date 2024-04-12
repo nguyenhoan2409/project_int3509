@@ -22,9 +22,10 @@
     flex-direction: row;
 }
 
+
+
 .search-btn-admin button {
     height: 40px;
-    width: 80px;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
     color: white;
@@ -32,6 +33,17 @@
     background: #007e43;
 }
 
+.search-btn-admin button:hover {
+    cursor: pointer;
+    background: #0fab62;
+}
+
+.update-cdr-btn {
+    width: 130px;
+}
+.search-score-btn {
+    width: 80px;
+}
 .search-admin input {
     height: 40px;
     width: 300px;

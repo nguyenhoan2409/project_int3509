@@ -11,6 +11,7 @@ export const ScoresList = () => {
 
   const getScores = async () => {
     try {
+      const cdr = await axios.patch("http://localhost:8080/score/CDR");
       const response = await axios.get("http://localhost:8080/score/list");
       console.log(response);
       setScores(response.data);
@@ -37,6 +38,14 @@ export const ScoresList = () => {
       console.error("Error searching:", error);
     }
   };
+  /*const updateCDR = async (event) => {
+    try {
+      const response = await axios.patch("http://localhost:8080/score/CDR");
+      console.log(response);
+    } catch (error) {
+      console.error("Error updating CDR:", error);
+    }
+  }; */
   return (
     <Layout>
       <div>
@@ -54,8 +63,9 @@ export const ScoresList = () => {
                   onChange={(e) => setMssv(e.target.value)}
                 />
                 <div className="search-btn-admin">
-                  <button onClick={searchHandle}>Tìm kiếm</button>
+                  <button className="search-score-btn" onClick={searchHandle}>Tìm kiếm</button>
                 </div>
+                
               </div>
             </div>
             <div className="table-admin">
