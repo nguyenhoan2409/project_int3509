@@ -47,7 +47,7 @@ export const ProductsList = () => {
                         <tbody>
                             {products?.map((product, index) => (
                                 <tr className='products-list-tr' key = {index}>
-                                <td  className="products-id-data">{product.product_id}</td>
+                                <td  className="products-id-data">{index + 1}</td>
                                 <td className="thumbnails-td products-thumbnails-data"><img src={product.thumbnail} /></td>
                                 <td className="products-name-data">{product.product_name}</td>
                                 <td className="products-price-data">{product.price}</td>
