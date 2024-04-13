@@ -1,14 +1,17 @@
 import { ScoresManagement } from "../ScoreLayout/ScoreLayout";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./ScoresList.css";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Layout from "~/Pages/Layout/Layout";
+import { DownloadTableExcel } from 'react-export-table-to-excel';
+
+
 export const ScoresList = () => {
   const [mssv, setMssv] = useState("");
   const [scores, setScores] = useState([]);
-
+  const tableRef = useRef(null);
   const getScores = async () => {
     try {
       const cdr = await axios.patch("http://localhost:8080/score/CDR");
@@ -38,14 +41,8 @@ export const ScoresList = () => {
       console.error("Error searching:", error);
     }
   };
-  /*const updateCDR = async (event) => {
-    try {
-      const response = await axios.patch("http://localhost:8080/score/CDR");
-      console.log(response);
-    } catch (error) {
-      console.error("Error updating CDR:", error);
-    }
-  }; */
+  
+
   return (
     <Layout>
       <div>
@@ -63,13 +60,25 @@ export const ScoresList = () => {
                   onChange={(e) => setMssv(e.target.value)}
                 />
                 <div className="search-btn-admin">
-                  <button className="search-score-btn" onClick={searchHandle}>Tìm kiếm</button>
+                  <button className="search-score-btn-admin" onClick={searchHandle}>Tìm kiếm</button>
                 </div>
+
+                <DownloadTableExcel
+                    filename="physical-scores"
+                    sheet="scores"
+                    currentTableRef={tableRef.current}
+                >
+
+                   <button className = "download-btn"> Tải xuống </button>
+
+                </DownloadTableExcel>
                 
               </div>
             </div>
             <div className="table-admin">
-              <table className="score-table-admin">
+              
+
+              <table className="score-table-admin" ref={tableRef}>
                 <thead>
                   <tr className="score-tr-admin">
                     <th className="mssv-admin">MSSV</th>

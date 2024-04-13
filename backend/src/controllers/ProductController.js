@@ -1,6 +1,7 @@
 // var product = require('../models/product.model')
 const { QueryTypes, DataTypes } = require("sequelize");
 const { database } = require("../config/database")
+const fs = require('fs')
 
 
 exports.get_list = async function(req, res){

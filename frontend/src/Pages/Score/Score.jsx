@@ -42,15 +42,15 @@ export const Score = () => {
       <Layout>
         <div className="main">
           <div className="score-header">
-            <h2> Điểm học phần GDTC </h2>
             <div className="search">
               <input
+               className="search-input-user"
                 type=""
                 placeholder="Tra cứu điểm..."
                 onChange={(e) => setMssv(e.target.value)}
               />
               <div className="search-btn">
-                <button onClick={searchHandle}>Tìm kiếm</button>
+                <button className="search-btn-users" onClick={searchHandle}>Tìm kiếm</button>
               </div>
             </div>
           </div>

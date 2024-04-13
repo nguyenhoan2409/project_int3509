@@ -12,13 +12,4 @@ module.exports = function (router) {
     router.delete('/product/delete/:id', productController.remove_product)
 
     router.put('/product/update/:id', productController.update_product)
-
-    router.get('/token', async function(req, res) {
-        var user = {
-            email : "20020483@vnu.edu.vn",
-            password : "123456"
-        }
-        const _token = await JWT.make(user)
-        res.send({token: _token})
-    })
 }
