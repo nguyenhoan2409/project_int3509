@@ -14,7 +14,9 @@ export const ProductDetail = () => {
   const [product, setProduct] = useState([]);
   const getDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/product/detail/${id}`);
+      const response = await axios.get(`http://localhost:8080/product/detail/${id}`, {
+        withCredentials: true,
+      });
       setProduct(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

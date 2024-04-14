@@ -130,7 +130,9 @@ export const CreateRequest = () => {
 
   const getDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/product/detail/${id}`);
+      const response = await axios.get(`http://localhost:8080/product/detail/${id}`, {
+        withCredentials: true,
+      });
       const product = response.data;
       setProduct(product[0]);
     } catch (error) {
