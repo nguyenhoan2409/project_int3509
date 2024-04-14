@@ -39,6 +39,6 @@
     margin-left: auto;
 }
 
-.products-navbar button:hover {
+.products-navbar .products-navbar-btn:hover {
     background-color: #EFEFEF;
 }

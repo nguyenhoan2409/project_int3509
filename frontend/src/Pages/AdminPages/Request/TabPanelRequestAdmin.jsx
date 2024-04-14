@@ -163,15 +163,6 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
         (order) => order.return_time.slice(0, 10) == returnDate
       );
     }
-    if (orderStatus) {
-      let statusList = orderStatus.split(",");
-      orderedFilterList = orderedFilterList.filter(
-        (order) =>
-          order.status == parseInt(statusList[0]) ||
-          order.status == parseInt(statusList[1]) ||
-          order.status == parseInt(statusList[2])
-      );
-    }
     setInitialOrderList(orderedFilterList);
   };
 
@@ -215,7 +206,8 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
             }}
             value={rentalDate}
             fullWidth
-            helperText={"Ngày bắt đầu yêu cầu"}
+            label="Ngày bắt đầu yêu cầu"
+            InputLabelProps={{ shrink: true }}
             size="small"
             sx={{
               "& .MuiOutlinedInput-input": {
@@ -235,39 +227,16 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
             }}
             value={returnDate}
             fullWidth
-            helperText={"Ngày kết thúc yêu cầu dự kiến"}
+            label={`Ngày kết thúc yêu cầu ${(index != 3) ? "dự kiến" : ""}`}
+            InputLabelProps={{ shrink: true }}
             size="small"
             sx={{
               "& .MuiOutlinedInput-input": {
                 fontSize: "14px",
               },
+              width: '200px'
             }}
           />
-        </FormControl>
-
-        <FormControl sx={{ m: 1, minWidth: 180 }} size="small">
-          <InputLabel id="demo-select-small-label" sx={{ fontSize: "14px" }}>
-            Trạng thái yêu cầu
-          </InputLabel>
-          <Select
-            labelId="demo-select-small-label"
-            id="demo-select-small"
-            value={orderStatus}
-            label="Trạng thái yêu cầu"
-            onChange={(e) => {
-              setOrderStatus(e.target.value);
-            }}
-            sx={{ fontSize: "14px" }}
-          >
-            <MenuItem value="" sx={{ fontSize: "14px" }}>
-              <em>--Lựa chọn--</em>
-            </MenuItem>
-
-            <MenuItem value={"1,5,9"}>Đang chờ phê duyệt</MenuItem>
-            <MenuItem value={"2,6,10"}>Yêu cầu được chấp nhận</MenuItem>
-            <MenuItem value={"3,7,11"}>Yêu cầu bị từ chối</MenuItem>
-            <MenuItem value={"4,8,12"}>Yêu cầu hoàn thành</MenuItem>
-          </Select>
         </FormControl>
 
         <Button

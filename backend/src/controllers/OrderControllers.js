@@ -122,6 +122,12 @@ exports.confirmOrderStatus = async (req, res) => {
       })
     }
 
+    if (newStatus == 8 || newStatus == 12) {
+      order.update({
+        return_time: moment().format('YYYY-MM-DD HH:mm:ss')
+      })
+    }
+
     await order.update({ status: newStatus });
 
     return res
@@ -143,6 +149,7 @@ exports.createOrder = async (req, res) => {
     rental_date, 
     return_date,
     status,
+    note
   } = req.body;
 
   try {
@@ -201,6 +208,7 @@ exports.createOrder = async (req, res) => {
       rental_time: rental_time,
       return_time: return_time,
       status: status,
+      note: note
     });
 
     return res

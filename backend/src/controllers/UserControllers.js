@@ -116,15 +116,29 @@ exports.update_user = async function (req, res) {
     }
 }
 
-/*  
-exports.login = function (req, res) {
-    var data = req.body
-    user.check_login(data, async function (response) {
-        if (response) {
-            const _token = await JWT.make(response)
-            res.send({ result: _token })
-        }
-        res.send({ result: response })
-    })
+exports.statisticaldata = async function(req, res) {
+    try {
+        const orderList = await Orders.findAll(); 
+        const totalRevenue = await Orders.sum('total_money', {
+            where: {
+                status: [4, 8, 12]
+            }
+        })
+        const recentlyOrders = await Orders.findAll({
+            order: [['rental_time', 'DESC']], 
+            limit: 5,
+        })
+        const result = {}; 
+        result.totalOrders = orderList.length; 
+        result.totalAwaitingOrders = (orderList.filter(order => order.status == 1 || order.status == 5 || order.status == 9)).length
+        result.totalAcceptedOrders = (orderList.filter(order => order.status == 2 || order.status == 6 || order.status == 10)).length
+        result.totalDeniedOrders = (orderList.filter(order => order.status == 3 || order.status == 7 || order.status == 11)).length
+        result.totalCompletedOrders = (orderList.filter(order => order.status == 4 || order.status == 8 || order.status == 12)).length
+        result.totalRevenue = totalRevenue; 
+        result.recentlyOrders = recentlyOrders; 
+        return res.status(200).json(result); 
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
 }
-*/
+

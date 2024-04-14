@@ -14,4 +14,6 @@ module.exports = function (router) {
 
     router.put('/user/update', verifyUser.isAuth, userController.update_user)
 
+    router.get('/admin/statisticalData', verifyUser.isAuth, verifyUser.checkAdmin, userController.statisticaldata)
+
 }

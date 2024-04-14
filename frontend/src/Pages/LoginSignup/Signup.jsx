@@ -100,14 +100,12 @@ export const Signup = () => {
   const Register = async (e) => {
     try {
       e.preventDefault(); 
-      validate("mssv");
       validate("email");
       validate("password");
       validate("fullname");
       validate("phone");
       validate("address");
       if (email &&
-         mssv &&
          password &&
          confirmPassword &&
          address &&
@@ -116,7 +114,6 @@ export const Signup = () => {
             const response = await axios.post(
             "http://localhost:8080/register",
             {
-              user_id: parseInt(mssv),
               password: password,
               fullname: fullname,
               email: email,
@@ -147,7 +144,7 @@ export const Signup = () => {
       <div className="signup-container-right">
         <h1>Đăng ký</h1>
         <form onSubmit={Register} className="signup-fields">
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          {/* <div style={{ display: "flex", flexDirection: "row" }}>
             <TextField
               label="Mã số sinh viên"
               type="number"
@@ -172,7 +169,10 @@ export const Signup = () => {
               fullWidth
               
             />
-            <TextField
+            
+          </div> */}
+
+          <TextField
               
               label="Email"
               // type="email"
@@ -199,7 +199,6 @@ export const Signup = () => {
               size="small"
               fullWidth
             />
-          </div>
 
           <TextField
             

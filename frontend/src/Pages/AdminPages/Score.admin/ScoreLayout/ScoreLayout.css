@@ -41,11 +41,11 @@
     gap: 1px;
     margin-left: auto;
 }
-.scores-navbar button {
+.scores-navbar .scores-navbar-btn {
     float: right;
 }
 
 
-.scores-navbar button:hover {
+.scores-navbar .scores-navbar-btn:hover {
     background-color: #EFEFEF;
 }

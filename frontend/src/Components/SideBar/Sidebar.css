@@ -13,8 +13,9 @@
   z-index: 1001;
 }
 
+
 .sidebar-logo-img {
-  width: 100%;
+  width: 80%;
 }
 .menu-list {
   list-style-type: none;

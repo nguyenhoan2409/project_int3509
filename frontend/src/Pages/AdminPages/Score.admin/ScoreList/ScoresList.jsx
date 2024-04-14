@@ -12,7 +12,6 @@ export const ScoresList = () => {
   const getScores = async () => {
     try {
       const response = await axios.get("http://localhost:8080/score/list");
-      console.log(response);
       setScores(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

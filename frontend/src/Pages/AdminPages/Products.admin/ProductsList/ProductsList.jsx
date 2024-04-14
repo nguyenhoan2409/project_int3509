@@ -13,7 +13,6 @@ export const ProductsList = () => {
         try {
             const res = await axios.get("http://localhost:8080/product/list");
             setProducts(res.data);
-            console.log(res.data)
         } catch (error) {
             console.error("Error fetching data:", error);
             if (error.response) {

@@ -36,7 +36,6 @@ export const Score = () => {
       console.error("Error searching:", error);
     }
   };
-  console.log(scores);
   return (
     <div className="score-container">
       <Layout>

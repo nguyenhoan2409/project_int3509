@@ -75,7 +75,7 @@
     font-size: 20px;
     gap: 10px;
 }
-.order-button button {
+.order-button .productdetail-btn {
     height: 45px;
     width: 100px;
     background-color: #04aa6d;

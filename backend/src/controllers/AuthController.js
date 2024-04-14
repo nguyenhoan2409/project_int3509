@@ -55,14 +55,14 @@ exports.register = async function (req, res) {
         type: QueryTypes.SELECT,
       }
     );
-    const checkMSSV = await User.findOne({
-      where: {
-        user_id: req.body.user_id,
-      },
-    });
-    if (checkMSSV) {
-      return res.status(400).json({ msg: "Mã số sinh viên đã tồn tại, vui lòng kiểm tra lại." });
-    }
+    // const checkMSSV = await User.findOne({
+    //   where: {
+    //     user_id: req.body.user_id,
+    //   },
+    // });
+    // if (checkMSSV) {
+    //   return res.status(400).json({ msg: "Mã số sinh viên đã tồn tại, vui lòng kiểm tra lại." });
+    // }
     if (checkEmail.length > 0) {
       return res.status(400).json({ msg: "Tài khoản đã tồn tại, vui lòng lựa chọn email khác." });
     }
@@ -73,7 +73,7 @@ exports.register = async function (req, res) {
       "INSERT INTO users (user_id, password, fullname, email, phone_number, address, role_id) VALUES (:user_id, :password, :fullname, :email, :phone_number, :address, :role_id)",
       {
         replacements: {
-          user_id: req.body.user_id,
+          user_id: null,
           password: hashPassword,
           fullname: req.body.fullname,
           email: req.body.email,

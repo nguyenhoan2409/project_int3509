@@ -39,7 +39,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 500px;
+  width: 350px;
+  min-width: 300px;
   height: 100vh;
   background: white;
   /* margin-top: 60px; */
