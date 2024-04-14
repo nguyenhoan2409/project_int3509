@@ -108,7 +108,7 @@ export const Sidebar = () => {
             <ul>
               <li className="sub-item-sidebar">
                 <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
-                <Link to="/user/:activepage"> Thông tin cá nhân </Link>
+                <Link to="/user/accountsettings"> Thông tin cá nhân </Link>
               </li>
               <li className= "sub-item-sidebar" onClick={logout}>
                 <AiOutlineLogout color="black" size={18} style={{marginLeft: 5}}/>

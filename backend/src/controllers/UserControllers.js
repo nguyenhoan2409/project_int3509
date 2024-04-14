@@ -98,16 +98,16 @@ exports.remove_user = async function (req, res) {
 
 exports.update_user = async function (req, res) {
     try {
-        await database.query("UPDATE users SET password=:password, fullname=:fullname, email=:email, phone_number=:phone_number, address=:address, role_id =:role_id WHERE user_id =: user_id ",
+         const user_id= req.body.user_id
+         console.log(user_id)
+        await database.query("UPDATE users SET fullname=:fullname, email=:email, phone_number=:phone_number, address=:address WHERE user_id =:user_id ",
             {
                 replacements: {
-                    password: req.body.password,
                     fullname: req.body.fullname,
                     email: req.body.email,
                     phone_number: req.body.phone_number,
                     address: req.body.address,
-                    role_id: req.body.role_id,
-                    user_id: req.params.id
+                    user_id: user_id
                 }, type: QueryTypes.UPDATE
             })
         return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" })

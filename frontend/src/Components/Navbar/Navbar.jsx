@@ -104,7 +104,7 @@ export const Navbar = () => {
             <ul className="sub-item-container">
               <li className="sub-item">
                 <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>
-                <Link to="/user/:activepage" onClick={handleTabClick}> Thông tin cá nhân </Link>
+                <Link to="/user/accountsettings" onClick={handleTabClick}> Thông tin cá nhân </Link>
               </li>
               <li className="sub-item" onClick={logout}>
                 <AiOutlineLogout color="black" size={18} style={{marginLeft: 5}}/>
