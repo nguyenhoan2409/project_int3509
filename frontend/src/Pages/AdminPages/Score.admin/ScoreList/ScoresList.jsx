@@ -14,8 +14,12 @@ export const ScoresList = () => {
   const tableRef = useRef(null);
   const getScores = async () => {
     try {
-      const cdr = await axios.patch("http://localhost:8080/score/CDR");
-      const response = await axios.get("http://localhost:8080/score/list");
+      const cdr = await axios.get("http://localhost:8080/score/CDR", {
+        withCredentials: true
+      });
+      const response = await axios.get("http://localhost:8080/score/list", {
+        withCredentials: true
+      });
       console.log(response);
       setScores(response.data);
     } catch (error) {
@@ -33,7 +37,9 @@ export const ScoresList = () => {
   const searchHandle = async (event) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/score/search/${mssv}`
+        `http://localhost:8080/score/search/${mssv}`, {
+          withCredentials: true
+        }
       );
       let st = response.data.student;
       setScores(st);
@@ -42,7 +48,6 @@ export const ScoresList = () => {
     }
   };
   
-
   return (
     <Layout>
       <div>

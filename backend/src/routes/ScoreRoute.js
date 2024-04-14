@@ -9,7 +9,7 @@ module.exports = function (router) {
 
     router.patch('/score/update', verifyUser.isAuth,scoreController.updateScore)
 
-    router.patch('/score/CDR', verifyUser.isAuth, scoreController.updateCDR)
+    router.get('/score/CDR', verifyUser.isAuth, scoreController.updateCDR)
 
     router.get('/score/check/:id', verifyUser.isAuth, scoreController.checkCDR)
 

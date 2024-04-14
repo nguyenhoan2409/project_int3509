@@ -20,10 +20,10 @@
 }
 
 .search-btn .search-btn-users {
-    height: 50px;
+    height: 40px;
     width: 80px;
     border: 1px solid #c9c9c9;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: 15px;
     background: #007e43;
@@ -34,11 +34,11 @@
 }
 
 .search .search-input-user {
-    height: 50px;
+    height: 37px;
     width: 300px;
     padding-left:20px;
     border: 1px solid #252323;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #5c5c5c;
     font-size: 15px;
 }

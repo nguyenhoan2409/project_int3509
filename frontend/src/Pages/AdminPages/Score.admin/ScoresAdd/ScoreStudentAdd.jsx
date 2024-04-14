@@ -54,6 +54,8 @@ export const ScoreStudentAdd = () => {
         fullname: data.fullname,
         class: data.class,
         univercity: data.university,
+      }, {
+        withCredentials: true,
       });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -70,6 +72,8 @@ export const ScoreStudentAdd = () => {
         mssv : data.mssv,
         subject: subject,
         score: score,
+      }, {
+        withCredentials: true,
       })
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -23,7 +23,9 @@ export const UpdateScores = () => {
   const getScoreDetail = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/score/search/${id}`
+        `http://localhost:8080/score/search/${id}`, {
+          withCredentials: true
+        }
       );
       const scores = response.data.student;
       const score = scores[0];
@@ -65,8 +67,14 @@ export const UpdateScores = () => {
           taekwondo_score: taekwondoScore,
           golf_score: golfScore,
           mssv: id,
+        },
+        {
+          withCredentials: true
         })
-        const cdr = await axios.patch("http://localhost:8080/score/CDR")
+        await axios.get("http://localhost:8080/score/CDR", {
+          withCredentials: true
+        })
+        getScoreDetail();
     } catch(error) {
       console.error("Error fetching data:", error);
     }

@@ -7,21 +7,10 @@ import Layout from "../Layout/Layout";
 
 export const Certificate = () => {
     const { id } = useParams();
-    const [footballScore, setFootballScore] = useState();
-    const [basketballScore, setBasketballScore] = useState();
-    const [tabletennisScore, setTabletennisScore] = useState();
-    const [bedmintonScore, setBedmintonScore] = useState();
-    const [airVolleyballScore, setAirVolleyballScore] = useState();
-    const [volleyballScore, setVolleyballScore] = useState();
-    const [taekwondoScore, setTaekwondoScore] = useState();
-    const [golfScore, setGolfScore] = useState();
-    const [checkCDR, setCheckCDR] = useState(false);
-    const [univercity, setUnivercity] = useState();
-    const [fullname, setFullname] = useState();
-    const [mssv, setMssv] = useState();
-    const [classs, setClasss] = useState();
+    const [student, setStudent] = useState({});
     const [email, setEmail] = useState();
     const [phonenumber, setPhonenumber] = useState();
+    const [checkCDR, setCheckCDR] = useState(false);
  
     function handleSubmit(event) {
         event.preventDefault();
@@ -29,23 +18,17 @@ export const Certificate = () => {
 
     const getScoreDetail = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/score/search/${id}`);
+          const response = await axios.get(`http://localhost:8080/score/search/${id}`, {
+            withCredentials: true,
+          });
           const scores = response.data.student;
           const score = scores[0];
-          setFullname(score.fullname);
-          setMssv(score.mssv);
-          setClasss(score.class);
-          setUnivercity(score.univercity);
-          setFootballScore(score.football_score);
-          setBasketballScore(score.basketball_score);
-          setTabletennisScore(score.tabletennis_score);
-          setBedmintonScore(score.bedminton_score);
-          setAirVolleyballScore(score.air_volleyball_score);
-          setVolleyballScore(score.volleyball_score);
-          setTaekwondoScore(score.taekwondo_score);
-          setGolfScore(score.golf_score);
+          console.log(score);
+          setStudent(score);
           if(score.CDR === "Đ") {
             setCheckCDR(true)
+          } else {
+            setCheckCDR(false)
           }
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -59,15 +42,20 @@ export const Certificate = () => {
       }, [])
       const CertificateRequest = async () => {
         try {
+          if(!email || !phonenumber) {
+            alert("Vui lòng nhập đầy đủ thông tin")
+          }
           const response = await axios.post("http://localhost:8080/score/certificate", {
-            mssv: mssv,
-            fullname: fullname,
-            class: classs,
-            univercity: univercity,
+            mssv: student.mssv,
+            fullname: student.fullname,
+            class: student.class,
+            univercity: student.univercity,
             email: email,
             phonenumber: phonenumber,
+          }, {
+            withCredentials: true,
           });
-
+          alert("Đã gửi yêu cầu thành công");
         } catch (error) {
           console.error("Error fetching data:", error);
           if (error.response) {
@@ -75,7 +63,7 @@ export const Certificate = () => {
           }
         }
       }
-      console.log(mssv, fullname, classs, univercity, email, phonenumber );
+
     return (
             <Layout>
             <h2 className="createRequestTitle">Tạo yêu cầu </h2>
@@ -89,7 +77,7 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="Họ và tên"
-                            value={fullname}
+                            value={student.fullname}
                             fullWidth
                             required
                         />
@@ -99,7 +87,7 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="MSSV"
-                            value={mssv}
+                            value={student.mssv}
                             fullWidth
                             required
                         />
@@ -112,7 +100,7 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="Lớp"
-                            value={classs}
+                            value={student.class}
                             fullWidth
                             required
                         />
@@ -121,7 +109,7 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="Trường"
-                            value={univercity}
+                            value={student.univercity}
                             fullWidth
                             required
                         />
@@ -153,17 +141,17 @@ export const Certificate = () => {
                     </Stack>
 
                     <div className="score-detail-user">
-                        <p> Bóng đá : {footballScore} .</p>
-                        <p> Bóng rổ: {basketballScore} .</p>
-                        <p> Bóng bàn: {tabletennisScore} .</p>
-                        <p> Cầu lông: {bedmintonScore} .</p>
+                        <p> Bóng đá : {student.football_score} .</p>
+                        <p> Bóng rổ: {student.basketball_score} .</p>
+                        <p> Bóng bàn: {student.tabletennis_score} .</p>
+                        <p> Cầu lông: {student.bedminton_score} .</p>
                     </div>
 
                     <div className="score-detail-user">
-                        <p> Bóng chuyền hơi: {airVolleyballScore} .</p>
-                        <p> Bóng chuyền da: {volleyballScore} .</p>
-                        <p> Taekwondo: {taekwondoScore} .</p>
-                        <p> Golf: {golfScore} .</p>
+                        <p> Bóng chuyền hơi: {student.air_volleyball_score} .</p>
+                        <p> Bóng chuyền da: {student.volleyball_score} .</p>
+                        <p> Taekwondo: {student.taekwondo_score} .</p>
+                        <p> Golf: {student.golf_score} .</p>
                     </div>
 
                 </form>
