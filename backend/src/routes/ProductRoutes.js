@@ -1,15 +1,15 @@
 module.exports = function (router) {
 
     var productController = require('../controllers/ProductController')
-    var JWT = require("../middleware/jwt")
+    var verifyUser = require('../middleware/AuthUser'); 
 
-    router.get('/product/list', productController.get_list)
+    router.get('/product/list', verifyUser.isAuth, productController.get_list)
 
-    router.get('/product/detail/:id', productController.detail)
+    router.get('/product/detail/:id', verifyUser.isAuth, productController.detail)
 
-    router.post('/product/add', productController.add_product)
+    router.post('/product/add', verifyUser.isAuth, productController.add_product)
 
-    router.delete('/product/delete/:id', productController.remove_product)
+    router.delete('/product/delete/:id', verifyUser.isAuth, productController.remove_product)
 
-    router.put('/product/update/:id', productController.update_product)
+    router.put('/product/update/:id', verifyUser.isAuth, productController.update_product)
 }

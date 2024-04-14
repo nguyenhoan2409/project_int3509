@@ -2,7 +2,6 @@ module.exports = function (router) {
 
     var userController = require('../controllers/UserControllers'); 
     var verifyUser = require('../middleware/AuthUser'); 
-    var JWT = require("../middleware/jwt")
 
     router.get('/user/list', verifyUser.isAuth, userController.get_list)
 

@@ -55,7 +55,9 @@ export const UpdateProduct = () => {
   }
   const getDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/product/detail/${id}`);
+      const response = await axios.get(`http://localhost:8080/product/detail/${id}`, {
+        withCredentials: true,
+      });
       const products = response.data;
       const product = products[0];
       setProduct(product);
@@ -79,6 +81,8 @@ export const UpdateProduct = () => {
         quantity,
         thumbnail,
         product_type
+      }, {
+        withCredentials: true,
       });
       setMsg(response.data.msg);
     } catch (error) {

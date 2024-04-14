@@ -70,6 +70,8 @@ export const CreateProduct = () => {
         thumbnail,
         description,
         product_type,
+      }, {
+        withCredentials: true,
       });
       setMsg(response.msg);
     } catch (error) {
