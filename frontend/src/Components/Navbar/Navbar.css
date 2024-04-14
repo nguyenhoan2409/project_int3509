@@ -37,11 +37,9 @@
 }
 
 .scrolled {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   transition: all ease-in-out 400ms;
 }
-
-
 
 .logo-img {
   width: 70%;
@@ -117,6 +115,13 @@
   padding: 0.625rem 0 0.5rem;
   color: black;
   position: relative;
+}
+
+.nav-menu-container li:last-child::before {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  padding: 30px;
 }
 
 .nav-menu-container li ul {

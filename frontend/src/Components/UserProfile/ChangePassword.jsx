@@ -1,24 +1,37 @@
-import React from 'react'
+import { Box, Button, Card, CardActions, CardContent, CardHeader, TextField } from "@mui/material";
+import Paper from "@mui/material/Paper";
 
 export const ChangePassword = () => {
   return (
-    <div className="accountsettings">
-      <h1>Change Password</h1>
-      <div className="form">
-        <div className="form-group">
-          <label htmlFor="name">Old Password<span>*</span></label>
-          <input type="text" name='name' id='name' />
-        </div>
+    <Card sx={{ minWidth: 275, p: 2 }} component={Paper}>
+      <CardHeader title={`Change Password`} sx={{ mb: 5 }} />
 
-        <div className="form-group">
-          <label htmlFor="name">New Password<span>*</span></label>
-          <input type="text" name='name' id='name' />
-        </div>
+      <CardContent>
+        <Box>
+          <TextField
+            margin="normal"
+            fullWidth
+            type="password"
+            label="Old Password"
+            required
+            id="fullWidth"
+          />
 
-        
-      
-      </div>
-      <button className='mainbutton1'>Save Changes</button>
-    </div>
-  )
-}
+          <TextField
+            margin="normal"
+            fullWidth
+            type="password"
+            label="New Password"
+            required
+            id="fullWidth"
+          />
+        </Box>
+      </CardContent>
+
+      <CardActions sx={{ alignItems: "flex-end", justifyContent: "flex-end" }}>
+        <Button>Cancel</Button>
+        <Button variant={"contained"}>Save change</Button>
+      </CardActions>
+    </Card>
+  );
+};

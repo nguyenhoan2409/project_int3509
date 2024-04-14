@@ -1,58 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import './AccountSettings.css'
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  TextField,
+} from "@mui/material";
+import Paper from "@mui/material/Paper";
+import { useSelector } from "react-redux";
 
 export const AccountSetting = () => {
-  const [userInfo, setUserInfo] = useState({});
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
-  const [msg, setMsg] = useState(''); 
-  useEffect(() => {
-    if (user) {
-      setUserInfo(user); 
-    }
-    if (isError) {
-      setMsg(message); 
-    }
-  }, [user, isError])
-  // useEffect(() => {
-  //   const getUserInfo = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8080/user/getMe`, {withCredentials: true});
-  //       setUser(response.data); 
-  //     } catch (error) {
-  //       if (error.response) {
-  //         setMsg(error.response.data.msg);
-  //       }
-  //     }
-  //   };
-  //   getUserInfo(); 
-  // }, []); 
+  const { user, isError, message } = useSelector((state) => state.auth);
 
   return (
-    <div className="accountsettings">
-      <h1>Personal Information</h1>
-      <div className="form">
-        <div className="form-group">
-          <label htmlFor="name">Your Name<span>*</span></label>
-          <input type="text" name='name' id='name' value={userInfo.fullname}/>
-        </div>
+    <Card sx={{ minWidth: 275, p: 2 }} component={Paper}>
+      <CardHeader title={`Personal Information`} sx={{ mb: 5 }} />
 
-        <div className="form-group">
-          <label htmlFor="phone">Phone/Mobile<span>*</span></label>
-          <input type="text" name='phone' id='phone' value={userInfo.phone_number}/>
-        </div>
+      <CardContent>
+        <Box>
+          <Box
+            sx={{
+              p: 1,
+              border: "1px dashed rgba(0,0,0,0.3)",
+              width: 120,
+              height: 120,
+              borderRadius: "100%",
+              mb: 3,
+            }}
+          >
+            <Avatar
+              alt={user?.fullname}
+              src="/assets/defaultAvatar.png"
+              sx={{ width: 100, height: 100 }}
+            />
+          </Box>
 
-        <div className="form-group">
-          <label htmlFor="email">Email<span>*</span></label>
-          <input type="email" name='email' id='email' value={userInfo.email}/>
-        </div>
-      
-      </div>
-      <button className='mainbutton1'>Save Changes</button>
-      <p>{msg}</p>
-    </div>
-  )
-}
+          <TextField
+            margin="normal"
+            value={user?.fullname}
+            fullWidth
+            label="Your name"
+            required
+            id="fullWidth"
+          />
+
+          <TextField
+            margin="normal"
+            value={user?.phone_number}
+            fullWidth
+            label="Phone/Mobile"
+            required
+            id="fullWidth"
+          />
+
+          <TextField
+            margin="normal"
+            value={user?.email}
+            fullWidth
+            label="Email"
+            type="email"
+            required
+            id="fullWidth"
+          />
+        </Box>
+      </CardContent>
+
+      <CardActions sx={{ alignItems: "flex-end", justifyContent: "flex-end" }}>
+        <Button>Cancel</Button>
+        <Button variant={"contained"}>Save change</Button>
+      </CardActions>
+    </Card>
+  );
+};

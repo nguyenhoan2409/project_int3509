@@ -1,13 +1,39 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { UserSidebar } from "~/Components/UserProfile/UserSidebar";
-import "./Profile.css";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Paper from "@mui/material/Paper";
+import { Link, useParams } from "react-router-dom";
 import { AccountSetting } from "~/Components/UserProfile/AccountSettings";
 import { ChangePassword } from "~/Components/UserProfile/ChangePassword";
 import { YourOrders } from "~/Components/UserProfile/YourOrders";
-import AvatarEditor from "react-avatar-editor";
-import { Navbar } from "~/Components/Navbar/Navbar";
 import Layout from "../Layout/Layout";
+import "./Profile.css";
+
+const MENUS = [
+  {
+    label: "Account setting",
+    to: "/user/accountsettings",
+    icon: <AccountCircleIcon fontSize="small" />,
+    id: "accountsettings",
+  },
+  {
+    label: "My Orders",
+    to: "/user/yourorders",
+    icon: <AddShoppingCartIcon fontSize="small" />,
+    id: "yourorders",
+  },
+  {
+    label: "Change Password",
+    to: "/user/changepassword",
+    icon: <ChangeCircleIcon fontSize="small" />,
+    id: "changepassword",
+  },
+];
 
 export const Profile = () => {
   const { activepage } = useParams();
@@ -15,26 +41,42 @@ export const Profile = () => {
   return (
     <div className="userprofile">
       <Layout>
-        <div className="userprofilein">
-          <div className="left">
-            <AvatarEditor
-              image="https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231712/thesomeday123171200008.jpg"
-              width={250}
-              height={250}
-              color={[255, 255, 255, 0.6]} // RGBA
-              scale={1}
-              rotate={0}
-            />
-            <UserSidebar activepage={activepage} />
-          </div>
-          <div className="right">
-            <div>
+        <Container maxWidth="xl" sx={{ mt: 2 }}>
+          <Grid container spacing={2}>
+            <Grid md={2} item>
+              <Typography sx={{ color: (theme) => theme.palette.grey["500"], fontWeight: "bold" }}>
+                Personal
+              </Typography>
+
+              <Box sx={{ mt: 1 }}>
+                <Paper sx={{ width: 320, maxWidth: "100%" }}>
+                  <MenuList>
+                    {MENUS.map((item) => {
+                      return (
+                        <MenuItem
+                          component={Link}
+                          to={item.to}
+                          selected={item.id === activepage}
+                          key={item.id}
+                          sx={{ py: 2 }}
+                        >
+                          <ListItemIcon>{item.icon}</ListItemIcon>
+                          <ListItemText>{item.label}</ListItemText>
+                        </MenuItem>
+                      );
+                    })}
+                  </MenuList>
+                </Paper>
+              </Box>
+            </Grid>
+
+            <Grid md={10} item>
               {activepage === "accountsettings" && <AccountSetting />}
               {activepage === "changepassword" && <ChangePassword />}
               {activepage === "yourorders" && <YourOrders />}
-            </div>
-          </div>
-        </div>
+            </Grid>
+          </Grid>
+        </Container>
       </Layout>
     </div>
   );

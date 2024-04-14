@@ -1,37 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Navbar } from "~/Components/Navbar/Navbar";
-import "./Layout.css"
+import { Box } from "@mui/material";
+import React, { useMemo } from "react";
 import { Footer } from "~/Components/Footer/Footer";
-import { Sidebar } from "~/Components/SideBar/Sidebar";
+import { Navbar } from "~/Components/Navbar/Navbar";
+import { usePathname } from "~/hooks/use-pathname";
+import Header from "~/layouts/dashboard/header";
+import Main from "~/layouts/dashboard/main";
+import Nav from "~/layouts/dashboard/nav";
+import "./Layout.css";
 
 const Layout = ({ children }) => {
-  const [userInfo, setUserInfo] = useState({});
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
-  const [msg, setMsg] = useState("");
-  useEffect(() => {
-    if (user) {
-      setUserInfo(user);
-    }
-    if (isError) {
-      setMsg(message);
-    }
-  }, [user, isError]);
+  const pathname = usePathname();
+
+  console.log(`pathname`, pathname);
+
+  const isAdmin = useMemo(() => pathname.includes("admin"), [pathname]);
+
   return (
     <React.Fragment>
-      {(userInfo.role_id == 2) && <Navbar />}
-      <div className={(userInfo.role_id == 1) ? 'main-container' : ''}>
-        {(userInfo.role_id == 1) && <Sidebar />}
-        <div className={(userInfo.role_id == 1) ? 'main-content' : ''}>
-            <main>{children}</main>
-            {(userInfo.role_id == 1) && <Footer />}
-        </div>
-      </div>
-      {(userInfo.role_id == 2) && <Footer />}
+      {isAdmin ? (
+        <>
+          {" "}
+          <Header onOpenNav />
+          <Box
+            sx={{
+              minHeight: 1,
+              display: "flex",
+              flexDirection: { xs: "column", lg: "row" },
+            }}
+          >
+            <Nav openNav />
+
+            <Main>
+              {children}
+
+              <Footer />
+            </Main>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Navbar />
+          <div>
+            <div>
+              <main>{children}</main>
+            </div>
+          </div>
+
+          <Footer />
+        </>
+      )}
     </React.Fragment>
   );
 };
 
-export default Layout; 
+export default Layout;

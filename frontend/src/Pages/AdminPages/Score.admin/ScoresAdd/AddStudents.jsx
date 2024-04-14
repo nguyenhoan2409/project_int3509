@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { getMe } from '~/features/authSlice';
-import { Link } from 'react-router-dom';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getMe } from "~/features/authSlice";
 
 export const AddStudents = () => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMe());
   }, []);
-  return (
-      <div>
-        Thêm danh sách sinh viên
-      </div>
 
-  )
-}
+  return <div>Thêm danh sách sinh viên</div>;
+};
