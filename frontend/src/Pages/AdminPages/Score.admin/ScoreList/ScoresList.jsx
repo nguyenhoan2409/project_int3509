@@ -55,7 +55,7 @@ export const ScoresList = () => {
             <div className="score-header-admin">
               <div className="search-admin">
                 <input
-                  type=""
+                  className="search-input-admin"
                   placeholder="Tra cứu điểm..."
                   onChange={(e) => setMssv(e.target.value)}
                 />

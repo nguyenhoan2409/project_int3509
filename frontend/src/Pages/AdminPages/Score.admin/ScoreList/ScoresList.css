@@ -46,7 +46,7 @@
     background-color: #007e43;
     color: white;
 }
-.search-admin input {
+.search-admin .search-input-admin {
     height: 40px;
     width: 300px;
     padding-left:10px;

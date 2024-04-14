@@ -12,7 +12,7 @@ const User = require("../models/Users");
 exports.get_list = async function (req, res) {
     try {
         const users = await database.query("SELECT * FROM users", { type: QueryTypes.SELECT })
-        return res.status(200).json({user: users});
+        return res.status(200).json({users});
     } catch (error) {
         return res.status(400).json({ msg: error })
     }
@@ -116,15 +116,17 @@ exports.update_user = async function (req, res) {
     }
 }
 
-/*  
-exports.login = function (req, res) {
-    var data = req.body
-    user.check_login(data, async function (response) {
-        if (response) {
-            const _token = await JWT.make(response)
-            res.send({ result: _token })
-        }
-        res.send({ result: response })
-    })
+exports.userToAdmin = async function (req, res) {
+    try {
+        var user_id = req.params.id
+        await database.query("UPDATE users SET role_id = :role_id WHERE user_id = :user_id", {
+            replacements: {
+                user_id: user_id,
+                role_id: req.body.role_id
+            }, type: QueryTypes.UPDATE
+        })
+        return res.status(200).json({ msg: "Đã chuyển người dùng sang admin" })
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
 }
-*/

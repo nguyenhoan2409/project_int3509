@@ -21,8 +21,7 @@ import { UpdateScores } from "./Pages/AdminPages/Score.admin/ScoresUpdate/Scores
 import { ScoreStudentAdd } from "./Pages/AdminPages/Score.admin/ScoresAdd/ScoreStudentAdd";
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
 import { AdminHome } from "./Pages/AdminPages/AdminHome/AdminHome";
-import { AdminList } from "./Pages/AdminPages/UserManagement/UserManagementList/AdminList/AdminList";
-import { UserList } from "./Pages/AdminPages/UserManagement/UserManagementList/UserList/UserList";
+import { UserManagement } from "./Pages/AdminPages/UserManagement/UserManagement";
 function App() {
   return (
     <div>
@@ -45,8 +44,7 @@ function App() {
           
           <Route path="/admin/request" element={<RequestAdmin />}></Route>
           <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
-          <Route path="/admin/users/user" element={<UserList/>}></Route>
-          <Route path="/admin/users/admin" element={<AdminList/>}></Route>
+          <Route path="/admin/users/list" element={<UserManagement/>}></Route>
           <Route path="/admin/products" element={<ProductsManagement/>}></Route>
           <Route path="/admin/products/list" element={<ProductsList/>}></Route>
           <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>
