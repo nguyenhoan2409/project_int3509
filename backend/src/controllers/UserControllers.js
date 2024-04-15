@@ -143,23 +143,23 @@ exports.updatePassword = async function (req, res) {
             }, type: QueryTypes.SELECT
         })
         const olderPassword = user[0].password
-        console.log(olderPassword)
+
+        const password = req.body.password
 
         const newPassword = await argon2.hash(req.body.newPassword)
-        console.log(newPassword)
 
-        const password = await argon2.hash(req.body.password)
-        console.log(password)
-
-        hasher = argon2.PasswordHasher()
-        hasher.verify(password, olderPassword)
-        console.log("Password is correct")
-        /* await database.query("UPDATE users SET password = :password WHERE user_id = :user_id", {
-            replacements: {
-                user_id: user_id,
-                password: newPassword
-            }, type: QueryTypes.UPDATE
-        }) */
+        const match = await argon2.verify(olderPassword, password)
+        console.log(match)
+        if(!match) {
+            return res.status(400).json({ msg: "Mật khẩu không đúng" })
+        } else {
+            await database.query("UPDATE users SET password = :password WHERE user_id = :user_id", {
+                replacements: {
+                    user_id: user_id,
+                    password: newPassword
+                }, type: QueryTypes.UPDATE
+            })
+        }
         return res.status(200).json({ msg: "Đã cập nhật mật khẩu thành công" })
     } catch (error) {
         return res.status(400).json({ msg: error })

@@ -21,11 +21,22 @@ export const ChangePassword = () => {
     }
   }, [user, isError])
 
+  const newPasswordChange = (e) => {
+    setNewPassword(e.target.value)
+  }
+
+  const cfPasswordChange = (e) => {
+     setCfPassword(e.target.value)
+     checkPassword()
+  }
+
+
   const checkPassword = () => {
-    if (newPassword !== cfPassword) {
-      setMsg("Mật khẩu không khớp")
+    console.log(newPassword, cfPassword)
+    if (newPassword === cfPassword) {
+      setMsg("Mật khẩu khớp")
   } else {
-     setMsg("Mật khẩu khớp")
+     setMsg("Mật khẩu không khớp")
   }
 }
 
@@ -38,17 +49,19 @@ export const ChangePassword = () => {
       },
       { withCredentials: true }
       );
+      setMsg("Thay đổi mật khẩu thành công")
     } catch (error) {
       console.error("Error fetching data:", error);
+      setMsg("Nhập mật khẩu sai, vui lòng thử lại")
     }
 }
 
   const handleUpdate = () => {
-    checkPassword()
     if(newPassword === cfPassword) {
       updatePassword()
     }
   }
+
 
   return (
     <div className="accountsettings">
@@ -61,11 +74,11 @@ export const ChangePassword = () => {
 
         <div className="form-group">
           <label htmlFor="password">Mật khẩu mới<span>*</span></label>
-          <input type="password" name='newPassword' onChange={(e) => setNewPassword(e.target.value)}/>
+          <input type="password" name='newPassword' onChange={newPasswordChange}/>
         </div>
         <div className="form-group">
           <label htmlFor="password">Nhập lại mật khẩu<span>*</span></label>
-          <input type="password" name='cfPassword' onChange={(e) => setCfPassword(e.target.value)}/>
+          <input type="password" name='cfPassword' onChange={cfPasswordChange}/>
         </div>
       </div>
 
