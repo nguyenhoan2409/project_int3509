@@ -3,28 +3,15 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100%;
-    padding: 20px;
     position: relative;
     overflow: hidden;
 }
 
-.yourorders table {
-    width: 90%;
+.yourorders .yourorders-table {
+    margin-top: 40px;
+    width: 95%;
     border-collapse: collapse;
-    border: 1px solid rgb(207, 207, 207);
     border-radius: 5px;
-    overflow: hidden;
-    height: 100px;
-    margin-top: 20px;
-    
-   
-}
-
-.yourorders table tr {
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 5px;
-    
 }
 
 
@@ -32,25 +19,30 @@
     padding: 5px 20px;
     border: 1px solid rgb(207, 207, 207);
     border-radius: 5px;
-    background-color: rgb(246, 246, 256);
-    color: gray;
+    background-color: #f8f8f8;
+    color: rgb(65, 64, 64);
 }
 
-.yourorders table tr td p {
-    display: flex;
-    align-items: center;
-    gap: 10px
-}
-.yourorders .greendot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: green;
+.yourorders-table-row {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
 }
 
-.yourorders .yellowdot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: yellow;
+.yourorders-table-icon {
+    width: 30px;
+    height: 30px;
+    color: #007e43;
+}
+.yourorders-table-row-15 {
+    width: 15%;
+}
+
+.yourorders-table-row-35 {
+    width: 35%;
+}
+
+.yourorders-table-row-10 {
+    width: 10%;
 }
