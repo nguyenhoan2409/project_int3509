@@ -1,10 +1,12 @@
 import React, { useState, useEffect} from 'react'
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import argon2 from 'argon2';
 
 export const ChangePassword = () => {
+  const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [cfPassword, setCfPassword] = useState("");
-  const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
   const [userInfo, setUserInfo] = useState({});
   const { user, isError, isSuccess, isLoading, message } = useSelector(
@@ -13,7 +15,6 @@ export const ChangePassword = () => {
   useEffect(() => {
     if (user) {
       setUserInfo(user); 
-      //setPassword(user.password);
     }
     if (isError) {
       setMsg(message); 
@@ -30,7 +31,13 @@ export const ChangePassword = () => {
 
   const updatePassword = async () => {
     try {
-      console.log(newPassword)
+      await axios.patch(`http://localhost:8080/user/update/password`, {
+        user_id: userInfo.user_id,
+        password: password,
+        newPassword: newPassword,
+      },
+      { withCredentials: true }
+      );
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -42,13 +49,14 @@ export const ChangePassword = () => {
       updatePassword()
     }
   }
+
   return (
     <div className="accountsettings">
       <h1>Đổi mật khẩu</h1>
       <div className="form">
         <div className="form-group">
           <label htmlFor="password">Mật khẩu cũ<span>*</span></label>
-          <input type="password" name='password' value={password}/>
+          <input type="password" name='password' onChange={(e) => setPassword(e.target.value)}/>
         </div>
 
         <div className="form-group">

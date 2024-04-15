@@ -15,4 +15,6 @@ module.exports = function (router) {
 
     router.patch('/user/user-to-admin/:id', verifyUser.isAuth, userController.userToAdmin)
 
+    router.patch('/user/update/password', verifyUser.isAuth, userController.updatePassword)
+
 }

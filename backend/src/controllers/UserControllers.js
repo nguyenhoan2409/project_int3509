@@ -4,6 +4,7 @@ const { QueryTypes } = require("sequelize")
 const { database } = require("../config/database")
 const Orders = require("../models/Orders");
 const User = require("../models/Users");
+const argon2 = require("argon2");
 
 
 
@@ -69,6 +70,7 @@ exports.getMe = async function (req, res) {
         const result = {
             user_id: user.user_id,
             fullname: user.fullname,
+            password: user.password,
             email: user.email,
             phone_number: user.phone_number,
             address: user.address,
@@ -126,6 +128,39 @@ exports.userToAdmin = async function (req, res) {
             }, type: QueryTypes.UPDATE
         })
         return res.status(200).json({ msg: "Đã chuyển người dùng sang admin" })
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
+}
+
+exports.updatePassword = async function (req, res) {
+    try {
+        const user_id = req.body.user_id
+
+        const user = await database.query("SELECT * FROM users WHERE user_id = :user_id", {
+            replacements: {
+                user_id: user_id
+            }, type: QueryTypes.SELECT
+        })
+        const olderPassword = user[0].password
+        console.log(olderPassword)
+
+        const newPassword = await argon2.hash(req.body.newPassword)
+        console.log(newPassword)
+
+        const password = await argon2.hash(req.body.password)
+        console.log(password)
+
+        hasher = argon2.PasswordHasher()
+        hasher.verify(password, olderPassword)
+        console.log("Password is correct")
+        /* await database.query("UPDATE users SET password = :password WHERE user_id = :user_id", {
+            replacements: {
+                user_id: user_id,
+                password: newPassword
+            }, type: QueryTypes.UPDATE
+        }) */
+        return res.status(200).json({ msg: "Đã cập nhật mật khẩu thành công" })
     } catch (error) {
         return res.status(400).json({ msg: error })
     }
