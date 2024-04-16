@@ -8,7 +8,7 @@ const { database } = require("../config/database");
 exports.getAllOrder = async (req, res) => {
   try {
     const orders = await database.query(`
-        SELECT o.*, p.product_name, p.thumbnail, s.description, u.fullname
+        SELECT o.*, p.product_name, p.thumbnail, p.product_type, s.description, u.fullname, u.email, u.phone_number
         FROM orders o
         LEFT JOIN products p ON o.product_id = p.product_id
         LEFT JOIN status s ON o.status = s.status_id
@@ -160,11 +160,18 @@ exports.createOrder = async (req, res) => {
         .json({ message: `Không tìm thấy sản phẩm với product_id: ${product_id}` });
     }
 
-    const timeLine = await Timeline.findOne({
+    let timeLine = await Timeline.findOne({
       where: {
         timeline_id: timeline_id
       }
     })
+
+    if (!timeLine) {
+      timeLine = {
+        start_time : moment().locale('vi').format('HH:mm:ss'),
+        end_time : moment().locale('vi').add(5, 'days').format('HH:mm:ss')
+      }
+    }
 
     const rental_time = rental_date + " " + timeLine.start_time; 
     const return_time = return_date + " " + timeLine.end_time; 

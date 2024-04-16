@@ -24,9 +24,11 @@ import axios from "axios";
 import InputAdornment from "@mui/material/InputAdornment";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import moment from "moment";
 
 export const CreateRequest = () => {
   const { product_id } = useParams();
+  const {user} = useSelector(state => state.auth); 
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [totalMoney, setTotalMoney] = useState("");
@@ -34,8 +36,9 @@ export const CreateRequest = () => {
   const [rentalDate, setRentalDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [note, setNote] = useState("");
-  const [userInfo, setUserInfo] = useState({});
   const [timelineList, setTimelineList] = useState([]);
+  const [phone, setPhone] = useState(user?.phone_number); 
+  const [address, setAddress] = useState(user?.address); 
   const [msg, setMsg] = useState("");
 
   const [errorRentalDate, setErrorRentalDate] = useState("");
@@ -44,7 +47,6 @@ export const CreateRequest = () => {
   const [errorTotalMoney, setErrorTotalMoney] = useState("");
   const navigate = useNavigate();
   const [openSnackBar, setOpenSnackBar] = useState(false);
-
   const handleOpenSnackBar = () => {
     setOpenSnackBar(true);
   };
@@ -55,9 +57,7 @@ export const CreateRequest = () => {
     }
     setOpenSnackBar(false);
   };
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
+  
 
   const validate = (type) => {
     switch (type) {
@@ -143,14 +143,6 @@ export const CreateRequest = () => {
     getProductDetail();
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      setUserInfo(user);
-    }
-    if (isError) {
-      console.log(isError);
-    }
-  }, [user, isError]);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
@@ -174,7 +166,7 @@ export const CreateRequest = () => {
         const res = await axios.post(
           "http://localhost:8080/order/createOrder",
           {
-            user_id: userInfo.user_id,
+            user_id: user?.user_id,
             product_id: product.product_id,
             quantity: product.product_type == 3 ? 1 : parseInt(quantity),
             total_money: product.product_type == 1 ? 0 : totalMoney,
@@ -196,6 +188,34 @@ export const CreateRequest = () => {
       setMsg(error.response.data.message);
     }
   };
+
+  const handleSubmitForBuying = async (e) => {
+    try {
+      e.preventDefault(); 
+      const res = await axios.post(
+        "http://localhost:8080/order/createOrder",
+        {
+          user_id: user?.user_id,
+          product_id: product.product_id,
+          quantity: product.product_type == 3 ? 1 : parseInt(quantity),
+          total_money: product.product_type == 1 ? 0 : totalMoney,
+          timeline_id: null,
+          rental_date: moment().locale('vi').format('YYYY-MM-DD'),
+          return_date: moment().locale('vi').add(5, "days").format('YYYY-MM-DD'),
+          status: 9,
+          note: (!note) ? ('M' + ', ' + phone + ', ' + address) : (note + ', ' + phone + ', ' + address)
+        },
+        { withCredentials: true }
+      );
+      handleOpenSnackBar();
+      setTimeout(() => {
+        navigate("/request");
+      }, 1000);
+    } catch (error) {
+      console.log(error); 
+      setMsg(error.response.data.message);
+    }
+  }
 
   return (
     <Layout>
@@ -225,8 +245,8 @@ export const CreateRequest = () => {
           <p className="create-request-productName">{product.product_name}</p>
         </div>
         <div className="create-request-container-right">
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
+          <form onSubmit={(product.product_type == 2) ? handleSubmitForBuying : handleSubmit}>
+            {(product.product_type != 2) && <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
               <TextField
                 type="date"
                 variant="outlined"
@@ -263,10 +283,21 @@ export const CreateRequest = () => {
                 InputLabelProps={{ shrink: true }}
                 sx={{ mb: 4 }}
               />
-            </Stack>
+            </Stack>}
+
+            {(product.product_type == 2) && <TextField
+                label="Địa chỉ"
+                fullWidth
+                value={address}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+                InputLabelProps={{ shrink: true }}
+                sx={{ mb: 4 }}
+            />}
 
             <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-              <TextField
+              {(product.product_type != 2) && <TextField
                 id="outlined-select-currency"
                 select
                 label="Lựa chọn khung giờ"
@@ -287,7 +318,17 @@ export const CreateRequest = () => {
                     {option.value}
                   </MenuItem>
                 ))}
-              </TextField>
+              </TextField>}
+
+              {(product.product_type == 2) && <TextField
+                label="Số điện thoại"
+                fullWidth
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+                InputLabelProps={{ shrink: true }}
+              />}
 
               {product.product_type != 3 && (
                 <div
@@ -310,7 +351,11 @@ export const CreateRequest = () => {
                     InputProps={{ inputProps: { min: 1 } }}
                     onChange={(e) => {
                       setQuantity(e.target.value);
+                      setTotalMoney(e.target.value * product.price);
                       setMsg("");
+                    }}
+                    onBlur={() => {
+                      if (!quantity || quantity == 0) {setQuantity(1); setTotalMoney(product.price)}; 
                     }}
                     sx={{ margin: "0 10px 0 10px" }}
                   />

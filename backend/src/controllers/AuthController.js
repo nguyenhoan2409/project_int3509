@@ -32,6 +32,10 @@ exports.login = async function (req, res) {
       httpOnly: true,
       // maxAge: 30 * 60 * 60 * 1000,
     });
+    res.cookie("isLoggedIn", true, { 
+      httpOnly: false,
+      // maxAge: 30 * 60 * 60 * 1000,
+    });
     return res.status(200).json({
       success: true,
       msg: "Đăng nhập thành công",
@@ -103,6 +107,7 @@ exports.register = async function (req, res) {
 exports.logOut = async function (req, res) {
   try {
     res.clearCookie('access_token', { httpOnly: true, sameSite: 'None', secure: true });
+    res.clearCookie('isLoggedIn', { httpOnly: false, sameSite: 'None', secure: true });
     res.status(200).json({ message: 'Đăng xuất thành công'});
   } catch (error) {
     return res.status(400).json({ msg: error + " Đăng xuất không thành công" });

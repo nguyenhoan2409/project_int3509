@@ -13,6 +13,8 @@ import { TabPanelRequestAdmin } from "./TabPanelRequestAdmin";
 import { useTheme } from "@mui/material/styles";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import moment from "moment/moment";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -69,14 +71,8 @@ export const RequestAdmin = () => {
       });
       
       response.data.map((order, index) => {
-        order.rental_time = new Date(order.rental_time)
-          .toISOString()
-          .replace("T", ", ")
-          .replace(/\.\d+Z$/, "");
-        order.return_time = new Date(order.return_time)
-          .toISOString()
-          .replace("T", ", ")
-          .replace(/\.\d+Z$/, "");
+        order.rental_time = moment.utc(order.rental_time).format('DD-MM-YYYY, HH:mm:ss')
+        order.return_time = moment.utc(order.return_time).format('DD-MM-YYYY, HH:mm:ss')
       });
       setOrderList(response.data);
       setOrderListToBeAccepted(response.data.filter(order => order.status == 1 || order.status == 5 || order.status == 9)); 

@@ -4,6 +4,7 @@ const { QueryTypes } = require("sequelize")
 const { database } = require("../config/database")
 const Orders = require("../models/Orders");
 const User = require("../models/Users");
+const argon2 = require("argon2");
 
 
 
@@ -98,10 +99,10 @@ exports.remove_user = async function (req, res) {
 
 exports.update_user = async function (req, res) {
     try {
-        await database.query("UPDATE users SET password=:password, fullname=:fullname, email=:email, phone_number=:phone_number, address=:address, role_id =:role_id WHERE user_id =: user_id ",
+        await database.query("UPDATE users SET password=:password, fullname=:fullname, email=:email, phone_number=:phone_number, address=:address, role_id =:role_id WHERE user_id =:user_id ",
             {
                 replacements: {
-                    password: req.body.password,
+                    password: await argon2.hash(req.body.password),
                     fullname: req.body.fullname,
                     email: req.body.email,
                     phone_number: req.body.phone_number,

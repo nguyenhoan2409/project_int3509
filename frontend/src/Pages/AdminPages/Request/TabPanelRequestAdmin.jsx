@@ -21,6 +21,7 @@ import Select from "@mui/material/Select";
 import { Button, TextField } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { IoMdClose } from "react-icons/io";
+import moment from "moment";
 
 const style = {
   position: "absolute",
@@ -47,6 +48,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
   const [selectedOrderDetail, setSelectedOrderDetail] = useState({}); 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const currentDate = new Date().toLocaleString('vi-VN', { hour12: false }); 
 
   const themeWithLocale = useMemo(
     () => createTheme(theme, locales["viVN"]),
@@ -155,12 +157,12 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
     }
     if (rentalDate) {
       orderedFilterList = orderedFilterList.filter(
-        (order) => order.rental_time.slice(0, 10) == rentalDate
+        (order) => moment(order.rental_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD, HH:mm:ss').slice(0, 10) == rentalDate
       );
     }
     if (returnDate) {
       orderedFilterList = orderedFilterList.filter(
-        (order) => order.return_time.slice(0, 10) == returnDate
+        (order) => moment(order.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD, HH:mm:ss').slice(0, 10) == returnDate
       );
     }
     setInitialOrderList(orderedFilterList);
@@ -188,7 +190,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
             </MenuItem>
             {productList.map((product, index) => {
               return (
-                <MenuItem value={product.product_id} sx={{ fontSize: "14px" }}>
+                <MenuItem value={product.product_id} sx={{ fontSize: "14px" }} key={product.product_id}>
                   {product.product_name}
                 </MenuItem>
               );
@@ -278,6 +280,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                     <StyledTableCell style={{ minWidth: 50 }}>Số lượng</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 150 }}>Thời gian bắt đầu</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 150 }}>Thời gian kết thúc {(index == 3) ? '' : 'dự kiến'}</StyledTableCell>
+                    {(index == 1) && <StyledTableCell style={{ minWidth: 100 }}>Kiểm tra quá hạn</StyledTableCell>}
                     <StyledTableCell style={{ minWidth: 150 }}>Trạng thái yêu cầu</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 280 }}>Tác vụ</StyledTableCell>
                   </TableRow>
@@ -286,7 +289,6 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                   {initialOrderList.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={6} sx={{textAlign: 'center'}}>Không có yêu cầu nào</TableCell>
-                      {/* Replace numberOfColumns with the actual number of columns in your table */}
                     </TableRow>
                   ) : (
                     initialOrderList
@@ -307,6 +309,11 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                             <TableCell>{row.quantity}</TableCell>
                             <TableCell>{row.rental_time}</TableCell>
                             <TableCell>{row.return_time}</TableCell>
+                            {(index == 1) && <TableCell>
+                              <div style={{backgroundColor: 'red', color: 'white', textAlign: 'center'}}>
+                                {moment().isBefore(moment(row.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD HH:mm:ss')) ? 'Chưa quá hạn' : 'Đã quá hạn'}
+                              </div>
+                            </TableCell>}
                             <TableCell>{row.description}</TableCell>
                             <TableCell>
                               <div>
@@ -346,62 +353,56 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                     >
                                       Thông tin chi tiết yêu cầu
                                     </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                    <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>ID:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.order_id : ""}</div>
-                                    </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.order_id}</div>
+                                    </div>
+                                    <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Tên người tạo yêu cầu:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.fullname : ""}</div>
-                                    </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.fullname}</div>
+                                    </div>
+                                    <div className="modal-description"
+                                    >
+                                      <div style={{flex: 1}}>Email người tạo yêu cầu:</div>
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.email}</div>
+                                    </div>
+                                    <div className="modal-description"
+                                    >
+                                      <div style={{flex: 1}}>Số điện thoại:</div>
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.phone_number}</div>
+                                    </div>
+                                    <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Tên sản phẩm:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.product_name : ""}</div>
-                                    </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.product_name}</div>
+                                    </div>
+                                    <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Số lượng:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.quantity : ""}</div>
-                                    </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.quantity}</div>
+                                    </div>
+                                    <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Tổng tiền:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.total_money + 'VNĐ' : ""}</div>
-                                    </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.total_money + 'VNĐ'}</div>
+                                    </div>
+                                    <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Thời gian bắt đầu:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.rental_time : ""}</div>
-                                    </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.rental_time}</div>
+                                    </div>
+                                    <div className="modal-description"
                                     >
-                                      <div style={{flex: 1}}>Thời gian kết thúc {(index == 3 ? ":" : 'dự kiến:')}</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.return_time : ""}</div>
-                                    </Typography>
-                                    <Typography
-                                      id="modal-modal-description"
-                                      sx={{ mt: 2, display: 'flex'}}
+                                      <div style={{flex: 1}}>Thời gian {(selectedOrderDetail?.product_type == 2) ? 'nhận hàng' : 'kết thúc'} {(index == 3 ? ":" : 'dự kiến:')}</div>
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.return_time}</div>
+                                    </div>
+                                    <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Trạng thái đơn hàng:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail ? selectedOrderDetail.description : ""}</div>
-                                    </Typography>
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.description}</div>
+                                    </div>
                                   </Box>
                                 </Modal>
                                 {(row.status == 1 || row.status == 5 || row.status == 9) && <Button
@@ -424,7 +425,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                   Từ chối
                                 </Button>}
 
-                                {(row.status == 2 || row.status == 6 || row.status == 7) && <Button
+                                {(row.status == 2 || row.status == 6 || row.status == 10) && <Button
                                   onClick={() => {handleConfirmToCompleted(row.order_id, row.product_id, row.quantity, row.status)}}
                                   sx={{ textTransform: "none", marginLeft: '5px' }}
                                   variant="contained"

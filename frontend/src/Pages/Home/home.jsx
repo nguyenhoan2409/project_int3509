@@ -6,13 +6,11 @@ import { Footer } from "~/Components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "~/features/authSlice";
 import Layout from "../Layout/Layout";
-const cookies = new Cookies();
 
 export const Home = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getMe());
+    dispatch(getMe());  
   }, []);
   return (
     <div className="hero">

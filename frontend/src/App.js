@@ -24,6 +24,7 @@ import { AddStudents } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddStudent
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
 import { AdminHome } from "./Pages/AdminPages/AdminHome/AdminHome";
 import { UserManagement } from "./Pages/AdminPages/UserManagement/UserManagement";
+import ProtectedRoute from "./Components/ProtectRoute/ProtectRoute";
 function App() {
   return (
     <div>
@@ -32,30 +33,33 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           
-          {/* User routes */}
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/score" element={<Score />}></Route>
-          <Route path="/request" element={<Request />}></Route>
-          <Route path="/create-request/:product_id" element={<CreateRequest />}></Route>
-          <Route path="/certificate/:id" element={<Certificate/>}></Route>
-          <Route path="/user/:activepage" element={<Profile />}></Route>
-          <Route path= "/product/detail/:id" element={<ProductDetail />}></Route>
-          <Route path="/product" element={<ShopCategory />}></Route>
-
-          {/* Admin routes */}
+            {/* User routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/home" element={<Home />}></Route>
+            <Route path="/score" element={<Score />}></Route>
+            <Route path="/request" element={<Request />}></Route>
+            <Route path="/create-request/:product_id" element={<CreateRequest />}></Route>
+            <Route path="/certificate/:id" element={<Certificate/>}></Route>
+            <Route path="/user/:activepage" element={<Profile />}></Route>
+            <Route path= "/product/detail/:id" element={<ProductDetail />}></Route>
+            <Route path="/product" element={<ShopCategory />}></Route>
           
-          <Route path="/admin/request" element={<RequestAdmin />}></Route>
-          <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
-          <Route path="/admin/users" element={<UserManagement/>}></Route>
-          <Route path="/admin/products" element={<ProductsManagement/>}></Route>
-          <Route path="/admin/products/list" element={<ProductsList/>}></Route>
-          <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>
-          <Route path="/admin/products/add" element={<CreateProduct/>}></Route>
-          <Route path="/admin/scores" element={<ScoresManagement/>}></Route>
-          <Route path="/admin/scores/list" element={<ScoresList/>}></Route>
-          <Route path="/admin/scores/update/:id" element={<UpdateScores/>}></Route>
-          <Route path="/admin/scores/add" element={<AddScores/>}></Route>
-          <Route path="/admin/students/add" element={<AddStudents/>}></Route>
+
+            {/* Admin routes */}
+          
+            <Route path="/admin/request" element={<RequestAdmin />}></Route>
+            <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
+            <Route path="/admin/users" element={<UserManagement/>}></Route>
+            <Route path="/admin/products" element={<ProductsManagement/>}></Route>
+            <Route path="/admin/products/list" element={<ProductsList/>}></Route>
+            <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>
+            <Route path="/admin/products/add" element={<CreateProduct/>}></Route>
+            <Route path="/admin/scores" element={<ScoresManagement/>}></Route>
+            <Route path="/admin/scores/list" element={<ScoresList/>}></Route>
+            <Route path="/admin/scores/update/:id" element={<UpdateScores/>}></Route>
+            <Route path="/admin/scores/add" element={<AddScores/>}></Route>
+            <Route path="/admin/students/add" element={<AddStudents/>}></Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

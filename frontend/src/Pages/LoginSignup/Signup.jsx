@@ -9,7 +9,7 @@ import { FaRegAddressCard } from "react-icons/fa";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import logoLogin from "../../assets/images/logo.svg";
+import logoLogin from "../../Components/Assets/logo.svg";
 
 export const Signup = () => {
   const [mssv, setMssv] = useState();
