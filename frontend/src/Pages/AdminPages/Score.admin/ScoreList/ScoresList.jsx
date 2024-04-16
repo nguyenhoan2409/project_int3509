@@ -14,7 +14,7 @@ export const ScoresList = () => {
   const tableRef = useRef(null);
   const getScores = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/score/list");
+      const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -55,8 +55,7 @@ function App() {
             <Route path="/admin/scores" element={<ScoresManagement/>}></Route>
             <Route path="/admin/scores/list" element={<ScoresList/>}></Route>
             <Route path="/admin/scores/update/:id" element={<UpdateScores/>}></Route>
-            <Route path="/admin/scores/add" element={<AddScores/>}></Route>
-            <Route path="/admin/students/add" element={<AddStudents/>}></Route>
+            <Route path="/admin/scores/add" element={<ScoreStudentAdd/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

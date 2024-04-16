@@ -175,3 +175,18 @@ exports.updatePassword = async function (req, res) {
         return res.status(400).json({ msg: error })
     }
 }
+
+exports.userToAdmin = async function (req, res) {
+    try {
+        var user_id = req.params.id
+        await database.query("UPDATE users SET role_id = :role_id WHERE user_id = :user_id", {
+            replacements: {
+                user_id: user_id,
+                role_id: req.body.role_id
+            }, type: QueryTypes.UPDATE
+        })
+        return res.status(200).json({ msg: "Đã chuyển người dùng sang admin" })
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
+}

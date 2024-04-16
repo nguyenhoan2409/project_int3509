@@ -102,7 +102,7 @@ export const CreateRequest = () => {
   const getProductDetail = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/product/detail/${product_id}`
+        `http://localhost:8080/product/detail/${product_id}`, {withCredentials: true}
       );
       setTotalMoney(response.data[0].price);
       setProduct(response.data[0]);

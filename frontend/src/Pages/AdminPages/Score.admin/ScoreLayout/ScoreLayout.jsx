@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import "./ScoreLayout.css"
+import { Box, Typography } from '@mui/material';
 
 export const ScoresManagement = () => {
   const navigate = useNavigate();

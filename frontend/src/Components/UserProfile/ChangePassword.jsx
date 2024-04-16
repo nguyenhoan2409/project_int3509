@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import argon2 from 'argon2';
 
 export const ChangePassword = () => {
   const [password, setPassword] = useState("");

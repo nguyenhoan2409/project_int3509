@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Container, LinearProgress, Typography } from "@mui/material";
 import "./Products.admin.css";
 export const ProductsManagement = () => {
+  const navigate = useNavigate(); 
   return (
     <div className="products-management-admin">
        <Box
