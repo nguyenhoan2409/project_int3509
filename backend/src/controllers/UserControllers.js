@@ -13,7 +13,7 @@ const argon2 = require("argon2");
 exports.get_list = async function (req, res) {
     try {
         const users = await database.query("SELECT * FROM users", { type: QueryTypes.SELECT })
-        return res.status(200).json({user: users});
+        return res.status(200).json({users});
     } catch (error) {
         return res.status(400).json({ msg: error })
     }
@@ -70,6 +70,7 @@ exports.getMe = async function (req, res) {
         const result = {
             user_id: user.user_id,
             fullname: user.fullname,
+            password: user.password,
             email: user.email,
             phone_number: user.phone_number,
             address: user.address,
@@ -107,8 +108,7 @@ exports.update_user = async function (req, res) {
                     email: req.body.email,
                     phone_number: req.body.phone_number,
                     address: req.body.address,
-                    role_id: req.body.role_id,
-                    user_id: req.params.id
+                    user_id: user_id
                 }, type: QueryTypes.UPDATE
             })
         return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" })
@@ -143,3 +143,35 @@ exports.statisticaldata = async function(req, res) {
     }
 }
 
+exports.updatePassword = async function (req, res) {
+    try {
+        const user_id = req.body.user_id
+
+        const user = await database.query("SELECT * FROM users WHERE user_id = :user_id", {
+            replacements: {
+                user_id: user_id
+            }, type: QueryTypes.SELECT
+        })
+        const olderPassword = user[0].password
+
+        const password = req.body.password
+
+        const newPassword = await argon2.hash(req.body.newPassword)
+
+        const match = await argon2.verify(olderPassword, password)
+        console.log(match)
+        if(!match) {
+            return res.status(400).json({ msg: "Mật khẩu không đúng" })
+        } else {
+            await database.query("UPDATE users SET password = :password WHERE user_id = :user_id", {
+                replacements: {
+                    user_id: user_id,
+                    password: newPassword
+                }, type: QueryTypes.UPDATE
+            })
+        }
+        return res.status(200).json({ msg: "Đã cập nhật mật khẩu thành công" })
+    } catch (error) {
+        return res.status(400).json({ msg: error })
+    }
+}

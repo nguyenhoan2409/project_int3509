@@ -6,6 +6,7 @@
     margin: 15px 20px;
 }
 
+
 .usersidebar .s1, .usersidebar .s2 {
     display: flex;
     align-items: center;
@@ -13,14 +14,12 @@
     padding: 20px;
 }
 
-.usersidebar svg {
-    width: 30px;
-    height: 30px;
-    color: gray;
-}
-
 
 .stylenone {
     text-decoration: none;
     color: inherit;
+}
+
+.usersidebar-icon {
+    font-size: 30px;
 }

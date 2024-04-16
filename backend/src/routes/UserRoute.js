@@ -2,7 +2,6 @@ module.exports = function (router) {
 
     var userController = require('../controllers/UserControllers'); 
     var verifyUser = require('../middleware/AuthUser'); 
-    var JWT = require("../middleware/jwt")
 
     router.get('/user/list', verifyUser.isAuth, userController.get_list)
 
@@ -15,5 +14,9 @@ module.exports = function (router) {
     router.put('/user/update/:id', verifyUser.isAuth, userController.update_user)
 
     router.get('/admin/statisticalData', verifyUser.isAuth, verifyUser.checkAdmin, userController.statisticaldata)
+
+    router.patch('/user/user-to-admin/:id', verifyUser.isAuth, userController.userToAdmin)
+
+    router.patch('/user/update/password', verifyUser.isAuth, userController.updatePassword)
 
 }

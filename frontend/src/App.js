@@ -7,7 +7,6 @@ import { ShopCategory } from "./Pages/Product/ShopCategory";
 import { Signup } from "./Pages/LoginSignup/Signup";
 import { Login } from "./Pages/LoginSignup/Login";
 import { CreateRequest } from "./Pages/Request/CreateRequest";
-import { DashBoard } from "./Pages/AdminPages/DashBoard/DashBoard";
 import { RequestAdmin } from "./Pages/AdminPages/Request/ResquestAdmin";
 
 
@@ -19,8 +18,7 @@ import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct/C
 import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreLayout/ScoreLayout";
 import { ScoresList } from "./Pages/AdminPages/Score.admin/ScoreList/ScoresList";
 import { UpdateScores } from "./Pages/AdminPages/Score.admin/ScoresUpdate/ScoresUpdate";
-import { AddScores } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddScores";
-import { AddStudents } from "./Pages/AdminPages/Score.admin/ScoresAdd/AddStudents";
+import { ScoreStudentAdd } from "./Pages/AdminPages/Score.admin/ScoresAdd/ScoreStudentAdd";
 import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
 import { AdminHome } from "./Pages/AdminPages/AdminHome/AdminHome";
 import { UserManagement } from "./Pages/AdminPages/UserManagement/UserManagement";
@@ -49,7 +47,7 @@ function App() {
           
             <Route path="/admin/request" element={<RequestAdmin />}></Route>
             <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
-            <Route path="/admin/users" element={<UserManagement/>}></Route>
+            <Route path="/admin/users/list" element={<UserManagement/>}></Route>
             <Route path="/admin/products" element={<ProductsManagement/>}></Route>
             <Route path="/admin/products/list" element={<ProductsList/>}></Route>
             <Route path="/admin/products/update/:id" element={<UpdateProduct/>}></Route>

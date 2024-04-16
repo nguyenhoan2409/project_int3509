@@ -5,40 +5,40 @@
     sans-serif;
 }
 
-
 .score-header {
-    width: 100%;
-    height: 200px;
+    height: 140px;
     justify-content: center;
     align-items: center;
-    gap: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .search {
-    margin-top: 10px;
     gap: 20px;
     display: flex;
     flex-direction: row;
 }
 
-.search-btn button {
-    height: 50px;
+.search-btn .search-btn-users {
+    height: 40px;
     width: 80px;
     border: 1px solid #c9c9c9;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     font-size: 15px;
     background: #007e43;
 }
 
-.search input {
-    height: 50px;
+.search-btn .search-btn-users:hover {
+    background: #039852;
+}
+
+.search .search-input-user {
+    height: 37px;
     width: 300px;
     padding-left:20px;
     border: 1px solid #252323;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #5c5c5c;
     font-size: 15px;
 }
@@ -48,26 +48,26 @@
     align-items: center;
 }
 
- /* .score-table table, td, th {
+ .score-table .score-table-user, .mssv, .fullname, .class, .univercity, .football, .bedminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR, .certificate-icons {
     border: 1px solid;
   }
   
- .score-table table {
+ .score-table .score-table-user {
     border-collapse: collapse;
   }
- .score-table th{
+ .score-table .score-table-header{
     text-align: center;
     background-color: #04AA6D;
     color: white;
     padding-top: 12px;
     padding-bottom: 12px;
 }
-.score-table tr {
+.score-table .score-table-tr {
     padding-top: 8px;
     text-align: center;
     padding-bottom: 8px;
-} */
-.score-table tr:nth-child(even){background-color: #f2f2f2;}
+} 
+.score-table .score-table-tr:nth-child(even){background-color: #f2f2f2;}
 .mssv {
     width: 100px;
 }
@@ -80,7 +80,7 @@
 .univercity {
     width: 60px;
 }
-.football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR{
+.football, .bedminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR{
     width: 60px;
 }
 .certificate-icons {

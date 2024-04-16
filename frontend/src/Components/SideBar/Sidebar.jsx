@@ -96,7 +96,7 @@ export const Sidebar = () => {
           </li>
 
           <li className="menu-list-item">
-            <Link to={"/admin/users"}>
+            <Link to={"/admin/users/list"}>
               <div className="menu-list-item-container">
                 <BsFilePersonFill className="menu-list-icon" size={24} />
                 <div>Quản lý người dùng</div>

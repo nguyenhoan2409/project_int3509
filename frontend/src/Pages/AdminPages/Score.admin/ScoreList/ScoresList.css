@@ -22,9 +22,10 @@
     flex-direction: row;
 }
 
-.search-btn-admin button {
+
+
+.search-btn-admin .search-score-btn-admin {
     height: 40px;
-    width: 80px;
     border: 1px solid #c9c9c9;
     border-radius: 5px;
     color: white;
@@ -32,7 +33,20 @@
     background: #007e43;
 }
 
-.search-admin input {
+.search-btn-admin .search-score-btn-admin:hover {
+    cursor: pointer;
+    background: #0fab62;
+}
+
+.update-cdr-btn {
+    width: 130px;
+}
+.search-score-btn {
+    width: 80px;
+    background-color: #007e43;
+    color: white;
+}
+.search-admin .search-input-admin {
     height: 40px;
     width: 300px;
     padding-left:10px;
@@ -41,32 +55,35 @@
     color: #5c5c5c;
     font-size: 15px;
 }
-.score-table-admin {
+.table-admin {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
- /* .score-table-admin table, td, th {
-    border: 1px solid;
-  }
   
- .score-table-admin table {
+ .table-admin .score-table-admin {
     border-collapse: collapse;
   }
- .score-table-admin th{
+ .score-table-admin .mssv-admin, .fullname-admin, .class-admin, .univercity-admin, .football-admin, .bedminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin, .action-admin{
     text-align: center;
     background-color: #04AA6D;
     color: white;
     padding-top: 12px;
     padding-bottom: 12px;
+    border: 1px solid;
 }
-.score-table-admin tr {
+
+.score-table-admin .mssv-admin-td, .fullname-admin-td, .class-admin-td, .univercity-admin-td, .football-admin-td, .bedminton-admin-td, .tabletennis-admin-td, .basketball-admin-td, .volleyball-admin-td, .air_volleyball-admin-td, .taekwondo-admin-td, .golf-admin-td, .CDR-admin-td, .action-admin-td{
+    text-align: center;
+    border: 1px solid;
+}
+.score-table-admin .score-tr-admin {
     padding-top: 8px;
     text-align: center;
     padding-bottom: 8px;
-} */
-.score-table-admin tr:nth-child(even){background-color: #f2f2f2;}
+} 
+.score-table-admin .score-tr-admin:nth-child(even){background-color: #f2f2f2;}
 .mssv-admin {
     width: 10%;
 }
@@ -80,5 +97,13 @@
 .action-admin, .univercity-admin, .football-admin, .bedminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
     width: 5%;
 }
-
+ 
+.download-btn {
+    width: 80px;
+    background-color: #007e43;
+    color: white;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px;
+}
 

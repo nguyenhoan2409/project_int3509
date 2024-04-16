@@ -11,7 +11,9 @@ export const ProductsList = () => {
     const [products, setProducts] = useState([]);
     const getProducts = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/product/list");
+            const res = await axios.get("http://localhost:8080/product/list", {
+                withCredentials: true,
+            });
             setProducts(res.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -29,11 +31,11 @@ export const ProductsList = () => {
             <div>
             <ProductsManagement/>
                 <div className="products-list">
-                    <table>
+                    <table className="products-list-table">
                         <thead>
-                            <tr>
+                            <tr className='products-list-tr'>
                                 <th className="products-id">ID</th>
-                                <th className="thumbnails"> Ảnh sản phẩm</th>
+                                <th className="products-thumbnails"> Ảnh sản phẩm</th>
                                 <th className="products-name">Tên sản phẩm </th>
                                 <th className="products-price">Giá </th>
                                 <th className="products-1">Số lượng trong kho</th>
@@ -45,16 +47,16 @@ export const ProductsList = () => {
                         </thead>
                         <tbody>
                             {products?.map((product, index) => (
-                                <tr key = {index}>
-                                <td>{product.product_id}</td>
-                                <td className="thumbnails-td"><img src={product.thumbnail} /></td>
-                                <td>{product.product_name}</td>
-                                <td>{product.price}</td>
-                                <td>{product.quantity}</td>
-                                <td>{product.quantity}</td>
-                                <td>{product.description}</td>
-                                <td>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</td>
-                                <td className='products-update-icon'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit /></Link></td>
+                                <tr className='products-list-tr' key = {index}>
+                                <td  className="products-id-data">{index + 1}</td>
+                                <td className="thumbnails-td products-thumbnails-data"><img src={product.thumbnail} /></td>
+                                <td className="products-name-data">{product.product_name}</td>
+                                <td className="products-price-data">{product.price}</td>
+                                <td className="products-1-data">{product.quantity}</td>
+                                <td className="products-2-data">{product.quantity}</td>
+                                <td className="descriptions-data">{product.description}</td>
+                                <td className="order-type-data">{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</td>
+                                <td className='products-update-data products-update-icon'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit /></Link></td>
                                 </tr>
                             ))}
                         </tbody>

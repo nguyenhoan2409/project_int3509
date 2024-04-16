@@ -37,9 +37,6 @@ export const ProductDetail = ({ navigation }) => {
               <img src={product.thumbnail} />
               <div className="product-right">
                 <div className="product-name">
-                  <div className="icon">
-                    <RiProductHuntLine />
-                  </div>
                   <div className="text">{product.product_name}</div>
                 </div>
                 <div className="review">
@@ -66,7 +63,7 @@ export const ProductDetail = ({ navigation }) => {
                   <p>{product.description}</p>
                 </div>
                 <Link to = {`/create-request/${id}`} >
-                  <div className="order-button"><button className="productdetail-btn">{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</button></div>
+                <div className="order-button"><button>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</button></div>
                 </Link>
               </div>
             </div>

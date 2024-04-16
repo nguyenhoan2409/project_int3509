@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import "./AdminHome.scss"
 import { Sidebar } from '~/Components/SideBar/Sidebar'
 import { Widget } from '~/Components/Widget/Widget'
-import List from '~/Components/List/List'
+import List from '~/Components/MostRecentRequest/MostRecentRequest'
 import Layout from '~/Pages/Layout/Layout'
 import { useDispatch, useSelector } from 'react-redux';
 import { getMe } from '~/features/authSlice';

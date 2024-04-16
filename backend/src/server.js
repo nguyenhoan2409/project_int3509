@@ -6,9 +6,11 @@ const { database } = require('./config/database');
 const cookieParser = require('cookie-parser'); 
 
 
+
 dotenv.config(); 
 const app = express(); 
 const port = 8080; 
+
 
 app.use(cookieParser())
 app.use(express.json()); 
@@ -26,14 +28,14 @@ app.use(function(req, res, next) {
   )
   next()
 })
-
-require('./routes/HomeRoutes')(app); 
+ 
 require('./routes/AccountRoutes')(app); 
 require('./routes/ProductRoutes')(app); 
 require('./routes/ScoreRoute')(app); 
 require('./routes/OrderRoutes')(app); 
 require('./routes/UserRoute')(app); 
 require('./routes/TimelineRoute')(app); 
+
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`); 

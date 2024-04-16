@@ -50,16 +50,14 @@ export const UpdateProduct = () => {
   }
 
   const handleThumbnailChange = (event) => {
-    const value = event.target.value
-    if(value !== "" ) {
-      setThumbnail(value)
-    } else {
-      alert("Bạn chưa nhập link ảnh")
-    }
+    const thumbnail  = URL.createObjectURL(event.target.files[0]); // Tạo đường dẫn tạm thời cho hình ảnh được chọn
+    setThumbnail(thumbnail);
   }
   const getDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/product/detail/${id}`);
+      const response = await axios.get(`http://localhost:8080/product/detail/${id}`, {
+        withCredentials: true,
+      });
       const products = response.data;
       const product = products[0];
       setProduct(product);
@@ -83,6 +81,8 @@ export const UpdateProduct = () => {
         quantity,
         thumbnail,
         product_type
+      }, {
+        withCredentials: true,
       });
       setMsg(response.data.msg);
     } catch (error) {
@@ -109,7 +109,7 @@ export const UpdateProduct = () => {
             <div className="update-product-row"> <p> Giá : </p> <input type="number" value={price} onChange={handlePriceChange} /></div>
             <div className="update-product-row"> <p> Mô tả : </p> <input type="text" value={description} onChange={handleDescriptionChange} /></div>
             <div className="update-product-row"> <p> Số lượng : </p> <input type="number" value={quantity} onChange={handleQuantityChange} /></div>
-            <div className="update-product-row"> <p> Ảnh : </p> <input type="text" value={thumbnail} onChange={handleThumbnailChange} /></div>
+            <div className="update-product-row"> <p> Ảnh : </p> <input type="file" accept=".png, .jpg, .jpeg, .gif" onChange={handleThumbnailChange} /></div>
             <div className="update-product-row"> 
             <p> Loại : </p> 
             <select value={product_type} onChange={e => setOrderType(e.target.value)}>

@@ -5,123 +5,62 @@ const { database } = require('../config/database')
 const { QueryTypes } = require('sequelize')
 // var db = require("../common/connect")
 
-exports.importStudentList = async function (req, res) {
+exports.addStudent = async function (req, res) {
     try {
-     let workbook = xlsx.readFile('C:\\Workspace\\project_int3509\\backend\\src\\controllers\\test\\k65cd.xlsx')
-     let workSheet = workbook.Sheets[workbook.SheetNames[0]]
-     let range = xlsx.utils.decode_range(workSheet["!ref"])
-     let i = 0 
-     //import excell
-     for( let row = range.s.r + 1; row <= range.e.r; row ++) {
-         let data = []
-         //read cell
-         for(let col = range.s.c; col <= range.e.c; col++) {
-             let cell = workSheet[xlsx.utils.encode_cell({r: row, c: col})]
-             data.push(cell.v)
-         }
-         let mssv = data[0]
-         let fullname = data[1]
-         let classs = data[2]
-         let univercity = data[3]
-           await database.query("INSERT INTO physicalscore (mssv, fullname, class, univercity) VALUES(:mssv, :fullname, :class, :univercity)", {
-                 replacements: {
-                     mssv: mssv,
-                     fullname: fullname,
-                     class : classs,
-                     univercity: univercity
-                 }
-             })
-             
-     }
-     return res.status(200).json({ msg: "Bạn đã thêm thành công" })
-    } catch {
-     return res.status(400).json({ msg: error })
+        const student = await database.query("INSERT INTO physicalscore (mssv, fullname, class, univercity) VALUES(:mssv, :fullname, :class, :univercity)", {
+            replacements: {
+                mssv: req.body.mssv,
+                fullname: req.body.fullname,
+                class : req.body.class,
+                univercity: req.body.univercity
+            }
+        })
+        return res.status(200).json({ msg: "Thêm danh sách sinh viên thành công" })
+    } catch(error) {
+        return res.status(400).json({ msg: error })
     }
- }
- 
- exports.score = async function (req, res) {
-     try {
-         let workbook = xlsx.readFile('C:/Workspace/project_int3509/backend/src/controllers/test/football.xlsx')
-         let workSheet = workbook.Sheets[workbook.SheetNames[0]]
-         let range = xlsx.utils.decode_range(workSheet["!ref"])
-         let i = 0
-         //import excell
-         let r = range.s.r
-         let c = range.e.c
-         let subject = workSheet[xlsx.utils.encode_cell({ r, c })]
-     
-         for (let row = range.s.r + 1; row <= range.e.r; row++) {
-             let data = []
-             //read cell
-             for (let col = range.s.c; col <= range.e.c; col++) {
-                 let cell = workSheet[xlsx.utils.encode_cell({ r: row, c: col })]
-                 data.push(cell.v)
-             }
-             const mssv = data[0]
-             const score = data[4]
-             if (subject.v == "bóng đá") {
-                  database.query("UPDATE physicalscore SET football_score=:score WHERE mssv = :mssv", {
-                   replacements: {
-                       mssv : mssv,
-                       score: score
-                   }, type: QueryTypes.UPDATE
-                 } )
-               } else if (subject.v == "cầu lông") {
-                     database.query("UPDATE physicalscore SET bedminton_score=:score WHERE mssv =:mssv", {
-                       replacements: {
-                           mssv : mssv,
-                           score: score
-                       }, type: QueryTypes.UPDATE
-                   })
-               } else if (subject.v == "bóng bàn") {
-                     database.query("UPDATE physicalscore SET tabletennis_score=:score WHERE mssv =:mssv", {
-                       replacements: {
-                           mssv : mssv,
-                           score: score
-                       }, type: QueryTypes.UPDATE
-                   })
-               } else if (subject.v == "bóng rổ") {
-                     database.query("UPDATE physicalscore SET basketball_score=:score WHERE mssv =:mssv", {
-                       replacements: {
-                           mssv : mssv,
-                           score: score
-                       }, type: QueryTypes.UPDATE
-                   })
-               } else if (subject.v == "bóng chuyền hơi") {
-                    database.query("UPDATE physicalscore SET air_volleyball_score=:score WHERE mssv =:mssv", {
-                       replacements: {
-                           mssv : mssv,
-                           score: score
-                       }, type: QueryTypes.UPDATE
-                   })
-               } else if (subject.v == "bóng chuyền da") {
-                     database.query("UPDATE physicalscore SET volleyball_score=:score WHERE mssv =:mssv", {
-                       replacements: {
-                           mssv : mssv,
-                           score: score
-                       }, type: QueryTypes.UPDATE
-                   })
-               } else if (subject.v == "taekwondo") {
-                    database.query("UPDATE physicalscore SET taekwondo_score=:score WHERE mssv =:mssv", {
-                       replacements: {
-                           mssv : mssv,
-                           score: score
-                       }, type: QueryTypes.UPDATE
-                   })
-               } else if (subject.v == "golf") {
-                     database.query("UPDATE physicalscore SET golf_score=:score WHERE mssv =:mssv", {
-                       replacements: {
-                           mssv : mssv,
-                           score: score
-                       }, type: QueryTypes.UPDATE
-                   })
-               }
-         }
-         return res.status(200).json({ msg: "Bạn đã thêm thành công" })
-     } catch(error) {
-         return res.status(400).json({ msg: error })
-     }
- }
+}
+
+exports.addScore = async function (req, res) {
+    try {
+        let _subject= req.body.subject
+        let subject = ""
+        if(_subject === "football") {
+            subject = "football_score"
+        }
+        if(_subject === "tabletennis") {
+            subject = "tabletennis_score"
+        }
+        if(_subject === "basketball") {
+            subject = "basketball_score"
+        }
+        if(_subject === "badminton") {
+            subject = "bedminton_score"
+        }
+        if(_subject === "air_volleyball") {
+            subject = "air_volleyball_score"
+        }
+        if(_subject === "volleyball") {
+            subject = "volleyball_score"
+        }
+        if(_subject === "taekwondo") {
+            subject = "taekwondo_score"
+        }
+        if(_subject === "golf") {
+            subject = "golf_score"
+        }
+        const student = await database.query(`UPDATE physicalscore SET ${subject}=:score WHERE mssv =:mssv`, {
+            replacements: {
+                score: req.body.score,
+                mssv: req.body.mssv
+            }
+        })
+    return res.status(200).json({ msg: "Thêm điểm thành cong" })
+
+    } catch(error) {
+        return res.status(400).json({ msg: error })
+    }
+}
  
  exports.getAllScore = async function (req, res) {
      try {
@@ -184,15 +123,16 @@ exports.importStudentList = async function (req, res) {
          if(list[i].volleyball_score >= 4) count++
          if(list[i].taekwondo_score >= 4) count++
          if(list[i].golf_score >= 4) count++
+         let CDR = ""
          if(count >= 4) {
-             let CDR = 1
-             database.query("UPDATE physicalscore SET CDR=:CDR WHERE mssv =:mssv", {
-                 replacements: {
-                     mssv: mssv,
-                     CDR : CDR
-                 }, type: QueryTypes.UPDATE
-             })
-         }
+              CDR = "Đ"    
+         }  else { CDR = ""}
+         database.query("UPDATE physicalscore SET CDR=:CDR WHERE mssv =:mssv", {
+            replacements: {
+                mssv: mssv,
+                CDR : CDR
+            }, type: QueryTypes.UPDATE
+        })
      }
          return res.status(200).json({ msg: "Cập nhật CDR thành công" })
      } catch(error) {
@@ -221,7 +161,6 @@ exports.importStudentList = async function (req, res) {
  
  exports.deleteSTudentList = async function(req, res) {
      const list = await database.query("SELECT *FROM physicalscore", {type: QueryTypes.SELECT})
-     console.log(list)
      for(let i = 0; i < list.length; i++) {
          let mssv = list[i].mssv
              await database.query("DELETE FROM physicalscore WHERE mssv=:mssv", {
@@ -234,5 +173,26 @@ exports.importStudentList = async function (req, res) {
                  }
              )
      }
+     return res.status(200).json({ msg: "Xóa thành công" })
  
+ }
+
+ exports.getCertificate = async function(req, res) {
+     try {
+         const data = req.body
+         const student = await database.query("INSERT INTO certificate (mssv, fullname, class, university, email, phonenumber, status) VALUES(:mssv, :fullname, :class, :univercity, :email, :phonenumber, :status)", {
+             replacements: {
+                 mssv : data.mssv,
+                 fullname: data.fullname,
+                 class : data.class,
+                 univercity: data.univercity,
+                 email: data.email,
+                 phonenumber: data.phonenumber,
+                 status : "đã gửi yêu cầu"
+             }, type : QueryTypes.SELECT
+         })
+         return res.status(200).json({ student })
+     } catch(error) {
+         return res.status(400).json({ msg: error })
+     }
  }

@@ -1,13 +1,23 @@
 module.exports = function (router) {
 
     var scoreController = require('../controllers/ScoreController')
+    var verifyUser = require('../middleware/AuthUser'); 
 
-    router.post('/importStudentList', scoreController.importStudentList)
-    router.put('/importScore', scoreController.score)
-    router.get('/score/list', scoreController.getAllScore)
-    router.get('/score/search/:id', scoreController.searchScore)
-    router.put('/score/update', scoreController.updateScore)
-    router.put('/score/CDR', scoreController.updateCDR)
-    router.get('/score/check/:id',scoreController.checkCDR)
+    router.get('/score/list', verifyUser.isAuth, scoreController.getAllScore)
+    
+    router.get('/score/search/:id', verifyUser.isAuth, scoreController.searchScore)
+
+    router.patch('/score/update', verifyUser.isAuth,scoreController.updateScore)
+
+    router.get('/score/CDR', verifyUser.isAuth, scoreController.updateCDR)
+
+    router.get('/score/check/:id', verifyUser.isAuth, scoreController.checkCDR)
+
     router.delete('/score/delete/list', scoreController.deleteSTudentList)
+
+    router.post('/student/add', verifyUser.isAuth, scoreController.addStudent)
+
+    router.patch('/score/add', verifyUser.isAuth, scoreController.addScore)
+
+    router.post('/score/certificate', verifyUser.isAuth, scoreController.getCertificate)
 }

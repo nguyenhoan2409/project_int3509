@@ -62,7 +62,7 @@
     margin-left: 10px; 
 }
 
-.create-product-right button {
+.create-product-right .create-product-btn {
     height: 40px;
     width: 170px;
     font-size: 20px;
@@ -76,4 +76,8 @@
 .msg-create-error {
     color: red;
     font-size: 18px;
+}
+.upload-thumbnail-btn {
+    width: 100px;
+    font-size: 10px;
 }

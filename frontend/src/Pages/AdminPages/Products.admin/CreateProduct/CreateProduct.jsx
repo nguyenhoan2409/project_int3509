@@ -29,7 +29,7 @@ export const CreateProduct = () => {
     if (event.target.value.length <= 30 && event.target.value.length > 0) {
       setProductName(event.target.value);
     } else {
-      if (event.target.value.length == 0) {
+      if (event.target.value.length === 0) {
         alert("Tên sản phẩm không được để trống");
       } else alert("Tên sản phẩm phải nhỏ hoặc bằng 30 ký tự");
     }
@@ -54,11 +54,8 @@ export const CreateProduct = () => {
     setDescription(event.target.value);
   };
   const handleThumbnailChange = (event) => {
-    if (event.target.value !== "") {
-      setThumbnail(event.target.value);
-    } else {
-      alert("Thêm link ảnh");
-    }
+      const thumbnail  = URL.createObjectURL(event.target.files[0]); // Tạo đường dẫn tạm thời cho hình ảnh được chọn
+      setThumbnail(thumbnail);
   };
   const handleProductTypeChange = (event) => {
     setProductType(event.target.value);
@@ -73,6 +70,8 @@ export const CreateProduct = () => {
         thumbnail,
         description,
         product_type,
+      }, {
+        withCredentials: true,
       });
       setMsg(response.msg);
     } catch (error) {
@@ -83,6 +82,7 @@ export const CreateProduct = () => {
       }
     }
   };
+  console.log(thumbnail);
   return (
     <Layout>
       <div>
@@ -93,28 +93,23 @@ export const CreateProduct = () => {
           </div>
           <div className="create-product-right">
             <div className="create-product-row">
-              {" "}
-              <p> Tên sản phẩm : </p>{" "}
+              <p> Tên sản phẩm : </p>
               <input type="text" onChange={handleNameChange} />
             </div>
             <div className="create-product-row">
-              {" "}
-              <p> Giá : </p>{" "}
+              <p> Giá : </p>
               <input type="number" onChange={handlePriceChange} />
             </div>
             <div className="create-product-row">
-              {" "}
-              <p> Số lượng kho: </p>{" "}
+              <p> Số lượng kho: </p>
               <input type="number" onChange={handleQuantityChange} />
             </div>
-            <div className="create-product-row">
-              {" "}
-              <p> Link ảnh : </p>{" "}
-              <input type="text" onChange={handleThumbnailChange} />
+            <div className="create-product-row">            
+              <p> Ảnh : </p>
+              <input type="file" accept=".png, .jpg, .jpeg, .gif" onChange={handleThumbnailChange} />
             </div>
             <div className="create-product-row">
-              {" "}
-              <p> Mô tả : </p>{" "}
+              <p> Mô tả : </p>
               <input type="text" onChange={handleDescriptionChange} />
             </div>
             <div className="create-product-row">
@@ -125,7 +120,7 @@ export const CreateProduct = () => {
                 <option value="3">Thuê</option>
               </select>
             </div>
-            <button onClick={handleCreate}>Thêm sản phẩm</button>
+            <button onClick={handleCreate} className="create-product-btn">Thêm sản phẩm</button>
             {!isFilled && <p className="msg-create-error">{msg}</p>}
             {isFilled && <p className="msg-create">{msg}</p>}
           </div>
