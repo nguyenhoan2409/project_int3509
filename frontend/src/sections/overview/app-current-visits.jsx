@@ -33,7 +33,7 @@ export default function AppCurrentVisits({ title, subheader, chart, ...other }) 
 
   const { colors, series, options } = chart;
 
-  const chartSeries = series.map((i) => i.value);
+  const chartSeries = series?.map((i) => i.value);
 
   const chartOptions = useChart({
     chart: {
@@ -42,7 +42,7 @@ export default function AppCurrentVisits({ title, subheader, chart, ...other }) 
       },
     },
     colors,
-    labels: series.map((i) => i.label),
+    labels: series?.map((i) => i.label),
     stroke: {
       colors: [theme.palette.background.paper],
     },

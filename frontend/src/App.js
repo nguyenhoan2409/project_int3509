@@ -45,8 +45,8 @@ function App() {
 
             {/* Admin routes */}
           
-            <Route path="/admin/request" element={<RequestAdmin />}></Route>
             <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
+            <Route path="/admin/request" element={<RequestAdmin />}></Route>
             <Route path="/admin/users/list" element={<UserManagement/>}></Route>
             <Route path="/admin/products" element={<ProductsManagement/>}></Route>
             <Route path="/admin/products/list" element={<ProductsList/>}></Route>

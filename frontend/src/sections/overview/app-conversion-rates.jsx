@@ -13,7 +13,7 @@ import Chart, { useChart } from "~/Components/chart";
 export default function AppConversionRates({ title, subheader, chart, ...other }) {
   const { colors, series, options } = chart;
 
-  const chartSeries = series.map((i) => i.value);
+  const chartSeries = series?.map((i) => i.value);
 
   const chartOptions = useChart({
     colors,
@@ -34,7 +34,7 @@ export default function AppConversionRates({ title, subheader, chart, ...other }
       },
     },
     xaxis: {
-      categories: series.map((i) => i.label),
+      categories: series?.map((i) => i.label),
     },
     yaxis: {
       max: 100,

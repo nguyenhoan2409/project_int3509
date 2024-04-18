@@ -48,7 +48,7 @@ const rows = [
   
 ];
 
-const List = () => {
+const List = ({list}) => {
   return (
     <div className="list">
       <TableContainer component={Paper}>
@@ -63,13 +63,13 @@ const List = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {list?.map((row) => (
               <TableRow key={row.id}>
                 <TableCell className="tableCell">{row.user_id}</TableCell>
                 <TableCell className="tableCell">
                   <div className="cellWrapper">{row.product_id}</div>
                 </TableCell>
-                <TableCell className="tableCell">{row.customer}</TableCell>
+                <TableCell className="tableCell">{row.rental_time}</TableCell>
                 <TableCell className="tableCell">{row.return_time}</TableCell>
                 <TableCell className="tableCell">
                   <span className={`status ${row.status}`}>{row.status}</span>
