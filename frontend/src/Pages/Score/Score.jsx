@@ -25,7 +25,7 @@ export const Score = () => {
 
   useEffect(() => {
     getScores();
-  }, []);
+  }, [mssv]);
 
   const searchHandle = async (event) => {
     try {

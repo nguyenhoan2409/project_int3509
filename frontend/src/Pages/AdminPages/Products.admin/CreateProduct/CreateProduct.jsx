@@ -3,6 +3,8 @@ import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import axios from "axios";
 import "./CreateProduct.css";
 import Layout from "~/Pages/Layout/Layout";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 export const CreateProduct = () => {
   const [product_name, setProductName] = useState();
   const [product_type, setProductType] = useState();
@@ -13,6 +15,10 @@ export const CreateProduct = () => {
   const [isFilled, setIsFilled] = useState(false);
   const [msg, setMsg] = useState();
 
+  const navigate = useNavigate();
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
   const handleCreate = () => {
     // Kiểm tra các trường bắt buộc trước khi thêm sản phẩm
     if (!product_name || !price || !quantity || !thumbnail || !product_type) {
@@ -73,6 +79,7 @@ export const CreateProduct = () => {
       }, {
         withCredentials: true,
       });
+      navigate("/admin/products/list");
       setMsg(response.msg);
     } catch (error) {
       console.error("Error fetching data:", error);

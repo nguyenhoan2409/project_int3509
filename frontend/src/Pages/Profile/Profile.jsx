@@ -8,9 +8,24 @@ import { YourOrders } from "~/Components/UserProfile/YourOrders";
 import AvatarEditor from "react-avatar-editor";
 import { Navbar } from "~/Components/Navbar/Navbar";
 import Layout from "../Layout/Layout";
-
+import { useSelector } from "react-redux";
+import { useState } from "react";
 export const Profile = () => {
   const { activepage } = useParams();
+  const [userInfo, setUserInfo] = useState({})
+  const [roleId, setRoleId] = useState()
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  )
+  useEffect(() => {
+    if (user) {
+      setUserInfo(user); 
+      setRoleId(user.role_id)
+    }
+    if (isError) {
+      console.log(message)
+    }
+  }, [user, isError])
 
   return (
     <div className="userprofile">

@@ -12,6 +12,7 @@ export const ScoresList = () => {
   const [mssv, setMssv] = useState("");
   const [scores, setScores] = useState([]);
   const tableRef = useRef(null);
+ 
   const getScores = async () => {
     try {
       const cdr = await axios.get("http://localhost:8080/score/CDR", {
@@ -29,11 +30,10 @@ export const ScoresList = () => {
       }
     }
   };
-
   useEffect(() => {
     getScores();
-  }, []);
-
+  }, [mssv]);
+  
   const searchHandle = async (event) => {
     try {
       const response = await axios.get(

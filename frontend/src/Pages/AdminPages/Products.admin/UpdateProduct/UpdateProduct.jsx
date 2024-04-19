@@ -12,7 +12,7 @@ export const UpdateProduct = () => {
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
   const [thumbnail, setThumbnail] = useState();
-  const [product_type, setOrderType] = useState();
+  const [product_type, setOrderType] = useState(2);
   const [isFilled, setIsFilled] = useState();
   const [msg, setMsg] = useState();
   const handleUpdate = () => {

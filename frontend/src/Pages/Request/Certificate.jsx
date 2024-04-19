@@ -4,6 +4,8 @@ import "./Request.css";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import Layout from "../Layout/Layout";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Certificate = () => {
     const { id } = useParams();
@@ -11,6 +13,12 @@ export const Certificate = () => {
     const [email, setEmail] = useState();
     const [phonenumber, setPhonenumber] = useState();
     const [checkCDR, setCheckCDR] = useState(false);
+
+    const navigate = useNavigate();
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
+
  
     function handleSubmit(event) {
         event.preventDefault();
@@ -55,6 +63,7 @@ export const Certificate = () => {
           }, {
             withCredentials: true,
           });
+          navigate("/request");
           alert("Đã gửi yêu cầu thành công");
         } catch (error) {
           console.error("Error fetching data:", error);
