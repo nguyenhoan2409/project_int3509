@@ -9,7 +9,7 @@ export const CreateProduct = () => {
   const [product_name, setProductName] = useState();
   const [product_type, setProductType] = useState();
   const [quantity, setQuantity] = useState();
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState();
   const [thumbnail, setThumbnail] = useState();
   const [isFilled, setIsFilled] = useState(false);

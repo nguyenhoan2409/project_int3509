@@ -10,7 +10,7 @@ const argon2 = require("argon2");
 
 // var JWT = require("../common/jwt")
 
-exports.get_list = async function (req, res) {
+exports.getUserList = async function (req, res) {
     try {
         const users = await database.query("SELECT * FROM users", { type: QueryTypes.SELECT })
         return res.status(200).json({users});
@@ -19,7 +19,7 @@ exports.get_list = async function (req, res) {
     }
 }
 
-exports.userDetail = async function (req, res) {
+exports.getUserDetail = async function (req, res) {
     try {
         const user_id = req.params.id;
 
@@ -83,7 +83,7 @@ exports.getMe = async function (req, res) {
     }
 }
 
-exports.remove_user = async function (req, res) {
+exports.removeUser = async function (req, res) {
     try {
         var user_id = req.params.id
         await database.query("DELETE FROM users WHERE user_id=:user_id", {
@@ -98,7 +98,7 @@ exports.remove_user = async function (req, res) {
 
 }
 
-exports.update_user = async function (req, res) {
+exports.updateUser = async function (req, res) {
     try {
          const user_id= req.body.user_id
          console.log(user_id)
@@ -118,7 +118,7 @@ exports.update_user = async function (req, res) {
     }
 }
 
-exports.userToAdmin = async function (req, res) {
+exports.updateUserToAdmin = async function (req, res) {
     try {
         var user_id = req.params.id
         await database.query("UPDATE users SET role_id = :role_id WHERE user_id = :user_id", {

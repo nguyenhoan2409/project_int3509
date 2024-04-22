@@ -3,7 +3,7 @@ module.exports = function (router) {
     var scoreController = require('../controllers/ScoreController')
     var verifyUser = require('../middleware/AuthUser'); 
 
-    router.get('/score/list', verifyUser.isAuth, scoreController.getAllScore)
+    router.get('/score/list', verifyUser.isAuth, scoreController.getScoreList)
     
     router.get('/score/search/:id', verifyUser.isAuth, scoreController.searchScore)
 
@@ -15,7 +15,7 @@ module.exports = function (router) {
 
     router.delete('/score/delete/list', scoreController.deleteSTudentList)
 
-    router.post('/student/add', verifyUser.isAuth, scoreController.addStudent)
+    router.post('/student/add', verifyUser.isAuth, scoreController.createStudent)
 
     router.patch('/score/add', verifyUser.isAuth, scoreController.addScore)
 

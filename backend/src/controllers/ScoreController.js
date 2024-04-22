@@ -1,11 +1,10 @@
 // var score = require('../models/score.model')
-var xlsx = require('xlsx')
 var fs = require('fs')
 const { database } = require('../config/database')
 const { QueryTypes } = require('sequelize')
 // var db = require("../common/connect")
 
-exports.addStudent = async function (req, res) {
+exports.createStudent = async function (req, res) {
     try {
         const student = await database.query("INSERT INTO physicalscore (mssv, fullname, class, univercity) VALUES(:mssv, :fullname, :class, :univercity)", {
             replacements: {
@@ -62,7 +61,7 @@ exports.addScore = async function (req, res) {
     }
 }
  
- exports.getAllScore = async function (req, res) {
+ exports.getScoreList = async function (req, res) {
      try {
         const data = await database.query("SELECT * FROM physicalscore", {type: QueryTypes.SELECT})
         console.log(data); 

@@ -4,7 +4,7 @@ const { database } = require("../config/database")
 const fs = require('fs')
 
 
-exports.get_list = async function(req, res){
+exports.getList = async function(req, res){
     try {
         const productList = await database.query("SELECT * FROM products", {type: QueryTypes.SELECT})
     return res.status(200).json(productList);
@@ -12,7 +12,7 @@ exports.get_list = async function(req, res){
         return res.status(400).json({msg: error})
     }
 }
-exports.detail = async function(req, res){
+exports.getDetail = async function(req, res){
     try {
         const product_id = req.params.id
         const productDetail = await database.query("SELECT * FROM products WHERE product_id = :product_id", {
@@ -27,7 +27,7 @@ exports.detail = async function(req, res){
     
 }
 
-exports.add_product = async function(req,res) {
+exports.createProduct = async function(req,res) {
     try {
         const product_name = req.body.product_name
         const price = req.body.price
@@ -59,7 +59,7 @@ exports.add_product = async function(req,res) {
     }
 }
 
-exports.remove_product = async function(req,res) {
+exports.removeProduct = async function(req,res) {
     try  {
         var product_id = req.params.id
         await database.query("DELETE FROM products WHERE product_id=:product_id", {
@@ -74,7 +74,7 @@ exports.remove_product = async function(req,res) {
     
 }
 
-exports.update_product = async function(req,res) {
+exports.updateProduct = async function(req,res) {
     try {
         await database.query("UPDATE products SET price=:price,product_type=:product_type, quantity=:quantity, thumbnail=:thumbnail, description=:description WHERE product_id = :product_id", 
         {
