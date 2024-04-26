@@ -6,6 +6,7 @@ const Orders = require("../models/Orders");
 const User = require("../models/Users");
 const argon2 = require("argon2");
 const Score = require("../models/Score");
+const Certificate = require("../models/Certificate");
 
 // var JWT = require("../common/jwt")
 
@@ -134,7 +135,9 @@ exports.update_user = async function (req, res) {
 
 exports.statisticaldata = async function (req, res) {
   try {
-    const orderList = await Orders.findAll();
+    const requestList = await Orders.findAll();
+    const certificateList = await Certificate.findAll(); 
+    const orderList = [...requestList, ...certificateList]; 
     const totalRevenue = await Orders.sum("total_money", {
       where: {
         status: [4, 8, 12],
@@ -171,7 +174,13 @@ exports.statisticaldata = async function (req, res) {
     const standartSportOutputAchievedStudent = sports.map(sport => {
         const passedCount = scoreList.filter(score => score[sport.key] !== null && score[sport.key] >= 4).length;
         const totalCount = scoreList.filter(score => score[sport.key] !== null).length; 
-        const percentage = (passedCount / totalCount) * 100;
+        var percentage = 0;
+        if (totalCount == 0) {
+          percentage = 0
+        } else {
+          percentage = (passedCount / totalCount) * 100; 
+        }
+        
         return { label: sport.label, value: percentage, passedCount: passedCount, totalCount: totalCount };
       });
 
@@ -183,16 +192,16 @@ exports.statisticaldata = async function (req, res) {
     const result = {};
     result.totalOrders = orderList.length;
     result.totalAwaitingOrders = orderList.filter(
-      (order) => order.status == 1 || order.status == 5 || order.status == 9
+      (order) => order.status == 1 || order.status == 5 || order.status == 9 || order.status == 13
     ).length;
     result.totalAcceptedOrders = orderList.filter(
-      (order) => order.status == 2 || order.status == 6 || order.status == 10
+      (order) => order.status == 2 || order.status == 6 || order.status == 10 || order.status == 14
     ).length;
     result.totalDeniedOrders = orderList.filter(
-      (order) => order.status == 3 || order.status == 7 || order.status == 11
+      (order) => order.status == 3 || order.status == 7 || order.status == 11 || order.status == 15
     ).length;
     result.totalCompletedOrders = orderList.filter(
-      (order) => order.status == 4 || order.status == 8 || order.status == 12
+      (order) => order.status == 4 || order.status == 8 || order.status == 12 || order.status == 16
     ).length;
     result.totalRevenue = totalRevenue;
     result.recentlyOrders = recentlyOrders;

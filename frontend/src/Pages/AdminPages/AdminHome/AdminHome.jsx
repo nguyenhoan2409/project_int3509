@@ -55,6 +55,7 @@ export const AdminHome = () => {
             totalCompletedOrders={statisticalData?.totalCompletedOrders || 0}
             totalPrice={statisticalData?.totalRevenue || 0}
             totalStudentStandard={statisticalData?.totalStandardOuputAchievedStudents || 0}
+            studentOverSubjects = {statisticalData?.standartSportOutputAchievedStudent || []}
             studentStandardOutput={
               statisticalData?.standartOutput || [
                 {
