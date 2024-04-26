@@ -3,16 +3,22 @@ import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import axios from "axios";
 import "./CreateProduct.css";
 import Layout from "~/Pages/Layout/Layout";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 export const CreateProduct = () => {
   const [product_name, setProductName] = useState();
-  const [product_type, setProductType] = useState();
+  const [product_type, setProductType] = useState(2);
   const [quantity, setQuantity] = useState();
-  const [description, setDescription] = useState();
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState();
   const [thumbnail, setThumbnail] = useState();
   const [isFilled, setIsFilled] = useState(false);
   const [msg, setMsg] = useState();
 
+  const navigate = useNavigate();
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
   const handleCreate = () => {
     // Kiểm tra các trường bắt buộc trước khi thêm sản phẩm
     if (!product_name || !price || !quantity || !thumbnail || !product_type) {
@@ -20,7 +26,7 @@ export const CreateProduct = () => {
       setIsFilled(false);
     } else {
       setIsFilled(true);
-      setMsg("Cập nhật sản phẩm thành công");
+      setMsg("Thêm sản phẩm thành công");
       addProduct();
     }
   };
@@ -63,6 +69,14 @@ export const CreateProduct = () => {
 
   const addProduct = async () => {
     try {
+      console.log({
+        product_name,
+        price,
+        quantity,
+        thumbnail,
+        description,
+        product_type,
+      })
       const response = await axios.post("http://localhost:8080/product/add", {
         product_name,
         price,
@@ -73,16 +87,18 @@ export const CreateProduct = () => {
       }, {
         withCredentials: true,
       });
-      setMsg(response.msg);
+      
+      // navigate("/admin/products/list");
+      // setMsg(response.msg);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
-        setMsg(error.response.data);
+        // setMsg(error.response.data);
       }
     }
   };
-  console.log(thumbnail);
+  // console.log(thumbnail);
   return (
     <Layout>
       <div>

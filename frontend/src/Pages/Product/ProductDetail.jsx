@@ -11,11 +11,12 @@ import { Link } from "react-router-dom";
 
 export const ProductDetail = ({ navigation }) => {
   const { id } = useParams(); 
+  const navigate = useNavigate(); 
   const [product, setProduct] = useState([]);
   const getDetail = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/product/detail/${id}`
+        `http://localhost:8080/product/detail/${id}`, {withCredentials: true}
       );
       setProduct(response.data);
     } catch (error) {
@@ -62,9 +63,9 @@ export const ProductDetail = ({ navigation }) => {
                   <p>Mô tả: </p>
                   <p>{product.description}</p>
                 </div>
-                <Link to = {`/create-request/${id}`} >
-                <div className="order-button"><button>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</button></div>
-                </Link>
+                
+                <div className="product-button"><button className="productdetail-btn" onClick={() => {navigate(`/create-request/${id}`); window.scrollTo(0,0)}}>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</button></div>
+              
               </div>
             </div>
           ))}

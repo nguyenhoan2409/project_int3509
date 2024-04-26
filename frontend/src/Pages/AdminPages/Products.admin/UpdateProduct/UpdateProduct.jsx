@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import './UpdateProduct.css'
 import Layout from "~/Pages/Layout/Layout";
@@ -15,6 +15,7 @@ export const UpdateProduct = () => {
   const [product_type, setOrderType] = useState();
   const [isFilled, setIsFilled] = useState();
   const [msg, setMsg] = useState();
+  const navigate = useNavigate();
   const handleUpdate = () => {
     // Kiểm tra các trường bắt buộc trước khi cập nhật sản phẩm
     if  (price === ''|| quantity === '' || thumbnail === '' || product_type=== '') {
@@ -85,6 +86,9 @@ export const UpdateProduct = () => {
         withCredentials: true,
       });
       setMsg(response.data.msg);
+      setTimeout(() => {
+        navigate('/admin/products/list'); 
+      }, 1000)
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {

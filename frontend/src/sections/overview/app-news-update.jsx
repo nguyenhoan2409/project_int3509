@@ -24,9 +24,9 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
-      <Scrollbar>
-        <List list={list} />
-      </Scrollbar>
+      
+        <List rows={list} />
+      
 
       <Divider sx={{ borderStyle: "dashed" }} />
 
@@ -35,7 +35,7 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
           size="small"
           color="inherit"
           endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
-          onClick={() => {navigate('/admin/request'); window.scrollTo(0, 0); }}
+          onClick={() => {navigate('/admin/request'); window.scrollTo(0, 0)}}
         >
           Xem tất cả
         </Button>

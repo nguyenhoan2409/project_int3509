@@ -47,15 +47,12 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
   const [open, setOpen] = useState(false);
   const [selectedOrderDetail, setSelectedOrderDetail] = useState({}); 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const currentDate = new Date().toLocaleString('vi-VN', { hour12: false }); 
-
+  const [rowsPerPage, setRowsPerPage] = useState(5); 
+  const [checkExpired, setCheckExpired] = useState(""); 
   const themeWithLocale = useMemo(
     () => createTheme(theme, locales["viVN"]),
     []
   );
-
-
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -125,12 +122,26 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
     }
   }
 
+  const handleConfirmCertificate = async (certificate_id, status) => {
+    try {
+      await axios.patch('http://localhost:8080/certificate/confirm', {
+          certificateId: certificate_id, 
+          newStatus: status
+      }, {withCredentials: true}); 
+      setMessageStackBar('Yêu cầu đã được cập nhật trạng thái thành công')
+      handleOpenSnackBar(); 
+      getAllOrder();
+    } catch (error) {
+      setMsg(error?.response?.data?.error); 
+    }
+  }
+
   const getAllProduct = async () => {
     try {
       const response = await axios.get("http://localhost:8080/product/list", {
         withCredentials: true,
       });
-      setProductList(response.data); 
+      setProductList([...response.data, {product_id: 0, product_name: "Giấy chuẩn đầu ra"}]); 
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -144,12 +155,16 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
 
   useEffect(() => {
     getAllProduct();
-    // getAllOrder(); 
   }, []);
 
 
   const handleFilter = () => {
     let orderedFilterList = orderList;
+    if (productName === 0) {
+      orderedFilterList = orderedFilterList.filter(
+        (order) => order.product_type == 4
+      );
+    }
     if (productName) {
       orderedFilterList = orderedFilterList.filter(
         (order) => order.product_id == productName
@@ -165,8 +180,20 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
         (order) => moment(order.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD, HH:mm:ss').slice(0, 10) == returnDate
       );
     }
+    if (checkExpired) {
+      if (checkExpired == 2) {
+        orderedFilterList = orderedFilterList.filter(
+          (order) => moment().isBefore(moment(order.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD HH:mm:ss')) == true
+        )
+      } else {
+        orderedFilterList = orderedFilterList.filter(
+          (order) => moment().isAfter(moment(order.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD HH:mm:ss')) == true
+        )
+      }
+    }
     setInitialOrderList(orderedFilterList);
   };
+
 
   return (
     <div>
@@ -188,10 +215,10 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
             <MenuItem value="" sx={{ fontSize: "14px" }}>
               <em>--Lựa chọn--</em>
             </MenuItem>
-            {productList.map((product, index) => {
+            {productList?.map((product, index) => {
               return (
-                <MenuItem value={product.product_id} sx={{ fontSize: "14px" }} key={product.product_id}>
-                  {product.product_name}
+                <MenuItem value={product?.product_id} sx={{ fontSize: "14px" }} key={product?.product_id}>
+                  {product?.product_name}
                 </MenuItem>
               );
             })}
@@ -241,6 +268,32 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
           />
         </FormControl>
 
+        {(index == 1) && <FormControl sx={{ mt: 1, ml: 0, mr: 1, mb: 1, minWidth: 150 }} size="small">
+          <InputLabel sx={{ fontSize: "14px" }}>
+            Kiểm tra quá hạn
+          </InputLabel>
+          <Select
+            labelId="demo-select-small-label"
+            value={checkExpired}
+            label="Kiểm tra quá hạn"
+            onChange={(e) => {
+              setCheckExpired(e.target.value);
+            }}
+            sx={{ fontSize: "14px" }}
+          >
+            <MenuItem value="" sx={{ fontSize: "14px" }}>
+              <em>--Lựa chọn--</em>
+            </MenuItem>
+            {[{id: 1, value: 'Đã quá hạn'}, {id: 2, value: 'Chưa quá hạn'}].map((row, index) => {
+              return (
+                <MenuItem value={row.id} sx={{ fontSize: "14px" }} key={row.id}>
+                  {row.value}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>}
+
         <Button
           variant="contained"
           size="small"
@@ -261,6 +314,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
             setRentalDate("");
             setReturnDate("");
             setOrderStatus("");
+            setCheckExpired("");
           }}
           color="success"
         >
@@ -280,7 +334,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                     <StyledTableCell style={{ minWidth: 50 }}>Số lượng</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 150 }}>Thời gian bắt đầu</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 150 }}>Thời gian kết thúc {(index == 3) ? '' : 'dự kiến'}</StyledTableCell>
-                    {(index == 1) && <StyledTableCell style={{ minWidth: 100 }}>Kiểm tra quá hạn</StyledTableCell>}
+                    {(index === 1) && <StyledTableCell style={{ minWidth: 100 }}>Kiểm tra quá hạn</StyledTableCell>}
                     <StyledTableCell style={{ minWidth: 150 }}>Trạng thái yêu cầu</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 280 }}>Tác vụ</StyledTableCell>
                   </TableRow>
@@ -296,23 +350,23 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
-                      .map((row) => {
+                      .map((row, rowIndex) => {
                         return (
                           <TableRow
                             role="checkbox"
                             tabIndex={-1}
-                            key={row.order_id}
+                            key={rowIndex}
                             hover
                           >
-                            <TableCell>{row.order_id}</TableCell>
+                            <TableCell>{row?.order_id || row?.certificate_id}</TableCell>
                             <TableCell>{row.product_name}</TableCell>
                             <TableCell>{row.quantity}</TableCell>
                             <TableCell>{row.rental_time}</TableCell>
                             <TableCell>{row.return_time}</TableCell>
-                            {(index == 1) && <TableCell>
-                              <div style={{backgroundColor: 'red', color: 'white', textAlign: 'center'}}>
+                            {(index === 1) && <TableCell>
+                              {<div style={{backgroundColor: moment().isBefore(moment(row.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD HH:mm:ss')) ? 'green' : 'red', color: 'white', textAlign: 'center'}}>
                                 {moment().isBefore(moment(row.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD HH:mm:ss')) ? 'Chưa quá hạn' : 'Đã quá hạn'}
-                              </div>
+                              </div>}
                             </TableCell>}
                             <TableCell>{row.description}</TableCell>
                             <TableCell>
@@ -356,13 +410,19 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                     <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>ID:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail?.order_id}</div>
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.order_id || selectedOrderDetail?.certificate_id}</div>
                                     </div>
                                     <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Tên người tạo yêu cầu:</div>
                                       <div style={{flex: 1}}>{selectedOrderDetail?.fullname}</div>
                                     </div>
+                                    {(selectedOrderDetail?.class) && 
+                                    <div className="modal-description"
+                                    >
+                                      <div style={{flex: 1}}>Lớp:</div>
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.class}</div>
+                                    </div>}
                                     <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Email người tạo yêu cầu:</div>
@@ -371,7 +431,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                     <div className="modal-description"
                                     >
                                       <div style={{flex: 1}}>Số điện thoại:</div>
-                                      <div style={{flex: 1}}>{selectedOrderDetail?.phone_number}</div>
+                                      <div style={{flex: 1}}>{selectedOrderDetail?.phone_number || selectedOrderDetail?.phonenumber}</div>
                                     </div>
                                     <div className="modal-description"
                                     >
@@ -390,23 +450,30 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                     </div>
                                     <div className="modal-description"
                                     >
-                                      <div style={{flex: 1}}>Thời gian bắt đầu:</div>
+                                      <div style={{flex: 1}}>Thời gian {(selectedOrderDetail?.product_type == 2 || selectedOrderDetail?.product_type == 4) ? 'tạo yêu cầu' : 'bắt đầu'}:</div>
                                       <div style={{flex: 1}}>{selectedOrderDetail?.rental_time}</div>
                                     </div>
                                     <div className="modal-description"
                                     >
-                                      <div style={{flex: 1}}>Thời gian {(selectedOrderDetail?.product_type == 2) ? 'nhận hàng' : 'kết thúc'} {(index == 3 ? ":" : 'dự kiến:')}</div>
+                                      <div style={{flex: 1}}>Thời gian {(selectedOrderDetail?.product_type == 2) ? 'nhận hàng' : (selectedOrderDetail?.product_type == 4 ? 'nhận giấy chứng nhận' : 'kết thúc')} {(index == 3 ? ":" : 'dự kiến:')}</div>
                                       <div style={{flex: 1}}>{selectedOrderDetail?.return_time}</div>
                                     </div>
                                     <div className="modal-description"
                                     >
-                                      <div style={{flex: 1}}>Trạng thái đơn hàng:</div>
+                                      <div style={{flex: 1}}>Trạng thái yêu cầu:</div>
                                       <div style={{flex: 1}}>{selectedOrderDetail?.description}</div>
                                     </div>
                                   </Box>
                                 </Modal>
-                                {(row.status == 1 || row.status == 5 || row.status == 9) && <Button
-                                  onClick={() => {handleConfirmToApproved(row.order_id, row.product_id, row.quantity, row.status)}}
+                                {(row.status == 1 || row.status == 5 || row.status == 9 || row.status == 13) && <Button
+                                  onClick={() => {
+                                    if (row.product_type != 4) {
+                                      handleConfirmToApproved(row.order_id, row.product_id, row.quantity, row.status)
+                                    } else {
+                                      handleConfirmCertificate(row.certificate_id, 14); 
+                                    }
+                                  }
+                                }
                                   sx={{ textTransform: "none", marginLeft: '5px'}}
                                   variant="contained"
                                   color="success"
@@ -415,8 +482,11 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                   Chấp nhận
                                 </Button>}
 
-                                {(row.status == 1 || row.status == 5 || row.status == 9) && <Button
-                                  onClick={() => {handleConfirmToDenied(row.order_id, row.product_id, row.quantity, row.status)}}
+                                {(row.status == 1 || row.status == 5 || row.status == 9 || row.status == 13) && <Button
+                                  onClick={() => {
+                                    if (row.product_type != 4) handleConfirmToDenied(row.order_id, row.product_id, row.quantity, row.status)
+                                    else handleConfirmCertificate(row.certificate_id, 15)
+                                  }}
                                   sx={{ textTransform: "none", marginLeft: '5px' }}
                                   variant="contained"
                                   color="error"
@@ -425,8 +495,11 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                   Từ chối
                                 </Button>}
 
-                                {(row.status == 2 || row.status == 6 || row.status == 10) && <Button
-                                  onClick={() => {handleConfirmToCompleted(row.order_id, row.product_id, row.quantity, row.status)}}
+                                {(row.status == 2 || row.status == 6 || row.status == 10 || row.status == 14) && <Button
+                                  onClick={() => {
+                                    if(row.product_type != 4) handleConfirmToCompleted(row.order_id, row.product_id, row.quantity, row.status)
+                                    else handleConfirmCertificate(row.certificate_id, 16)
+                                  }}
                                   sx={{ textTransform: "none", marginLeft: '5px' }}
                                   variant="contained"
                                   color="error"

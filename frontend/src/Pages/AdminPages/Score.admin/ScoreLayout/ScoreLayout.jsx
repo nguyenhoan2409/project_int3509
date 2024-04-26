@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import "./ScoreLayout.css"
 import { Box, Typography } from '@mui/material';
+import Layout from '~/Pages/Layout/Layout';
 
 export const ScoresManagement = () => {
   const navigate = useNavigate();
   return (
+    
       <div className='scores-management'>
        <Box
         sx={{
@@ -27,6 +29,5 @@ export const ScoresManagement = () => {
       </div>
       </div>
     
-
   )
 }

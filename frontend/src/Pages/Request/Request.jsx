@@ -23,8 +23,9 @@ import { IoMdClose } from "react-icons/io";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import moment from "moment/moment";
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { useSelector } from "react-redux";
 
 export const Request = () => {
   const theme = useTheme();
@@ -38,8 +39,8 @@ export const Request = () => {
   const [orderStatus, setOrderStatus] = useState("");
   const [selectedOrderDetail, setSelectedOrderDetail] = useState({});
   const [open, setOpen] = useState(false);
-  const [openSnackBar, setOpenSnackBar] = useState(false); 
-
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const {user} = useSelector((state) => state.auth); 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const themeWithLocale = useMemo(
@@ -65,18 +66,28 @@ export const Request = () => {
 
   const getUserOrders = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/getMe`, {
+      const response1 = await axios.get(`http://localhost:8080/user/getMe`, {
         withCredentials: true,
       });
-      response.data.orderList.map((order, index) => {
-        order.rental_time = moment.utc(order.rental_time).format('DD-MM-YYYY, HH:mm:ss')
-        order.return_time = moment.utc(order.return_time).format('DD-MM-YYYY, HH:mm:ss')
+
+      const response2 = await axios.get(`http://localhost:8080/certificate/getById/${user?.user_id}`, {
+        withCredentials: true,
+      })
+
+      const response = [...response1?.data.orderList, ...response2?.data]
+      response.map((order, index) => {
+        order.rental_time = moment
+          .utc(order.rental_time)
+          .format("DD-MM-YYYY, HH:mm:ss");
+        order.return_time = moment
+          .utc(order.return_time)
+          .format("DD-MM-YYYY, HH:mm:ss");
       });
-      setOrderList(response.data.orderList);
-      setInitialOrderList(response.data.orderList);
+      setOrderList(response);
+      setInitialOrderList(response);
     } catch (error) {
       if (error.response) {
-        setMsg(error.response.data.msg);
+        setMsg(error.response.data?.msg);
       }
     }
   };
@@ -86,7 +97,7 @@ export const Request = () => {
       const response = await axios.get("http://localhost:8080/product/list", {
         withCredentials: true,
       });
-      setProductList(response.data);
+      setProductList([...response.data, {product_id: 0, product_name: "Giấy chuẩn đầu ra"}]); 
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
@@ -101,6 +112,11 @@ export const Request = () => {
 
   const handleFilter = () => {
     let orderedFilterList = initialOrderList;
+    if (productName === 0) {
+      orderedFilterList = orderedFilterList.filter(
+        (order) => order.product_type == 4
+      );
+    }
     if (productName) {
       orderedFilterList = orderedFilterList.filter(
         (order) => order.product_id == productName
@@ -108,12 +124,18 @@ export const Request = () => {
     }
     if (rentalDate) {
       orderedFilterList = orderedFilterList.filter(
-        (order) => moment(order.rental_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD, HH:MM:SS').slice(0, 10) == rentalDate
+        (order) =>
+          moment(order.rental_time, "DD-MM-YYYY, HH:mm:ss")
+            .format("YYYY-MM-DD, HH:MM:SS")
+            .slice(0, 10) == rentalDate
       );
     }
     if (returnDate) {
       orderedFilterList = orderedFilterList.filter(
-        (order) => moment(order.return_time, 'DD-MM-YYYY, HH:mm:ss').format('YYYY-MM-DD, HH:MM:SS').slice(0, 10) == returnDate
+        (order) =>
+          moment(order.return_time, "DD-MM-YYYY, HH:mm:ss")
+            .format("YYYY-MM-DD, HH:MM:SS")
+            .slice(0, 10) == returnDate
       );
     }
     if (orderStatus) {
@@ -122,7 +144,8 @@ export const Request = () => {
         (order) =>
           order.status == parseInt(statusList[0]) ||
           order.status == parseInt(statusList[1]) ||
-          order.status == parseInt(statusList[2])
+          order.status == parseInt(statusList[2]) || 
+          order.status == parseInt(statusList[3])
       );
     }
     setOrderList(orderedFilterList);
@@ -137,25 +160,29 @@ export const Request = () => {
 
   const handleConfirmToCompleted = async (order_id, product_id, quantity) => {
     try {
-      await axios.put('http://localhost:8080/order/confirmOrderStatus', {
-          orderId: order_id, 
-          productId: product_id, 
-          quantity: quantity, 
-          newStatus: 12
-      }, {withCredentials: true}); 
-      handleOpenSnackBar(); 
-      getUserOrders(); 
+      await axios.put(
+        "http://localhost:8080/order/confirmOrderStatus",
+        {
+          orderId: order_id,
+          productId: product_id,
+          quantity: quantity,
+          newStatus: 12,
+        },
+        { withCredentials: true }
+      );
+      handleOpenSnackBar();
+      getUserOrders();
     } catch (error) {
-      setMsg(error.response.data.error); 
+      setMsg(error.response.data.error);
     }
-  }
+  };
 
   const handleOpenSnackBar = () => {
     setOpenSnackBar(true);
   };
 
-  const handleCloseSnackBar = (event, reason) => { 
-    if (reason === 'clickaway') {
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === "clickaway") {
       return;
     }
     setOpenSnackBar(false);
@@ -164,16 +191,21 @@ export const Request = () => {
     <div className="request-container">
       <Layout>
         <div className="title">Danh sách các yêu cầu</div>
-        <Snackbar open={openSnackBar} autoHideDuration={2000} onClose={handleCloseSnackBar} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
-        <Alert
+        <Snackbar
+          open={openSnackBar}
+          autoHideDuration={2000}
           onClose={handleCloseSnackBar}
-          severity="success"
-          variant="filled"
-          sx={{ width: '100%' }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          Xác nhận đã nhận hàng thành công.
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={handleCloseSnackBar}
+            severity="success"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            Xác nhận đã nhận hàng thành công.
+          </Alert>
+        </Snackbar>
         <div className="request-filter-container">
           <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
             <InputLabel id="demo-select-small-label" sx={{ fontSize: "14px" }}>
@@ -264,10 +296,10 @@ export const Request = () => {
                 <em>--Lựa chọn--</em>
               </MenuItem>
 
-              <MenuItem value={"1,5,9"}>Đang chờ phê duyệt</MenuItem>
-              <MenuItem value={"2,6,10"}>Yêu cầu được chấp nhận</MenuItem>
-              <MenuItem value={"3,7,11"}>Yêu cầu bị từ chối</MenuItem>
-              <MenuItem value={"4,8,12"}>Yêu cầu hoàn thành</MenuItem>
+              <MenuItem value={"1,5,9,13"}>Đang chờ phê duyệt</MenuItem>
+              <MenuItem value={"2,6,10,14"}>Yêu cầu được chấp nhận</MenuItem>
+              <MenuItem value={"3,7,11,15"}>Yêu cầu bị từ chối</MenuItem>
+              <MenuItem value={"4,8,12,16"}>Yêu cầu hoàn thành</MenuItem>
             </Select>
           </FormControl>
 
@@ -297,7 +329,7 @@ export const Request = () => {
             Về mặc định
           </Button>
         </div>
-        <div style={{margin: '0 20px 0 20px'}}>
+        <div style={{ margin: "0 20px 0 20px" }}>
           <ThemeProvider theme={themeWithLocale}>
             <Paper sx={{ width: "100%", overflow: "hidden" }}>
               <TableContainer sx={{ maxHeight: 440 }}>
@@ -322,7 +354,7 @@ export const Request = () => {
                       <StyledTableCell style={{ minWidth: 150 }}>
                         Trạng thái yêu cầu
                       </StyledTableCell>
-                      <StyledTableCell style={{ minWidth: 250}}>
+                      <StyledTableCell style={{ minWidth: 250 }}>
                         Tác vụ
                       </StyledTableCell>
                     </TableRow>
@@ -348,7 +380,7 @@ export const Request = () => {
                               key={row.order_id}
                               hover
                             >
-                              <TableCell>{row.order_id}</TableCell>
+                              <TableCell>{row.order_id || row.certificate_id}</TableCell>
                               <TableCell>{row.product_name}</TableCell>
                               <TableCell>{row.quantity}</TableCell>
                               <TableCell>{row.rental_time}</TableCell>
@@ -380,17 +412,19 @@ export const Request = () => {
                                       },
                                     }}
                                   >
-                                    <Box sx={{
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-}}>
+                                    <Box
+                                      sx={{
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        width: 400,
+                                        bgcolor: "background.paper",
+                                        border: "2px solid #000",
+                                        boxShadow: 24,
+                                        p: 4,
+                                      }}
+                                    >
                                       <IoMdClose
                                         size={24}
                                         className="close-modal-button"
@@ -409,7 +443,7 @@ export const Request = () => {
                                       <div className="modal-description">
                                         <div style={{ flex: 1 }}>ID:</div>
                                         <div style={{ flex: 1 }}>
-                                          {selectedOrderDetail?.order_id}
+                                          {selectedOrderDetail?.order_id || selectedOrderDetail?.certificate_id}
                                         </div>
                                       </div>
                                       <div className="modal-description">
@@ -467,7 +501,13 @@ export const Request = () => {
                                         textTransform: "none",
                                         marginLeft: "5px",
                                       }}
-                                      onClick={() => handleConfirmToCompleted(row.order_id, row.product_id, row.quantity)}
+                                      onClick={() =>
+                                        handleConfirmToCompleted(
+                                          row.order_id,
+                                          row.product_id,
+                                          row.quantity
+                                        )
+                                      }
                                       variant="contained"
                                       color="success"
                                       size="small"

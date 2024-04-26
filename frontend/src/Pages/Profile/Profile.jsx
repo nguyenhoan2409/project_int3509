@@ -8,10 +8,11 @@ import { YourOrders } from "~/Components/UserProfile/YourOrders";
 import AvatarEditor from "react-avatar-editor";
 import { Navbar } from "~/Components/Navbar/Navbar";
 import Layout from "../Layout/Layout";
+import { useSelector } from "react-redux";
 
 export const Profile = () => {
   const { activepage } = useParams();
-
+  const {user} = useSelector((state) => state.auth); 
   return (
     <div className="userprofile">
       <Layout>
@@ -31,7 +32,7 @@ export const Profile = () => {
             <div>
               {activepage === "accountsettings" && <AccountSetting />}
               {activepage === "changepassword" && <ChangePassword />}
-              {activepage === "yourorders" && <YourOrders />}
+              {activepage === "yourorders" && user?.role_id === 2 && <YourOrders />}
             </div>
           </div>
         </div>

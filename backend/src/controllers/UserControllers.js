@@ -34,23 +34,23 @@ exports.userDetail = async function (req, res) {
       }
     );
 
-    const orderListOfUser = await Orders.findAll({
-      where: {
-        user_id: userDetail[0].user_id,
-      },
-      attributes: [
-        "order_id",
-        "product_id",
-        "quantity",
-        "total_money",
-        "rental_time",
-        "return_time",
-        "status",
-      ],
-    });
+    // const orderListOfUser = await Orders.findAll({
+    //   where: {
+    //     user_id: userDetail[0].user_id,
+    //   },
+    //   attributes: [
+    //     "order_id",
+    //     "product_id",
+    //     "quantity",
+    //     "total_money",
+    //     "rental_time",
+    //     "return_time",
+    //     "status",
+    //   ],
+    // });
 
-    userDetail[0].orders = orderListOfUser;
-    return res.status(200).json(userDetail);
+    // userDetail[0].orders = orderListOfUser;
+    return res.status(200).json(userDetail[0]);
   } catch (error) {
     return res.status(400).json({ msg: error });
   }
@@ -115,25 +115,22 @@ exports.remove_user = async function (req, res) {
 
 exports.update_user = async function (req, res) {
   try {
-    await database.query(
-      "UPDATE users SET password=:password, fullname=:fullname, email=:email, phone_number=:phone_number, address=:address, role_id =:role_id WHERE user_id =:user_id ",
-      {
-        replacements: {
-          password: await argon2.hash(req.body.password),
-          fullname: req.body.fullname,
-          email: req.body.email,
-          phone_number: req.body.phone_number,
-          address: req.body.address,
-          user_id: user_id,
-        },
-        type: QueryTypes.UPDATE,
-      }
-    );
-    return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" });
+       const user_id= req.body.user_id
+      await database.query("UPDATE users SET fullname=:fullname, email=:email, phone_number=:phone_number, address=:address WHERE user_id =:user_id ",
+          {
+              replacements: {
+                  fullname: req.body.fullname,
+                  email: req.body.email,
+                  phone_number: req.body.phone_number,
+                  address: req.body.address,
+                  user_id: user_id
+              }, type: QueryTypes.UPDATE
+          })
+      return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" })
   } catch (error) {
-    return res.status(400).json({ msg: error });
+      return res.status(400).json({ msg: error })
   }
-};
+}
 
 exports.statisticaldata = async function (req, res) {
   try {
@@ -143,14 +140,21 @@ exports.statisticaldata = async function (req, res) {
         status: [4, 8, 12],
       },
     });
-    const recentlyOrders = await Orders.findAll({
-      order: [["rental_time", "DESC"]],
-      limit: 5,
-    });
+    
+    const recentlyOrders = await database.query(`
+        SELECT o.*, p.product_name, p.thumbnail, p.product_type, s.description, u.fullname, u.email, u.phone_number
+        FROM orders o
+        LEFT JOIN products p ON o.product_id = p.product_id
+        LEFT JOIN status s ON o.status = s.status_id
+        LEFT JOIN users u ON u.user_id = o.user_id
+        ORDER BY o.rental_time DESC 
+        LIMIT 5
+    `, { type: QueryTypes.SELECT });
+
     const scoreList = await Score.findAll();
     const totalStandardOuputAchievedStudents = await Score.count({
       where: {
-        CDR: "1",
+        CDR: "Đ",
       },
     });
 
@@ -172,8 +176,8 @@ exports.statisticaldata = async function (req, res) {
       });
 
     const standartOutput = [
-        { label: "Đạt", value: scoreList.filter(score => score.CDR === '1').length},
-        { label: "Không đạt", value: scoreList.filter(score => score.CDR === null).length}
+        { label: "Đạt", value: scoreList.filter(score => score.CDR === 'Đ').length},
+        { label: "Không đạt", value: scoreList.filter(score => score.CDR === "").length}
     ]
 
     const result = {};

@@ -14,6 +14,9 @@ import { useTheme } from "@mui/material/styles";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import moment from "moment/moment";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { LogOut, reset } from "~/features/authSlice";
 
 
 function TabPanel(props) {
@@ -51,6 +54,8 @@ function a11yProps(index) {
 
 
 export const RequestAdmin = () => {
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
   const theme = useTheme(); 
   const [value, setValue] = useState(0);
   const [orderList, setOrderList] = useState([]);
@@ -59,29 +64,37 @@ export const RequestAdmin = () => {
   const [orderListDenied, setOrderListDenied] = useState([]); 
   const [orderListCompleted, setOrderListCompleted] = useState([]); 
   const [openSnackBar, setOpenSnackBar] = useState(false); 
-
-  
   const [msg, setMsg] = useState("");
   const [messageStackBar, setMessageStackBar] = useState("");
   
   const getAllOrder = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/order/getAllOrder`, {
+      const response1 = await axios.get(`http://localhost:8080/order/getAllOrder`, {
         withCredentials: true,
       });
-      
-      response.data.map((order, index) => {
+
+      const response2 = await axios.get('http://localhost:8080/certificate/getAll', {
+        withCredentials: true,
+      })
+
+      const response = [...response1?.data, ...response2?.data]; 
+      response.map((order, index) => {
         order.rental_time = moment.utc(order.rental_time).format('DD-MM-YYYY, HH:mm:ss')
         order.return_time = moment.utc(order.return_time).format('DD-MM-YYYY, HH:mm:ss')
       });
-      setOrderList(response.data);
-      setOrderListToBeAccepted(response.data.filter(order => order.status == 1 || order.status == 5 || order.status == 9)); 
-      setOrderListAccepted(response.data.filter(order => order.status == 2 || order.status == 6 || order.status == 10)); 
-      setOrderListDenied(response.data.filter(order => order.status == 3 || order.status == 7 || order.status == 11)); 
-      setOrderListCompleted(response.data.filter(order => order.status == 4 || order.status == 8 || order.status == 12))
+      setOrderList(response);
+      setOrderListToBeAccepted(response.filter(order => order.status == 1 || order.status == 5 || order.status == 9 || order.status == 13)); 
+      setOrderListAccepted(response.filter(order => order.status == 2 || order.status == 6 || order.status == 10 || order.status == 14)); 
+      setOrderListDenied(response.filter(order => order.status == 3 || order.status == 7 || order.status == 11 || order.status == 15)); 
+      setOrderListCompleted(response.filter(order => order.status == 4 || order.status == 8 || order.status == 12 || order.status == 16))
     } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.msg);
+      if (error?.response?.data?.msg?.message === "jwt expired") { 
+        dispatch(reset());
+        dispatch(LogOut());
+        navigate("/");
+      }
+      if (error?.response) {
+        setMsg(error?.response?.data?.msg);
       }
     }
   };

@@ -19,5 +19,5 @@ module.exports = function (router) {
 
     router.patch('/score/add', verifyUser.isAuth, scoreController.addScore)
 
-    router.post('/score/certificate', verifyUser.isAuth, scoreController.getCertificate)
+    router.post('/score/certificate', verifyUser.isAuth, scoreController.addCertificate)
 }

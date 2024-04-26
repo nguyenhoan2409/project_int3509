@@ -349,8 +349,8 @@ export const CreateRequest = () => {
                     value={quantity}
                     InputProps={{ inputProps: { min: 1 } }}
                     onChange={(e) => {
-                      setQuantity(e.target.value);
-                      setTotalMoney(e.target.value * product.price);
+                      setQuantity(parseInt(e.target.value));
+                      setTotalMoney(parseInt(e.target.value) * product.price);
                       setMsg("");
                     }}
                     onBlur={() => {

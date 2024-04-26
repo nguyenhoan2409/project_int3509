@@ -3,7 +3,7 @@ import { FcHome, FcDocument, FcBusinessman } from "react-icons/fc";
 import React, { useEffect, useState } from "react";
 import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
 import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   AiOutlineUser,
   AiOutlineLogout,
@@ -28,6 +28,7 @@ import {
 export const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation(); 
   const logout = async () => {
     try {
       dispatch(reset());
@@ -38,21 +39,10 @@ export const Sidebar = () => {
     }
   };
 
-  const [userName, setUserName] = useState("");
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
-  const [msg, setMsg] = useState("");
-  useEffect(() => {
-    if (user) {
-      var arr = user.fullname.split(" ");
-      setUserName(arr[arr.length - 1]);
-    }
-    if (isError) {
-      setMsg(message);
-    }
-  }, [user, isError]);
-
+  
   return (
     <div className="sidebar-container">
       <div>
@@ -60,15 +50,15 @@ export const Sidebar = () => {
       </div>
       <div className="menu-list-container">
         <ul className="menu-list">
-          <li className="menu-list-item">
-            <Link to={"/admin/dashboard"}>
+          <li className={`menu-list-item ${location.pathname === '/admin/dashboard' ? 'sidebar-active' : ''}`}>
+            <NavLink to="/admin/dashboard" className={nav => (nav.isActive ? "active" : "")} >
               <div className="menu-list-item-container">
                 <FcStatistics className="menu-list-icon" size={24} />
                 <div>Trang chủ</div>
               </div>
-            </Link>
+            </NavLink>
           </li>
-          <li className="menu-list-item">
+          <li className={`menu-list-item ${location.pathname === '/admin/products/list' || location.pathname === '/admin/products/add' ? 'sidebar-active' : ''}`}>
             <Link to={"/admin/products/list"}>
               <div className="menu-list-item-container">
                 <BsBagCheckFill className="menu-list-icon" size={24} />
@@ -77,7 +67,7 @@ export const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="menu-list-item">
+          <li className={`menu-list-item ${location.pathname === '/admin/request' ? 'sidebar-active' : ''}`}>
             <Link to={"/admin/request"}>
               <div className="menu-list-item-container">
                 <BsListCheck className="menu-list-icon" size={24} />
@@ -86,7 +76,7 @@ export const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="menu-list-item">
+          <li className={`menu-list-item ${location.pathname === '/admin/scores/list' || location.pathname === '/admin/scores/add' ? 'sidebar-active' : ''}`}>
             <Link to={"/admin/scores/list"}>
               <div className="menu-list-item-container">
                 <BsFileEarmarkTextFill className="menu-list-icon" size={24} />
@@ -95,7 +85,7 @@ export const Sidebar = () => {
             </Link>
           </li>
 
-          <li className="menu-list-item">
+          <li className={`menu-list-item ${location.pathname === '/admin/users/list' ? 'sidebar-active' : ''}`}>
             <Link to={"/admin/users/list"}>
               <div className="menu-list-item-container">
                 <BsFilePersonFill className="menu-list-icon" size={24} />
@@ -114,11 +104,11 @@ export const Sidebar = () => {
             >
               <img src={defaultAvatar} className="img-profile" />
               <p style={{ color: "black", marginLeft: "5px", fontWeight: 600 }}>
-                Xin chào, {userName}
+                Xin chào, {(user?.fullname.split(" "))[user?.fullname.split(" ").length -1]}
               </p>
             </div>
             <ul>
-              <li className="sub-item-sidebar">
+              <li className="sub-item-sidebar" onClick={() => window.scrollTo(0,0)}>
                 <AiOutlineUser
                   color="black"
                   size={18}

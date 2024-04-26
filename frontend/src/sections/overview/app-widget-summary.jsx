@@ -6,13 +6,10 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import { fShortenNumber } from "~/utils/format-number";
-import { palette } from "~/theme/palette";
-import { useTheme } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
-export default function AppWidgetSummary({ title, total, icon, color, sx, ...other }) {
-  const theme = useTheme(); 
+export default function AppWidgetSummary({ title, total, icon, color = "primary", sx, ...other }) {
   return (
     <Card
       component={Stack}
@@ -23,14 +20,13 @@ export default function AppWidgetSummary({ title, total, icon, color, sx, ...oth
         py: 5,
         borderRadius: 2,
         ...sx,
-
       }}
       {...other}
     >
       {icon && <Box sx={{ width: 64, height: 64 }}>{icon}</Box>}
 
       <Stack spacing={0.5}>
-        <Typography variant="h4">{fShortenNumber(total)}</Typography>
+        <Typography variant="h4">{total ? fShortenNumber(total) : 0}</Typography>
 
         <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
           {title}

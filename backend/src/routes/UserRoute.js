@@ -11,7 +11,7 @@ module.exports = function (router) {
 
     router.delete('/user/delete/:id', verifyUser.isAuth, userController.remove_user)
 
-    router.put('/user/update/:id', verifyUser.isAuth, userController.update_user)
+    router.put('/user/update', verifyUser.isAuth, userController.update_user)
 
     router.get('/admin/statisticalData', verifyUser.isAuth, verifyUser.checkAdmin, userController.statisticaldata)
 

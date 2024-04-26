@@ -12,6 +12,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { LogOut, reset } from "~/features/authSlice";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,6 +37,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const UserManagement = () => {
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
   const [users, setUsers] = useState([]);
   const [userList, setUserList] = useState([]);
   const [msg, setMsg] = useState("");
@@ -50,6 +55,11 @@ export const UserManagement = () => {
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
+      }
+      if (error?.response?.data?.msg?.message === "jwt expired") { 
+        dispatch(reset());
+        dispatch(LogOut());
+        navigate("/");
       }
     }
   };
@@ -119,7 +129,7 @@ export const UserManagement = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="right">ID</StyledTableCell>
+              <StyledTableCell align="right">STT</StyledTableCell>
               <StyledTableCell align="right">Họ và tên</StyledTableCell>
               <StyledTableCell align="right">Email</StyledTableCell>
               <StyledTableCell align="right">SĐT</StyledTableCell>
@@ -129,9 +139,9 @@ export const UserManagement = () => {
           </TableHead>
 
           <TableBody>
-            {users?.map((user) => (
-              <StyledTableRow key={user._id}>
-                <StyledTableCell align="right">{user.user_id}</StyledTableCell>
+            {users?.map((user, index) => (
+              <StyledTableRow key={user.user_id}>
+                <StyledTableCell align="right">{index}</StyledTableCell>
                 <StyledTableCell align="right">{user.fullname}</StyledTableCell>
                 <StyledTableCell align="right">{user.email}</StyledTableCell>
                 <StyledTableCell align="right">
