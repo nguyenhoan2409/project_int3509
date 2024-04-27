@@ -23,6 +23,8 @@ import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/Pro
 import { AdminHome } from "./Pages/AdminPages/AdminHome/AdminHome";
 import { UserManagement } from "./Pages/AdminPages/UserManagement/UserManagement";
 import ProtectedRoute from "./Components/ProtectRoute/ProtectRoute";
+import { EmailVerify } from "./Pages/LoginSignup/EmailVerify";
+import { NotificationLoginSignup } from "./Pages/LoginSignup/NotificationLoginSignup";
 function App() {
   return (
     <div>
@@ -30,6 +32,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/user/:id/verify/:code" element={<EmailVerify />}></Route>
+          <Route path="/notificationLoginSignup" element={<NotificationLoginSignup />}></Route>
           
             {/* User routes */}
           <Route element={<ProtectedRoute />}>

@@ -125,14 +125,15 @@ export const Signup = () => {
           );
           if (response.data) {
             console.log(response.data);
-            navigate("/");
+            navigate("/notificationLoginSignup", {state: {type: "aftersignup"}})
             console.log("Tạo tài khoản thành công");
           }
           return response.data;
+          
          } 
     } catch (err) {
-      console.log(err.response.data);
-      setMsg(err.response.data.msg);
+      console.log(err?.response?.data);
+      setMsg(err?.response?.data?.msg);
     }
   };
   return (

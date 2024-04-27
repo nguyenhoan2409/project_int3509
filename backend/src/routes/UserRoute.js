@@ -19,4 +19,6 @@ module.exports = function (router) {
 
     router.patch('/user/update/password', verifyUser.isAuth, userController.updatePassword)
 
+    router.get('/user/:id/verify/:code', userController.verifyUser); 
+
 }

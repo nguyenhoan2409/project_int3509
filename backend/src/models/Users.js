@@ -7,8 +7,9 @@ const User = database.define(
     user_id: {
         type: DataTypes.INTEGER, 
         defaultValue: DataTypes.UUIDV4,
-        allowNull: true, 
-        primaryKey: true
+        allowNull: false, 
+        primaryKey: true, 
+        autoIncrement: true
     },
     password: {
         type: DataTypes.STRING, 
@@ -34,6 +35,10 @@ const User = database.define(
         type: DataTypes.INTEGER, 
         allowNull: true,
     },
+    isVerified: {
+        type: DataTypes.TINYINT, 
+        allowNull: true
+    }
   },
   {
     timestamps: false,

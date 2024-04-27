@@ -7,6 +7,7 @@ const User = require("../models/Users");
 const argon2 = require("argon2");
 const Score = require("../models/Score");
 const Certificate = require("../models/Certificate");
+const Verification = require("../models/Verification");
 
 // var JWT = require("../common/jwt")
 
@@ -116,35 +117,39 @@ exports.remove_user = async function (req, res) {
 
 exports.update_user = async function (req, res) {
   try {
-       const user_id= req.body.user_id
-      await database.query("UPDATE users SET fullname=:fullname, email=:email, phone_number=:phone_number, address=:address WHERE user_id =:user_id ",
-          {
-              replacements: {
-                  fullname: req.body.fullname,
-                  email: req.body.email,
-                  phone_number: req.body.phone_number,
-                  address: req.body.address,
-                  user_id: user_id
-              }, type: QueryTypes.UPDATE
-          })
-      return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" })
+    const user_id = req.body.user_id;
+    await database.query(
+      "UPDATE users SET fullname=:fullname, email=:email, phone_number=:phone_number, address=:address WHERE user_id =:user_id ",
+      {
+        replacements: {
+          fullname: req.body.fullname,
+          email: req.body.email,
+          phone_number: req.body.phone_number,
+          address: req.body.address,
+          user_id: user_id,
+        },
+        type: QueryTypes.UPDATE,
+      }
+    );
+    return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" });
   } catch (error) {
-      return res.status(400).json({ msg: error })
+    return res.status(400).json({ msg: error });
   }
-}
+};
 
 exports.statisticaldata = async function (req, res) {
   try {
     const requestList = await Orders.findAll();
-    const certificateList = await Certificate.findAll(); 
-    const orderList = [...requestList, ...certificateList]; 
+    const certificateList = await Certificate.findAll();
+    const orderList = [...requestList, ...certificateList];
     const totalRevenue = await Orders.sum("total_money", {
       where: {
         status: [4, 8, 12],
       },
     });
-    
-    const recentlyOrders = await database.query(`
+
+    const recentlyOrders = await database.query(
+      `
         SELECT o.*, p.product_name, p.thumbnail, p.product_type, s.description, u.fullname, u.email, u.phone_number
         FROM orders o
         LEFT JOIN products p ON o.product_id = p.product_id
@@ -152,7 +157,9 @@ exports.statisticaldata = async function (req, res) {
         LEFT JOIN users u ON u.user_id = o.user_id
         ORDER BY o.rental_time DESC 
         LIMIT 5
-    `, { type: QueryTypes.SELECT });
+    `,
+      { type: QueryTypes.SELECT }
+    );
 
     const scoreList = await Score.findAll();
     const totalStandardOuputAchievedStudents = await Score.count({
@@ -171,44 +178,76 @@ exports.statisticaldata = async function (req, res) {
       { label: "Võ taekwondo", key: "taekwondo_score" },
       { label: "Golf", key: "golf_score" },
     ];
-    const standartSportOutputAchievedStudent = sports.map(sport => {
-        const passedCount = scoreList.filter(score => score[sport.key] !== null && score[sport.key] >= 4).length;
-        const totalCount = scoreList.filter(score => score[sport.key] !== null).length; 
-        var percentage = 0;
-        if (totalCount == 0) {
-          percentage = 0
-        } else {
-          percentage = (passedCount / totalCount) * 100; 
-        }
-        
-        return { label: sport.label, value: percentage, passedCount: passedCount, totalCount: totalCount };
-      });
+    const standartSportOutputAchievedStudent = sports.map((sport) => {
+      const passedCount = scoreList.filter(
+        (score) => score[sport.key] !== null && score[sport.key] >= 4
+      ).length;
+      const totalCount = scoreList.filter(
+        (score) => score[sport.key] !== null
+      ).length;
+      var percentage = 0;
+      if (totalCount == 0) {
+        percentage = 0;
+      } else {
+        percentage = (passedCount / totalCount) * 100;
+      }
+
+      return {
+        label: sport.label,
+        value: percentage,
+        passedCount: passedCount,
+        totalCount: totalCount,
+      };
+    });
 
     const standartOutput = [
-        { label: "Đạt", value: scoreList.filter(score => score.CDR === 'Đ').length},
-        { label: "Không đạt", value: scoreList.filter(score => score.CDR === "").length}
-    ]
+      {
+        label: "Đạt",
+        value: scoreList.filter((score) => score.CDR === "Đ").length,
+      },
+      {
+        label: "Không đạt",
+        value: scoreList.filter((score) => score.CDR === "").length,
+      },
+    ];
 
     const result = {};
     result.totalOrders = orderList.length;
     result.totalAwaitingOrders = orderList.filter(
-      (order) => order.status == 1 || order.status == 5 || order.status == 9 || order.status == 13
+      (order) =>
+        order.status == 1 ||
+        order.status == 5 ||
+        order.status == 9 ||
+        order.status == 13
     ).length;
     result.totalAcceptedOrders = orderList.filter(
-      (order) => order.status == 2 || order.status == 6 || order.status == 10 || order.status == 14
+      (order) =>
+        order.status == 2 ||
+        order.status == 6 ||
+        order.status == 10 ||
+        order.status == 14
     ).length;
     result.totalDeniedOrders = orderList.filter(
-      (order) => order.status == 3 || order.status == 7 || order.status == 11 || order.status == 15
+      (order) =>
+        order.status == 3 ||
+        order.status == 7 ||
+        order.status == 11 ||
+        order.status == 15
     ).length;
     result.totalCompletedOrders = orderList.filter(
-      (order) => order.status == 4 || order.status == 8 || order.status == 12 || order.status == 16
+      (order) =>
+        order.status == 4 ||
+        order.status == 8 ||
+        order.status == 12 ||
+        order.status == 16
     ).length;
     result.totalRevenue = totalRevenue;
     result.recentlyOrders = recentlyOrders;
     result.totalStandardOuputAchievedStudents =
       totalStandardOuputAchievedStudents;
-    result.standartSportOutputAchievedStudent = standartSportOutputAchievedStudent; 
-    result.standartOutput = standartOutput; 
+    result.standartSportOutputAchievedStudent =
+      standartSportOutputAchievedStudent;
+    result.standartOutput = standartOutput;
     return res.status(200).json(result);
   } catch (error) {
     return res.status(400).json({ msg: error });
@@ -272,5 +311,31 @@ exports.userToAdmin = async function (req, res) {
     return res.status(200).json({ msg: "Đã chuyển người dùng sang admin" });
   } catch (error) {
     return res.status(400).json({ msg: error });
+  }
+};
+
+exports.verifyUser = async function (req, res) {
+  try {
+    const user = await User.findOne({
+      where: {
+        user_id: req.params.id
+      }
+    });
+    if (!user) return res.status(400).json({ msg: "Link xác thực không hợp lệ." });
+
+    const verification = await Verification.findOne({
+      where: {
+        user_id: user.user_id, 
+        code: req.params.code
+      }
+    });
+    if (!verification) return res.status(400).json({ msg: "Link xác thực không hợp lệ." });
+
+    await user.update({ isVerified: 1 });
+    await verification.destroy(); 
+
+    res.status(200).json({ message: "Xác thực email thành công." });
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi server." , error: error});
   }
 };
