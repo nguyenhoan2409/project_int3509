@@ -55,14 +55,14 @@ exports.addScore = async function (req, res) {
                 mssv: req.body.mssv
             }
         })
-    return res.status(200).json({ msg: "Thêm điểm thành công" })
+    return res.status(200).json({ msg: "Thêm điểm thành cong" })
 
     } catch(error) {
         return res.status(400).json({ msg: error })
     }
 }
  
- exports.getScoreList = async function (req, res) {
+ exports.getAllScore = async function (req, res) {
      try {
         const data = await database.query("SELECT * FROM physicalscore", {type: QueryTypes.SELECT})
         console.log(data); 
