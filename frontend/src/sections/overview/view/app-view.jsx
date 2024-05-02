@@ -137,7 +137,7 @@ export default function AppView({
 
         <Grid xs={12} sm={6} md={3}>
           <AppWidgetSummary
-            title="Yêu cầu đợi cần xác nhận hoàn tất"
+            title="Yêu cầu cần xác nhận hoàn tất"
             total={totalAcceptedOrders}
             color="error"
             icon={<MdOutlineConfirmationNumber size={30} color="green"/>}

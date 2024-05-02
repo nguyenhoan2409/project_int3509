@@ -27,7 +27,7 @@ export const Signup = () => {
   const [errorFullName, setErrorFullName] = useState("");
   const [errorAddress, setErrorAddress] = useState("");
   const [errorPhone, setErrorPhone] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false); 
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -123,12 +123,13 @@ export const Signup = () => {
             },
             { withCredentials: true }
           );
-          if (response.data) {
+          if (response?.data) {
             console.log(response.data);
+            setIsLoading(true);
             navigate("/notificationLoginSignup", {state: {type: "aftersignup"}})
             console.log("Tạo tài khoản thành công");
           }
-          return response.data;
+          return response?.data;
           
          } 
     } catch (err) {
@@ -337,7 +338,7 @@ export const Signup = () => {
             className="signUpBtn"
             size="large"
           >
-            Đăng ký
+            {isLoading ? 'Đang tạo tài khoản...' : 'Đăng ký'}
           </Button>
         </form>
         <p className="loginsignup-login">

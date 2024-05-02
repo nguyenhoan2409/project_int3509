@@ -4,12 +4,12 @@ import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdError } from "react-icons/md";
-import "./Login.css"
+import "./Login.css";
 
 export const EmailVerify = () => {
-  const [valid, setValid] = useState(true);
+  const [valid, setValid] = useState();
   const param = useParams();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const verifyEmailUrl = async () => {
@@ -26,32 +26,46 @@ export const EmailVerify = () => {
     };
     verifyEmailUrl();
   }, [param]);
-
   return (
     <>
-      {valid ? (
+      {valid === undefined ? (
         <div className="emailVerifyContainer">
-          <FaCheckCircle size={80} color="green"/>
+          <h1>Đang kiểm tra...</h1>
+        </div>
+      ) : valid === true ? (
+        <div className="emailVerifyContainer">
+          <FaCheckCircle size={80} color="green" />
           <h1>Xác thực email thành công</h1>
           <Button
             variant="contained"
             size="medium"
             sx={{ textTransform: "none", m: "8px" }}
-            onClick={() => {navigate('/')}}
+            onClick={() => {
+              navigate("/");
+            }}
             color="success"
-          >Đăng nhập</Button>
+          >
+            Đăng nhập
+          </Button>
         </div>
       ) : (
         <div className="emailVerifyContainer">
-          <MdError size={80} color="red"/>
-          <h1>Xác thực email không thành công, vui lòng kiểm tra lại link xác thực.</h1>
+          <MdError size={80} color="red" />
+          <h1>
+            Xác thực email không thành công, vui lòng kiểm tra lại link xác
+            thực.
+          </h1>
           <Button
             variant="contained"
             size="medium"
             sx={{ textTransform: "none", m: "8px" }}
-            onClick={() => {navigate('/')}}
+            onClick={() => {
+              navigate("/");
+            }}
             color="success"
-          >Quay về trang Đăng nhập</Button>
+          >
+            Quay về trang Đăng nhập
+          </Button>
         </div>
       )}
     </>

@@ -51,12 +51,12 @@ export const Sidebar = () => {
       <div className="menu-list-container">
         <ul className="menu-list">
           <li className={`menu-list-item ${location.pathname === '/admin/dashboard' ? 'sidebar-active' : ''}`}>
-            <NavLink to="/admin/dashboard" className={nav => (nav.isActive ? "active" : "")} >
+            <Link to={"/admin/dashboard"}>
               <div className="menu-list-item-container">
                 <FcStatistics className="menu-list-icon" size={24} />
                 <div>Trang chủ</div>
               </div>
-            </NavLink>
+            </Link>
           </li>
           <li className={`menu-list-item ${location.pathname === '/admin/products/list' || location.pathname === '/admin/products/add' ? 'sidebar-active' : ''}`}>
             <Link to={"/admin/products/list"}>
@@ -68,7 +68,7 @@ export const Sidebar = () => {
           </li>
 
           <li className={`menu-list-item ${location.pathname === '/admin/request' ? 'sidebar-active' : ''}`}>
-            <Link to={"/admin/request"}>
+            <Link to={"/admin/request"} onClick={() => window.scrollTo(0, 0)}>
               <div className="menu-list-item-container">
                 <BsListCheck className="menu-list-icon" size={24} />
                 <div>Quản lý yêu cầu</div>

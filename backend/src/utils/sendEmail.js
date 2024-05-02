@@ -20,7 +20,7 @@ module.exports = async (email, subject, text) => {
 			from: process.env.USER,
 			to: email,
 			subject: subject,
-			html: '<p>Vui lòng nhấn vào link sau để xác thực tài khoản' + '<br>' + 
+			html: '<p>Vui lòng nhấn vào link sau để xác thực' + '<br>' + 
             `<a href=${text}>Click vào đây</a>`
 		});
 		console.log("email sent successfully");
