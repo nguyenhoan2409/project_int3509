@@ -16,8 +16,6 @@ export const ShopCategory = () => {
         withCredentials: true,
       });
       setProducts(res.data);
-      const productList = res.data
-      console.log(res.data)
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
@@ -27,20 +25,16 @@ export const ShopCategory = () => {
   }
   useEffect(() => {
     getProducts();
-  }, [])
-  console.log(productList)
-  console.log("Hello")
+  }, []);
   return (
     <div className="shop-category">
       <Layout>
-        <img className="shopcategory-banner" src={image} />
+        {/* <img className="shopcategory-banner" src={image} /> */}
         <div className="shopcategory-products">
           {productList?.map((product) => (
               <Item
-                id={product.product_id}
-                image={product.thumbnail}
-                name={product.product_name}
-                order={product.product_type}
+                product={product}
+                key={product.product_id}
               />
           ))}
         </div>

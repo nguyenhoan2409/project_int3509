@@ -9,7 +9,7 @@ import { FaRegAddressCard } from "react-icons/fa";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import logoLogin from "../../assets/images/logo.svg";
+import logoLogin from "../../Components/Assets/logo.svg";
 
 export const Signup = () => {
   const [mssv, setMssv] = useState();
@@ -27,7 +27,7 @@ export const Signup = () => {
   const [errorFullName, setErrorFullName] = useState("");
   const [errorAddress, setErrorAddress] = useState("");
   const [errorPhone, setErrorPhone] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false); 
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
@@ -100,14 +100,12 @@ export const Signup = () => {
   const Register = async (e) => {
     try {
       e.preventDefault(); 
-      validate("mssv");
       validate("email");
       validate("password");
       validate("fullname");
       validate("phone");
       validate("address");
       if (email &&
-         mssv &&
          password &&
          confirmPassword &&
          address &&
@@ -116,7 +114,6 @@ export const Signup = () => {
             const response = await axios.post(
             "http://localhost:8080/register",
             {
-              user_id: parseInt(mssv),
               password: password,
               fullname: fullname,
               email: email,
@@ -126,16 +123,18 @@ export const Signup = () => {
             },
             { withCredentials: true }
           );
-          if (response.data) {
+          if (response?.data) {
             console.log(response.data);
-            navigate("/");
+            setIsLoading(true);
+            navigate("/notificationLoginSignup", {state: {type: "aftersignup"}})
             console.log("Tạo tài khoản thành công");
           }
-          return response.data;
+          return response?.data;
+          
          } 
     } catch (err) {
-      console.log(err.response.data);
-      setMsg(err.response.data.msg);
+      console.log(err?.response?.data);
+      setMsg(err?.response?.data?.msg);
     }
   };
   return (
@@ -147,7 +146,7 @@ export const Signup = () => {
       <div className="signup-container-right">
         <h1>Đăng ký</h1>
         <form onSubmit={Register} className="signup-fields">
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          {/* <div style={{ display: "flex", flexDirection: "row" }}>
             <TextField
               label="Mã số sinh viên"
               type="number"
@@ -172,7 +171,10 @@ export const Signup = () => {
               fullWidth
               
             />
-            <TextField
+            
+          </div> */}
+
+          <TextField
               
               label="Email"
               // type="email"
@@ -199,7 +201,6 @@ export const Signup = () => {
               size="small"
               fullWidth
             />
-          </div>
 
           <TextField
             
@@ -337,7 +338,7 @@ export const Signup = () => {
             className="signUpBtn"
             size="large"
           >
-            Đăng ký
+            {isLoading ? 'Đang tạo tài khoản...' : 'Đăng ký'}
           </Button>
         </form>
         <p className="loginsignup-login">

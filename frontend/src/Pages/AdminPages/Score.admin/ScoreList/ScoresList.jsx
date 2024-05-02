@@ -3,37 +3,43 @@ import React, { useEffect, useState, useRef } from "react";
 import "./ScoresList.css";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "~/Pages/Layout/Layout";
 import { DownloadTableExcel } from 'react-export-table-to-excel';
+import { useDispatch } from "react-redux";
+import { reset } from "numeral";
+import { LogOut } from "~/features/authSlice";
 
 
 export const ScoresList = () => {
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate(); 
   const [mssv, setMssv] = useState("");
   const [scores, setScores] = useState([]);
   const tableRef = useRef(null);
- 
+  var initialScoreList = []; 
   const getScores = async () => {
     try {
-      const cdr = await axios.get("http://localhost:8080/score/CDR", {
-        withCredentials: true
-      });
-      const response = await axios.get("http://localhost:8080/score/list", {
-        withCredentials: true
-      });
-      console.log(response);
+      console.log("reloaded")
+      const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
+      initialScoreList = response.data; 
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
+      }
+      if (error?.response?.data?.msg?.message === "jwt expired") { 
+        dispatch(reset());
+        dispatch(LogOut());
+        navigate("/");
       }
     }
   };
   useEffect(() => {
     getScores();
   }, [mssv]);
-  
+
   const searchHandle = async (event) => {
     try {
       const response = await axios.get(
@@ -62,7 +68,7 @@ export const ScoresList = () => {
                 <input
                   className="search-input-admin"
                   placeholder="Tra cứu điểm..."
-                  onChange={(e) => setMssv(e.target.value)}
+                  onChange={(e) => {setMssv(e.target.value);}}
                 />
                 <div className="search-btn-admin">
                   <button className="search-score-btn-admin" onClick={searchHandle}>Tìm kiếm</button>

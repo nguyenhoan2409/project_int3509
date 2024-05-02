@@ -1,18 +1,66 @@
-const physicalscore = function(physicalscore) {
-    this.mssv = physicalscore.mssv
-    this.fullname = physicalscore.fullname
-    this.class = physicalscore.class
-    this.univercity = physicalscore.univercity
-    this.football_score = physicalscore.football_score
-    this.bedminton_score = physicalscore.bedminton_score
-    this.tabletennis_score = physicalscore.tabletennis_score
-    this.basketball_score = physicalscore.basketball_score
-    this.air_volleyball_score = physicalscore.air_volleyball_score
-    this.volleyball_score = physicalscore.volleyball_score
-    this.taekwondo_score = physicalscore.taekwondo_score
-    this.golf_score = physicalscore.golf_score
-    this.CDR = physicalscore.CDR
-}
+const { DataTypes } = require("sequelize");
+const { database } = require("../config/database");
+const Score = database.define(
+  "physicalscore",
+  {
+    mssv: {
+        type: DataTypes.INTEGER, 
+        allowNull: false, 
+        primaryKey: true
+    },
+    fullname: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
+    class: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
+    univercity: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
+    football_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true,
+    },
+    bedminton_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true,
+    },
+    tabletennis_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true,
+    },
+    basketball_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true,
+    },
+    air_volleyball_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true,
+    },
+    volleyball_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true
+    }, 
+    taekwondo_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true
+    }, 
+    golf_score: {
+        type: DataTypes.DOUBLE, 
+        allowNull: true
+    }, 
+    CDR: {
+        type: DataTypes.STRING, 
+        allowNull: true
+    }
+  },
+  {
+    tableName: 'physicalscore',
+    timestamps: false,
+  }
+);
 
-
-module.exports = physicalscore
+module.exports = Score

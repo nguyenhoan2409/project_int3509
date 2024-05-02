@@ -35,6 +35,7 @@ require('./routes/ScoreRoute')(app);
 require('./routes/OrderRoutes')(app); 
 require('./routes/UserRoute')(app); 
 require('./routes/TimelineRoute')(app); 
+require('./routes/CertificateRoutes')(app); 
 
 
 app.listen(port, () => {

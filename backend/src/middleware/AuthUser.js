@@ -20,8 +20,8 @@ let isAuth = async function (req, res, next) {
 };
 
 let checkAdmin = async function (req, res, next) {
-  try {
-    if (req.authData.role_id != 1) {
+  try { 
+    if (req.authData.data.role_id != 1) {
       return res.status(400).json({msg: 'Chức năng chỉ khả dụng với tài khoản admin.'})
     }
     return next(); 

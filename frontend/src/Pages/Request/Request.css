@@ -87,6 +87,11 @@
     margin-bottom: 20px;
 }
 
+.modal-description {
+    margin-top: 15px;
+    display: flex;
+}
+
 .createRequestMain {
     display: flex;
     flex-direction: column;

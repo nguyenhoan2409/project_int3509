@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Container, LinearProgress, Typography } from "@mui/material";
 import "./Products.admin.css";
 export const ProductsManagement = () => {
+  const navigate = useNavigate(); 
   return (
     <div className="products-management-admin">
        <Box
@@ -19,12 +20,13 @@ export const ProductsManagement = () => {
       <div className="products-container">
         <div className="products-right">
           <div className="products-navbar">
-            <Link to="/admin/products/list">
-              <button>Danh sách sản phẩm </button>
-            </Link>
-            <Link to="/admin/products/add">
-              <button>Thêm sản phẩm </button>
-            </Link>
+            <button onClick={() => navigate("/admin/products/list")} className="products-navbar-btn">
+              Danh sách sản phẩm{" "}
+            </button>
+
+            <button onClick={() => navigate("/admin/products/add")} className="products-navbar-btn">
+              Thêm sản phẩm{" "}
+            </button>
           </div>
         </div>
       </div>

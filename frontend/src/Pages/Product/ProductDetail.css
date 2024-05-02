@@ -76,7 +76,7 @@
     font-size: 20px;
     gap: 10px;
 }
-.order-button button {
+.product-button .productdetail-btn {
     height: 45px;
     width: 100px;
     background-color: #006d3a;
@@ -87,7 +87,8 @@
     margin-top: 10px;
 }
 
-.order-button button:hover {
+.product-button .productdetail-btn:hover {
+    cursor: pointer;
     background-color: #03924f;
     color: white;
 }

@@ -3,7 +3,7 @@ import "./Navbar.css";
 
 import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
 import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineUser, AiOutlineLogout, AiFillCaretDown } from "react-icons/ai";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ export const Navbar = () => {
   const navigate = useNavigate(); 
   const dispatch = useDispatch(); 
   const [open, setOpen] = React.useState(false);
-
+  const location = useLocation(); 
   const handleOpen = () => {
     setOpen(true);
   };
@@ -79,21 +79,25 @@ export const Navbar = () => {
       <div className="nav-menu-container">
         <ul className="nav-menu">
           <li>
+            <hr className={`${location.pathname === '/home' ? 'navbar-active' : 'navbar-inactive'}`}></hr>
             <Link to="/home" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Trang chủ
             </Link>
           </li>
           <li>
+            <hr className={`${location.pathname === '/product' ? 'navbar-active' : 'navbar-inactive'}`}></hr>
             <Link to="/product" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Dụng cụ
             </Link>
           </li>
           <li>
+            <hr className={`${location.pathname === '/score' ? 'navbar-active' : 'navbar-inactive'}`}></hr>
             <Link to="/score" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Tra cứu điểm
             </Link>
           </li>
           <li>
+            <hr className={`${location.pathname === '/request' ? 'navbar-active' : 'navbar-inactive'}`}></hr>
             <Link to="/request" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
               Yêu cầu
             </Link>

@@ -11,9 +11,7 @@ export const Score = () => {
 
   const getScores = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/score/list", {
-        withCredentials: true,
-      });
+      const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -30,9 +28,7 @@ export const Score = () => {
   const searchHandle = async (event) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/score/search/${mssv}`, {
-          withCredentials: true,
-        }
+        `http://localhost:8080/score/search/${mssv}`, {withCredentials: true}
       );
       let st = response.data.student;
       setScores(st);
@@ -40,7 +36,6 @@ export const Score = () => {
       console.error("Error searching:", error);
     }
   };
-  console.log(scores);
   return (
     <div className="score-container">
       <Layout>

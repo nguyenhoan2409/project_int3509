@@ -4,6 +4,7 @@ const { database } = require("../config/database")
 const fs = require('fs')
 
 
+exports.getProductList = async function(req, res){
 exports.getList = async function(req, res){
     try {
         const productList = await database.query("SELECT * FROM products", {type: QueryTypes.SELECT})
@@ -12,6 +13,7 @@ exports.getList = async function(req, res){
         return res.status(400).json({msg: error})
     }
 }
+exports.getProductDetail = async function(req, res){
 exports.getDetail = async function(req, res){
     try {
         const product_id = req.params.id
@@ -27,6 +29,7 @@ exports.getDetail = async function(req, res){
     
 }
 
+exports.addProduct = async function(req,res) {
 exports.createProduct = async function(req,res) {
     try {
         const product_name = req.body.product_name

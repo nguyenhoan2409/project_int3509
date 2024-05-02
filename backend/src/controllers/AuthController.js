@@ -3,6 +3,9 @@ const { database } = require("../config/database");
 const JWT = require("../middleware/jwt");
 const argon2 = require("argon2");
 const User = require("../models/Users");
+const Verification = require("../models/Verification");
+const crypto = require("crypto");
+const sendEmail = require("../utils/sendEmail");
 
 exports.login = async function (req, res) {
   try {
@@ -16,14 +19,34 @@ exports.login = async function (req, res) {
         .status(400)
         .json({ msg: "Tài khoản không tồn tại, vui lòng kiểm tra lại email" });
     }
-    console.log(user.password,"và", req.body.password)
+
     const match = await argon2.verify(user.password, req.body.password);
-    console.log(match)
+    
     if (!match) {
       return res
         .status(400)
         .json({ msg: "Mật khẩu nhập sai, vui lòng kiểm tra lại." });
     }
+
+    if (!user.isVerified) {
+			let code = await Verification.findOne({
+        where: {
+          user_id: user.user_id
+        }
+      });
+			if (!code) {
+				code = await Verification.create({
+					user_id: user.user_id,
+					code: crypto.randomBytes(32).toString('hex')
+				});
+				const url = `http://localhost:3000/user/${user.user_id}/verify/${code.code}`;
+				await sendEmail(user.email, "Xác thực tài khoản", url);
+			}
+
+			return res
+				.status(400)
+				.json({ msg: "Link xác thực đã được gửi tới email, vui lòng nhấn vào link để xác thực." });
+		}
     // req.session.userId = user.user_id;
     const token = await JWT.make({
       user_id: user.user_id,
@@ -31,6 +54,10 @@ exports.login = async function (req, res) {
     });
     res.cookie("access_token", token, { 
       httpOnly: true,
+      // maxAge: 30 * 60 * 60 * 1000,
+    });
+    res.cookie("isLoggedIn", true, { 
+      httpOnly: false,
       // maxAge: 30 * 60 * 60 * 1000,
     });
     return res.status(200).json({
@@ -56,46 +83,46 @@ exports.register = async function (req, res) {
         type: QueryTypes.SELECT,
       }
     );
-    const checkMSSV = await User.findOne({
-      where: {
-        user_id: req.body.user_id,
-      },
-    });
-    if (checkMSSV) {
-      return res.status(400).json({ msg: "Mã số sinh viên đã tồn tại, vui lòng kiểm tra lại." });
-    }
+    // const checkMSSV = await User.findOne({
+    //   where: {
+    //     user_id: req.body.user_id,
+    //   },
+    // });
+    // if (checkMSSV) {
+    //   return res.status(400).json({ msg: "Mã số sinh viên đã tồn tại, vui lòng kiểm tra lại." });
+    // }
     if (checkEmail.length > 0) {
       return res.status(400).json({ msg: "Tài khoản đã tồn tại, vui lòng lựa chọn email khác." });
     }
 
     const hashPassword = await argon2.hash(req.body.password);
     
-    await database.query(
-      "INSERT INTO users (user_id, password, fullname, email, phone_number, address, role_id) VALUES (:user_id, :password, :fullname, :email, :phone_number, :address, :role_id)",
+    const user = await database.query(
+      "INSERT INTO users (password, fullname, email, phone_number, address, role_id, isVerified) VALUES (:password, :fullname, :email, :phone_number, :address, :role_id, :isVerified)",
       {
         replacements: {
-          user_id: req.body.user_id,
           password: hashPassword,
           fullname: req.body.fullname,
           email: req.body.email,
           phone_number: req.body.phone_number,
           address: req.body.address,
           role_id: 2,
+          isVerified: 0
         },
         type: QueryTypes.INSERT,
       }
     );
+
+
+    const code = await Verification.create({
+      user_id: user[0],
+      code: crypto.randomBytes(32).toString('hex')
+    });
+    const url = `http://localhost:3000/user/${user[0]}/verify/${code.code}`;
+    await sendEmail(req.body.email, "Xác thực tài khoản", url);
     return res
-      .status(200)
-      .json({ success: true, msg: "Bạn đã tạo tài khoản thành công", user: {
-        user_id: req.body.user_id,
-        password: hashPassword,
-        fullname: req.body.fullname,
-        email: req.body.email,
-        phone_number: req.body.phone_number,
-        address: req.body.address,
-        role_id: 2,
-      }});
+      .status(201)
+      .json({ success: true, msg: "Link xác thực đã được gửi tới email, vui lòng click để xác nhận", user: user});
   } catch (error) {
     return res.status(400).json({ msg: "Tạo tài khoản thất bại"});
   }
@@ -104,6 +131,7 @@ exports.register = async function (req, res) {
 exports.logOut = async function (req, res) {
   try {
     res.clearCookie('access_token', { httpOnly: true, sameSite: 'None', secure: true });
+    res.clearCookie('isLoggedIn', { httpOnly: false, sameSite: 'None', secure: true });
     res.status(200).json({ message: 'Đăng xuất thành công'});
   } catch (error) {
     return res.status(400).json({ msg: error + " Đăng xuất không thành công" });

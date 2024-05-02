@@ -1,4 +1,5 @@
 // var score = require('../models/score.model')
+var xlsx = require('xlsx')
 var fs = require('fs')
 const { database } = require('../config/database')
 const { QueryTypes } = require('sequelize')

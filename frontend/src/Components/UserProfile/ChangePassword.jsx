@@ -1,58 +1,51 @@
 import React, { useState, useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import argon2 from 'argon2';
+import { useNavigate } from 'react-router-dom';
 
 export const ChangePassword = () => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [cfPassword, setCfPassword] = useState("");
   const [msg, setMsg] = useState("");
-  const [userInfo, setUserInfo] = useState({});
+  const navigate = useNavigate(); 
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   )
-  useEffect(() => {
-    if (user) {
-      setUserInfo(user); 
-    }
-    if (isError) {
-      setMsg(message); 
-    }
-  }, [user, isError])
 
   const newPasswordChange = (e) => {
+    setMsg("")
     setNewPassword(e.target.value)
   }
 
   const cfPasswordChange = (e) => {
+    setMsg("")
      setCfPassword(e.target.value)
-     checkPassword()
+    //  checkPassword()
   }
 
 
   const checkPassword = () => {
-    console.log(newPassword, cfPassword)
-    if (newPassword === cfPassword) {
-      setMsg("Mật khẩu khớp")
-  } else {
-     setMsg("Mật khẩu không khớp")
-  }
+    if (newPassword !== cfPassword) {
+      setMsg("Mật khẩu mới không khớp"); 
+    }
 }
 
   const updatePassword = async () => {
     try {
       await axios.patch(`http://localhost:8080/user/update/password`, {
-        user_id: userInfo.user_id,
+        user_id: user?.user_id,
         password: password,
         newPassword: newPassword,
       },
       { withCredentials: true }
       );
-      setMsg("Thay đổi mật khẩu thành công")
+      alert("Thay đổi mật khẩu thành công"); 
+      navigate('/user/:activepage'); 
+      // setMsg("Thay đổi mật khẩu thành công")
     } catch (error) {
       console.error("Error fetching data:", error);
-      setMsg("Nhập mật khẩu sai, vui lòng thử lại")
+      setMsg("Nhập mật khẩu cũ sai, vui lòng thử lại")
     }
 }
 
@@ -69,16 +62,16 @@ export const ChangePassword = () => {
       <div className="form">
         <div className="form-group">
           <label htmlFor="password">Mật khẩu cũ<span>*</span></label>
-          <input type="password" name='password' onChange={(e) => setPassword(e.target.value)}/>
+          <input required type="password" name='password' value={password} onChange={(e) => {setMsg(""); setPassword(e.target.value)}}/>
         </div>
 
         <div className="form-group">
           <label htmlFor="password">Mật khẩu mới<span>*</span></label>
-          <input type="password" name='newPassword' onChange={newPasswordChange}/>
+          <input required type="password" name='newPassword' value={newPassword} onChange={newPasswordChange}/>
         </div>
         <div className="form-group">
-          <label htmlFor="password">Nhập lại mật khẩu<span>*</span></label>
-          <input type="password" name='cfPassword' onChange={cfPasswordChange}/>
+          <label htmlFor="password">Nhập lại mật khẩu mới<span>*</span></label>
+          <input required type="password" name='cfPassword' value={cfPassword} onChange={cfPasswordChange} onBlur={() => checkPassword()}/>
         </div>
       </div>
 

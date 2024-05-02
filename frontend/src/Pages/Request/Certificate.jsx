@@ -13,12 +13,7 @@ export const Certificate = () => {
     const [email, setEmail] = useState();
     const [phonenumber, setPhonenumber] = useState();
     const [checkCDR, setCheckCDR] = useState(false);
-
-    const navigate = useNavigate();
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
-
+    const {user} = useSelector((state) => state.auth); 
  
     function handleSubmit(event) {
         event.preventDefault();
@@ -31,7 +26,6 @@ export const Certificate = () => {
           });
           const scores = response.data.student;
           const score = scores[0];
-          console.log(score);
           setStudent(score);
           if(score.CDR === "Đ") {
             setCheckCDR(true)
@@ -53,13 +47,15 @@ export const Certificate = () => {
           if(!email || !phonenumber) {
             alert("Vui lòng nhập đầy đủ thông tin")
           }
-          const response = await axios.post("http://localhost:8080/score/certificate", {
+          const response = await axios.post("http://localhost:8080/certificate/create", {
             mssv: student.mssv,
             fullname: student.fullname,
             class: student.class,
-            univercity: student.univercity,
+            university: student.univercity,
             email: email,
             phonenumber: phonenumber,
+            status: 13, 
+            user_id: user?.user_id
           }, {
             withCredentials: true,
           });
@@ -89,6 +85,7 @@ export const Certificate = () => {
                             value={student.fullname}
                             fullWidth
                             required
+                            InputLabelProps={{ shrink: true }}
                         />
 
                         <TextField
@@ -99,6 +96,7 @@ export const Certificate = () => {
                             value={student.mssv}
                             fullWidth
                             required
+                            InputLabelProps={{ shrink: true }}
                         />
 
                     </Stack>
@@ -112,6 +110,7 @@ export const Certificate = () => {
                             value={student.class}
                             fullWidth
                             required
+                            InputLabelProps={{ shrink: true }}
                         />
                         <TextField
                             type="text"
@@ -121,6 +120,7 @@ export const Certificate = () => {
                             value={student.univercity}
                             fullWidth
                             required
+                            InputLabelProps={{ shrink: true }}
                         />
                     </Stack>
                     <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>

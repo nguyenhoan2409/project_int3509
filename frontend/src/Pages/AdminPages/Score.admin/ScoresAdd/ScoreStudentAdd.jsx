@@ -75,6 +75,9 @@ export const ScoreStudentAdd = () => {
       }, {
         withCredentials: true,
       })
+      await axios.get("http://localhost:8080/score/CDR", {
+          withCredentials: true
+        })
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {

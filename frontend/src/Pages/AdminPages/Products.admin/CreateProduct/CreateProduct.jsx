@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 export const CreateProduct = () => {
   const [product_name, setProductName] = useState();
-  const [product_type, setProductType] = useState();
+  const [product_type, setProductType] = useState(2);
   const [quantity, setQuantity] = useState();
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState();
@@ -26,7 +26,7 @@ export const CreateProduct = () => {
       setIsFilled(false);
     } else {
       setIsFilled(true);
-      setMsg("Cập nhật sản phẩm thành công");
+      setMsg("Thêm sản phẩm thành công");
       addProduct();
     }
   };
@@ -69,6 +69,14 @@ export const CreateProduct = () => {
 
   const addProduct = async () => {
     try {
+      console.log({
+        product_name,
+        price,
+        quantity,
+        thumbnail,
+        description,
+        product_type,
+      })
       const response = await axios.post("http://localhost:8080/product/add", {
         product_name,
         price,
@@ -79,17 +87,18 @@ export const CreateProduct = () => {
       }, {
         withCredentials: true,
       });
-      navigate("/admin/products/list");
-      setMsg(response.msg);
+      
+      // navigate("/admin/products/list");
+      // setMsg(response.msg);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
-        setMsg(error.response.data);
+        // setMsg(error.response.data);
       }
     }
   };
-  console.log(thumbnail);
+  // console.log(thumbnail);
   return (
     <Layout>
       <div>

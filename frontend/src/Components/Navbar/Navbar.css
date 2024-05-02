@@ -37,7 +37,7 @@
 }
 
 .scrolled {
-  background-color: #04AA6D;
+  background-color: #fff;
   transition: all ease-in-out 400ms;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .nav-menu-container .nav-menu .nav-link-scrolled {
-  color: white;
+  color: black;
 }
 
 .nav-menu li a {
@@ -68,6 +68,21 @@
 .nav-menu li a:hover {
   color: #006d3a;
   text-decoration: none;
+}
+
+.navbar-active{
+  content: "";
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: -15px;
+  width: 100%;
+}
+
+.navbar-inactive {
+  display: none;
 }
 
 .nav-menu li .nav-link::before {
@@ -91,7 +106,7 @@
   content: "";
   display: block;
   height: 5px;
-  background-color: #fff;
+  background-color: #444;
 
   position: absolute;
   top: -15px;

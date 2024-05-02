@@ -2,31 +2,35 @@ import React, { useEffect, useState } from 'react'
 import './AccountSettings.css'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const AccountSetting = () => {
   const [userInfo, setUserInfo] = useState({});
-  const [fullname, setFullname] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone_number, setPhoneNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [userId, setUserId] = useState();
   const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
+  const [fullname, setFullname] = useState();
+  const [email, setEmail] = useState();
+  const [phone_number, setPhoneNumber] = useState();
+  const [address, setAddress] = useState();
   const [msg, setMsg] = useState(); 
+  const navigate = useNavigate(); 
+
+  const getUserDetail = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/detail/${user?.user_id}`, {withCredentials: true}); 
+      setFullname(response.data.fullname); 
+      setEmail(response.data.email); 
+      setPhoneNumber(response.data.phone_number); 
+      setAddress(response.data.address); 
+    } catch (error) {
+      console.log(error); 
+    }
+  }
+
   useEffect(() => {
-    if (user) {
-      setUserInfo(user); 
-      setAddress(user.address);
-      setFullname(user.fullname);
-      setEmail(user.email);
-      setPhoneNumber(user.phone_number);
-      setUserId(user.user_id);
-    }
-    if (isError) {
-      setMsg(message); 
-    }
-  }, [user, isError])
+    getUserDetail(); 
+  }, [])
 
   const updateUser = async () => {
     try {
@@ -35,11 +39,12 @@ export const AccountSetting = () => {
           email : email,
           phone_number : phone_number,
           address : address,
-          user_id: userId
+          user_id: user?.user_id
       }, {
         withCredentials: true
       })
-      setMsg("Cập nhật thành công")
+      alert("Cập nhật thông tin người dùng thành công"); 
+      navigate('/user/:activepage');
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
@@ -47,7 +52,6 @@ export const AccountSetting = () => {
       }
     }
   }
-console.log(userId)
   return (
     <div className="accountsettings">
       <h1>Thông tin người dùng</h1>

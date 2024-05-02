@@ -1,16 +1,33 @@
-import React from 'react'
-import './Item.css'
-import { Link } from "react-router-dom";
-export const Item = ({ image, name, order, id }) => {
+import React from "react";
+import "./Item.css";
+import { Link, useNavigate } from "react-router-dom";
+export const Item = ({ product }) => {
+  const handleTabClick = () => {
+    window.scrollTo(0, 0);
+  };
+  const navigate = useNavigate();
   return (
-    
-      <div className="product">
-        <Link to= {`/product/detail/${id}`}><img src={image} alt={name} /></Link>
-        <p className='name'>{name}</p>
-        <Link to= {`/product/detail/${id}`}><button>{order === 1 ? "Mượn" : (order === 2 ? "Mua" : "Thuê")}</button></Link>
+    <div className="product">
+      <img
+        src={product.thumbnail}
+        alt={product.product_name}
+        className="product-image"
+        onClick={() => navigate(`/product/detail/${product.product_id}`)}
+      />
+      <p className="name">{product.product_name}</p>
+      <button
+        className="btn-request"
+        onClick={() => {
+          handleTabClick();
+          navigate(`/create-request/${product.product_id}`);
+        }}
+      >
+        {product.product_type === 1
+          ? "Mượn"
+          : product.product_type === 2
+          ? "Mua"
+          : "Thuê"}
+      </button>
     </div>
-    
-
   );
 };
-

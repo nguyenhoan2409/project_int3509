@@ -7,36 +7,56 @@ import {
   MenuItem,
   IconButton,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useRoutes,
+} from "react-router-dom";
 import "./Request.css";
 import Layout from "../Layout/Layout";
 import { RiSubtractFill } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import {useParams} from 'react-router-dom'
+import InputAdornment from "@mui/material/InputAdornment";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import moment from "moment";
 
 export const CreateRequest = () => {
-  const {id} = useParams()
+  const { product_id } = useParams();
+  const {user} = useSelector(state => state.auth); 
+  const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [totalMoney, setTotalMoney] = useState("");
   const [timelineId, setTimelineId] = useState("");
   const [rentalDate, setRentalDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-  const [userInfo, setUserInfo] = useState({});
+  const [note, setNote] = useState("");
   const [timelineList, setTimelineList] = useState([]);
+  const [phone, setPhone] = useState(user?.phone_number); 
+  const [address, setAddress] = useState(user?.address); 
   const [msg, setMsg] = useState("");
 
   const [errorRentalDate, setErrorRentalDate] = useState("");
   const [errorReturnDate, setErrorReturnDate] = useState("");
   const [errorTimeline, setErrorTimeline] = useState("");
   const [errorTotalMoney, setErrorTotalMoney] = useState("");
-  const [product, setProduct] = useState([]);
-
   const navigate = useNavigate();
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const handleOpenSnackBar = () => {
+    setOpenSnackBar(true);
+  };
+
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBar(false);
+  };
+  
 
   const validate = (type) => {
     switch (type) {
@@ -48,6 +68,9 @@ export const CreateRequest = () => {
       case "returnDate":
         if (!returnDate) {
           setErrorReturnDate("Vui lòng nhập ngày kết thúc yêu cầu dự kiến.");
+        }
+        if (returnDate < rentalDate) {
+          setErrorReturnDate("Ngày kết thúc không thể sau ngày bắt đầu.");
         }
         break;
       case "timeline":
@@ -76,27 +99,60 @@ export const CreateRequest = () => {
     }
   };
 
-  useEffect(() => {
-    getTimelineList();
-  }, []);
+  const getProductDetail = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/product/detail/${product_id}`, {withCredentials: true}
+      );
+      setTotalMoney(response.data[0].price);
+      setProduct(response.data[0]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      if (error.response) {
+        console.error("Server responded with:", error.response.data);
+      }
+    }
+  };
+
+  const sizeClothes = [
+    {
+      value: "S",
+      label: "S",
+    },
+    {
+      value: "M",
+      label: "M",
+    },
+    {
+      value: "L",
+      label: "L",
+    },
+    {
+      value: "XL",
+      label: "XL",
+    },
+    {
+      value: "XXL",
+      label: "XXL",
+    },
+  ];
 
   useEffect(() => {
-    if (user) {
-      setUserInfo(user);
-    }
-    if (isError) {
-      console.log(isError);
-    }
-  }, [user, isError]);
+    getTimelineList();
+    getProductDetail();
+  }, []);
+
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
+      setTotalMoney((quantity - 1) * product.price);
     }
   };
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
+    setTotalMoney((quantity + 1) * product.price);
   };
 
   const handleSubmit = async (e) => {
@@ -105,62 +161,91 @@ export const CreateRequest = () => {
       validate("rentalDate");
       validate("returnDate");
       validate("timeline");
-      validate("totalMoney");
-      if (rentalDate && returnDate && timelineId && totalMoney) {
+      if (rentalDate && returnDate && timelineId && !errorReturnDate) {
         const res = await axios.post(
           "http://localhost:8080/order/createOrder",
           {
-            user_id: userInfo.user_id,
+            user_id: user?.user_id,
             product_id: product.product_id,
-            quantity: parseInt(quantity),
-            total_money: totalMoney,
+            quantity: product.product_type == 3 ? 1 : parseInt(quantity),
+            total_money: product.product_type == 1 ? 0 : totalMoney,
             timeline_id: parseInt(timelineId),
             rental_date: rentalDate,
             return_date: returnDate,
-            status: 6,
+            status:
+              product.product_type == 1 ? 1 : product.product_type == 2 ? 9 : 5,
+            note: note,
           },
           { withCredentials: true }
         );
-        navigate("/request");
+        handleOpenSnackBar();
+        setTimeout(() => {
+          navigate("/request");
+        }, 1000);
       }
     } catch (error) {
       setMsg(error.response.data.message);
     }
   };
 
-  const getDetail = async () => {
+  const handleSubmitForBuying = async (e) => {
     try {
-      const response = await axios.get(`http://localhost:8080/product/detail/${id}`, {
-        withCredentials: true,
-      });
-      const product = response.data;
-      setProduct(product[0]);
+      e.preventDefault(); 
+      const res = await axios.post(
+        "http://localhost:8080/order/createOrder",
+        {
+          user_id: user?.user_id,
+          product_id: product.product_id,
+          quantity: product.product_type == 3 ? 1 : parseInt(quantity),
+          total_money: product.product_type == 1 ? 0 : totalMoney,
+          timeline_id: null,
+          rental_date: moment().locale('vi').format('YYYY-MM-DD'),
+          return_date: moment().locale('vi').add(5, "days").format('YYYY-MM-DD'),
+          status: 9,
+          note: (!note) ? ('M' + ', ' + phone + ', ' + address) : (note + ', ' + phone + ', ' + address)
+        },
+        { withCredentials: true }
+      );
+      handleOpenSnackBar();
+      setTimeout(() => {
+        navigate("/request");
+      }, 1000);
     } catch (error) {
-      console.error("Error fetching data:", error);
-      if (error.response) {
-        console.error("Server responded with:", error.response.data);
-      }
+      console.log(error); 
+      setMsg(error.response.data.message);
     }
   }
-  useEffect(() => {
-    getDetail();
-  }, []);
 
   return (
     <Layout>
       <h2 className="createRequestTitle">Tạo yêu cầu</h2>
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={1000}
+        onClose={handleOpenSnackBar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackBar}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Yêu cầu đã được tạo thành công, đang chuyển hướng...
+        </Alert>
+      </Snackbar>
       <div className="createRequestContainer">
         <div className="create-request-container-left">
-           <img
+          <img
             src={product.thumbnail}
             alt="thumbnail"
             className="create-request-productImg"
-          /> 
-           <p className="create-request-productName">{product.product_name}</p>
+          />
+          <p className="create-request-productName">{product.product_name}</p>
         </div>
         <div className="create-request-container-right">
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
+          <form onSubmit={(product.product_type == 2) ? handleSubmitForBuying : handleSubmit}>
+            {(product.product_type != 2) && <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
               <TextField
                 type="date"
                 variant="outlined"
@@ -173,8 +258,10 @@ export const CreateRequest = () => {
                 value={rentalDate}
                 fullWidth
                 error={!!errorRentalDate}
-                helperText={errorRentalDate || "Ngày bắt đầu yêu cầu"}
+                helperText={errorRentalDate}
+                label="Ngày bắt đầu yêu cầu"
                 sx={{ mb: 4 }}
+                InputLabelProps={{ shrink: true }}
               />
 
               <TextField
@@ -186,16 +273,30 @@ export const CreateRequest = () => {
                   setMsg("");
                   setErrorReturnDate("");
                 }}
+                onBlur={() => validate("returnDate")}
                 value={returnDate}
                 fullWidth
                 error={!!errorReturnDate}
-                helperText={errorReturnDate || "Ngày kết thúc yêu cầu dự kiến"}
+                helperText={errorReturnDate}
+                label="Ngày kết thúc yêu cầu dự kiến"
+                InputLabelProps={{ shrink: true }}
                 sx={{ mb: 4 }}
               />
-            </Stack>
+            </Stack>}
+
+            {(product.product_type == 2) && <TextField
+                label="Địa chỉ"
+                fullWidth
+                value={address}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+                InputLabelProps={{ shrink: true }}
+                sx={{ mb: 4 }}
+            />}
 
             <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-              <TextField
+              {(product.product_type != 2) && <TextField
                 id="outlined-select-currency"
                 select
                 label="Lựa chọn khung giờ"
@@ -216,57 +317,112 @@ export const CreateRequest = () => {
                     {option.value}
                   </MenuItem>
                 ))}
-              </TextField>
+              </TextField>}
 
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
+              {(product.product_type == 2) && <TextField
+                label="Số điện thoại"
+                fullWidth
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
                 }}
-              >
-                <IconButton
-                  onClick={decreaseQuantity}
-                  className="create-request-changeQuantity"
-                >
-                  <RiSubtractFill />
-                </IconButton>
-                <TextField
-                  type="number"
-                  label="Số lượng"
-                  value={quantity}
-                  InputProps={{ inputProps: { min: 1 } }}
-                  onChange={(e) => {
-                    setQuantity(e.target.value);
-                    setMsg("");
+                InputLabelProps={{ shrink: true }}
+              />}
+
+              {product.product_type != 3 && (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                   }}
-                  sx={{ margin: "0 10px 0 10px" }}
-                />
-                <IconButton
-                  onClick={increaseQuantity}
-                  className="create-request-changeQuantity"
                 >
-                  <IoIosAdd />
-                </IconButton>
-              </div>
+                  <IconButton
+                    onClick={decreaseQuantity}
+                    className="create-request-changeQuantity"
+                  >
+                    <RiSubtractFill />
+                  </IconButton>
+                  <TextField
+                    type="number"
+                    label="Số lượng"
+                    value={quantity}
+                    InputProps={{ inputProps: { min: 1 } }}
+                    onChange={(e) => {
+                      setQuantity(parseInt(e.target.value));
+                      setTotalMoney(parseInt(e.target.value) * product.price);
+                      setMsg("");
+                    }}
+                    onBlur={() => {
+                      if (!quantity || quantity == 0) {setQuantity(1); setTotalMoney(product.price)}; 
+                    }}
+                    sx={{ margin: "0 10px 0 10px" }}
+                  />
+                  <IconButton
+                    onClick={increaseQuantity}
+                    className="create-request-changeQuantity"
+                  >
+                    <IoIosAdd />
+                  </IconButton>
+                </div>
+              )}
             </Stack>
 
-            <TextField
-              type="number"
-              variant="outlined"
-              color="secondary"
-              label="Tổng số tiền"
-              onChange={(e) => {
-                setTotalMoney(e.target.value);
-                setMsg("");
-                setErrorTotalMoney("");
-              }}
-              value={totalMoney}
-              fullWidth
-              error={!!errorTotalMoney}
-              helperText={errorTotalMoney}
-              sx={{ mb: 4 }}
-            />
+            <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
+              {(product.product_type == 2) && <TextField
+                id="outlined-select-currency"
+                select
+                label="Kích cỡ"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                fullWidth
+              >
+                {sizeClothes.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>}
+
+              {product.product_type != 1 && (
+                <TextField
+                  type="number"
+                  variant="outlined"
+                  color="secondary"
+                  label="Tổng số tiền"
+                  onChange={(e) => {
+                    setTotalMoney(e.target.value);
+                    setMsg("");
+                    setErrorTotalMoney("");
+                  }}
+                  value={totalMoney}
+                  fullWidth
+                  error={!!errorTotalMoney}
+                  helperText={errorTotalMoney}
+                  sx={{ mb: 4 }}
+                  disabled
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">VNĐ</InputAdornment>
+                    ),
+                  }}
+                />
+              )}
+            </Stack>
+
+            {product.product_type != 2 && (
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Lời ghi chú"
+                multiline
+                maxRows={4}
+                fullWidth
+                value={note}
+                onChange={(e) => {
+                  setNote(e.target.value);
+                }}
+              />
+            )}
             <p style={{ color: "red", marginBottom: "10px", fontSize: "14px" }}>
               {msg}
             </p>

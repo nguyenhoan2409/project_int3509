@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getMe } from '~/features/authSlice';
-import { Link } from 'react-router-dom';
+import { LogOut, getMe, reset } from '~/features/authSlice';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaEdit } from "react-icons/fa";
 import "./ProductsList.css"
@@ -9,18 +9,24 @@ import { ProductsManagement } from '../ProductsLayout/Products.admin';
 import Layout from '~/Pages/Layout/Layout';
 export const ProductsList = () => {
     const [products, setProducts] = useState([]);
+    const dispatch = useDispatch(); 
+    const navigate = useNavigate(); 
     const getProducts = async () => {
         try {
             const res = await axios.get("http://localhost:8080/product/list", {
                 withCredentials: true,
             });
             setProducts(res.data);
-            console.log(res.data)
         } catch (error) {
             console.error("Error fetching data:", error);
             if (error.response) {
                 console.error("Server responded with:", error.response.data);
             }
+            if (error?.response?.data?.msg?.message === "jwt expired") { 
+                dispatch(reset());
+                dispatch(LogOut());
+                navigate("/");
+              }
         }
     }
     useEffect(() => {
