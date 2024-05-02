@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ShopCategory.css";
 import { Item } from "./../../Components/Item/Item";
-import image from "../../Components/Assets/banner_uniform.png";
-import { Footer } from "~/Components/Footer/Footer";
 import Layout from "../Layout/Layout";
 import axios from "axios";
 

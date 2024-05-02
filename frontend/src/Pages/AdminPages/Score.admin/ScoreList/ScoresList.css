@@ -24,14 +24,28 @@
     align-items: center;
 }
 
-
-
+.search-input-admin {
+    height: 30px;
+    width: 10%;
+    font-size: 12px;
+    padding-left: 10px;
+    border-radius: 2px;
+    border: 1px solid #252323;
+}
+.search-select-admin {
+    height: 32px;
+    width: 10%;
+    font-size: 12px;
+    padding-left: 10px;
+    border-radius: 2px;
+    border: 1px solid #252323;
+}
 .search-btn-admin .search-score-btn-admin {
-    height: 40px;
+    height: 33px;
     border: 1px solid #c9c9c9;
-    border-radius: 5px;
+    border-radius: 2px;
     color: white;
-    font-size: 15px;
+    font-size: 12px;
     background: #007e43;
 }
 
@@ -48,8 +62,8 @@
     background-color: #007e43;
     color: white;
 }
-.search-admin .search-input-admin {
-    height: 35px;
+.search-btn-admin .search-input-admin {
+    height: 32px;
     width: 10%;
     padding-left:10px;
     border: 1px solid #252323;

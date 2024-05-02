@@ -6,7 +6,7 @@
 }
 
 .score-header {
-    height: 140px;
+    height: 80px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -14,18 +14,18 @@
 }
 
 .search {
-    gap: 20px;
+    gap: 10px;
     display: flex;
     flex-direction: row;
 }
 
 .search-btn .search-btn-users {
-    height: 40px;
+    height: 32px;
     width: 80px;
     border: 1px solid #c9c9c9;
-    border-radius: 5px;
+    border-radius: 2px;
     color: white;
-    font-size: 15px;
+    font-size: 12px;
     background: #007e43;
 }
 
@@ -34,18 +34,19 @@
 }
 
 .search .search-input-user {
-    height: 35px;
-    width: 200px;
+    height: 30px;
+    width: 150px;
     padding-left: 10px;
     border: 1px solid #252323;
     border-radius: 2px;
     color: #5c5c5c;
-    font-size: 15px;
+    font-size: 12px;
 }
 .score-table {
-    margin-left: 50px;
     justify-content: center;
     align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
  .score-table .score-table-user, .mssv, .fullname, .class, .university, .football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR, .certificate-icons {

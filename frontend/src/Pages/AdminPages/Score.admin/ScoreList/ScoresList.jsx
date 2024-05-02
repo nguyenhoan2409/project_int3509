@@ -69,9 +69,14 @@ export const ScoresList = () => {
       )
     }
     if(CDR) {
-      scoreFilterList = scoreFilterList.filter(
-        (score) => score.CDR == CDR
-      )
+      if(CDR === "Đạt") {
+        scoreFilterList = scoreFilterList.filter(
+          (score) => score.CDR == "Đ"
+        ) }
+      if(CDR === "không đạt") {
+        scoreFilterList = scoreFilterList.filter(
+          (score) => score.CDR == null
+        )}
     }
     setScores(scoreFilterList);
 
@@ -111,25 +116,26 @@ export const ScoresList = () => {
                 placeholder="Trường .."
                 onChange={(e) => setUniversity(e.target.value)}
               />
-               <input
-               className="search-input-admin"
-                type=""
-                placeholder="CDR .."
-                onChange={(e) => setCDR(e.target.value)}
-              />
+               <select className="search-select-admin" onChange={(e) => setCDR(e.target.value)}>
+                <option>--CDR--</option>
+                <option>Đạt</option>
+                <option>Không </option>
+                 </select>
                 <div className="search-btn-admin">
                   <button className="search-score-btn-admin" onClick={handleFilterScore}>Tìm kiếm</button>
                 </div>
 
-                <DownloadTableExcel
+               <div className="search-btn-admin">
+               <DownloadTableExcel
                     filename="physical-scores"
                     sheet="scores"
                     currentTableRef={tableRef.current}
                 >
 
-                   <button className = "download-btn"> Tải xuống </button>
+                   <button className = "search-score-btn-admin"> Tải xuống </button>
 
                 </DownloadTableExcel>
+               </div>
                 
               </div>
             </div>
