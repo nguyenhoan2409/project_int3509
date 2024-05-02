@@ -35,6 +35,23 @@ exports.getUserDetail = async function (req, res) {
         type: QueryTypes.SELECT,
       }
     );
+
+    // const orderListOfUser = await Orders.findAll({
+    //   where: {
+    //     user_id: userDetail[0].user_id,
+    //   },
+    //   attributes: [
+    //     "order_id",
+    //     "product_id",
+    //     "quantity",
+    //     "total_money",
+    //     "rental_time",
+    //     "return_time",
+    //     "status",
+    //   ],
+    // });
+
+    // userDetail[0].orders = orderListOfUser;
     return res.status(200).json(userDetail[0]);
   } catch (error) {
     return res.status(400).json({ msg: error });
