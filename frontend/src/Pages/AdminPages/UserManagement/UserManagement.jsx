@@ -141,7 +141,7 @@ export const UserManagement = () => {
           <TableBody>
             {users?.map((user, index) => (
               <StyledTableRow key={user.user_id}>
-                <StyledTableCell align="right">{index}</StyledTableCell>
+                <StyledTableCell align="right">{index +1}</StyledTableCell>
                 <StyledTableCell align="right">{user.fullname}</StyledTableCell>
                 <StyledTableCell align="right">{user.email}</StyledTableCell>
                 <StyledTableCell align="right">
@@ -153,8 +153,8 @@ export const UserManagement = () => {
                     "Admin"
                   ) : (
                     <Button onClick={() => userToAdmin(user.user_id)}>
-                      {" "}
-                      Cấp quyền admin{" "}
+                    
+                      Cấp quyền admin
                     </Button>
                   )}
                 </StyledTableCell>

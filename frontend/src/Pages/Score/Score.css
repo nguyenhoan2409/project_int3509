@@ -86,3 +86,11 @@
 .certificate-icons {
     font-size: 25px;
 }
+
+.no-data-user {
+    text-align: center;
+    font-size: 18px;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px ;
+}

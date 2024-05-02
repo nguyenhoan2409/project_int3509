@@ -123,7 +123,22 @@ export const ScoreStudentAdd = () => {
                 </table>
                  </div>
 
-            ) : (<div className = "no-data-msg">Không có file nào được tải </div>)}
+            ) : (
+            <div className='no-data'>
+              <p className = "no-data-msg" >Không có file nào được tải </p>
+              <div style={{display: 'flex', flexDirection: 'row'}}>
+                  <p style={{width: '100px'}}> Lưu ý </p> 
+                  <p style={{color: 'red', marginLeft: '5px', marginRight: '5px'}}>*</p> 
+                  <div> 
+                      <p>: File tải lên phải chỉ bao gồm các trường dữ liệu : </p>
+                      <p> 1. Đối với tải danh sách sinh viên : mssv, fullname, class, university. </p>
+                      <p> 2. Sau khi tải lên danh sách sinh viên thành công, có thể tải điểm với các trường dữ liệu :
+                         mssv, fullname, class, university, subject (football, badminton,...). </p>
+                  </div>
+               </div>
+              </div>
+          )
+            }
           </div>
       </div>
       </Layout>

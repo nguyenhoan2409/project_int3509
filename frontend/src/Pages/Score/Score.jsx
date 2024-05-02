@@ -145,6 +145,7 @@ export const Score = () => {
                 ))}
               </tbody>
             </table>
+            {scores.length === 0 && <p className="no-data-user">Không có dữ liệu</p>}
             <TablePagination
                 rowsPerPageOptions={[25, 100, 1000, 10000, 100000]}
                 component="div"

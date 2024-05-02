@@ -7,53 +7,75 @@ import { Link, useNavigate } from "react-router-dom";
 import Layout from "~/Pages/Layout/Layout";
 import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { useDispatch } from "react-redux";
-import { reset } from "numeral";
-import { LogOut } from "~/features/authSlice";
-
+import TablePagination from "@mui/material/TablePagination";
 
 export const ScoresList = () => {
   const dispatch = useDispatch(); 
   const navigate = useNavigate(); 
   const [mssv, setMssv] = useState("");
+  const [name, setName] = useState("");
+  const [classs, setClasss] = useState("");
+  const [university, setUniversity] = useState("");
+  const [CDR, setCDR] = useState("");
   const [scores, setScores] = useState([]);
+  const [initialScoreList, setInitialScoreList] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
   const tableRef = useRef(null);
-  var initialScoreList = []; 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   const getScores = async () => {
     try {
-      console.log("reloaded")
       const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
-      initialScoreList = response.data; 
+      setInitialScoreList(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
       }
-      if (error?.response?.data?.msg?.message === "jwt expired") { 
-        dispatch(reset());
-        dispatch(LogOut());
-        navigate("/");
-      }
     }
   };
+
   useEffect(() => {
     getScores();
-  }, [mssv]);
+  }, [mssv, name, classs, university, CDR]);
 
-  const searchHandle = async (event) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/score/search/${mssv}`, {
-          withCredentials: true
-        }
+  const handleFilterScore = () => {
+     let scoreFilterList = initialScoreList;
+    if (mssv) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.mssv == mssv
       );
-      let st = response.data.student;
-      setScores(st);
-    } catch (error) {
-      console.error("Error searching:", error);
     }
-  };
-  
+    if (name) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.fullname == name
+      );
+    }
+    if (classs) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.class == classs
+      )
+    }
+    if(university) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.university == university
+      )
+    }
+    if(CDR) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.CDR == CDR
+      )
+    }
+    setScores(scoreFilterList);
+
+  }
   return (
     <Layout>
       <div>
@@ -65,13 +87,38 @@ export const ScoresList = () => {
           <div className="main-admin">
             <div className="score-header-admin">
               <div className="search-admin">
-                <input
-                  className="search-input-admin"
-                  placeholder="Tra cứu điểm..."
-                  onChange={(e) => {setMssv(e.target.value);}}
-                />
+              <input
+               className="search-input-admin"
+                type=""
+                placeholder="Mssv .."
+                onChange={(e) => setMssv(e.target.value)}
+              />
+               <input
+               className="search-input-admin"
+                type=""
+                placeholder="Họ và tên .."
+                onChange={(e) => setName(e.target.value)}
+              />
+               <input
+               className="search-input-admin"
+                type=""
+                placeholder="Lớp .."
+                onChange={(e) => setClasss(e.target.value)}
+              />
+               <input
+               className="search-input-admin"
+                type=""
+                placeholder="Trường .."
+                onChange={(e) => setUniversity(e.target.value)}
+              />
+               <input
+               className="search-input-admin"
+                type=""
+                placeholder="CDR .."
+                onChange={(e) => setCDR(e.target.value)}
+              />
                 <div className="search-btn-admin">
-                  <button className="search-score-btn-admin" onClick={searchHandle}>Tìm kiếm</button>
+                  <button className="search-score-btn-admin" onClick={handleFilterScore}>Tìm kiếm</button>
                 </div>
 
                 <DownloadTableExcel
@@ -109,7 +156,10 @@ export const ScoresList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {scores?.map((score, index) => (
+                  {scores?.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        ).map((score, index) => (
                     <tr className="score-tr-admin" key={index}>
                       <td className="mssv-admin-td">{score.mssv}</td>
                       <td className="fullname-admin-td">{score.fullname}</td>
@@ -132,8 +182,21 @@ export const ScoresList = () => {
                       </td>
                     </tr>
                   ))}
+  
                 </tbody>
               </table>
+              {scores?.length === 0 && (
+                    <p className="no-data-admin"> Không có dữ liệu </p>
+                  )}
+              <TablePagination
+                rowsPerPageOptions={[25, 100, 1000, 10000, 100000]}
+                component="div"
+                count={scores.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
             </div>
           </div>
         </div>
