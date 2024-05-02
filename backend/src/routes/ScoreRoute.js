@@ -18,6 +18,4 @@ module.exports = function (router) {
     router.post('/student/add', verifyUser.isAuth, scoreController.createStudent)
 
     router.patch('/score/add', verifyUser.isAuth, scoreController.addScore)
-
-    router.post('/score/certificate', verifyUser.isAuth, scoreController.addCertificate)
 }
