@@ -177,22 +177,4 @@ exports.addScore = async function (req, res) {
  
  }
 
- exports.createCertificate = async function(req, res) {
-     try {
-         const data = req.body
-         const student = await database.query("INSERT INTO certificate (mssv, fullname, class, university, email, phonenumber, status) VALUES(:mssv, :fullname, :class, :univercity, :email, :phonenumber, :status)", {
-             replacements: {
-                 mssv : data.mssv,
-                 fullname: data.fullname,
-                 class : data.class,
-                 univercity: data.univercity,
-                 email: data.email,
-                 phonenumber: data.phonenumber,
-                 status : "đã gửi yêu cầu"
-             }, type : QueryTypes.INSERT
-         })
-         return res.status(200).json({ student })
-     } catch(error) {
-         return res.status(400).json({ msg: error })
-     }
- }
+ 
