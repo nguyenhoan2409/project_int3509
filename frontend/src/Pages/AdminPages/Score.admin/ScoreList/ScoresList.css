@@ -65,7 +65,7 @@
  .table-admin .score-table-admin {
     border-collapse: collapse;
   }
- .score-table-admin .mssv-admin, .fullname-admin, .class-admin, .univercity-admin, .football-admin, .bedminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin, .action-admin{
+ .score-table-admin .mssv-admin, .fullname-admin, .class-admin, .university-admin, .football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin, .action-admin{
     text-align: center;
     background-color: #04AA6D;
     color: white;
@@ -74,7 +74,7 @@
     border: 1px solid;
 }
 
-.score-table-admin .mssv-admin-td, .fullname-admin-td, .class-admin-td, .univercity-admin-td, .football-admin-td, .bedminton-admin-td, .tabletennis-admin-td, .basketball-admin-td, .volleyball-admin-td, .air_volleyball-admin-td, .taekwondo-admin-td, .golf-admin-td, .CDR-admin-td, .action-admin-td{
+.score-table-admin .mssv-admin-td, .fullname-admin-td, .class-admin-td, .university-admin-td, .football-admin-td, .badminton-admin-td, .tabletennis-admin-td, .basketball-admin-td, .volleyball-admin-td, .air_volleyball-admin-td, .taekwondo-admin-td, .golf-admin-td, .CDR-admin-td, .action-admin-td{
     text-align: center;
     border: 1px solid;
 }
@@ -94,7 +94,7 @@
     width: 15%;
 }
 
-.action-admin, .univercity-admin, .football-admin, .bedminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
+.action-admin, .university-admin, .football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
     width: 5%;
 }
  

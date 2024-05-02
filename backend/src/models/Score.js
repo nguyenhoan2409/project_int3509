@@ -16,7 +16,7 @@ const Score = database.define(
         type: DataTypes.STRING, 
         allowNull: true,
     },
-    univercity: {
+    university: {
         type: DataTypes.STRING, 
         allowNull: true,
     },
@@ -24,7 +24,7 @@ const Score = database.define(
         type: DataTypes.DOUBLE, 
         allowNull: true,
     },
-    bedminton_score: {
+    badminton_score: {
         type: DataTypes.DOUBLE, 
         allowNull: true,
     },

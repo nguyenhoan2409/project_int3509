@@ -53,7 +53,7 @@ export const ScoreStudentAdd = () => {
         mssv: data.mssv,
         fullname: data.fullname,
         class: data.class,
-        univercity: data.university,
+        university: data.university,
       }, {
         withCredentials: true,
       });

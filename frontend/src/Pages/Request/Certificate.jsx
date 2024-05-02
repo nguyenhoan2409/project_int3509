@@ -4,7 +4,6 @@ import "./Request.css";
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import Layout from "../Layout/Layout";
-import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export const Certificate = () => {
@@ -59,7 +58,6 @@ export const Certificate = () => {
           }, {
             withCredentials: true,
           });
-          navigate("/request");
           alert("Đã gửi yêu cầu thành công");
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -117,7 +115,7 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="Trường"
-                            value={student.univercity}
+                            value={student.university}
                             fullWidth
                             required
                             InputLabelProps={{ shrink: true }}

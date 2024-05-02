@@ -95,9 +95,9 @@ export const ScoresList = () => {
                     <th className="mssv-admin">MSSV</th>
                     <th className="fullname-admin">Họ và Tên</th>
                     <th className="class-admin">Lớp</th>
-                    <th className="univercity-admin">Trường</th>
+                    <th className="university-admin">Trường</th>
                     <th className="football-admin">Bóng đá</th>
-                    <th className="bedminton-admin">Cầu lông</th>
+                    <th className="badminton-admin">Cầu lông</th>
                     <th className="tabletennis-admin">Bóng bàn</th>
                     <th className="basketball-admin">Bóng rổ</th>
                     <th className="volleyball-admin">Bóng chuyền hơi</th>
@@ -114,9 +114,9 @@ export const ScoresList = () => {
                       <td className="mssv-admin-td">{score.mssv}</td>
                       <td className="fullname-admin-td">{score.fullname}</td>
                       <td className="class-admin-td">{score.class}</td>
-                      <td className="univercity-admin-td">{score.univercity}</td>
+                      <td className="university-admin-td">{score.university}</td>
                       <td className="football-admin-td">{score.football_score}</td>
-                      <td className="bedminton-admin-td">{score.bedminton_score}</td>
+                      <td className="badminton-admin-td">{score.badminton_score}</td>
                       <td className="tabletennis-admin-td">{score.tabletennis_score}</td>
                       <td className="basketball-admin-td">{score.basketball_score}</td>
                       <td className="volleyball-admin-td">{score.volleyball_score}</td>

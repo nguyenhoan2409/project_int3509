@@ -4,15 +4,30 @@ import axios from "axios";
 import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 import { TbCertificate } from "react-icons/tb";
+import TablePagination from "@mui/material/TablePagination";
 
 export const Score = () => {
   const [mssv, setMssv] = useState("");
+  const [name, setName] = useState("");
+  const [classs, setClasss] = useState("");
+  const [university, setUniversity] = useState("");
   const [scores, setScores] = useState([]);
+  const [initialScoreList, setInitialScoreList] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   const getScores = async () => {
     try {
       const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
+      setInitialScoreList(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
@@ -23,19 +38,33 @@ export const Score = () => {
 
   useEffect(() => {
     getScores();
-  }, [mssv]);
+  }, [mssv, name, classs, university]);
 
-  const searchHandle = async (event) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/score/search/${mssv}`, {withCredentials: true}
+  const handleFilterScore = () => {
+     let scoreFilterList = initialScoreList;
+    if (mssv) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.mssv == mssv
       );
-      let st = response.data.student;
-      setScores(st);
-    } catch (error) {
-      console.error("Error searching:", error);
     }
-  };
+    if (name) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.fullname == name
+      );
+    }
+    if (classs) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.class == classs
+      )
+    }
+    if(university) {
+      scoreFilterList = scoreFilterList.filter(
+        (score) => score.university == university
+      )
+    }
+    setScores(scoreFilterList);
+
+  }
   return (
     <div className="score-container">
       <Layout>
@@ -45,11 +74,29 @@ export const Score = () => {
               <input
                className="search-input-user"
                 type=""
-                placeholder="Tra cứu điểm..."
+                placeholder="Mssv .."
                 onChange={(e) => setMssv(e.target.value)}
               />
+               <input
+               className="search-input-user"
+                type=""
+                placeholder="Họ và tên .."
+                onChange={(e) => setName(e.target.value)}
+              />
+               <input
+               className="search-input-user"
+                type=""
+                placeholder="Lớp .."
+                onChange={(e) => setClasss(e.target.value)}
+              />
+               <input
+               className="search-input-user"
+                type=""
+                placeholder="Trường .."
+                onChange={(e) => setUniversity(e.target.value)}
+              />
               <div className="search-btn">
-                <button className="search-btn-users" onClick={searchHandle}>Tìm kiếm</button>
+                <button className="search-btn-users" onClick={handleFilterScore}>Tìm kiếm</button>
               </div>
             </div>
           </div>
@@ -60,9 +107,9 @@ export const Score = () => {
                   <th className="mssv score-table-header">MSSV</th>
                   <th className="fullname score-table-header">Họ và Tên</th>
                   <th className="class score-table-header">Lớp</th>
-                  <th className="univercity score-table-header">Trường</th>
+                  <th className="university score-table-header">Trường</th>
                   <th className="football score-table-header">Bóng đá</th>
-                  <th className="bedminton score-table-header">Cầu lông</th>
+                  <th className="badminton score-table-header">Cầu lông</th>
                   <th className="tabletennis score-table-header">Bóng bàn</th>
                   <th className="basketball score-table-header">Bóng rổ</th>
                   <th className="volleyball score-table-header">Bóng chuyền hơi</th>
@@ -73,14 +120,17 @@ export const Score = () => {
                 </tr>
               </thead>
               <tbody>
-                {scores?.map((score, index) => (
+                {scores?.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        ).map((score, index) => (
                   <tr className="score-table-tr" key={index}>
                     <td className="mssv">{score.mssv}</td>
                     <td className="fullname">{score.fullname}</td>
                     <td className="class">{score.class}</td>
-                    <td className="univercity">{score.univercity}</td>
+                    <td className="university">{score.university}</td>
                     <td className="football">{score.football_score}</td>
-                    <td className="bedminton">{score.bedminton_score}</td>
+                    <td className="badminton">{score.badminton_score}</td>
                     <td className="tabletennis">{score.tabletennis_score}</td>
                     <td className="basketball">{score.basketball_score}</td>
                     <td className="volleyball">{score.volleyball_score}</td>
@@ -95,6 +145,15 @@ export const Score = () => {
                 ))}
               </tbody>
             </table>
+            <TablePagination
+                rowsPerPageOptions={[25, 100, 1000, 10000, 100000]}
+                component="div"
+                count={scores.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
           </div>
         </div>
       </Layout>

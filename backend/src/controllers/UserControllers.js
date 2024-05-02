@@ -173,7 +173,7 @@ exports.statisticaldata = async function (req, res) {
       { label: "Bóng bàn", key: "tabletennis_score" },
       { label: "Bóng chuyền hơi", key: "air_volleyball_score" },
       { label: "Bóng rổ", key: "basketball_score" },
-      { label: "Cầu lông", key: "bedminton_score" },
+      { label: "Cầu lông", key: "badminton_score" },
       { label: "Bóng chuyền da", key: "volleyball_score" },
       { label: "Võ taekwondo", key: "taekwondo_score" },
       { label: "Golf", key: "golf_score" },
