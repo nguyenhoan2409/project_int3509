@@ -11,7 +11,7 @@ const Verification = require("../models/Verification");
 
 // var JWT = require("../common/jwt")
 
-exports.get_list = async function (req, res) {
+exports.getUserList = async function (req, res) {
   try {
     const users = await database.query("SELECT * FROM users", {
       type: QueryTypes.SELECT,
@@ -22,16 +22,9 @@ exports.get_list = async function (req, res) {
   }
 };
 
-exports.userDetail = async function (req, res) {
+exports.getUserDetail = async function (req, res) {
   try {
     const user_id = req.params.id;
-exports.getUserList = async function (req, res) {
-    try {
-        const users = await database.query("SELECT * FROM users", { type: QueryTypes.SELECT })
-        return res.status(200).json({users});
-    } catch (error) {
-        return res.status(400).json({ msg: error })
-    }
 
     const userDetail = await database.query(
       "SELECT * FROM users WHERE user_id = :user_id",
@@ -42,23 +35,6 @@ exports.getUserList = async function (req, res) {
         type: QueryTypes.SELECT,
       }
     );
-
-    // const orderListOfUser = await Orders.findAll({
-    //   where: {
-    //     user_id: userDetail[0].user_id,
-    //   },
-    //   attributes: [
-    //     "order_id",
-    //     "product_id",
-    //     "quantity",
-    //     "total_money",
-    //     "rental_time",
-    //     "return_time",
-    //     "status",
-    //   ],
-    // });
-
-    // userDetail[0].orders = orderListOfUser;
     return res.status(200).json(userDetail[0]);
   } catch (error) {
     return res.status(400).json({ msg: error });
@@ -107,7 +83,7 @@ exports.getMe = async function (req, res) {
   }
 };
 
-exports.remove_user = async function (req, res) {
+exports.removeUser = async function (req, res) {
   try {
     var user_id = req.params.id;
     await database.query("DELETE FROM users WHERE user_id=:user_id", {
@@ -122,7 +98,7 @@ exports.remove_user = async function (req, res) {
   }
 };
 
-exports.update_user = async function (req, res) {
+exports.updateUser = async function (req, res) {
   try {
     const user_id = req.body.user_id;
     await database.query(
@@ -260,74 +236,6 @@ exports.statisticaldata = async function (req, res) {
     return res.status(400).json({ msg: error });
   }
 };
-            `, {replacements: {
-                user_id: user.user_id
-            }}, { type: QueryTypes.SELECT });
-        const result = {
-            user_id: user.user_id,
-            fullname: user.fullname,
-            password: user.password,
-            email: user.email,
-            phone_number: user.phone_number,
-            address: user.address,
-            role_id: user.role_id,
-            orderList: orderListOfMe[0]
-        }
-        return res.status(200).json(result); 
-    } catch (error) {
-        return res.status(400).json({ msg: error })
-    }
-}
-
-exports.removeUser = async function (req, res) {
-    try {
-        var user_id = req.params.id
-        await database.query("DELETE FROM users WHERE user_id=:user_id", {
-            replacements: {
-                user_id: user_id
-            }, type: QueryTypes.DELETE
-        })
-        return res.status(200).json({ msg: "Đã xóa người dùng thành công" });
-    } catch (error) {
-        return res.status(400).json({ msg: error })
-    }
-
-}
-
-exports.updateUser = async function (req, res) {
-    try {
-         const user_id= req.body.user_id
-         console.log(user_id)
-        await database.query("UPDATE users SET fullname=:fullname, email=:email, phone_number=:phone_number, address=:address WHERE user_id =:user_id ",
-            {
-                replacements: {
-                    fullname: req.body.fullname,
-                    email: req.body.email,
-                    phone_number: req.body.phone_number,
-                    address: req.body.address,
-                    user_id: user_id
-                }, type: QueryTypes.UPDATE
-            })
-        return res.status(200).json({ msg: "Đã cập nhật người dùng thành công" })
-    } catch (error) {
-        return res.status(400).json({ msg: error })
-    }
-}
-
-exports.updateUserToAdmin = async function (req, res) {
-    try {
-        var user_id = req.params.id
-        await database.query("UPDATE users SET role_id = :role_id WHERE user_id = :user_id", {
-            replacements: {
-                user_id: user_id,
-                role_id: req.body.role_id
-            }, type: QueryTypes.UPDATE
-        })
-        return res.status(200).json({ msg: "Đã chuyển người dùng sang admin" })
-    } catch (error) {
-        return res.status(400).json({ msg: error })
-    }
-}
 
 exports.updatePassword = async function (req, res) {
   try {
