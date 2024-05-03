@@ -147,13 +147,14 @@ export const Login = () => {
             className="loginBtn"
             size="large"
           >
-            {isLoading ? 'Đang kiểm tra' : 'Đăng nhập'}
+            {isLoading ? 'Đang kiểm tra...' : 'Đăng nhập'}
           </Button>
         </form>
-        <p className="loginsignup-login">
+        <p className="loginsignup-login" onClick={() => {navigate('/notificationLoginSignup', {state: {type: 'forgotPassword-typeEmail'}})}}>Quên mật khẩu?</p>
+        <p style={{fontSize: '16px', fontWeight: '500'}}>
           Bạn chưa có tài khoản?
           <Link style={{ textDecoration: "none" }} to="/signup">
-            <span style={{ color: "blue" }}>Đăng ký</span>
+            <span style={{ color: "blue", marginLeft: '10px' }}>Đăng ký</span>
           </Link>
         </p>
       </div>

@@ -8,7 +8,8 @@ const argon2 = require("argon2");
 const Score = require("../models/Score");
 const Certificate = require("../models/Certificate");
 const Verification = require("../models/Verification");
-
+const crypto = require("crypto");
+const sendEmail = require("../utils/sendEmail");
 // var JWT = require("../common/jwt")
 
 exports.get_list = async function (req, res) {
@@ -339,3 +340,87 @@ exports.verifyUser = async function (req, res) {
     res.status(500).json({ message: "Lỗi server." , error: error});
   }
 };
+
+exports.checkEmailForForgottenPassword = async function (req, res) {
+  try {
+    const email = req.body.email; 
+    const user = await User.findOne({
+      where: {
+        email: email
+      }
+    });
+    if (!user) return res.status(400).json({ msg: "Email người dùng không tồn tại, vui lòng kiểm tra lại" });
+
+    let code = await Verification.findOne({
+      where: {
+        user_id: user.user_id
+      }
+    });
+    if (!code) {
+      code = await Verification.create({
+        user_id: user.user_id,
+        code: crypto.randomBytes(32).toString('hex')
+      });
+      const url = `http://localhost:3000/user/forgottenPassword/${user.user_id}/verify/${code.code}`;
+      await sendEmail(user.email, "Xác thực tài khoản", url);
+    }
+
+    return res
+      .status(200)
+      .json({ msg: "Link xác thực đã được gửi tới email, vui lòng nhấn vào link để xác thực." });
+
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi server." , error: error});
+  }
+};
+
+exports.verifyUserForForgottenPassword = async function (req, res) {
+  try {
+    const user = await User.findOne({
+      where: {
+        user_id: req.params.id
+      }
+    });
+    if (!user) return res.status(400).json({ msg: "Link xác thực không hợp lệ." });
+
+    const verification = await Verification.findOne({
+      where: {
+        user_id: user.user_id, 
+        code: req.params.code
+      }
+    });
+    if (!verification) return res.status(400).json({ msg: "Link xác thực không hợp lệ." });
+
+    res.status(200).json({ message: "Xác thực email cho chức năng quên mật khẩu thành công." });
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi server." , error: error});
+  }
+};
+
+exports.createNewPassword = async function (req, res) {
+  try {
+    const {user_id, newPassword, code} = req.body; 
+    const user = await User.findOne({
+      where: {
+        user_id: user_id
+      }
+    })
+    if (!user) return res.status(400).json({ msg: "Người dùng không tồn tại." });
+    const verification = await Verification.findOne({
+      where: {
+        user_id: user.user_id, 
+        code: code
+      }
+    });
+
+    if (!verification) return res.status(400).json({ msg: "Bạn chưa được xác thực đổi mật khẩu, vui lòng kiểm tra lại" });
+    const new_password = await argon2.hash(newPassword); 
+    await user.update({
+      password: new_password
+    })
+    await verification.destroy(); 
+    return res.status(200).json({ msg: "Đổi mật khẩu thành công" });
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi server." , error: error});
+  }
+}
