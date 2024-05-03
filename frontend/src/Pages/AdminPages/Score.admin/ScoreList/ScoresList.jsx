@@ -73,9 +73,9 @@ export const ScoresList = () => {
         scoreFilterList = scoreFilterList.filter(
           (score) => score.CDR == "Đ"
         ) }
-      if(CDR === "không đạt") {
+      if(CDR === "Không") {
         scoreFilterList = scoreFilterList.filter(
-          (score) => score.CDR == null
+          (score) => score.CDR !== "Đ"
         )}
     }
     setScores(scoreFilterList);
@@ -155,7 +155,7 @@ export const ScoresList = () => {
                     <th className="basketball-admin">Bóng rổ</th>
                     <th className="volleyball-admin">Bóng chuyền hơi</th>
                     <th className="air_volleyball-admin">Bóng chuyền</th>
-                    <th className="taekwondo-admin">Taekwondo</th>
+                    <th className="taekwondo-admin">Võ</th>
                     <th className="golf-admin">Golf</th>
                     <th className="CDR-admin">CĐR</th>
                     <th className="action-admin">Thao tác</th>

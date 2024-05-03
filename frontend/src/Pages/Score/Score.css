@@ -70,19 +70,19 @@
 } 
 .score-table .score-table-tr:nth-child(even){background-color: #f2f2f2;}
 .mssv {
-    width: 100px;
+    width: 7%;
 }
 .fullname {
-    width: 200px;
+    width: 15%;
 }
 .class {
-    width: 200px;
+    width: 15%;
 }
 .university {
-    width: 60px;
+    width: 7%;
 }
 .football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR{
-    width: 60px;
+    width: 6%;
 }
 .certificate-icons {
     font-size: 25px;

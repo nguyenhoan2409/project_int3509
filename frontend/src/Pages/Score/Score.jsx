@@ -114,7 +114,7 @@ export const Score = () => {
                   <th className="basketball score-table-header">Bóng rổ</th>
                   <th className="volleyball score-table-header">Bóng chuyền hơi</th>
                   <th className="air_volleyball score-table-header">Bóng chuyền</th>
-                  <th className="taekwondo score-table-header">Taekwondo</th>
+                  <th className="taekwondo score-table-header">Võ</th>
                   <th className="golf score-table-header">Golf</th>
                   <th className="CDR score-table-header">CĐR</th>
                 </tr>

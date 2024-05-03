@@ -101,13 +101,13 @@
 } 
 .score-table-admin .score-tr-admin:nth-child(even){background-color: #f2f2f2;}
 .mssv-admin {
-    width: 10%;
+    width: 7%;
 }
 .fullname-admin {
-    width: 20%;
+    width: 12%;
 }
 .class-admin {
-    width: 15%;
+    width: 12%;
 }
 
 .action-admin, .university-admin, .football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
