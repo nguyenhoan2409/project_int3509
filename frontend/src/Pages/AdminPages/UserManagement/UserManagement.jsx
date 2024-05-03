@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LogOut, reset } from "~/features/authSlice";
 import TablePagination from "@mui/material/TablePagination";
-
+import Alert from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,9 +42,7 @@ export const UserManagement = () => {
   const dispatch = useDispatch(); 
   const navigate = useNavigate(); 
   const [users, setUsers] = useState([]);
-  const [userList, setUserList] = useState([]);
   const [initialUserList, setInitialUserList] = useState([]);
-  const [msg, setMsg] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone_number, setPhone_number] = useState("");
@@ -67,7 +65,6 @@ export const UserManagement = () => {
       });
       const users = response.data;
       setUsers(users.users);
-      setUserList(users.users);
       setInitialUserList(users.users);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -139,18 +136,17 @@ export const UserManagement = () => {
       }
     }
   };
+
+
+  const updateUserToAdmin = async(user_id) => {
+    const result = window.confirm('Bạn có chắc muốn thực hiện hành động này không?');
+    if (result) {
+        userToAdmin(user_id);
+    } 
+    }
   return (
     <Layout>
-      <Box
-        sx={{
-          textAlign: "center",
-          p: 2,
-          background: (theme) => theme.palette.grey["200"],
-          color: (theme) => theme.palette.success.main,
-        }}
-      >
-        <Typography variant="h5">Quản lý người dùng</Typography>
-      </Box>
+      <div className="title">Quản lý người dùng</div>
 
       <div className="search-user">
         <input
@@ -189,8 +185,9 @@ export const UserManagement = () => {
         </div>
       </div>
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+     <div style={{marginLeft : "20px", marginRight : "20px"}} >
+     <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 600 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell align="right">STT</StyledTableCell>
@@ -214,7 +211,7 @@ export const UserManagement = () => {
                 <StyledTableCell align="right">{user.email}</StyledTableCell>
                 <StyledTableCell align="right">{user.phone_number}</StyledTableCell>
                 <StyledTableCell align="right">{user.address}</StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="right" style={user.role_id === 1 ? {color: 'red'} : {color: '#007e43'}}>
                   {user.role_id === 1 ? (
                     "Quản trị viên"
                   ) : (
@@ -223,9 +220,9 @@ export const UserManagement = () => {
                 </StyledTableCell>
                 <StyledTableCell align="right"> 
                     {user.role_id === 2 && 
-                    <Button onClick={() => userToAdmin(user.user_id)}>
+                    <div onClick={() => updateUserToAdmin(user.user_id)} style={{cursor: 'pointer', color: '#063678'}}>
                       Cấp quyền admin
-                    </Button> }
+                    </div> }
                     </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -242,6 +239,7 @@ export const UserManagement = () => {
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
       </TableContainer>
+     </div>
     </Layout>
   );
 };

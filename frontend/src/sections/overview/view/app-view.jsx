@@ -94,9 +94,7 @@ export default function AppView({
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" sx={{ mb: 5 }}>
-        Thống kê
-      </Typography>
+      <div className="title">Thống kê</div>
 
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3}>

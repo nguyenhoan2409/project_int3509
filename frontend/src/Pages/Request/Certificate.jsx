@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button, Stack } from "@mui/material";
 import "./Request.css";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Layout from "../Layout/Layout";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ export const Certificate = () => {
     const [phonenumber, setPhonenumber] = useState();
     const [checkCDR, setCheckCDR] = useState(false);
     const {user} = useSelector((state) => state.auth); 
- 
+    const navigate = useNavigate();
     function handleSubmit(event) {
         event.preventDefault();
     }
@@ -59,6 +59,7 @@ export const Certificate = () => {
             withCredentials: true,
           });
           alert("Đã gửi yêu cầu thành công");
+          navigate("/request");
         } catch (error) {
           console.error("Error fetching data:", error);
           if (error.response) {

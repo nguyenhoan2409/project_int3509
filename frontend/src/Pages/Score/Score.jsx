@@ -95,9 +95,7 @@ export const Score = () => {
                 placeholder="Trường .."
                 onChange={(e) => setUniversity(e.target.value)}
               />
-              <div className="search-btn">
                 <button className="search-btn-users" onClick={handleFilterScore}>Tìm kiếm</button>
-              </div>
             </div>
           </div>
           <div className="score-table">

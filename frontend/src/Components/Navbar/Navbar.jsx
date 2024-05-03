@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
-
-import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
-import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineUser, AiOutlineLogout, AiFillCaretDown } from "react-icons/ai";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { LogOut, reset } from "~/features/authSlice";
 import Snackbar from '@mui/material/Snackbar';
@@ -73,7 +69,7 @@ export const Navbar = () => {
         </Alert>
       </Snackbar>
       <div className="nav-logo">
-        <img src={logo} alt="" className="logo-img" />
+        <img src="https://www.vnu.edu.vn/home/images/logo.png" alt="" className="logo-img" />
       </div>
 
       <div className="nav-menu-container">
@@ -103,7 +99,7 @@ export const Navbar = () => {
             </Link>
           </li>
           <li>
-            <img src={defaultAvatar} className="img-profile" />
+            <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-1024.png" className="img-profile" />
             <AiFillCaretDown color={scrolled ? 'white' : "rgba(186, 149, 149, 0.4)"} size={18} style={{paddingBottom: 10}}/>
             <ul className="sub-item-container">
               <li className="sub-item">

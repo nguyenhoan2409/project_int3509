@@ -6,22 +6,23 @@
 }
 
 .score-header {
-    height: 80px;
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
+    margin: 30px 20px 10px 20px;
 }
 
 .search {
     gap: 10px;
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
-.search-btn .search-btn-users {
-    height: 32px;
-    width: 80px;
+.search-btn-users {
+    height: 33px;
+    width: 20%;
     border: 1px solid #c9c9c9;
     border-radius: 2px;
     color: white;
@@ -29,13 +30,13 @@
     background: #007e43;
 }
 
-.search-btn .search-btn-users:hover {
+.search-btn-users:hover {
     background: #039852;
 }
 
 .search .search-input-user {
     height: 30px;
-    width: 150px;
+    width: 40%;
     padding-left: 10px;
     border: 1px solid #252323;
     border-radius: 2px;
@@ -50,7 +51,7 @@
 }
 
  .score-table .score-table-user, .mssv, .fullname, .class, .university, .football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR, .certificate-icons {
-    border: 1px solid;
+    border: #074d2c 1px solid;
   }
   
  .score-table .score-table-user {
@@ -58,7 +59,7 @@
   }
  .score-table .score-table-header{
     text-align: center;
-    background-color: #04AA6D;
+    background-color:#007e43;
     color: white;
     padding-top: 12px;
     padding-bottom: 12px;

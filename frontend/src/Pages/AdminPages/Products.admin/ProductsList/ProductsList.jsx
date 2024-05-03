@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { LogOut, getMe, reset } from '~/features/authSlice';
+import { useDispatch } from 'react-redux';
+import { LogOut, reset } from '~/features/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaEdit } from "react-icons/fa";
@@ -48,7 +48,7 @@ export const ProductsList = () => {
                                 <th className="products-1">Số lượng trong kho</th>
                                 <th className="products-2">Số lượng hiện có</th>
                                 <th className="descriptions">Mô tả</th>
-                                <th className="order-type">Mua/Mượn/Thuê</th>
+                                <th className="order-type">Mua /Mượn /Thuê</th>
                                 <th className="products-update">Thao tác</th>
                             </tr>
                         </thead>
@@ -56,14 +56,14 @@ export const ProductsList = () => {
                             {products?.map((product, index) => (
                                 <tr className='products-list-tr' key = {index}>
                                 <td  className="products-id-data">{index + 1}</td>
-                                <td className="thumbnails-td products-thumbnails-data"><img src={product.thumbnail} /></td>
+                                <td className="products-thumbnails-data"><img src={product.thumbnail} /></td>
                                 <td className="products-name-data">{product.product_name}</td>
                                 <td className="products-price-data">{product.price}</td>
                                 <td className="products-1-data">{product.quantity}</td>
                                 <td className="products-2-data">{product.quantity}</td>
                                 <td className="descriptions-data">{product.description}</td>
                                 <td className="order-type-data">{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</td>
-                                <td className='products-update-data products-update-icon'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit /></Link></td>
+                                <td className='products-update-data'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit /></Link></td>
                                 </tr>
                             ))}
                         </tbody>

@@ -10,6 +10,9 @@ export const ScoreStudentAdd = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [excelData, setExcelData] = useState(null);
   const [subject, setSubject] = useState();
+  const [msg, setMsg] = useState("Đã thêm thành công!");
+  const [msgError, setMsgError] = useState("File không hợp lệ!");
+  const [check, setCheck] = useState(false);
   const handleFile = (e) => {
     let selectedFile = e.target.files[0];
     if(selectedFile){
@@ -29,24 +32,37 @@ export const ScoreStudentAdd = () => {
      const sheetName = workbook.SheetNames[0];
      const worksheet = workbook.Sheets[sheetName];
      const data = XLSX.utils.sheet_to_json(worksheet);
-     setExcelData(data);
      const dataHeader = Object.keys(data[0]);
      if(dataHeader.length === 4){
-       for(let i = 0; i < data.length; i++){
-         addStudent(data[i]);
+       if(dataHeader[0] === "mssv" && dataHeader[1] === "fullname" && dataHeader[2] === "class" && dataHeader[3] === "university") {
+        for(let i = 0; i < data.length; i++){
+          addStudent(data[i]);
+        }
+        setCheck(true);
+       } else {
+        setCheck(false);
        }
-     }
+     } 
      if(dataHeader.length === 5) {
-        console.log(dataHeader[4])
         setSubject(dataHeader[4]);
-        console.log(data.length)
-        for(let j = 0; j < data.length; j++){
-           addScore(data[j]);
-         }
-       }
-     
-   }   
+        if(dataHeader[0] === "mssv" && dataHeader[1] === "fullname" && dataHeader[2] === "class" && dataHeader[3] === "university"
+        && (dataHeader[4] === "football" || dataHeader[4] === "badminton" || dataHeader[4] === "tabletennis" || dataHeader[4] === "basketball"
+        || dataHeader[4] === "volleyball" || dataHeader[4] === "air_volleyball" || dataHeader[4] === "taekwondo" || dataHeader[4] === "golf")) {
+          for(let j = 0; j < data.length; j++){
+            addScore(data[j]);
+          }
+          setCheck(true);
+        } else {
+          setCheck(false);
+        }
+       } 
+     if(dataHeader.length !== 4 && dataHeader.length !== 5) {
+        setMsg("File không hợp lệ");
+      }
+       setExcelData(data);   
   }
+}
+
   const addStudent = async (data) => {
     try {
       const res = await axios.post("http://localhost:8080/student/add", {
@@ -102,7 +118,8 @@ export const ScoreStudentAdd = () => {
           <div className='data-view'>
             {excelData?(
               <div className='table-data-res'>
-                <h2> Danh sách </h2>
+                <h2 style={{color: 'green'}}> {check === true && msg}</h2>
+                <h2 style={{color: 'red'}}> {check === false && msgError}</h2>
                 <table className="table-data-score-student">
                 <thead>
                   <tr> 

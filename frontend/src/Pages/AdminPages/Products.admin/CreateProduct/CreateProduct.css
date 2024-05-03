@@ -63,10 +63,17 @@
 }
 
 .create-product-right .create-product-btn {
-    height: 40px;
+    height: 45px;
     width: 170px;
     font-size: 20px;
     margin-top: 20px;
+    border-radius: 2px;
+    border: #007e83 1px solid;
+}
+.create-product-right .create-product-btn:hover {
+    background-color: #35a571;
+    border: #35a571;
+    cursor: pointer;
 }
 
 .msg-create {

@@ -1,6 +1,5 @@
 import React from 'react'
 import './Footer.css'
-import footer_logo from '~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU.png'
 import { FaHome } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 
@@ -8,7 +7,7 @@ export const Footer = () => {
   return (
     <div className='footer'>
         <div className="footer-logo">
-            <img src={footer_logo} alt="" />
+            <img src="https://www.vnu.edu.vn/upload/2015/01/17449/image/Logo-VNU-1995.png" alt="" style={{width: '100px'}}/>
             <p>TRUNG TÂM GIÁO DỤC THỂ CHẤT & THỂ THAO VNU</p>
         </div>
         

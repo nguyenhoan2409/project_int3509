@@ -51,13 +51,6 @@
     margin-left: 10px; 
 }
 
-.update-product-right button {
-    height: 40px;
-    width: 100px;
-    font-size: 20px;
-
-}
-
 .update-product-row select {
     font-size: 18px;
     height: 40px;
@@ -77,4 +70,19 @@
 .msg-update-error {
     color: red;
     font-size: 18px;
+}
+
+.btn-update-product {
+    height: 45px;
+    width: 120px;
+    font-size: 20px;
+    margin-top: 20px;
+    border-radius: 2px;
+    border: #007e83 1px solid;
+}
+
+.btn-update-product:hover {
+    background-color: #35a571;
+    border: #35a571;
+    cursor: pointer;
 }

@@ -121,21 +121,15 @@ export const ScoresList = () => {
                 <option>Đạt</option>
                 <option>Không </option>
                  </select>
-                <div className="search-btn-admin">
-                  <button className="search-score-btn-admin" onClick={handleFilterScore}>Tìm kiếm</button>
-                </div>
-
-               <div className="search-btn-admin">
+                <button className="search-score-btn-admin" onClick={handleFilterScore}>Tìm kiếm</button>
                <DownloadTableExcel
                     filename="physical-scores"
                     sheet="scores"
                     currentTableRef={tableRef.current}
                 >
-
                    <button className = "search-score-btn-admin"> Tải xuống </button>
-
                 </DownloadTableExcel>
-               </div>
+          
                 
               </div>
             </div>
