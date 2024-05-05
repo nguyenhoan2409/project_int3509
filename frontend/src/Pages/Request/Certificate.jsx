@@ -50,7 +50,7 @@ export const Certificate = () => {
             mssv: student.mssv,
             fullname: student.fullname,
             class: student.class,
-            university: student.univercity,
+            university: student.university,
             email: email,
             phonenumber: phonenumber,
             status: 13, 
