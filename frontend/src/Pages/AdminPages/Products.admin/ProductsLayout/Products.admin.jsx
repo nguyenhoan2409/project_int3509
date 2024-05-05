@@ -6,16 +6,7 @@ export const ProductsManagement = () => {
   const navigate = useNavigate(); 
   return (
     <div className="products-management-admin">
-       <Box
-        sx={{
-          textAlign: "center",
-          p: 2,
-          background: (theme) => theme.palette.grey["200"],
-          color: (theme) => theme.palette.success.main,
-        }}
-      >
-        <Typography variant="h5">Quản lý sản phẩm</Typography>
-      </Box>
+      <div className="title">Quản lý sản phẩm</div>
 
       <div className="products-container">
         <div className="products-right">

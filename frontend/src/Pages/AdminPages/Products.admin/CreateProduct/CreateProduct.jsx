@@ -88,17 +88,14 @@ export const CreateProduct = () => {
         withCredentials: true,
       });
       
-      // navigate("/admin/products/list");
-      // setMsg(response.msg);
+      navigate("/admin/products/list");
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
-        // setMsg(error.response.data);
       }
     }
   };
-  // console.log(thumbnail);
   return (
     <Layout>
       <div>

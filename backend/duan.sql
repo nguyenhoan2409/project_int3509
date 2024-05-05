@@ -96,9 +96,9 @@ CREATE TABLE `physicalscore` (
   `mssv` int(20) NOT NULL,
   `fullname` varchar(150) DEFAULT NULL,
   `class` varchar(50) DEFAULT NULL,
-  `univercity` varchar(100) DEFAULT NULL,
+  `university` varchar(100) DEFAULT NULL,
   `football_score` float DEFAULT NULL,
-  `bedminton_score` float DEFAULT NULL,
+  `badminton_score` float DEFAULT NULL,
   `tabletennis_score` float DEFAULT NULL,
   `basketball_score` float DEFAULT NULL,
   `air_volleyball_score` float DEFAULT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE `physicalscore` (
 -- Dumping data for table `physicalscore`
 --
 
-INSERT INTO `physicalscore` (`mssv`, `fullname`, `class`, `univercity`, `football_score`, `bedminton_score`, `tabletennis_score`, `basketball_score`, `air_volleyball_score`, `volleyball_score`, `taekwondo_score`, `golf_score`, `CDR`) VALUES
+INSERT INTO `physicalscore` (`mssv`, `fullname`, `class`, `university`, `football_score`, `badminton_score`, `tabletennis_score`, `basketball_score`, `air_volleyball_score`, `volleyball_score`, `taekwondo_score`, `golf_score`, `CDR`) VALUES
 (20020058, 'Lê Ngọc Minh', 'QH-2020-I/CQ-C-D', 'UET', 9, NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL),
 (20020061, 'Phạm Ngọc Minh', 'QH-2020-I/CQ-C-D', 'UET', 7, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL),
 (20020071, 'Nguyễn Thanh Tùng', 'QH-2020-I/CQ-C-D', 'UET', 5, NULL, NULL, 5, NULL, NULL, NULL, NULL, NULL),

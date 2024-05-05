@@ -1,25 +1,16 @@
 import "./Sidebar.css";
-import { FcHome, FcDocument, FcBusinessman } from "react-icons/fc";
-import React, { useEffect, useState } from "react";
-import logo from "~/Components/Assets/Logo ĐH Quốc Gia Hà Nội-VNU Text.png";
-import defaultAvatar from "~/Components/Assets/defaultAvatar.png";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link,useLocation, useNavigate } from "react-router-dom";
 import {
   AiOutlineUser,
-  AiOutlineLogout,
-  AiFillCaretDown,
+  AiOutlineLogout
 } from "react-icons/ai";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { LogOut, reset } from "~/features/authSlice";
 import { FcStatistics } from "react-icons/fc";
-import { LiaProductHunt } from "react-icons/lia";
-import { GoGitPullRequest } from "react-icons/go";
-import { CiUser } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import {
   BsBagCheckFill,
-  BsGrid1X2Fill,
   BsFileEarmarkTextFill,
   BsFilePersonFill,
   BsListCheck,
@@ -46,7 +37,7 @@ export const Sidebar = () => {
   return (
     <div className="sidebar-container">
       <div>
-        <img src={logo} alt="" className="sidebar-logo-img" />
+        <img src="https://www.vnu.edu.vn/home/images/logo.png" alt="" className="sidebar-logo-img" />
       </div>
       <div className="menu-list-container">
         <ul className="menu-list">
@@ -102,7 +93,7 @@ export const Sidebar = () => {
                 alignItems: "center",
               }}
             >
-              <img src={defaultAvatar} className="img-profile" />
+              <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-1024.png" className="img-profile" />
               <p style={{ color: "black", marginLeft: "5px", fontWeight: 600 }}>
                 Xin chào, {(user?.fullname.split(" "))[user?.fullname.split(" ").length -1]}
               </p>
@@ -114,7 +105,7 @@ export const Sidebar = () => {
                   size={18}
                   style={{ marginLeft: 5 }}
                 />
-                <Link to="/user/:activepage"> Thông tin cá nhân </Link>
+                <Link to="/user/accountsettings"> Thông tin cá nhân </Link>
               </li>
               <li className="sub-item-sidebar" onClick={logout}>
                 <AiOutlineLogout

@@ -12,7 +12,7 @@ const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
 // var JWT = require("../common/jwt")
 
-exports.get_list = async function (req, res) {
+exports.getUserList = async function (req, res) {
   try {
     const users = await database.query("SELECT * FROM users", {
       type: QueryTypes.SELECT,
@@ -23,7 +23,7 @@ exports.get_list = async function (req, res) {
   }
 };
 
-exports.userDetail = async function (req, res) {
+exports.getUserDetail = async function (req, res) {
   try {
     const user_id = req.params.id;
 
@@ -101,7 +101,7 @@ exports.getMe = async function (req, res) {
   }
 };
 
-exports.remove_user = async function (req, res) {
+exports.removeUser = async function (req, res) {
   try {
     var user_id = req.params.id;
     await database.query("DELETE FROM users WHERE user_id=:user_id", {
@@ -116,7 +116,7 @@ exports.remove_user = async function (req, res) {
   }
 };
 
-exports.update_user = async function (req, res) {
+exports.updateUser = async function (req, res) {
   try {
     const user_id = req.body.user_id;
     await database.query(
@@ -174,7 +174,7 @@ exports.statisticaldata = async function (req, res) {
       { label: "Bóng bàn", key: "tabletennis_score" },
       { label: "Bóng chuyền hơi", key: "air_volleyball_score" },
       { label: "Bóng rổ", key: "basketball_score" },
-      { label: "Cầu lông", key: "bedminton_score" },
+      { label: "Cầu lông", key: "badminton_score" },
       { label: "Bóng chuyền da", key: "volleyball_score" },
       { label: "Võ taekwondo", key: "taekwondo_score" },
       { label: "Golf", key: "golf_score" },

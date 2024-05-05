@@ -9,16 +9,8 @@ export const ScoresManagement = () => {
   return (
     
       <div className='scores-management'>
-       <Box
-        sx={{
-          textAlign: "center",
-          p: 2,
-          background: (theme) => theme.palette.grey["200"],
-          color: (theme) => theme.palette.success.main,
-        }}
-      >
-        <Typography variant="h5">Quản lý điểm</Typography>
-      </Box>
+      <div className="title">Quản lý điểm</div>
+    
       <div className='scores-container'>
         <div className="scores-right">
           <div className="scores-navbar">

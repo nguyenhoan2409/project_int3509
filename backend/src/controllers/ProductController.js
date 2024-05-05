@@ -3,7 +3,6 @@ const { QueryTypes, DataTypes } = require("sequelize");
 const { database } = require("../config/database")
 const fs = require('fs')
 
-
 exports.getProductList = async function(req, res){
     try {
         const productList = await database.query("SELECT * FROM products", {type: QueryTypes.SELECT})
@@ -26,8 +25,7 @@ exports.getProductDetail = async function(req, res){
     }
     
 }
-
-exports.addProduct = async function(req,res) {
+exports.createProduct = async function(req,res) {
     try {
         const product_name = req.body.product_name
         const price = req.body.price

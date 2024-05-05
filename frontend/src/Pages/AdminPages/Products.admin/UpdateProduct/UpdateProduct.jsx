@@ -12,7 +12,7 @@ export const UpdateProduct = () => {
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
   const [thumbnail, setThumbnail] = useState();
-  const [product_type, setOrderType] = useState();
+  const [product_type, setOrderType] = useState(2);
   const [isFilled, setIsFilled] = useState();
   const [msg, setMsg] = useState();
   const navigate = useNavigate();
@@ -122,7 +122,7 @@ export const UpdateProduct = () => {
               <option value="3">Thuê</option>
              </select>
           </div>
-            <button onClick={handleUpdate}>Cập nhật</button>
+            <button onClick={handleUpdate} className="btn-update-product">Cập nhật</button>
             {!isFilled && <p className="msg-update-error">{msg}</p>}
             {isFilled && <p className="msg-update">{msg}</p>}
           </div>

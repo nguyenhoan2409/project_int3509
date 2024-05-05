@@ -15,6 +15,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LogOut, reset } from "~/features/authSlice";
+import TablePagination from "@mui/material/TablePagination";
+import Alert from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,9 +42,22 @@ export const UserManagement = () => {
   const dispatch = useDispatch(); 
   const navigate = useNavigate(); 
   const [users, setUsers] = useState([]);
-  const [userList, setUserList] = useState([]);
-  const [msg, setMsg] = useState("");
+  const [initialUserList, setInitialUserList] = useState([]);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone_number, setPhone_number] = useState("");
+  const [address, setAddress] = useState("");
+  const [roleId, setRoleId] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   const getUsers = async () => {
     try {
       const response = await axios.get("http://localhost:8080/user/list", {
@@ -50,7 +65,7 @@ export const UserManagement = () => {
       });
       const users = response.data;
       setUsers(users.users);
-      setUserList(users.users);
+      setInitialUserList(users.users);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
@@ -63,21 +78,46 @@ export const UserManagement = () => {
       }
     }
   };
-
-  const searchUser = () => {
-    const filteredData = userList.filter((user) =>
-      user.fullname.toLowerCase().includes(name.toLowerCase())
-    );
-    setUsers(filteredData);
-    if (filteredData.length === 0) {
-      setMsg("Không tìm thấy người dùng");
-    } else {
-      setMsg("");
-    }
-  };
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [name, email, phone_number, address, roleId]);
+
+  const handleFilterUser = () => {
+    let filteredUserList = initialUserList
+    if(name) {
+      filteredUserList = filteredUserList.filter(
+        (user) => user.fullname == name
+      )
+    }
+    if(email) {
+      filteredUserList = filteredUserList.filter(
+        (user) => user.email == email
+      )
+    }
+    if(phone_number) {
+      filteredUserList = filteredUserList.filter(
+        (user) => user.phone_number == phone_number
+      )
+    }
+    if(address) {
+      filteredUserList = filteredUserList.filter(
+        (user) => user.address == address
+      )
+    }
+    if(roleId) {
+      if(roleId === "Quản trị viên") {
+        filteredUserList = filteredUserList.filter(
+          (user) => user.role_id == 1
+        )
+      }
+      if(roleId === "Người dùng") {
+        filteredUserList = filteredUserList.filter(
+          (user) => user.role_id == 2
+        )
+      }
+    }
+    setUsers(filteredUserList);
+  };
 
   const userToAdmin = async (user_id) => {
     try {
@@ -96,37 +136,58 @@ export const UserManagement = () => {
       }
     }
   };
+
+
+  const updateUserToAdmin = async(user_id) => {
+    const result = window.confirm('Bạn có chắc muốn thực hiện hành động này không?');
+    if (result) {
+        userToAdmin(user_id);
+    } 
+    }
   return (
     <Layout>
-      <Box
-        sx={{
-          textAlign: "center",
-          p: 2,
-          background: (theme) => theme.palette.grey["200"],
-          color: (theme) => theme.palette.success.main,
-        }}
-      >
-        <Typography variant="h5">Quản lý người dùng</Typography>
-      </Box>
+      <div className="title">Quản lý người dùng</div>
 
       <div className="search-user">
         <input
           className="search-user-input-admin"
-          placeholder="Tra cứu ..."
+          placeholder="Họ và tên ..."
           onChange={(e) => setName(e.target.value)}
         />
+        <input
+          className="search-user-input-admin"
+          placeholder="Email ..."
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          className="search-user-input-admin"
+          placeholder="SĐT ..."
+          onChange={(e) => setPhone_number(e.target.value)}
+        />
+        <input
+          className="search-user-input-admin"
+          placeholder="Địa chỉ ..."
+          onChange={(e) => setAddress(e.target.value)}
+        />
+         <select className="search-user-select-admin" onChange={(e) => setRoleId(e.target.value)} placeholder="Quyền">
+           <option> -- Quyền -- </option>
+           <option>Người dùng </option>
+           <option>Quản trị viên </option>
+          </select>
+
         <div className="search-btn-admin">
           <button
-            className="search-score-btn-admin"
-            onClick={() => searchUser()}
+            className="search-user-btn-admin"
+            onClick={handleFilterUser}
           >
             Tìm kiếm
           </button>
         </div>
       </div>
 
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+     <div style={{marginLeft : "20px", marginRight : "20px"}} >
+     <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 600 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell align="right">STT</StyledTableCell>
@@ -135,39 +196,50 @@ export const UserManagement = () => {
               <StyledTableCell align="right">SĐT</StyledTableCell>
               <StyledTableCell align="right">Địa chỉ</StyledTableCell>
               <StyledTableCell align="right">Quyền</StyledTableCell>
+              <StyledTableCell align="right">Thao tác</StyledTableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {users?.map((user, index) => (
+            {users?.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        ).map((user, index) => (
               <StyledTableRow key={user.user_id}>
-                <StyledTableCell align="right">{index}</StyledTableCell>
+                <StyledTableCell align="right">{index +1}</StyledTableCell>
                 <StyledTableCell align="right">{user.fullname}</StyledTableCell>
                 <StyledTableCell align="right">{user.email}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {user.phone_number}
-                </StyledTableCell>
+                <StyledTableCell align="right">{user.phone_number}</StyledTableCell>
                 <StyledTableCell align="right">{user.address}</StyledTableCell>
-                <StyledTableCell align="right">
+                <StyledTableCell align="right" style={user.role_id === 1 ? {color: 'red'} : {color: '#007e43'}}>
                   {user.role_id === 1 ? (
-                    "Admin"
+                    "Quản trị viên"
                   ) : (
-                    <Button onClick={() => userToAdmin(user.user_id)}>
-                      {" "}
-                      Cấp quyền admin{" "}
-                    </Button>
+                    "Người dùng"
                   )}
                 </StyledTableCell>
+                <StyledTableCell align="right"> 
+                    {user.role_id === 2 && 
+                    <div onClick={() => updateUserToAdmin(user.user_id)} style={{cursor: 'pointer', color: '#063678'}}>
+                      Cấp quyền admin
+                    </div> }
+                    </StyledTableCell>
               </StyledTableRow>
             ))}
-            <StyledTableRow>
-              <StyledTableCell align="center" colSpan={7}>
-                {msg}
-              </StyledTableCell>
-            </StyledTableRow>
           </TableBody>
         </Table>
+        {users.length === 0 && <p className="no-data-user">Không có dữ liệu</p>}
+            <TablePagination
+                rowsPerPageOptions={[25, 100, 1000, 10000, 100000]}
+                component="div"
+                count={users.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
       </TableContainer>
+     </div>
     </Layout>
   );
 };

@@ -12,7 +12,7 @@ export const UpdateScores = () => {
   const [footballScore, setFootballScore] = useState();
   const [basketballScore, setBasketballScore] = useState();
   const [tabletennisScore, setTabletennisScore] = useState();
-  const [bedmintonScore, setBedmintonScore] = useState();
+  const [badmintonScore, setbadmintonScore] = useState();
   const [airVolleyballScore, setAirVolleyballScore] = useState();
   const [volleyballScore, setVolleyballScore] = useState();
   const [taekwondoScore, setTaekwondoScore] = useState();
@@ -33,7 +33,7 @@ export const UpdateScores = () => {
       setFootballScore(score.football_score);
       setBasketballScore(score.basketball_score);
       setTabletennisScore(score.tabletennis_score);
-      setBedmintonScore(score.bedminton_score);
+      setbadmintonScore(score.badminton_score);
       setAirVolleyballScore(score.air_volleyball_score);
       setVolleyballScore(score.volleyball_score);
       setTaekwondoScore(score.taekwondo_score);
@@ -61,7 +61,7 @@ export const UpdateScores = () => {
           football_score: footballScore,
           basketball_score: basketballScore,
           tabletennis_score: tabletennisScore,
-          bedminton_score: bedmintonScore,
+          badminton_score: badmintonScore,
           air_volleyball_score: airVolleyballScore,
           volleyball_score: volleyballScore,
           taekwondo_score: taekwondoScore,
@@ -103,7 +103,7 @@ export const UpdateScores = () => {
             </div>
             <div className="profile-student-row">
               <p>Trường: </p>
-              {scores.univercity}
+              {scores.university}
             </div>
           </div>
           <div className="score-student">
@@ -123,9 +123,9 @@ export const UpdateScores = () => {
                     <label>Cầu lông: </label>
                     <input
                       type="text"
-                      value={bedmintonScore}
+                      value={badmintonScore}
                       onChange={(event) =>
-                        setBedmintonScore(event.target.value)
+                        setbadmintonScore(event.target.value)
                       }
                     />
                   </div>

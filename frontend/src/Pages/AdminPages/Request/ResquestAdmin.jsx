@@ -127,7 +127,7 @@ export const RequestAdmin = () => {
   return (
     <Layout>
       <div style={{marginLeft: '30px'}}>
-      <div className="title">Yêu cầu</div>
+      <div className="title">Quản lý yêu cầu</div>
       <Snackbar open={openSnackBar} autoHideDuration={5000} onClose={handleCloseSnackBar} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
         <Alert
           onClose={handleCloseSnackBar}

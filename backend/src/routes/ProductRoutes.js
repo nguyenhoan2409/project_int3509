@@ -7,7 +7,7 @@ module.exports = function (router) {
 
     router.get('/product/detail/:id', verifyUser.isAuth, productController.getProductDetail)
 
-    router.post('/product/add', verifyUser.isAuth, productController.addProduct)
+    router.post('/product/add', verifyUser.isAuth, productController.createProduct)
 
     router.delete('/product/delete/:id', verifyUser.isAuth, productController.removeProduct)
 

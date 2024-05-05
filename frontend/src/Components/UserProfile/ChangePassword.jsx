@@ -21,7 +21,6 @@ export const ChangePassword = () => {
   const cfPasswordChange = (e) => {
     setMsg("")
      setCfPassword(e.target.value)
-    //  checkPassword()
   }
 
 
@@ -40,9 +39,10 @@ export const ChangePassword = () => {
       },
       { withCredentials: true }
       );
-      alert("Thay đổi mật khẩu thành công"); 
-      navigate('/user/:activepage'); 
-      // setMsg("Thay đổi mật khẩu thành công")
+      const result = window.confirm('Đổi mật khẩu thành công. Tiếp tục phiên đăng nhập?');
+      if (!result) {
+          navigate('/')
+      } 
     } catch (error) {
       console.error("Error fetching data:", error);
       setMsg("Nhập mật khẩu cũ sai, vui lòng thử lại")
@@ -52,10 +52,8 @@ export const ChangePassword = () => {
   const handleUpdate = () => {
     if(newPassword === cfPassword) {
       updatePassword()
+      }
     }
-  }
-
-
   return (
     <div className="accountsettings">
       <h1>Đổi mật khẩu</h1>

@@ -5,14 +5,14 @@ const { database } = require('../config/database')
 const { QueryTypes } = require('sequelize')
 // var db = require("../common/connect")
 
-exports.addStudent = async function (req, res) {
+exports.createStudent = async function (req, res) {
     try {
-        const student = await database.query("INSERT INTO physicalscore (mssv, fullname, class, univercity) VALUES(:mssv, :fullname, :class, :univercity)", {
+        const student = await database.query("INSERT INTO physicalscore (mssv, fullname, class, university) VALUES(:mssv, :fullname, :class, :university)", {
             replacements: {
                 mssv: req.body.mssv,
                 fullname: req.body.fullname,
                 class : req.body.class,
-                univercity: req.body.univercity
+                university: req.body.university
             }
         })
         return res.status(200).json({ msg: "Thêm danh sách sinh viên thành công" })
@@ -35,7 +35,7 @@ exports.addScore = async function (req, res) {
             subject = "basketball_score"
         }
         if(_subject === "badminton") {
-            subject = "bedminton_score"
+            subject = "badminton_score"
         }
         if(_subject === "air_volleyball") {
             subject = "air_volleyball_score"
@@ -89,10 +89,10 @@ exports.addScore = async function (req, res) {
  
  exports.updateScore = async function (req, res) {
      try {
-         const student = database.query("UPDATE physicalscore SET football_score=:football_score, bedminton_score=:bedminton_score, tabletennis_score=:tabletennis_score, basketball_score=:basketball_score, air_volleyball_score=:air_volleyball_score, volleyball_score=:volleyball_score, taekwondo_score=:taekwondo_score, golf_score=:golf_score WHERE mssv =:mssv",
+         const student = database.query("UPDATE physicalscore SET football_score=:football_score, badminton_score=:badminton_score, tabletennis_score=:tabletennis_score, basketball_score=:basketball_score, air_volleyball_score=:air_volleyball_score, volleyball_score=:volleyball_score, taekwondo_score=:taekwondo_score, golf_score=:golf_score WHERE mssv =:mssv",
          { replacements : {
              football_score: req.body.football_score,
-             bedminton_score: req.body.bedminton_score,
+             badminton_score: req.body.badminton_score,
              tabletennis_score: req.body.tabletennis_score,
              basketball_score: req.body.basketball_score,
              air_volleyball_score: req.body.air_volleyball_score,
@@ -117,7 +117,7 @@ exports.addScore = async function (req, res) {
          
          if(list[i].football_score >= 4) count++
          if(list[i].basketball_score >= 4) count++
-         if(list[i].bedminton_score >= 4) count++
+         if(list[i].badminton_score >= 4) count++
          if(list[i].tabletennis_score >= 4) count++
          if(list[i].air_volleyball_score >= 4) count++
          if(list[i].volleyball_score >= 4) count++
@@ -177,22 +177,4 @@ exports.addScore = async function (req, res) {
  
  }
 
- exports.addCertificate = async function(req, res) {
-     try {
-         const data = req.body
-         const student = await database.query("INSERT INTO certificate (mssv, fullname, class, university, email, phonenumber, status) VALUES(:mssv, :fullname, :class, :univercity, :email, :phonenumber, :status)", {
-             replacements: {
-                 mssv : data.mssv,
-                 fullname: data.fullname,
-                 class : data.class,
-                 univercity: data.univercity,
-                 email: data.email,
-                 phonenumber: data.phonenumber,
-                 status : "đã gửi yêu cầu"
-             }, type : QueryTypes.INSERT
-         })
-         return res.status(200).json({ student })
-     } catch(error) {
-         return res.status(400).json({ msg: error })
-     }
- }
+ 
