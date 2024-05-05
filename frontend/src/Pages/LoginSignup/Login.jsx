@@ -154,7 +154,7 @@ export const Login = () => {
         <p style={{fontSize: '16px', fontWeight: '500'}}>
           Bạn chưa có tài khoản?
           <Link style={{ textDecoration: "none" }} to="/signup">
-            <span style={{ color: "blue", marginLeft: '10px' }}>Đăng ký</span>
+            <span style={{ color: "blue", marginLeft: '5px' }}>Đăng ký</span>
           </Link>
         </p>
       </div>
