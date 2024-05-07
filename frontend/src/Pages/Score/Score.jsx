@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./Score.css";
 import axios from "axios";
 import Layout from "../Layout/Layout";
 import { Link } from "react-router-dom";
 import { TbCertificate } from "react-icons/tb";
 import TablePagination from "@mui/material/TablePagination";
+import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import * as locales from "@mui/material/locale";
 
 export const Score = () => {
+  const theme = useTheme();
   const [mssv, setMssv] = useState("");
   const [name, setName] = useState("");
   const [classs, setClasss] = useState("");
@@ -15,6 +18,10 @@ export const Score = () => {
   const [initialScoreList, setInitialScoreList] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const themeWithLocale = useMemo(
+    () => createTheme(theme, locales["viVN"]),
+    []
+  );
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -99,6 +106,7 @@ export const Score = () => {
             </div>
           </div>
           <div className="score-table">
+            <ThemeProvider theme={themeWithLocale}>
             <table className="score-table-user">
               <thead>
                 <tr className="score-table-tr">
@@ -153,6 +161,7 @@ export const Score = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
+              </ThemeProvider>
           </div>
         </div>
       </Layout>

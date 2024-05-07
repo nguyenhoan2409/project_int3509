@@ -21,4 +21,10 @@ module.exports = function (router) {
 
     router.get('/user/:id/verify/:code', userController.verifyUser); 
 
+    router.post('/user/checkEmailForForgottenPassword', userController.checkEmailForForgottenPassword); 
+
+    router.get('/user/forgottenPassword/:id/verify/:code', userController.verifyUserForForgottenPassword); 
+
+    router.patch('/user/createNewPassword', userController.createNewPassword); 
+
 }

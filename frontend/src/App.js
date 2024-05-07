@@ -25,6 +25,7 @@ import { UserManagement } from "./Pages/AdminPages/UserManagement/UserManagement
 import ProtectedRoute from "./Components/ProtectRoute/ProtectRoute";
 import { EmailVerify } from "./Pages/LoginSignup/EmailVerify";
 import { NotificationLoginSignup } from "./Pages/LoginSignup/NotificationLoginSignup";
+import { NewPasswordForForgottenPassword } from "./Pages/LoginSignup/NewPasswordForForgottenPassword";
 function App() {
   return (
     <div>
@@ -33,6 +34,7 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/user/:id/verify/:code" element={<EmailVerify />}></Route>
+          <Route path="/user/forgottenPassword/:id/verify/:code" element={<NewPasswordForForgottenPassword />}></Route>
           <Route path="/notificationLoginSignup" element={<NotificationLoginSignup />}></Route>
           
             {/* User routes */}

@@ -49,7 +49,7 @@ export const ProductsList = () => {
                                 <th className="products-2">Số lượng hiện có</th>
                                 <th className="descriptions">Mô tả</th>
                                 <th className="order-type">Mua /Mượn /Thuê</th>
-                                <th className="products-update">Thao tác</th>
+                                <th className="products-update">Chỉnh sửa thông tin</th>
                             </tr>
                         </thead>
                         <tbody>

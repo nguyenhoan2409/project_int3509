@@ -341,9 +341,9 @@ export const Signup = () => {
             {isLoading ? 'Đang tạo tài khoản...' : 'Đăng ký'}
           </Button>
         </form>
-        <p className="loginsignup-login">
+        <p style={{fontSize: '16px', fontWeight: '500', marginTop: '10px'}}>
           Bạn đã có tài khoản?
-          <Link style={{ textDecoration: "none" }} to="/">
+          <Link style={{ textDecoration: "none", marginLeft: '5px' }} to="/">
             <span style={{ color: "blue" }}>Đăng nhập</span>
           </Link>
         </p>
