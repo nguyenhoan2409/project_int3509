@@ -27,7 +27,6 @@ export const CreateProduct = () => {
       setIsFilled(false);
     } else {
       setIsFilled(true);
-      setMsg("Thêm sản phẩm thành công");
       addProduct();
     }
   };
@@ -86,17 +85,16 @@ export const CreateProduct = () => {
       }, {
         withCredentials: true,
       });
-      
+      setMsg("Thêm sản phẩm thành công");
       navigate("/admin/products/list");
     } catch (error) {
-      console.error("Error fetching data:", error);
       if (error.response) {
-        console.error("Server responded with:", error.response.data);
+        setIsFilled(false);
+        setMsg(error.response.data);
       }
     }
   };
-  console.log(product_name, price, quantity, thumbnail, description, product_type);
-  console.log(!price)
+  console.log(msg);
   return (
     <Layout>
       <div>

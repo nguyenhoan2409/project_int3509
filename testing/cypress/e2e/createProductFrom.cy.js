@@ -96,7 +96,6 @@ it('Create Product Test 7', () => {
   cy.get('.create-product-form').find('.msg-create-error').should('contain', "Giá phải lớn hơn hoặc bằng 0")
 })
 
-
 // nhập price nhỏ hơn 0
 it('Create Product Test 8', () => {
   cy.contains('Quản lý sản phẩm').click()
@@ -119,6 +118,20 @@ it('Create Product Test 10', () => {
   cy.contains('Thêm sản phẩm').click();  
   cy.get('.create-product-form').find('input[name="product_name"]').type('test').clear()
   cy.get('.create-product-form').find('.msg-create-error').should('contain', "Tên sản phẩm không được để trống")
+})
+
+//kiểm tra trùng sản phẩm
+it('Create Product Test 11', () => {
+  cy.contains('Quản lý sản phẩm').click()
+  cy.contains('Thêm sản phẩm').click();  
+  cy.get('.create-product-form').find('input[name="product_name"]').type('Bóng đá')
+  cy.get('.create-product-form').find('input[name="price"]').type('0')
+  cy.get('.create-product-form').find('input[name="quantity"]').type('100')
+  cy.get('.create-product-form').find('input[name="description"]').type('test 1')
+  cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/e2e/image/test.jpg')
+  cy.get('.create-product-form').find('select[name="product_type"]').select('Mượn')
+  cy.get('.create-product-form').find('.create-product-btn').click();
+  cy.get('.create-product-form').find('.msg-create-error').should('contain', "Tên sản phẩm đã tồn tại, vui lòng nhập tên khác")
 })
 
 })
