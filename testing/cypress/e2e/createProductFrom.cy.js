@@ -17,7 +17,7 @@ describe('Create Product Test', () => {
       cy.get('.create-product-form').find('input[name="price"]').type('0')
       cy.get('.create-product-form').find('input[name="quantity"]').type('100')
       cy.get('.create-product-form').find('input[name="description"]').type('test 1')
-      cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/support/image/test.jpg')
+      cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/e2e/image/test.jpg')
       cy.get('.create-product-form').find('select[name="product_type"]').select('Mượn')
       cy.get('.create-product-form').find('.create-product-btn').click();
       cy.url().should('eq', 'http://localhost:3000/admin/products/list')
@@ -30,7 +30,7 @@ describe('Create Product Test', () => {
     cy.get('.create-product-form').find('input[name="price"]').type('0')
     cy.get('.create-product-form').find('input[name="quantity"]').type('100')
     cy.get('.create-product-form').find('input[name="description"]').type('test 2')
-    cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/support/image/test.jpg')
+    cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/e2e/image/test.jpg')
     cy.get('.create-product-form').find('select[name="product_type"]').select('Mượn')
     cy.get('.create-product-form').find('.create-product-btn').click();
     cy.get('.create-product-form').find('.msg-create-error').should('contain', "Vui lòng điền đầy đủ thông tin!")
@@ -43,7 +43,7 @@ it('Create Product Test 3', () => {
   cy.get('.create-product-form').find('input[name="product_name"]').type('Product 3')
   cy.get('.create-product-form').find('input[name="quantity"]').type('100')
   cy.get('.create-product-form').find('input[name="description"]').type('test 3')
-  cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/support/image/test.jpg')
+  cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/e2e/image/test.jpg')
   cy.get('.create-product-form').find('select[name="product_type"]').select('Mượn')
   cy.get('.create-product-form').find('.create-product-btn').click();
   cy.get('.create-product-form').find('.msg-create-error').should('contain', "Vui lòng điền đầy đủ thông tin!")
@@ -56,7 +56,7 @@ it('Create Product Test 4', () => {
   cy.get('.create-product-form').find('input[name="product_name"]').type('Product 4')
   cy.get('.create-product-form').find('input[name="price"]').type('0')
   cy.get('.create-product-form').find('input[name="description"]').type('test 4')
-  cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/support/image/test.jpg')
+  cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/e2e/image/test.jpg')
   cy.get('.create-product-form').find('select[name="product_type"]').select('Mượn')
   cy.get('.create-product-form').find('.create-product-btn').click();
   cy.get('.create-product-form').find('.msg-create-error').should('contain', "Vui lòng điền đầy đủ thông tin!")
@@ -82,7 +82,7 @@ it('Create Product Test 6', () => {
   cy.get('.create-product-form').find('input[name="price"]').type('0')
   cy.get('.create-product-form').find('input[name="quantity"]').type('100')
   cy.get('.create-product-form').find('input[name="description"]').type('test 6')
-  cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/support/image/test.jpg')
+  cy.get('.create-product-form').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/e2e/image/test.jpg')
   cy.get('.create-product-form').find('select[name="product_type"]').should('contain', "Mượn")
   cy.get('.create-product-form').find('.create-product-btn').click();
   cy.url().should('eq', 'http://localhost:3000/admin/products/list')
