@@ -68,7 +68,7 @@ export const AccountSetting = () => {
 
         <div className="form-group">
           <label htmlFor="email">Email<span>*</span></label>
-          <input type="email" name='email' id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <input type="email" name='email' id='email' value={email}/>
         </div>
         <div className="form-group">
           <label htmlFor="text">Địa chỉ<span>*</span></label>
