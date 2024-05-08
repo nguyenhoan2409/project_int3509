@@ -177,7 +177,7 @@ export const ScoresList = () => {
                       <td className="action-admin-td">
                         {" "}
                         <Link to={`/admin/scores/update/${score.mssv}`}>
-                          <FaEdit />
+                          <FaEdit id = {index + 1 }/>
                         </Link>{" "}
                       </td>
                     </tr>
