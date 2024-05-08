@@ -93,7 +93,7 @@ export const Login = () => {
           <TextField
           
             label="Email"
-            // type="email"
+            type="email"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

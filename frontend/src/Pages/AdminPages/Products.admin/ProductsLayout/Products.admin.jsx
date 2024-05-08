@@ -15,7 +15,7 @@ export const ProductsManagement = () => {
               Danh sách sản phẩm{" "}
             </button>
 
-            <button onClick={() => navigate("/admin/products/add")} className="products-navbar-btn">
+            <button onClick={() => navigate("/admin/products/add")} className="products-navbar-btn create-product">
               Thêm sản phẩm{" "}
             </button>
           </div>
