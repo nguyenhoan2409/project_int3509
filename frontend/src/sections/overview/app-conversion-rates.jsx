@@ -53,7 +53,7 @@ export default function AppConversionRates({ title, subheader, chart, ...other }
           type="bar"
           series={[{ data: chartSeries }]}
           options={chartOptions}
-          width="100%"
+          width="93%"
           height={364}
         />
       </Box>

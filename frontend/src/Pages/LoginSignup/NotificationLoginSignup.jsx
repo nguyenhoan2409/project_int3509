@@ -80,6 +80,7 @@ export const NotificationLoginSignup = () => {
           >
             <TextField
               label="Email"
+              name="forgottenPassword-email"
               // type="email"
               InputProps={{
                 startAdornment: (
