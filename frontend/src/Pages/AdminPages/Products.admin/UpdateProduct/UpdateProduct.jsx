@@ -13,7 +13,7 @@ export const UpdateProduct = () => {
   const [price, setPrice] = useState();
   const [thumbnail, setThumbnail] = useState();
   const [product_type, setOrderType] = useState(2);
-  const [isFilled, setIsFilled] = useState();
+  const [isFilled, setIsFilled] = useState(false);
   const [msg, setMsg] = useState();
   const navigate = useNavigate();
   const handleUpdate = () => {
@@ -22,7 +22,6 @@ export const UpdateProduct = () => {
        setMsg("Vui lòng điền đầy đủ thông tin!")
        setIsFilled(false)
     } else {
-       setIsFilled(true)
        getUpdate()
     }
   }
@@ -31,13 +30,18 @@ export const UpdateProduct = () => {
     if(value >= 0 ) {
       setPrice(value)
     } else {
-      alert("Giá phải lớn hơn hoặc bằng 0")
-      setPrice(0)
+      setIsFilled(false)
+      setMsg("Giá phải lớn hơn hoặc bằng 0")
     }
   }
   const handleDescriptionChange = (event) => {
     const value = event.target.value
-    setDescription(value)
+    if(value.length >= 30) {
+      setIsFilled(false)
+      setMsg("Mô tả sản phẩm không được quá 30 kí tự")
+    } else {
+      setDescription(value)
+    }
   }
 
   const handleQuantityChange = (event) => {
@@ -45,8 +49,8 @@ export const UpdateProduct = () => {
     if(value >= 0 ) {
       setQuantity(value)
     } else {
-      alert("Số lượng kho phải lớn hơn hoặc bằng 0")
-      setQuantity(0)
+      setIsFilled(false)
+      setMsg("Số lượng kho phải lớn hơn hoặc bằng 0")
     }
   }
 
@@ -86,6 +90,7 @@ export const UpdateProduct = () => {
         withCredentials: true,
       });
       setMsg(response.data.msg);
+      setIsFilled(true)
       setTimeout(() => {
         navigate('/admin/products/list'); 
       }, 1000)
@@ -109,14 +114,14 @@ export const UpdateProduct = () => {
             <img src={thumbnail} alt="" />
           </div>
           <div className="update-product-right">
-            <div className="update-product-row"> <p> Tên sản phẩm : </p> <input type="text" value={product.product_name} /></div>
-            <div className="update-product-row"> <p> Giá : </p> <input type="number" value={price} onChange={handlePriceChange} /></div>
-            <div className="update-product-row"> <p> Mô tả : </p> <input type="text" value={description} onChange={handleDescriptionChange} /></div>
-            <div className="update-product-row"> <p> Số lượng : </p> <input type="number" value={quantity} onChange={handleQuantityChange} /></div>
-            <div className="update-product-row"> <p> Ảnh : </p> <input type="file" accept=".png, .jpg, .jpeg, .gif" onChange={handleThumbnailChange} /></div>
+            <div className="update-product-row"> <p> Tên sản phẩm : </p> <input type="text" value={product.product_name} name = "product_name"/></div>
+            <div className="update-product-row"> <p> Giá : </p> <input type="number" value={price} onChange={handlePriceChange} name = "price"/></div>
+            <div className="update-product-row"> <p> Mô tả : </p> <input type="text" value={description} onChange={handleDescriptionChange} name = "description" /></div>
+            <div className="update-product-row"> <p> Số lượng : </p> <input type="number" value={quantity} onChange={handleQuantityChange} name = "quantity"/></div>
+            <div className="update-product-row"> <p> Ảnh : </p> <input type="file" accept=".png, .jpg, .jpeg, .gif" onChange={handleThumbnailChange} name = "thumbnail"/></div>
             <div className="update-product-row"> 
             <p> Loại : </p> 
-            <select value={product_type} onChange={e => setOrderType(e.target.value)}>
+            <select value={product_type} onChange={e => setOrderType(e.target.value)} name = "product_type">
               <option value="2">Mua</option>
               <option value="1">Mượn</option>
               <option value="3">Thuê</option>

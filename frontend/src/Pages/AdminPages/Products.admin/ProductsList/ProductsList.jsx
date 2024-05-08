@@ -63,7 +63,7 @@ export const ProductsList = () => {
                                 <td className="products-2-data">{product.quantity}</td>
                                 <td className="descriptions-data">{product.description}</td>
                                 <td className="order-type-data">{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</td>
-                                <td className='products-update-data'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit /></Link></td>
+                                <td className='products-update-data'><Link to= {`/admin/products/update/${product.product_id}`}><FaEdit id={index + 1}/></Link></td>
                                 </tr>
                             ))}
                         </tbody>

@@ -55,7 +55,13 @@ export const CreateProduct = () => {
     }
   };
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+    const value = event.target.value
+    if(value.length >= 30) {
+      setIsFilled(false)
+      setMsg("Mô tả sản phẩm không được quá 30 kí tự")
+    } else {
+      setDescription(value)
+    }
   };
   const handleThumbnailChange = (event) => {
       const thumbnail  = URL.createObjectURL(event.target.files[0]); // Tạo đường dẫn tạm thời cho hình ảnh được chọn
