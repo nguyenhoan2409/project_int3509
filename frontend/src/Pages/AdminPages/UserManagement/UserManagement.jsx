@@ -206,11 +206,11 @@ export const UserManagement = () => {
                           page * rowsPerPage + rowsPerPage
                         ).map((user, index) => (
               <StyledTableRow key={user.user_id}>
-                <StyledTableCell align="right">{index +1}</StyledTableCell>
-                <StyledTableCell align="right">{user.fullname}</StyledTableCell>
-                <StyledTableCell align="right">{user.email}</StyledTableCell>
-                <StyledTableCell align="right">{user.phone_number}</StyledTableCell>
-                <StyledTableCell align="right">{user.address}</StyledTableCell>
+                <StyledTableCell align="right" className="stt">{index +1}</StyledTableCell>
+                <StyledTableCell align="right" className="name">{user.fullname}</StyledTableCell>
+                <StyledTableCell align="right" className="email">{user.email}</StyledTableCell>
+                <StyledTableCell align="right" className="phone">{user.phone_number}</StyledTableCell>
+                <StyledTableCell align="right" className="address">{user.address}</StyledTableCell>
                 <StyledTableCell align="right" style={user.role_id === 1 ? {color: 'red'} : {color: '#007e43'}} className="role" id = {user.user_id}>
                   {user.role_id === 1 ? (
                     "Quản trị viên"

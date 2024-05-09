@@ -99,6 +99,7 @@ it('Create Product Test Thumbnail', () => {
   cy.get('.create-product-form').find('input[name="price"]').type('0')
   cy.get('.create-product-form').find('input[name="quantity"]').type('100')
   cy.get('.create-product-form').find('input[name="description"]').type('test 5')
+  cy.get('.create-product-form').find('select[name="product_type"]').select('Mượn')
   cy.get('.create-product-form').find('.create-product-btn').click();
   cy.get('.create-product-form').find('.msg-create-error').should('contain', "Vui lòng điền đầy đủ thông tin!")
 })
