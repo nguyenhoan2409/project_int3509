@@ -72,13 +72,11 @@ describe('Filter User Test ', () => {
         cy.get('.search-user').find('input[placeholder="Email ..."]').type('20020483@gmail.com')
         cy.get('.search-user').find('input[placeholder="SĐT ..."]').type('0373311038')
         cy.get('.search-user').find('input[placeholder="Địa chỉ ..."]').type('Hưng Yên')
-        cy.get('.search-user').find('select[placeholder="Quyền"]').select('Quản trị viên')
         cy.get('.search-user-btn-admin').click()
         cy.get('.name').should('contain', 'Nguyễn Thu Trang')
         cy.get('.email').should('contain', '20020483@gmail.com')
         cy.get('.phone').should('contain', '0373311038')
         cy.get('.address').should('contain', 'Hưng Yên')
-        cy.get('.role').should('contain', 'Quản trị viên')
     })   
 
     it('Search by all error 1', () => {

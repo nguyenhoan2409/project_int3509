@@ -50,7 +50,7 @@
     margin-right: 20px;
 }
 
- .score-table .score-table-user, .mssv, .fullname, .class, .university, .football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR, .certificate-icons {
+ .score-table .score-table-user, .score-table-header {
     border: #074d2c 1px solid;
   }
   
@@ -72,21 +72,27 @@
 .score-table .score-table-tr:nth-child(even){background-color: #f2f2f2;}
 .mssv {
     width: 7%;
+    border: black 1px solid;
 }
 .fullname {
     width: 15%;
+    border: black 1px solid;
 }
 .class {
     width: 15%;
+    border: black 1px solid;
 }
 .university {
     width: 7%;
+    border: black 1px solid;
 }
 .football, .badminton, .tabletennis, .basketball, .volleyball, .air_volleyball, .taekwondo, .golf, .CDR{
     width: 6%;
+    border: black 1px solid;
 }
 .certificate-icons {
     font-size: 25px;
+    border: black 1px solid;
 }
 
 .no-data-user {

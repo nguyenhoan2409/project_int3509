@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./UserManagement.css";
 import Layout from "~/Pages/Layout/Layout";
-import { Box, Container, LinearProgress, Typography } from "@mui/material";
-import { Button, Chip } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -16,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LogOut, reset } from "~/features/authSlice";
 import TablePagination from "@mui/material/TablePagination";
-import Alert from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -58,7 +55,7 @@ export const UserManagement = () => {
     setPage(0);
   };
 
-  const getUsers = async () => {
+  const getUserList = async () => {
     try {
       const response = await axios.get("http://localhost:8080/user/list", {
         withCredentials: true,
@@ -79,7 +76,7 @@ export const UserManagement = () => {
     }
   };
   useEffect(() => {
-    getUsers();
+    getUserList();
   }, [name, email, phone_number, address, roleId]);
 
   const handleFilterUser = () => {
@@ -128,7 +125,7 @@ export const UserManagement = () => {
         },
         { withCredentials: true }
       );
-      getUsers();
+      getUserList();
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {

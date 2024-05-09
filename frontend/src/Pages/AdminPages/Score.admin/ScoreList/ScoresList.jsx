@@ -10,8 +10,6 @@ import { useDispatch } from "react-redux";
 import TablePagination from "@mui/material/TablePagination";
 
 export const ScoresList = () => {
-  const dispatch = useDispatch(); 
-  const navigate = useNavigate(); 
   const [mssv, setMssv] = useState("");
   const [name, setName] = useState("");
   const [classs, setClasss] = useState("");
@@ -29,7 +27,7 @@ export const ScoresList = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const getScores = async () => {
+  const getScoreList = async () => {
     try {
       const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
@@ -43,7 +41,7 @@ export const ScoresList = () => {
   };
 
   useEffect(() => {
-    getScores();
+    getScoreList();
   }, [mssv, name, classs, university, CDR]);
 
   const handleFilterScore = () => {
@@ -79,7 +77,6 @@ export const ScoresList = () => {
         )}
     }
     setScores(scoreFilterList);
-
   }
   return (
     <Layout>
@@ -116,7 +113,7 @@ export const ScoresList = () => {
                 placeholder="Trường .."
                 onChange={(e) => setUniversity(e.target.value)}
               />
-               <select className="search-select-admin" onChange={(e) => setCDR(e.target.value)}>
+               <select className="search-select-admin" onChange={(e) => setCDR(e.target.value)}  name = "CDR">
                 <option>--CDR--</option>
                 <option>Đạt</option>
                 <option>Không </option>
@@ -185,7 +182,7 @@ export const ScoresList = () => {
   
                 </tbody>
               </table>
-              {scores?.length === 0 && (
+              {scores.length === 0 && (
                     <p className="no-data-admin"> Không có dữ liệu </p>
                   )}
               <TablePagination
