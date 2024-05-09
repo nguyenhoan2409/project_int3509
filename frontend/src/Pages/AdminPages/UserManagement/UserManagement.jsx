@@ -211,18 +211,22 @@ export const UserManagement = () => {
                 <StyledTableCell align="right">{user.email}</StyledTableCell>
                 <StyledTableCell align="right">{user.phone_number}</StyledTableCell>
                 <StyledTableCell align="right">{user.address}</StyledTableCell>
-                <StyledTableCell align="right" style={user.role_id === 1 ? {color: 'red'} : {color: '#007e43'}}>
+                <StyledTableCell align="right" style={user.role_id === 1 ? {color: 'red'} : {color: '#007e43'}} className="role" id = {user.user_id}>
                   {user.role_id === 1 ? (
                     "Quản trị viên"
                   ) : (
-                    "Người dùng"
+                    "Người dùng"
                   )}
                 </StyledTableCell>
-                <StyledTableCell align="right"> 
-                    {user.role_id === 2 && 
-                    <div onClick={() => updateUserToAdmin(user.user_id)} style={{cursor: 'pointer', color: '#063678'}}>
+                <StyledTableCell align="right" className="action" id = {user.user_id}> 
+                    {user.role_id === 2 ? (
+                      <div onClick={() => updateUserToAdmin(user.user_id)} style={{cursor: 'pointer', color: '#063678'}} id = {user.user_id}>
                       Cấp quyền admin
-                    </div> }
+                    </div>
+                    ) : (
+                      <div id = {user.user_id}> </div>
+                    )
+                     }
                     </StyledTableCell>
               </StyledTableRow>
             ))}
