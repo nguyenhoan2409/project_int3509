@@ -5,7 +5,7 @@ describe('Update Score Test', () => {
         cy.get('.loginsignup-fields').find('input[type="password"]').type('trang')
         cy.get('form').submit();
         cy.contains('Quản lý điểm').click()
-        cy.get('.action-admin-td').find('svg[id = "1"]').click();
+        cy.get('.action-admin-td').find('svg[id = "2"]').click();
     })
 
     // football
