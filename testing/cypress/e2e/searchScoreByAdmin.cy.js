@@ -7,24 +7,26 @@ describe('Search Score By Admin Test ', () => {
         cy.contains('Quản lý điểm').click()
     })
     it('Search by MSSV', () => {
-        cy.get('.search-admin').find('input[placeholder="Mssv .."]').type('20020483')
+        cy.get('.search-admin').find('input[placeholder="Mssv .."]').type('10000001')
         cy.contains('Tìm kiếm').click()
-        cy.get('.mssv-admin-td').should('contain', '20020483')
+        cy.get('.mssv-admin-td').should('contain', '10000001')
     })
 
+    
     /*
     it('Search error by MSSV', () => {
-        cy.get('.search-admin').find('input[placeholder="Mssv .."]').type('0')
+        cy.get('.search-admin').find('input[placeholder="Mssv .."]').type('10000003')
         cy.contains('Tìm kiếm').click()
         cy.get('.no-data-admin').should('contain', 'Không có dữ liệu')
     })
     */
     
+    
 
     it('Search by Name', () => {
-        cy.get('.search-admin').find('input[placeholder="Họ và tên .."]').type('Nguyễn Thị Thu Trang')
+        cy.get('.search-admin').find('input[placeholder="Họ và tên .."]').type('Test Name 1')
         cy.contains('Tìm kiếm').click()
-        cy.get('.fullname-admin-td').should('contain', 'Nguyễn Thị Thu Trang')
+        cy.get('.fullname-admin-td').should('contain', 'Test Name 1')
     })
 
     
@@ -38,9 +40,9 @@ describe('Search Score By Admin Test ', () => {
     
 
     it('Search by Class', () => {
-        cy.get('.search-admin').find('input[placeholder="Lớp .."]').type('QH-2020-I/CQ-C-D')
+        cy.get('.search-admin').find('input[placeholder="Lớp .."]').type('Class 1')
         cy.contains('Tìm kiếm').click()
-        cy.get('.class-admin-td').should('contain', 'QH-2020-I/CQ-C-D')
+        cy.get('.class-admin-td').should('contain', 'Class 1')
     })
 
    
@@ -53,9 +55,9 @@ describe('Search Score By Admin Test ', () => {
     */
 
     it('Search by University', () => {
-        cy.get('.search-admin').find('input[placeholder="Trường .."]').type('ULIS')
+        cy.get('.search-admin').find('input[placeholder="Trường .."]').type('Test Uni')
         cy.contains('Tìm kiếm').click()
-        cy.get('.university-admin-td').should('contain', 'ULIS')
+        cy.get('.university-admin-td').should('contain', 'Test Uni')
     })
 
    /*  it('Search error by Class', () => {
@@ -78,15 +80,15 @@ describe('Search Score By Admin Test ', () => {
     })
 
     it('Search by all', () => {
-        cy.get('.search-admin').find('input[placeholder="Mssv .."]').type('20020483')
-        cy.get('.search-admin').find('input[placeholder="Họ và tên .."]').type('Nguyễn Thị Thu Trang')
-        cy.get('.search-admin').find('input[placeholder="Lớp .."]').type('QH-2020-I/CQ-C-D')
-        cy.get('.search-admin').find('input[placeholder="Trường .."]').type('UET')
+        cy.get('.search-admin').find('input[placeholder="Mssv .."]').type('10000001')
+        cy.get('.search-admin').find('input[placeholder="Họ và tên .."]').type('Test Name 1')
+        cy.get('.search-admin').find('input[placeholder="Lớp .."]').type('Class 1')
+        cy.get('.search-admin').find('input[placeholder="Trường .."]').type('Test Uni')
         cy.contains('Tìm kiếm').click()
-        cy.get('.mssv-admin-td').should('contain', '20020483')
-        cy.get('.fullname-admin-td').should('contain', 'Nguyễn Thị Thu Trang')
-        cy.get('.class-admin-td').should('contain', 'QH-2020-I/CQ-C-D')
-        cy.get('.university-admin-td').should('contain', 'UET')
+        cy.get('.mssv-admin-td').should('contain', '10000001')
+        cy.get('.fullname-admin-td').should('contain', 'Test Name 1')
+        cy.get('.class-admin-td').should('contain', 'Class 1')
+        cy.get('.university-admin-td').should('contain', 'Test Uni')
     })
 })
 

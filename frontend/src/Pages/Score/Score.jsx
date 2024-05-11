@@ -144,7 +144,7 @@ export const Score = () => {
                     <td className="taekwondo">{score.taekwondo_score}</td>
                     <td className="golf">{score.golf_score}</td>
                     <td className="certificate-icons"><Link to={`/certificate/${score.mssv}`} >
-                          <TbCertificate />
+                          <TbCertificate id = {score.mssv} />
                         </Link>
                     </td>
                   </tr>
