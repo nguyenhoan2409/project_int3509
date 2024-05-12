@@ -69,7 +69,7 @@ export const CreateRequest = () => {
         if (!returnDate) {
           setErrorReturnDate("Vui lòng nhập ngày kết thúc yêu cầu dự kiến.");
         }
-        if (returnDate < rentalDate) {
+        if (returnDate && returnDate < rentalDate) {
           setErrorReturnDate("Ngày kết thúc không thể sau ngày bắt đầu.");
         }
         break;
@@ -244,7 +244,7 @@ export const CreateRequest = () => {
           <p className="create-request-productName">{product.product_name}</p>
         </div>
         <div className="create-request-container-right">
-          <form onSubmit={(product.product_type == 2) ? handleSubmitForBuying : handleSubmit}>
+          <form onSubmit={(product.product_type == 2) ? handleSubmitForBuying : handleSubmit} className="create-request-form-container">
             {(product.product_type != 2) && <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
               <TextField
                 type="date"
@@ -297,6 +297,7 @@ export const CreateRequest = () => {
 
             <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
               {(product.product_type != 2) && <TextField
+                name="createRequest-timeline"
                 id="outlined-select-currency"
                 select
                 label="Lựa chọn khung giờ"
@@ -423,7 +424,7 @@ export const CreateRequest = () => {
                 }}
               />
             )}
-            <p style={{ color: "red", marginBottom: "10px", fontSize: "14px" }}>
+            <p style={{ color: "red", marginBottom: "10px", fontSize: "14px" }} className="errorInfo">
               {msg}
             </p>
             <Button

@@ -91,7 +91,7 @@ export const Login = () => {
         <h1>Đăng nhập</h1>
         <form onSubmit={Login} className="loginsignup-fields">
           <TextField
-          
+            name="email"
             label="Email"
             type="email"
             InputProps={{
@@ -118,7 +118,7 @@ export const Login = () => {
           />
 
           <TextField
-          
+            name="password"
             label="Mật khẩu"
             type="password"
             InputProps={{
@@ -149,7 +149,7 @@ export const Login = () => {
             {isLoading ? 'Đang kiểm tra...' : 'Đăng nhập'}
           </Button>
         </form>
-        <p className="loginsignup-login" onClick={() => {navigate('/notificationLoginSignup', {state: {type: 'forgotPassword-typeEmail'}})}}>Quên mật khẩu?</p>
+        <p className="forgottenPassword" onClick={() => {navigate('/notificationLoginSignup', {state: {type: 'forgotPassword-typeEmail'}})}}>Quên mật khẩu?</p>
         <p style={{fontSize: '16px', fontWeight: '500'}}>
           Bạn chưa có tài khoản?
           <Link style={{ textDecoration: "none" }} to="/signup">

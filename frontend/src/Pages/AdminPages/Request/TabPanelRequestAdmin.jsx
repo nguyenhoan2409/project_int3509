@@ -128,7 +128,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
           certificateId: certificate_id, 
           newStatus: status
       }, {withCredentials: true}); 
-      setMessageStackBar('Yêu cầu đã được cập nhật trạng thái thành công')
+      setMessageStackBar((status === 14) ? 'Đã chấp nhận yêu cầu thành công' : ((status === 15) ? 'Đã từ chối yêu cầu thành công' : 'Yêu cầu đã hoàn tất và cập nhật thành công'));
       handleOpenSnackBar(); 
       getAllOrder();
     } catch (error) {
@@ -197,7 +197,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
 
   return (
     <div>
-      <div>
+      <div className="requestAdmin-filter-container">
         <FormControl sx={{ mt: 1, ml: 0, mr: 1, mb: 1, minWidth: 150 }} size="small">
           <InputLabel id="demo-select-small-label" sx={{ fontSize: "14px" }}>
             Tên sản phẩm
@@ -478,6 +478,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                   variant="contained"
                                   color="success"
                                   size="small"
+                                  className="confirm-approved-btn"
                                 >
                                   Chấp nhận
                                 </Button>}
@@ -491,6 +492,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                   variant="contained"
                                   color="error"
                                   size="small"
+                                  className="confirm-denied-btn"
                                 >
                                   Từ chối
                                 </Button>}
@@ -504,6 +506,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                   variant="contained"
                                   color="error"
                                   size="small"
+                                  className="confirm-completed-btn"
                                 >
                                   Xác nhận hoàn tất
                                 </Button>}

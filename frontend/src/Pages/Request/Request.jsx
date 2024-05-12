@@ -248,7 +248,8 @@ export const Request = () => {
               }}
               value={rentalDate}
               fullWidth
-              helperText={"Ngày bắt đầu yêu cầu"}
+              label="Ngày bắt đầu yêu cầu"
+              InputLabelProps={{shrink: true}}
               size="small"
               sx={{
                 "& .MuiOutlinedInput-input": {
@@ -258,7 +259,7 @@ export const Request = () => {
             />
           </FormControl>
 
-          <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
+          <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
             <TextField
               type="date"
               variant="outlined"
@@ -268,7 +269,8 @@ export const Request = () => {
               }}
               value={returnDate}
               fullWidth
-              helperText={"Ngày kết thúc yêu cầu dự kiến"}
+              label="Ngày kết thúc yêu cầu dự kiến"
+              InputLabelProps={{shrink: true}}
               size="small"
               sx={{
                 "& .MuiOutlinedInput-input": {
@@ -304,6 +306,7 @@ export const Request = () => {
           </FormControl>
 
           <Button
+            className="submitBtn-filter"
             variant="contained"
             size="small"
             sx={{ textTransform: "none", m: "8px" }}
@@ -314,6 +317,7 @@ export const Request = () => {
           </Button>
 
           <Button
+            className="returnToDefaultBtn-filter"
             variant="contained"
             size="small"
             sx={{ textTransform: "none" }}
@@ -336,25 +340,25 @@ export const Request = () => {
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead sx={{ backgroundColor: "green" }}>
                     <TableRow>
-                      <StyledTableCell style={{ minWidth: 80 }}>
+                      <StyledTableCell style={{ minWidth: 80 }} key="id">
                         ID
                       </StyledTableCell>
-                      <StyledTableCell style={{ minWidth: 50 }}>
+                      <StyledTableCell style={{ minWidth: 50 }} key="product_name">
                         Tên sản phẩm
                       </StyledTableCell>
-                      <StyledTableCell style={{ minWidth: 50 }}>
+                      <StyledTableCell style={{ minWidth: 50 }} key="product_quantity">
                         Số lượng
                       </StyledTableCell>
-                      <StyledTableCell style={{ minWidth: 150 }}>
+                      <StyledTableCell style={{ minWidth: 150 }} key="start_time">
                         Thời gian bắt đầu
                       </StyledTableCell>
-                      <StyledTableCell style={{ minWidth: 150 }}>
+                      <StyledTableCell style={{ minWidth: 150 }} key="end_time">
                         Thời gian kết thúc
                       </StyledTableCell>
-                      <StyledTableCell style={{ minWidth: 150 }}>
+                      <StyledTableCell style={{ minWidth: 150 }} key="request_status">
                         Trạng thái yêu cầu
                       </StyledTableCell>
-                      <StyledTableCell style={{ minWidth: 250 }}>
+                      <StyledTableCell style={{ minWidth: 250 }} key="request_action">
                         Tác vụ
                       </StyledTableCell>
                     </TableRow>
@@ -389,6 +393,7 @@ export const Request = () => {
                               <TableCell>
                                 <div>
                                   <Button
+                                    className="request-detail-btn"
                                     onClick={() => handleOpen(row)}
                                     sx={{ textTransform: "none" }}
                                     variant="contained"
@@ -398,6 +403,7 @@ export const Request = () => {
                                     Xem chi tiết
                                   </Button>
                                   <Modal
+                                    className="modal-request-detail-container"
                                     open={open}
                                     row={row}
                                     onClose={handleClose}

@@ -52,7 +52,7 @@ export const Signup = () => {
 
             const [domain, extension] = afterAt.split(".");
             if (!domain || !extension) {
-              setErrorEmail("Cần viết thêm sau @");
+              setErrorEmail("Email cần chứa dấu .");
             }
           }
         }
@@ -175,7 +175,7 @@ export const Signup = () => {
           </div> */}
 
           <TextField
-              
+              name="email"
               label="Email"
               // type="email"
               InputProps={{
@@ -203,7 +203,7 @@ export const Signup = () => {
             />
 
           <TextField
-            
+            name="password"
             label="Mật khẩu"
             type="password"
             InputProps={{
@@ -227,7 +227,7 @@ export const Signup = () => {
           />
 
           <TextField
-            
+            name="confirmPassword"
             label="Nhập lại mật khẩu"
             type="password"
             InputProps={{
@@ -254,7 +254,7 @@ export const Signup = () => {
           />
 
           <TextField
-            
+            name="fullname"
             label="Họ và tên"
             type="text"
             value={fullname}
@@ -282,7 +282,7 @@ export const Signup = () => {
           />
 
           <TextField
-            
+            name="phonenumber"
             label="Số điện thoại"
             type="tel"
             InputProps={{
@@ -309,7 +309,7 @@ export const Signup = () => {
           />
 
           <TextField
-            
+            name="address"
             label="Địa chỉ"
             type="text"
             InputProps={{

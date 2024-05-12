@@ -79,9 +79,22 @@
   margin-top: 10px;
   font-size: 16px;
   font-weight: 500;
+  color: blue;
 }
 
 .loginsignup-login:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.forgottenPassword {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: blue;
+}
+
+.forgottenPassword:hover {
   opacity: 0.5;
   cursor: pointer;
 }
