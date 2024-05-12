@@ -16,9 +16,16 @@ export const Home = () => {
     <div className="hero">
       <Layout>
         <div className="hero-main">
-          <div className="hero-title">
-            GIỚI THIỆU VỀ TRUNG TÂM GIÁO DỤC THỂ CHẤT VÀ THỂ THAO, ĐẠI HỌC QUỐC
-            GIA HÀ NỘI
+          <div className="title">
+            Giới thiệu về trung tâm giáo dục thể chất và thể thao
+          </div>
+          <div style={{
+            textAlign: "center",
+            fontSize: "25px",
+            fontWeight: "600",
+            marginTop: "-30px"
+          }}>
+            Đại học quốc gia Hà Nội
           </div>
           <div className="hero-text">
             Trung tâm Giáo dục Thể chất và Thể thao, ĐHQGHN được thành lập theo

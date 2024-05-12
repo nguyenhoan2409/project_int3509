@@ -1,8 +1,5 @@
 .productdetails {
     background-color: #f5f5f5;
-    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
 }
 
 .product-detail {
@@ -47,17 +44,20 @@
     text-transform: lowercase;
 }
 .product-name .text {
-    font-size: 40px;
+    font-size: xx-large;
     font-weight: 500;
+    text-align: center;
 }
 
 .icon {
-    font-size: 40px;
+    /* font-size: 40px; */
     margin-right: 10px ;
+    display: flex;
+    align-items: center;
 }
 
 .product-price {
-    color: chocolate;
+    color: red;
 }
 
 .product-price .text {
@@ -66,29 +66,29 @@
 }
 
 .text-coin {
-    font-size: 25px;
+    text-align: center;
+    font-size: large;
     text-decoration-line: underline;
 }
 
 .quantity-description {
     display: flex;
     flex-direction: row;
-    font-size: 20px;
-    gap: 10px;
+    font-size: large;
+    gap: 5px;
 }
 .product-button .productdetail-btn {
     height: 45px;
     width: 100px;
     background-color: #006d3a;
     color: white;
-    font-size: 20px;
-    border-radius: 2px;
+    font-size: large;
+    border-radius: 5px;
     border: #006d3a;
     margin-top: 10px;
 }
 
 .product-button .productdetail-btn:hover {
     cursor: pointer;
-    background-color: #03924f;
-    color: white;
+    opacity: 0.9;
 }

@@ -75,7 +75,9 @@ export const Score = () => {
   return (
     <div className="score-container">
       <Layout>
-        <div className="main">
+        <div className="title">Tra cứu điểm</div>
+
+        <div>
           <div className="score-header">
             <div className="search">
               <input
@@ -143,7 +145,7 @@ export const Score = () => {
                     <td className="air_volleyball">{score.air_volleyball_score}</td>
                     <td className="taekwondo">{score.taekwondo_score}</td>
                     <td className="golf">{score.golf_score}</td>
-                    <td className="certificate-icons"><Link to={`/certificate/${score.mssv}`} >
+                    <td className="certificate-icons CDR"><Link to={`/certificate/${score.mssv}`} >
                           <TbCertificate id = {score.mssv} />
                         </Link>
                     </td>

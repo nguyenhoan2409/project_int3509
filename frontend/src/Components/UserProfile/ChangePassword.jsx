@@ -57,7 +57,7 @@ export const ChangePassword = () => {
   return (
     <div className="accountsettings">
       <h1>Đổi mật khẩu</h1>
-      <div className="form">
+      <div className="profile-form-container">
         <div className="form-group">
           <label htmlFor="password">Mật khẩu cũ<span>*</span></label>
           <input required type="password" name='password' value={password} onChange={(e) => {setMsg(""); setPassword(e.target.value)}}/>
