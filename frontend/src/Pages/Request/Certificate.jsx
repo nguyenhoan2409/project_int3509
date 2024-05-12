@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Layout from "../Layout/Layout";
 import { useSelector } from "react-redux";
+import { CreateRequest } from "./CreateRequest";
 
 export const Certificate = () => {
     const { id } = useParams();
@@ -12,6 +13,7 @@ export const Certificate = () => {
     const [email, setEmail] = useState();
     const [phonenumber, setPhonenumber] = useState();
     const [checkCDR, setCheckCDR] = useState(false);
+    const [msg, setMsg] = useState("");
     const {user} = useSelector((state) => state.auth); 
     const navigate = useNavigate();
     function handleSubmit(event) {
@@ -30,6 +32,7 @@ export const Certificate = () => {
             setCheckCDR(true)
           } else {
             setCheckCDR(false)
+            setMsg("Bạn chưa đạt chuẩn đầu ra")
           }
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -43,10 +46,8 @@ export const Certificate = () => {
       }, [])
       const CertificateRequest = async () => {
         try {
-          if(!email || !phonenumber) {
-            alert("Vui lòng nhập đầy đủ thông tin")
-          }
-          const response = await axios.post("http://localhost:8080/certificate/create", {
+          if(msg.length === 0) {
+            const response = await axios.post("http://localhost:8080/certificate/create", {
             mssv: student.mssv,
             fullname: student.fullname,
             class: student.class,
@@ -58,8 +59,8 @@ export const Certificate = () => {
           }, {
             withCredentials: true,
           });
-          alert("Đã gửi yêu cầu thành công");
           navigate("/request");
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
           if (error.response) {
@@ -67,7 +68,50 @@ export const Certificate = () => {
           }
         }
       }
-
+      
+      const validate = (type) => {
+        switch (type) {
+          case "email":
+            if (!email) {
+              setMsg("Vui lòng nhập email");
+            } else {
+              if (!email.includes("@")) {
+                setMsg("Định dạng email cần có @");
+              } else {
+                const [, afterAt] = email.split("@");
+                if (!afterAt || !afterAt.trim()) {
+                  setMsg("Cần viết thêm sau @");
+                }
+    
+                const [domain, extension] = afterAt.split(".");
+                if (!domain || !extension) {
+                  setMsg("Cần viết thêm sau @");
+                }
+              }
+              if(email.includes("@") && email.includes(".")) {
+                setMsg("");
+              }
+            }
+            break;
+        
+          case "phonenumber":
+            if (!phonenumber) {
+              setMsg("Vui lòng nhập số điện thoại");
+            } else {
+              if (!/^(0\d{9}|(\+84|\(84\))\d{9})$/.test(phonenumber)) {
+                setMsg(
+                  "Số điện thoại không hợp lệ, định dạng chuẩn 10 số dạng 0xxxx.. hoặc +84xxxx.."
+                );
+              } else {
+                setMsg("");
+              }
+            }
+            break;
+          default:
+            alert("Type không hợp lệ");
+        }
+      };
+      console.log("msg: ", msg);
     return (
             <Layout>
             <h2 className="createRequestTitle">Tạo yêu cầu </h2>
@@ -129,8 +173,12 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="Email"
+                            id = "email"
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
+                            onBlur={() => {
+                              validate("email");
+                            }}
                             fullWidth
                             required
                             sx={{ mb: 4 }}
@@ -140,8 +188,12 @@ export const Certificate = () => {
                             variant="outlined"
                             color="secondary"
                             label="Số điện thoại"
+                            id = "phonenumber"
                             onChange={(e) => setPhonenumber(e.target.value)}
                             value={phonenumber}
+                            onBlur={() => {
+                              validate("phonenumber");
+                            }}
                             fullWidth
                             required
                             sx={{ mb: 4 }}
@@ -152,23 +204,22 @@ export const Certificate = () => {
                         <p> Bóng đá : {student.football_score} .</p>
                         <p> Bóng rổ: {student.basketball_score} .</p>
                         <p> Bóng bàn: {student.tabletennis_score} .</p>
-                        <p> Cầu lông: {student.bedminton_score} .</p>
+                        <p> Cầu lông: {student.badminton_score} .</p>
                     </div>
 
                     <div className="score-detail-user">
                         <p> Bóng chuyền hơi: {student.air_volleyball_score} .</p>
                         <p> Bóng chuyền da: {student.volleyball_score} .</p>
-                        <p> Taekwondo: {student.taekwondo_score} .</p>
+                        <p> Võ: {student.taekwondo_score} .</p>
                         <p> Golf: {student.golf_score} .</p>
                     </div>
 
                 </form>
+                <div style={{color: 'red', textAlign: 'center', marginTop: '10px', marginBottom: '10px', fontSize: '18px'}} className = "msg-request">{msg}</div>
                 {checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn" onClick={CertificateRequest}>
                         Tạo yêu cầu
                     </Button>}
-
-                    {!checkCDR && <p style = {{color: 'red', textAlign: 'center', marginTop: '10px', marginBottom: '10px', fontSize: '18px'}}>Bạn chưa đạt CĐR</p>}
-                    {!checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn" disabled>
+                {!checkCDR && <Button variant="outlined" type="submit" className="createRequestBtn" disabled>
                         Tạo yêu cầu
                     </Button>}
             </div>

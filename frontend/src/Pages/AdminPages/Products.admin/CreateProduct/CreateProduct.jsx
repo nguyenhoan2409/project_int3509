@@ -5,8 +5,9 @@ import "./CreateProduct.css";
 import Layout from "~/Pages/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { private_createTypography } from "@mui/material";
 export const CreateProduct = () => {
-  const [product_name, setProductName] = useState();
+  const [product_name, setProductName] = useState("");
   const [product_type, setProductType] = useState(2);
   const [quantity, setQuantity] = useState();
   const [description, setDescription] = useState("");
@@ -26,7 +27,6 @@ export const CreateProduct = () => {
       setIsFilled(false);
     } else {
       setIsFilled(true);
-      setMsg("Thêm sản phẩm thành công");
       addProduct();
     }
   };
@@ -36,28 +36,32 @@ export const CreateProduct = () => {
       setProductName(event.target.value);
     } else {
       if (event.target.value.length === 0) {
-        alert("Tên sản phẩm không được để trống");
-      } else alert("Tên sản phẩm phải nhỏ hoặc bằng 30 ký tự");
+        setMsg("Tên sản phẩm không được để trống");
+      } else setMsg("Tên sản phẩm phải nhỏ hoặc bằng 30 ký tự");
     }
   };
   const handlePriceChange = (event) => {
     if (event.target.value >= 0) {
       setPrice(event.target.value);
     } else {
-      alert("Giá phải lớn hơn hoặc bằng 0");
-      setPrice(0);
+      setMsg("Giá phải lớn hơn hoặc bằng 0");
     }
   };
   const handleQuantityChange = (event) => {
     if (event.target.value >= 0) {
       setQuantity(event.target.value);
     } else {
-      alert("Số lượng trong kho phải lớn hơn hoặc bằng 0");
-      setQuantity(0);
+      setMsg("Số lượng trong kho phải lớn hơn hoặc bằng 0");
     }
   };
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+    const value = event.target.value
+    if(value.length >= 30) {
+      setIsFilled(false)
+      setMsg("Mô tả sản phẩm không được quá 30 kí tự")
+    } else {
+      setDescription(value)
+    }
   };
   const handleThumbnailChange = (event) => {
       const thumbnail  = URL.createObjectURL(event.target.files[0]); // Tạo đường dẫn tạm thời cho hình ảnh được chọn
@@ -87,15 +91,16 @@ export const CreateProduct = () => {
       }, {
         withCredentials: true,
       });
-      
+      setMsg("Thêm sản phẩm thành công");
       navigate("/admin/products/list");
     } catch (error) {
-      console.error("Error fetching data:", error);
       if (error.response) {
-        console.error("Server responded with:", error.response.data);
+        setIsFilled(false);
+        setMsg(error.response.data);
       }
     }
   };
+  console.log(msg);
   return (
     <Layout>
       <div>
@@ -107,27 +112,27 @@ export const CreateProduct = () => {
           <div className="create-product-right">
             <div className="create-product-row">
               <p> Tên sản phẩm : </p>
-              <input type="text" onChange={handleNameChange} />
+              <input type="text" onChange={handleNameChange} name = "product_name" value={product_name}/>
             </div>
             <div className="create-product-row">
               <p> Giá : </p>
-              <input type="number" onChange={handlePriceChange} />
+              <input type="number" onChange={handlePriceChange} name = "price" value={price}/>
             </div>
             <div className="create-product-row">
               <p> Số lượng kho: </p>
-              <input type="number" onChange={handleQuantityChange} />
+              <input type="number" onChange={handleQuantityChange} name = "quantity" value={quantity}/>
             </div>
             <div className="create-product-row">            
               <p> Ảnh : </p>
-              <input type="file" accept=".png, .jpg, .jpeg, .gif" onChange={handleThumbnailChange} />
+              <input type="file" accept=".png, .jpg, .jpeg, .gif" onChange={handleThumbnailChange} name = "thumbnail" />
             </div>
             <div className="create-product-row">
               <p> Mô tả : </p>
-              <input type="text" onChange={handleDescriptionChange} />
+              <input type="text" onChange={handleDescriptionChange}  name = "description" value={description}/>
             </div>
             <div className="create-product-row">
               <p> Loại : </p>
-              <select value={product_type} onChange={handleProductTypeChange}>
+              <select value={product_type} onChange={handleProductTypeChange} name = "product_type">
                 <option value="2">Mua</option>
                 <option value="1">Mượn</option>
                 <option value="3">Thuê</option>

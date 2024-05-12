@@ -45,7 +45,7 @@ export const Sidebar = () => {
             <Link to={"/admin/dashboard"}>
               <div className="menu-list-item-container">
                 <FcStatistics className="menu-list-icon" size={24} />
-                <div>Trang chủ</div>
+                <div className = "home-sidebar">Trang chủ</div>
               </div>
             </Link>
           </li>

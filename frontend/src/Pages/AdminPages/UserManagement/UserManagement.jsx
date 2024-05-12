@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./UserManagement.css";
 import Layout from "~/Pages/Layout/Layout";
-import { Box, Container, LinearProgress, Typography } from "@mui/material";
-import { Button, Chip } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -16,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LogOut, reset } from "~/features/authSlice";
 import TablePagination from "@mui/material/TablePagination";
-import Alert from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -58,7 +55,7 @@ export const UserManagement = () => {
     setPage(0);
   };
 
-  const getUsers = async () => {
+  const getUserList = async () => {
     try {
       const response = await axios.get("http://localhost:8080/user/list", {
         withCredentials: true,
@@ -79,7 +76,7 @@ export const UserManagement = () => {
     }
   };
   useEffect(() => {
-    getUsers();
+    getUserList();
   }, [name, email, phone_number, address, roleId]);
 
   const handleFilterUser = () => {
@@ -128,7 +125,7 @@ export const UserManagement = () => {
         },
         { withCredentials: true }
       );
-      getUsers();
+      getUserList();
     } catch (error) {
       console.error("Error fetching data:", error);
       if (error.response) {
@@ -206,23 +203,27 @@ export const UserManagement = () => {
                           page * rowsPerPage + rowsPerPage
                         ).map((user, index) => (
               <StyledTableRow key={user.user_id}>
-                <StyledTableCell align="right">{index +1}</StyledTableCell>
-                <StyledTableCell align="right">{user.fullname}</StyledTableCell>
-                <StyledTableCell align="right">{user.email}</StyledTableCell>
-                <StyledTableCell align="right">{user.phone_number}</StyledTableCell>
-                <StyledTableCell align="right">{user.address}</StyledTableCell>
-                <StyledTableCell align="right" style={user.role_id === 1 ? {color: 'red'} : {color: '#007e43'}}>
+                <StyledTableCell align="right" className="stt">{index +1}</StyledTableCell>
+                <StyledTableCell align="right" className="name">{user.fullname}</StyledTableCell>
+                <StyledTableCell align="right" className="email">{user.email}</StyledTableCell>
+                <StyledTableCell align="right" className="phone">{user.phone_number}</StyledTableCell>
+                <StyledTableCell align="right" className="address">{user.address}</StyledTableCell>
+                <StyledTableCell align="right" style={user.role_id === 1 ? {color: 'red'} : {color: '#007e43'}} className="role" id = {user.user_id}>
                   {user.role_id === 1 ? (
                     "Quản trị viên"
                   ) : (
-                    "Người dùng"
+                    "Người dùng"
                   )}
                 </StyledTableCell>
-                <StyledTableCell align="right"> 
-                    {user.role_id === 2 && 
-                    <div onClick={() => updateUserToAdmin(user.user_id)} style={{cursor: 'pointer', color: '#063678'}}>
+                <StyledTableCell align="right" className="action" id = {user.user_id}> 
+                    {user.role_id === 2 ? (
+                      <div onClick={() => updateUserToAdmin(user.user_id)} style={{cursor: 'pointer', color: '#063678'}} id = {user.user_id}>
                       Cấp quyền admin
-                    </div> }
+                    </div>
+                    ) : (
+                      <div id = {user.user_id}> </div>
+                    )
+                     }
                     </StyledTableCell>
               </StyledTableRow>
             ))}

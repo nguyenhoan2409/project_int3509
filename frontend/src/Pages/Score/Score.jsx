@@ -30,7 +30,7 @@ export const Score = () => {
     setPage(0);
   };
 
-  const getScores = async () => {
+  const getScoreList = async () => {
     try {
       const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
@@ -44,7 +44,7 @@ export const Score = () => {
   };
 
   useEffect(() => {
-    getScores();
+    getScoreList();
   }, [mssv, name, classs, university]);
 
   const handleFilterScore = () => {
@@ -110,19 +110,19 @@ export const Score = () => {
             <table className="score-table-user">
               <thead>
                 <tr className="score-table-tr">
-                  <th className="mssv score-table-header">MSSV</th>
-                  <th className="fullname score-table-header">Họ và Tên</th>
-                  <th className="class score-table-header">Lớp</th>
-                  <th className="university score-table-header">Trường</th>
-                  <th className="football score-table-header">Bóng đá</th>
-                  <th className="badminton score-table-header">Cầu lông</th>
-                  <th className="tabletennis score-table-header">Bóng bàn</th>
-                  <th className="basketball score-table-header">Bóng rổ</th>
-                  <th className="volleyball score-table-header">Bóng chuyền hơi</th>
-                  <th className="air_volleyball score-table-header">Bóng chuyền</th>
-                  <th className="taekwondo score-table-header">Võ</th>
-                  <th className="golf score-table-header">Golf</th>
-                  <th className="CDR score-table-header">CĐR</th>
+                  <th className="score-table-header">MSSV</th>
+                  <th className="score-table-header">Họ và Tên</th>
+                  <th className="score-table-header">Lớp</th>
+                  <th className="score-table-header">Trường</th>
+                  <th className="score-table-header">Bóng đá</th>
+                  <th className="score-table-header">Cầu lông</th>
+                  <th className="score-table-header">Bóng bàn</th>
+                  <th className="score-table-header">Bóng rổ</th>
+                  <th className="score-table-header">Bóng chuyền hơi</th>
+                  <th className="score-table-header">Bóng chuyền</th>
+                  <th className="score-table-header">Võ</th>
+                  <th className="score-table-header">Golf</th>
+                  <th className="score-table-header">CĐR</th>
                 </tr>
               </thead>
               <tbody>
@@ -144,7 +144,7 @@ export const Score = () => {
                     <td className="taekwondo">{score.taekwondo_score}</td>
                     <td className="golf">{score.golf_score}</td>
                     <td className="certificate-icons"><Link to={`/certificate/${score.mssv}`} >
-                          <TbCertificate />
+                          <TbCertificate id = {score.mssv} />
                         </Link>
                     </td>
                   </tr>

@@ -17,8 +17,9 @@ export const UpdateScores = () => {
   const [volleyballScore, setVolleyballScore] = useState();
   const [taekwondoScore, setTaekwondoScore] = useState();
   const [golfScore, setGolfScore] = useState();
-  const [CDR, setCDR] = useState();
   const [checkCDR, setCheckCDR] = useState();
+  const [checkValue, setCheckValue] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const getScoreDetail = async () => {
     try {
@@ -38,11 +39,12 @@ export const UpdateScores = () => {
       setVolleyballScore(score.volleyball_score);
       setTaekwondoScore(score.taekwondo_score);
       setGolfScore(score.golf_score);
-      setCDR(score.CDR);
       if (score.CDR === "Đ") {
-        setCheckCDR(true);
+        setMsg("Sinh viên đã đạt chuẩn đầu ra");
+        setCheckValue(true);
       } else {
-        setCheckCDR(false);
+        setMsg("Sinh viên chưa đạt chuẩn đầu ra");
+        setCheckValue(false);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -55,7 +57,7 @@ export const UpdateScores = () => {
     getScoreDetail();
   }, []);
 
-  const getScoreUpdate = async () => {
+  const scoreUpdate = async () => {
     try {
         const response = await axios.patch("http://localhost:8080/score/update", {
           football_score: footballScore,
@@ -79,6 +81,24 @@ export const UpdateScores = () => {
       console.error("Error fetching data:", error);
     }
   }
+  const handleUpdate = () => {
+    if(footballScore < 0 || footballScore > 10
+      || basketballScore < 0 || basketballScore > 10
+      || tabletennisScore < 0 || tabletennisScore > 10
+      || badmintonScore < 0 || badmintonScore > 10
+      || airVolleyballScore < 0 || airVolleyballScore > 10
+      || volleyballScore < 0 || volleyballScore > 10
+      || taekwondoScore < 0 || taekwondoScore > 10
+      || golfScore < 0 || golfScore > 10) {
+      setMsg("Điểm phải nhỏ hoặc bằng 10 và lớn hơn hoặc bằng 0");
+      setCheckValue(false)
+    } else {
+      scoreUpdate();
+      setCheckValue(true);
+      setMsg("Đã cập nhật điểm thành công");
+    }
+
+  }
   return (
     <Layout>
       <div className="score-update-container">
@@ -93,17 +113,16 @@ export const UpdateScores = () => {
               <PiStudentDuotone />
             </div>
             <div className="profile-student-row">
-              <p>Mã sinh viên : </p> {scores.mssv}
+              <p>Mã sinh viên : {scores.mssv} </p>
             </div>
             <div className="profile-student-row">
-              <p>Tên sinh viên: </p> {scores.fullname}
+              <p>Tên sinh viên: {scores.fullname} </p>
             </div>
             <div className="profile-student-row">
-              <p>Lớp: </p> {scores.class}
+              <p>Lớp: {scores.class} </p>
             </div>
             <div className="profile-student-row">
-              <p>Trường: </p>
-              {scores.university}
+              <p>Trường: {scores.university} </p>
             </div>
           </div>
           <div className="score-student">
@@ -114,19 +133,21 @@ export const UpdateScores = () => {
                   <div className="form-update-row">
                     <label>Bóng đá: </label>
                     <input
-                      type="text"
+                      type="number"
                       value={footballScore}
                       onChange={(event) => setFootballScore(event.target.value)}
+                      name="football_score"
                     />
                   </div>
                   <div className="form-update-row">
                     <label>Cầu lông: </label>
                     <input
-                      type="text"
+                      type="number"
                       value={badmintonScore}
                       onChange={(event) =>
                         setbadmintonScore(event.target.value)
                       }
+                      name="badminton_score"
                     />
                   </div>
                 </div>
@@ -134,21 +155,23 @@ export const UpdateScores = () => {
                   <div className="form-update-row">
                     <label>Bóng bàn: </label>
                     <input
-                      type="text"
+                      type="number"
                       value={tabletennisScore}
                       onChange={(event) =>
                         setTabletennisScore(event.target.value)
                       }
+                      name = "tabletennis_score"
                     />
                   </div>
                   <div className="form-update-row">
                     <label>Bóng rổ: </label>
                     <input
-                      type="text"
+                      type="number"
                       value={basketballScore}
                       onChange={(event) =>
                         setBasketballScore(event.target.value)
                       }
+                      name="basketball_score"
                     />
                   </div>
                 </div>
@@ -156,21 +179,23 @@ export const UpdateScores = () => {
                   <div className="form-update-row">
                     <label>Bóng chuyền hơi: </label>
                     <input
-                      type="text"
+                      type="number"
                       value={airVolleyballScore}
                       onChange={(event) =>
                         setAirVolleyballScore(event.target.value)
                       }
+                      name = "airVolleyball_score"
                     />
                   </div>
                   <div className="form-update-row">
                     <label>Bóng chuyền da: </label>
                     <input
-                      type="text"
+                      type="number"
                       value={volleyballScore}
                       onChange={(event) =>
                         setVolleyballScore(event.target.value)
                       }
+                      name = "volleyball_score"
                     />
                   </div>
                 </div>
@@ -178,34 +203,36 @@ export const UpdateScores = () => {
                   <div className="form-update-row">
                     <label>Taekwondo: </label>
                     <input
-                      type="text"
+                      type="number"
                       value={taekwondoScore}
                       onChange={(event) =>
                         setTaekwondoScore(event.target.value)
                       }
+                      name="taekwondo_score"
                     />
                   </div>
                   <div className="form-update-row">
                     <label>Golf:</label>
                     <input
-                      type="text"
+                      type="number"
                       value={golfScore}
                       onChange={(event) => setGolfScore(event.target.value)}
+                      name="golf_score"
                     />
                   </div>
                 </div>
               </div>
             </form>
 
-            <button onClick={getScoreUpdate} className="update-score-button">
+            <button onClick={handleUpdate} className="update-score-button">
               {" "}
               Cập nhật{" "}
             </button>
-            {checkCDR === true && (
-              <p className="check-cdr-msg"> Sinh viên đã đạt CĐR </p>
+            {checkValue === true && (
+              <p className="check-cdr-msg"> {msg} </p>
             )}
-            {checkCDR === false && (
-              <p className="check-cdr-msg-error"> Sinh viên chưa đạt CĐR </p>
+            {checkValue === false && (
+              <p className="check-cdr-msg-error"> {msg} </p>
             )}
           </div>
         </div>
