@@ -1,5 +1,5 @@
 .main-container {
-   font-family:"Work Sans", sans-serif;
+   /* font-family:"Work Sans", sans-serif; */
    /* display: flex;  */
    /* margin-top: 12vh; */
    /* position: absolute;
@@ -9,9 +9,9 @@
    height: 100vh;
 }
 
-main {
+/* main {
     font-family: "Work Sans", sans-serif;
-}
+} */
 
 .main-content {
     width: calc(100% - 200px);

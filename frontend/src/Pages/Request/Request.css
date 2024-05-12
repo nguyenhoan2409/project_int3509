@@ -6,17 +6,16 @@
 
 .title {
     text-align: center;
-    font-family:"Work Sans", sans-serif;
+    /* font-family:"Work Sans", sans-serif; */
     font-size: 25px;
     font-weight: 600;
     margin: 20px 0 10px 10px;
 }
 
 .createRequestContainer {
-    font-family: "Work Sans", sans-serif;
+    /* font-family: "Work Sans", sans-serif; */
     display: flex;
     justify-content: center; 
-  
 }
 
 .create-request-container-left {
@@ -77,7 +76,7 @@
 }
 
 .score-detail-user {
-    font-family: "Work Sans", sans-serif;
+    /* font-family: "Work Sans", sans-serif; */
     font-size: 18px;
     font-weight: 400;
     display: flex;
