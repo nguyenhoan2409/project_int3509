@@ -23,3 +23,8 @@
 .usersidebar-icon {
     font-size: 30px;
 }
+
+.usersidebar-title {
+    font-size: large;
+    font-weight: 600;
+}

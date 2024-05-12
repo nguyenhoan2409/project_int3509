@@ -100,7 +100,7 @@ export const Navbar = () => {
           </li>
           <li>
             <img src="https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-1024.png" className="img-profile" />
-            <AiFillCaretDown color={scrolled ? 'white' : "rgba(186, 149, 149, 0.4)"} size={18} style={{paddingBottom: 10}}/>
+            <AiFillCaretDown color="rgba(186, 149, 149, 0.4)" size={18} style={{paddingBottom: 10}}/>
             <ul className="sub-item-container">
               <li className="sub-item">
                 <AiOutlineUser color="black" size={18} style={{marginLeft: 5}}/>

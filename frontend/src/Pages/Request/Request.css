@@ -6,17 +6,14 @@
 
 .title {
     text-align: center;
-    font-family:"Work Sans", sans-serif;
     font-size: 25px;
     font-weight: 600;
-    margin: 20px 0 10px 10px;
+    margin: 20px 0 20px 10px;
 }
 
 .createRequestContainer {
-    font-family: "Work Sans", sans-serif;
     display: flex;
     justify-content: center; 
-  
 }
 
 .create-request-container-left {
@@ -60,7 +57,7 @@
 }
 
 .createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
-    background-color: #006d3a;
+    background-color: #006d3a;;
     color: white;
     width: 150px;
     height: 50px;
@@ -74,10 +71,12 @@
 
 .request-filter-container {
     margin-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .score-detail-user {
-    font-family: "Work Sans", sans-serif;
     font-size: 18px;
     font-weight: 400;
     display: flex;

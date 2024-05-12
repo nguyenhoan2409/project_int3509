@@ -114,7 +114,7 @@ export const Certificate = () => {
       console.log("msg: ", msg);
     return (
             <Layout>
-            <h2 className="createRequestTitle">Tạo yêu cầu </h2>
+            <h2 className="title">Tạo yêu cầu </h2>
             <div className="createRequestMain">
         
                 <form onSubmit={handleSubmit}>

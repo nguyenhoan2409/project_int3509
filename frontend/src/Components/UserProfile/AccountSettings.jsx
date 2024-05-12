@@ -54,25 +54,25 @@ export const AccountSetting = () => {
   }
   return (
     <div className="accountsettings">
-      <h1>Thông tin người dùng</h1>
-      <div className="form">
+      <div className='title'>Thông tin người dùng</div>
+      <div className="profile-form-container">
         <div className="form-group">
           <label htmlFor="name">Họ và tên<span>*</span></label>
-          <input type="text" name='name' id='name' value={fullname} onChange={(e) => setFullname(e.target.value)}/>
+          <input type="text" name='name' id='name' value={fullname} onChange={(e) => setFullname(e.target.value)} className='profile-input'/>
         </div>
 
         <div className="form-group">
           <label htmlFor="phone">Số điện thoại<span>*</span></label>
-          <input type="number" name='phone' id='phone' value={phone_number} onChange={(e) => setPhoneNumber(e.target.value)}/>
+          <input type="number" name='phone' id='phone' value={phone_number} onChange={(e) => setPhoneNumber(e.target.value)} className='profile-input'/>
         </div>
 
         <div className="form-group">
           <label htmlFor="email">Email<span>*</span></label>
-          <input type="email" name='email' id='email' value={email}/>
+          <input type="email" name='email' id='email' value={email} className='profile-input' disabled/>
         </div>
         <div className="form-group">
           <label htmlFor="text">Địa chỉ<span>*</span></label>
-          <input type="text" name='address' value={address} onChange={(e) => setAddress(e.target.value)}/>
+          <input type="text" name='address' value={address} onChange={(e) => setAddress(e.target.value)} className='profile-input'/>
         </div>
       
       </div>

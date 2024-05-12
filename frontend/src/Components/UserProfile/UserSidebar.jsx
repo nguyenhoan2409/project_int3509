@@ -15,7 +15,7 @@ export const UserSidebar = ({ activepage }) => {
         activepage === 'accountsettings' ?
           <div className='s2'>
             <div className='usersidebar-icon'> <FaRegUserCircle /> </div>
-            <span style={{fontSize : "20px", fontWeight : "600"}}>Chỉnh sửa thông tin</span>
+            <span className='usersidebar-title'>Chỉnh sửa thông tin</span>
           </div>
           :
           <Link to='/user/accountsettings'
@@ -23,7 +23,7 @@ export const UserSidebar = ({ activepage }) => {
           >
             <div className='s1'>
               <div className='usersidebar-icon'> <FaRegUserCircle /> </div>
-              <span style={{fontSize : "20px" , fontWeight : "600"}} >Chỉnh sửa thông tin</span>
+              <span className='usersidebar-title'>Chỉnh sửa thông tin</span>
             </div>
           </Link>
 
@@ -34,13 +34,13 @@ export const UserSidebar = ({ activepage }) => {
           <div className='s2'>
             <div className='usersidebar-icon'> <IoCartOutline /> </div>
 
-            <span style={{fontSize : "20px", fontWeight : "600"} }>Lịch sử</span>
+            <span className='usersidebar-title'>Lịch sử</span>
           </div>
           :
           <Link to='/user/yourorders' className='stylenone'>
             <div className='s1'>
               <div className='usersidebar-icon'> <IoCartOutline /></div>
-              <span style={{fontSize : "20px", fontWeight : "600"}}>Lịch sử</span>
+              <span className='usersidebar-title'>Lịch sử</span>
             </div>
           </Link>)
           : <></>
@@ -51,13 +51,13 @@ export const UserSidebar = ({ activepage }) => {
         activepage === 'changepassword' ?
           <div className='s2'>
             <div className='usersidebar-icon'> <FaRegEye /> </div>
-            <span style={{fontSize : "20px", fontWeight : "600"}}>Đổi mật khẩu</span>
+            <span className='usersidebar-title'>Đổi mật khẩu</span>
           </div>
           :
           <Link to='/user/changepassword' className='stylenone'>
             <div className='s1'>
               <div className='usersidebar-icon'> <FaRegEye className='usersidebar-icon' /> </div>
-              <span style={{fontSize : "20px", fontWeight : "600"}}>Đổi mật khẩu</span>
+              <span className='usersidebar-title'>Đổi mật khẩu</span>
             </div>
           </Link>
 

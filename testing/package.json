@@ -1,18 +1,15 @@
 {
-  "name": "cypress",
+  "name": "testing",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cypress open"
+ 	"start": "cypress open",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.8.1"
-  },
-  "dependencies": {
-    "faker": "^6.6.6"
   }
 }

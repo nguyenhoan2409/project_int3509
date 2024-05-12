@@ -153,7 +153,7 @@ export const Request = () => {
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: "#007e43",
+      backgroundColor: "#006d3a",
       color: theme.palette.common.white,
     },
   }));
@@ -308,10 +308,14 @@ export const Request = () => {
           <Button
             className="submitBtn-filter"
             variant="contained"
-            size="small"
-            sx={{ textTransform: "none", m: "8px" }}
+            size="medium"
+            sx={{ textTransform: "none", m: "8px", backgroundColor: '#006d3a', 
+            '&:hover': {
+              opacity: 0.9, 
+              backgroundColor: '#006d3a'
+            } }}
             onClick={handleFilter}
-            color="success"
+            
           >
             Lọc
           </Button>
@@ -319,8 +323,15 @@ export const Request = () => {
           <Button
             className="returnToDefaultBtn-filter"
             variant="contained"
-            size="small"
-            sx={{ textTransform: "none" }}
+            size="medium"
+            sx={{ 
+              textTransform: "none", 
+              backgroundColor: '#006d3a', 
+              '&:hover': {
+                opacity: 0.9, 
+                backgroundColor: '#006d3a'
+              }
+            }}
             onClick={() => {
               setOrderList(initialOrderList);
               setProductName("");
@@ -328,7 +339,6 @@ export const Request = () => {
               setReturnDate("");
               setOrderStatus("");
             }}
-            color="success"
           >
             Về mặc định
           </Button>

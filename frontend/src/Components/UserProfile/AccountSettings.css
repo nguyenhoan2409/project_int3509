@@ -9,48 +9,52 @@
     padding: 20px 10px;
 }
 
-.accountsettings .form {
+.accountsettings .profile-form-container {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
-    padding: 10px 20px;
+    padding: 0 20px;
     align-items: center;
+    margin-top: 0px;
 }
 
-.accountsettings .form .form-group {
+.accountsettings .profile-form-container .form-group {
     display: flex;
     flex-direction: column;
     width: 50%;
     margin: 10px;
 }
 
-.accountsettings .form .form-group input{
+.accountsettings .profile-form-container .form-group input{
    padding: 10px;
 }
 
 .mainbutton1 {
-    background: #131550;
-    border: 1px solid white;
+    background: #006d3a;
+    border: 1px solid #006d3a;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 1rem;
     margin: 1rem;
-    cursor: pointer;
     color: white;
   }
 
 
 .mainbutton1:hover {
-    background-color: #131550;
-    color: white;
-    transform: scale(1.1);
-    transition: all 0.6s ease-in-out;
+    cursor: pointer;
+    opacity: 0.9;
 }
 
-.accountsettings .form .form-group label {
+.accountsettings .profile-form-container .form-group label {
     font-size: 1.2 rem;
     font-weight: 300;
     margin-bottom: 5px;
 }
+
+.profile-input {
+    border-radius: 5px;
+    border: 1px black solid;
+}
+

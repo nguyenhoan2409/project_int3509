@@ -40,28 +40,29 @@ export const ProductDetail = ({ navigation }) => {
                 <div className="product-name">
                   <div className="text">{product.product_name}</div>
                 </div>
-                <div className="review">
+                {/* <div className="review">
                   <FaStar />
                   <FaStar />
                   <FaStar />
                   <FaStar />
                   <FaStarHalfAlt />
                   <p> 2350 lượt {product.product_type} | 440 lượt đánh giá</p>
-                </div>
+                </div> */}
                 <div className="product-price">
                   <div className="icon">
-                    <AiOutlineDollar />
+                    <AiOutlineDollar size={28}/>
                   </div>
                   <p className="text">{product.price}</p>
                   <p className="text-coin"> đ </p>
                 </div>
                 <div className="quantity-description">
                   <p>Số lượng trong kho: </p>
-                  <p>{product.quantity}</p>
+                  <p style={{color: "red"}}>{product.quantity}</p>
+                  <p>sản phẩm</p>
                 </div>
                 <div className="quantity-description">
                   <p>Mô tả: </p>
-                  <p>{product.description}</p>
+                  <p>{(!product.description) ? "Không có mô tả" : product.description}</p>
                 </div>
                 
                 <div className="product-button"><button className="productdetail-btn" onClick={() => {navigate(`/create-request/${id}`); window.scrollTo(0,0)}}>{product.product_type === 1 ? "Mượn" : (product.product_type === 2 ? "Mua" : "Thuê")}</button></div>

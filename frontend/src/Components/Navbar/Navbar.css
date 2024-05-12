@@ -5,7 +5,6 @@
   justify-content: space-between;
   padding: 0;
   box-shadow: 0 1px 3px -2px black;
-  font-family: "Work Sans", sans-serif;
   font-weight: 600;
   margin: 0 0;
   font-size: large;
@@ -23,7 +22,6 @@
   justify-content: space-between;
   padding: 0;
   box-shadow: 0 1px 3px -2px black;
-  font-family: "Work Sans", sans-serif;
   font-weight: 600;
   margin: 0 0;
   font-size: large;
@@ -66,7 +64,7 @@
 }
 
 .nav-menu li a:hover {
-  color: #006d3a;
+  color: #006d3a;;
   text-decoration: none;
 }
 
@@ -177,7 +175,7 @@
 }
 
 .sub-item:hover {
-  color: #006d3a;
+  color: #006d3a;;
   cursor: pointer;
   background-color: rgba(232, 232, 232, 0.4);
 }
