@@ -11,9 +11,9 @@ import CardHeader from "@mui/material/CardHeader";
 
 import { fToNow } from "~/utils/format-time";
 
-import Iconify from "~/Components/iconify";
-import Scrollbar from "~/Components/scrollbar";
-import List from "~/Components/List/List";
+import Iconify from "~/components/iconify";
+import Scrollbar from "~/components/scrollbar";
+import List from "~/components/List/List";
 import { useNavigate } from "react-router-dom";
 
 // ----------------------------------------------------------------------

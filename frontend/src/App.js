@@ -1,31 +1,31 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "~/Pages/Home/home";
-import { Request } from "./Pages/Request/Request";
-import { Score } from "./Pages/Score/Score";
-import { Profile } from "./Pages/Profile/Profile";
-import { ShopCategory } from "./Pages/Product/ShopCategory";
-import { Signup } from "./Pages/LoginSignup/Signup";
-import { Login } from "./Pages/LoginSignup/Login";
-import { CreateRequest } from "./Pages/Request/CreateRequest";
-import { RequestAdmin } from "./Pages/AdminPages/Request/ResquestAdmin";
+import {Home} from "./pages/UserPages/Home/home"
+import { Request } from "./pages/UserPages/Request/Request";
+import { Score } from "./pages/UserPages/Score/Score";
+import { Profile } from "./pages/AdminUserPages/Profile/Profile";
+import { ShopCategory } from "./pages/UserPages/Product/ShopCategory";
+import { Signup } from "./pages/AdminUserPages/LoginSignup/Signup";
+import { Login } from "./pages/AdminUserPages/LoginSignup/Login";
+import { CreateRequest } from "./pages/UserPages/Request/CreateRequest";
+import { RequestAdmin } from "./pages/AdminPages/Request/ResquestAdmin";
 
 
-import { ProductDetail } from "./Pages/Product/ProductDetail";
-import { Certificate } from "./Pages/Request/Certificate";
-import { ProductsManagement } from "./Pages/AdminPages/Products.admin/ProductsLayout/Products.admin";
-import { UpdateProduct } from "./Pages/AdminPages/Products.admin/UpdateProduct/UpdateProduct";
-import { CreateProduct } from "./Pages/AdminPages/Products.admin/CreateProduct/CreateProduct";
-import { ScoresManagement } from "./Pages/AdminPages/Score.admin/ScoreLayout/ScoreLayout";
-import { ScoresList } from "./Pages/AdminPages/Score.admin/ScoreList/ScoresList";
-import { UpdateScores } from "./Pages/AdminPages/Score.admin/ScoresUpdate/ScoresUpdate";
-import { ScoreStudentAdd } from "./Pages/AdminPages/Score.admin/ScoresAdd/ScoreStudentAdd";
-import { ProductsList } from "./Pages/AdminPages/Products.admin/ProductsList/ProductsList";
-import { AdminHome } from "./Pages/AdminPages/AdminHome/AdminHome";
-import { UserManagement } from "./Pages/AdminPages/UserManagement/UserManagement";
-import ProtectedRoute from "./Components/ProtectRoute/ProtectRoute";
-import { EmailVerify } from "./Pages/LoginSignup/EmailVerify";
-import { NotificationLoginSignup } from "./Pages/LoginSignup/NotificationLoginSignup";
-import { NewPasswordForForgottenPassword } from "./Pages/LoginSignup/NewPasswordForForgottenPassword";
+import { ProductDetail } from "./pages/UserPages/Product/ProductDetail";
+import { Certificate } from "./pages/UserPages/Request/Certificate";
+import { ProductsManagement } from "./pages/AdminPages/Products.admin/ProductsLayout/Products.admin";
+import { UpdateProduct } from "./pages/AdminPages/Products.admin/UpdateProduct/UpdateProduct";
+import { CreateProduct } from "./pages/AdminPages/Products.admin/CreateProduct/CreateProduct";
+import { ScoresManagement } from "./pages/AdminPages/Score.admin/ScoreLayout/ScoreLayout";
+import { ScoresList } from "./pages/AdminPages/Score.admin/ScoreList/ScoresList";
+import { UpdateScores } from "./pages/AdminPages/Score.admin/ScoresUpdate/ScoresUpdate";
+import { ScoreStudentAdd } from "./pages/AdminPages/Score.admin/ScoresAdd/ScoreStudentAdd";
+import { ProductsList } from "./pages/AdminPages/Products.admin/ProductsList/ProductsList";
+import { AdminHome } from "./pages/AdminPages/AdminHome/AdminHome";
+import { UserManagement } from "./pages/AdminPages/UserManagement/UserManagement";
+import ProtectedRoute from "./components/ProtectRoute/ProtectRoute";
+import { EmailVerify } from "./pages/AdminUserPages/LoginSignup/EmailVerify";
+import { NotificationLoginSignup } from "./pages/AdminUserPages/LoginSignup/NotificationLoginSignup";
+import { NewPasswordForForgottenPassword } from "./pages/AdminUserPages/LoginSignup/NewPasswordForForgottenPassword";
 function App() {
   return (
     <div>

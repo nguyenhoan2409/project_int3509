@@ -1,0 +1,97 @@
+
+.score-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.form-update-score {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+.form-update-row-1 {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.form-update-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-update-row label {
+    font-weight: 500;
+    font-size: large;
+    width: 150px;
+}
+.form-update-row input {
+    font-size: large;
+    height: 30px;
+    width: 100px;
+}
+
+.profile-title{
+    font-size: x-large;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.profile-student-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-student, .score-student {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: large;
+    align-items: center;
+}
+
+.profile-student {
+    width: 30%;
+}
+
+.score-student {
+    width: 70%;
+}
+
+.profile-student .avatar {
+    font-size: 150px;
+}
+
+.profile-student-row p {
+    font-weight: 500;
+}
+
+.update-score-button {
+    background-color: #006d3a;;
+    color: white;
+    width: 120px;
+    height: 50px;
+    margin-top: 10px;
+    font-size: medium;
+    border-radius: 5px;
+    border: none;
+}
+
+.update-score-button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.check-cdr-msg {
+    color: #099d5e;
+}
+
+.check-cdr-msg-error {
+    color: red;
+}
+

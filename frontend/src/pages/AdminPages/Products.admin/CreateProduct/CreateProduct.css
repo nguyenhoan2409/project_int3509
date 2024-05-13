@@ -1,0 +1,76 @@
+
+.create-product-form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+.create-product-left {
+    flex: 1;
+}
+.create-product-left img {
+    height: 400px;
+    width: 70%;
+    float: right;
+}
+
+.create-product-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
+    align-items: center;
+}
+
+.create-product-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.create-product-row p {
+    font-weight: 500;
+    width: 130px;
+}
+
+.create-product-row input {
+    height: 40px;
+    width: 250px;
+    font-size: large;
+}
+
+.create-product-row select {
+    height: 40px;
+    font-size: large;
+    width: 260px;
+}
+
+.create-product-right .create-product-btn {
+    background-color: #006d3a;;
+    color: white;
+    width: 180px;
+    height: 50px;
+    margin-top: 10px;
+    font-size: medium;
+    border-radius: 5px;
+    border: none;
+}
+.create-product-right .create-product-btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.msg-create {
+    color: green;
+    font-size: large;
+}
+.msg-create-error {
+    color: red;
+    font-size: large;
+}
