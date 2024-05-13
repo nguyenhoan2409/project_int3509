@@ -37,11 +37,12 @@
 }
 .search-score-btn-admin {
     height: 40px;
-    width: 80px;
+    width: 90px;
     border: none;
     border-radius: 5px;
     color: white;
     background: #006d3a;
+    margin-right: 0px;
 }
 
 .search-score-btn-admin:hover {
@@ -96,14 +97,6 @@
     width: 5%;
 }
  
-.download-btn {
-    width: 80px;
-    background-color: #006d3a;
-    color: white;
-    height: 40px;
-    border-radius: 4px;
-    border: 2px;
-}
 .no-data-admin {
     text-align: center;
     font-size: 18px;

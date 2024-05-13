@@ -37,6 +37,7 @@
     flex-direction: row;
     gap: 1px;
     margin-left: auto;
+    margin-right: 20px;
 }
 .scores-navbar .scores-navbar-btn {
     float: right;
