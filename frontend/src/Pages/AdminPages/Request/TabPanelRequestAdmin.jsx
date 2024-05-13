@@ -329,14 +329,14 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
               <Table stickyHeader aria-label="sticky table">
                 <TableHead sx={{backgroundColor: 'green'}}>
                   <TableRow>
-                    <StyledTableCell style={{ minWidth: 80 }}>ID</StyledTableCell>
-                    <StyledTableCell style={{ minWidth: 50 }}>Tên sản phẩm</StyledTableCell>
-                    <StyledTableCell style={{ minWidth: 50 }}>Số lượng</StyledTableCell>
-                    <StyledTableCell style={{ minWidth: 150 }}>Thời gian bắt đầu</StyledTableCell>
-                    <StyledTableCell style={{ minWidth: 150 }}>Thời gian kết thúc {(index == 3) ? '' : 'dự kiến'}</StyledTableCell>
-                    {(index === 1) && <StyledTableCell style={{ minWidth: 100 }}>Kiểm tra quá hạn</StyledTableCell>}
-                    <StyledTableCell style={{ minWidth: 150 }}>Trạng thái yêu cầu</StyledTableCell>
-                    <StyledTableCell style={{ minWidth: 280 }}>Tác vụ</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '7%' }}>ID</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '10%' }}>Tên sản phẩm</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '10%' }}>Số lượng</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '30%' }}>Thời gian bắt đầu</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '30%' }}>Thời gian kết thúc {(index == 3) ? '' : 'dự kiến'}</StyledTableCell>
+                    {(index === 1) && <StyledTableCell style={{ minWidth: '20%' }}>Kiểm tra quá hạn</StyledTableCell>}
+                    <StyledTableCell style={{ minWidth: '30%' }}>Trạng thái yêu cầu</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '40%' }}>Tác vụ</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

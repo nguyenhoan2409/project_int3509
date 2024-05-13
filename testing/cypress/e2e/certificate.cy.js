@@ -1,8 +1,8 @@
 describe('Search Score By Student Test ', () => {
     beforeEach(() => {
         cy.visit('http://localhost:3000/')
-        cy.get('.loginsignup-fields').find('input[type="email"]').type('trang42a1dqh@gmail.com')
-        cy.get('.loginsignup-fields').find('input[type="password"]').type('trang')
+        cy.get('.loginsignup-fields').find('input[type="email"]').type('20020407@gmail.com')
+        cy.get('.loginsignup-fields').find('input[type="password"]').type('24092002')
         cy.get('form').submit();
         cy.contains('Tra cứu điểm').click()
     })

@@ -73,14 +73,6 @@ export const CreateProduct = () => {
 
   const addProduct = async () => {
     try {
-      console.log({
-        product_name,
-        price,
-        quantity,
-        thumbnail,
-        description,
-        product_type,
-      })
       const response = await axios.post("http://localhost:8080/product/add", {
         product_name,
         price,
@@ -103,7 +95,7 @@ export const CreateProduct = () => {
   console.log(msg);
   return (
     <Layout>
-      <div>
+      <div style={{minWidth: '250px'}}>
         <ProductsManagement />
         <div className="create-product-form">
           <div className="create-product-left">
