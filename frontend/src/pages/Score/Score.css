@@ -1,0 +1,97 @@
+.score-container {
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.score-header {
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.search {
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.search-btn .search-btn-users {
+    height: 32px;
+    width: 80px;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    color: white;
+    font-size: 12px;
+    background: #007e43;
+}
+
+.search-btn .search-btn-users:hover {
+    background: #039852;
+}
+
+.search .search-input-user {
+    height: 30px;
+    width: 150px;
+    padding-left: 10px;
+    border: 1px solid #252323;
+    border-radius: 2px;
+    color: #5c5c5c;
+    font-size: 12px;
+}
+.score-table {
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+ .score-table .score-table-user, .mssv, .fullname, .class, .university, .football, .swimming, .tabletennis, .basketball, .volleyball, .air_volleyball, .traditional_gymnastics, .basic_fitness, .CDR, .certificate-icons {
+    border: 1px solid;
+  }
+  
+ .score-table .score-table-user {
+    border-collapse: collapse;
+  }
+ .score-table .score-table-header{
+    text-align: center;
+    background-color: #04AA6D;
+    color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.score-table .score-table-tr {
+    padding-top: 8px;
+    text-align: center;
+    padding-bottom: 8px;
+} 
+.score-table .score-table-tr:nth-child(even){background-color: #f2f2f2;}
+.mssv {
+    width: 80px;
+}
+.fullname {
+    width: 200px;
+}
+.class {
+    width: 100px;
+}
+.university {
+    width: 180px;
+}
+.football, .swimming, .tabletennis, .basketball, .volleyball, .air_volleyball, .traditional_gymnastics, .basic_fitness, .CDR{
+    width: 60px;
+}
+.certificate-icons {
+    font-size: 25px;
+}
+
+.no-data-user {
+    text-align: center;
+    font-size: 18px;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px ;
+}

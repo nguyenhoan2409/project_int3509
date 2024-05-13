@@ -1,0 +1,114 @@
+.scores-list-admin {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: medium;
+}
+
+
+.score-header-admin {
+    margin: 10px 0px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-admin {
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input-admin {
+    height: 37px;
+    width: 16%;
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding-left: 10px;
+}
+.search-select-admin {
+    height: 40px;
+    width: 16%;
+    padding-left: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+.search-score-btn-admin {
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: #006d3a;
+}
+
+.search-score-btn-admin:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+
+.table-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+ .table-admin .score-table-admin {
+    border-collapse: collapse;
+  }
+ .score-table-admin .mssv-admin, .fullname-admin, .class-admin, .university-admin, .football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin, .action-admin{
+    text-align: center;
+    background-color: #006d3a;
+    color: white;
+    font-weight: 450;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border:black 1px solid;
+    border-radius: 2px;
+}
+
+.score-table-admin .mssv-admin-td, .fullname-admin-td, .class-admin-td, .university-admin-td, .football-admin-td, .badminton-admin-td, .tabletennis-admin-td, .basketball-admin-td, .volleyball-admin-td, .air_volleyball-admin-td, .taekwondo-admin-td, .golf-admin-td, .CDR-admin-td, .action-admin-td{
+    text-align: center;
+    border: 1px solid;
+    font-size: medium;
+}
+.score-table-admin .score-tr-admin {
+    padding-top: 8px;
+    text-align: center;
+    padding-bottom: 8px;
+} 
+.score-table-admin .score-tr-admin:nth-child(even){background-color: #f2f2f2;}
+.mssv-admin {
+    width: 7%;
+}
+.fullname-admin {
+    width: 12%;
+}
+.class-admin {
+    width: 12%;
+}
+
+.action-admin, .university-admin, .football-admin, .badminton-admin, .tabletennis-admin, .basketball-admin, .volleyball-admin, .air_volleyball-admin, .taekwondo-admin, .golf-admin, .CDR-admin{
+    width: 5%;
+}
+ 
+.download-btn {
+    width: 80px;
+    background-color: #006d3a;
+    color: white;
+    height: 40px;
+    border-radius: 4px;
+    border: 2px;
+}
+.no-data-admin {
+    text-align: center;
+    font-size: 18px;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px ;
+}
+

@@ -1,0 +1,25 @@
+
+.userprofilein {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 5vh;
+    gap: 20px;
+}
+
+.userprofile .userprofilein .left {
+    width: 25vw;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+}
+
+
+.userprofile .userprofilein .right {
+    width: 60vw;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+}
+
+.userprofile .userprofilein .right div {
+    margin-top: 20px;
+}
