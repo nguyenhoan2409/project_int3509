@@ -9,21 +9,25 @@
     font-size: large;
 }
 
+.update-product-left {
+    flex: 1;
+}
+
 .update-product-left img {
     height: 400px;
-    width: 400px;
+    width: 70%;
+    float: right;
 }
 
 .update-product-right {
+    flex: 1.2;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.update-product-right {
-    display: flex;
+    font-size: 20px;
     align-items: center;
 }
+
 .update-product-row {
     display: flex;
     flex-direction: row;
@@ -33,7 +37,7 @@
 
 .update-product-row p {
     font-weight: 500;
-    width: 130px;
+    width: 140px;
 }
 
 .update-product-row input {
