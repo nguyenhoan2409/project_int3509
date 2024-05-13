@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navbar } from "~/Components/Navbar/Navbar";
+import { Navbar } from "~/components/Navbar/Navbar";
 import "./Layout.css"
-import { Footer } from "~/Components/Footer/Footer";
-import { Sidebar } from "~/Components/SideBar/Sidebar";
+import { Footer } from "~/components/Footer/Footer";
+import { Sidebar } from "~/components/SideBar/Sidebar";
 import { FiMenu } from "react-icons/fi";
 
 const Layout = ({ children }) => {

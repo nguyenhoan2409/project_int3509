@@ -6,6 +6,7 @@
     gap: 40px;
     justify-content: center;
     align-items: center;
+    font-size: large;
 }
 
 .create-product-left img {
@@ -17,7 +18,6 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    font-size: 20px;
 }
 
 .create-product-right {
@@ -33,49 +33,41 @@
 
 .create-product-row p {
     font-weight: 500;
-    font-size: 18px;
     width: 130px;
 }
 
 .create-product-row input {
-    font-size: 18px;
     height: 40px;
     width: 250px;
-    margin-right: 20px;
-    margin-left: 10px; 
+    font-size: large;
 }
 
 .create-product-row select {
-    font-size: 18px;
     height: 40px;
+    font-size: large;
     width: 260px;
-    margin-right: 20px;
-    margin-left: 10px; 
 }
 
 .create-product-right .create-product-btn {
-    height: 45px;
-    width: 170px;
-    font-size: 20px;
-    margin-top: 20px;
-    border-radius: 2px;
-    border: #007e83 1px solid;
+    background-color: #006d3a;;
+    color: white;
+    width: 180px;
+    height: 50px;
+    margin-top: 10px;
+    font-size: medium;
+    border-radius: 5px;
+    border: none;
 }
 .create-product-right .create-product-btn:hover {
-    background-color: #35a571;
-    border: #35a571;
     cursor: pointer;
+    opacity: 0.9;
 }
 
 .msg-create {
     color: green;
-    font-size: 18px;
+    font-size: large;
 }
 .msg-create-error {
     color: red;
-    font-size: 18px;
-}
-.upload-thumbnail-btn {
-    width: 100px;
-    font-size: 10px;
+    font-size: large;
 }

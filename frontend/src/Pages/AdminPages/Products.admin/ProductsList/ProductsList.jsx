@@ -6,7 +6,7 @@ import axios from 'axios';
 import { FaEdit } from "react-icons/fa";
 import "./ProductsList.css"
 import { ProductsManagement } from '../ProductsLayout/Products.admin';
-import Layout from '~/Pages/Layout/Layout';
+import Layout from '~/components/Layout/Layout';
 export const ProductsList = () => {
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch(); 
@@ -49,7 +49,7 @@ export const ProductsList = () => {
                                 <th className="products-2">Số lượng hiện có</th>
                                 <th className="descriptions">Mô tả</th>
                                 <th className="order-type">Mua /Mượn /Thuê</th>
-                                <th className="products-update">Chỉnh sửa thông tin</th>
+                                <th className="products-update">Cập nhật</th>
                             </tr>
                         </thead>
                         <tbody>

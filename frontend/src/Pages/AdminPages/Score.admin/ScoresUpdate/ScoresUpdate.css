@@ -26,17 +26,17 @@
 
 .form-update-row label {
     font-weight: 500;
-    font-size: 18px;
+    font-size: large;
     width: 150px;
 }
 .form-update-row input {
-    font-size: 18px;
+    font-size: large;
     height: 30px;
     width: 100px;
 }
 
 .profile-title{
-    font-size: 25px;
+    font-size: x-large;
     font-weight: 600;
     margin-top: 40px;
     margin-bottom: 30px;
@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    font-size: 18px;
+    font-size: large;
     align-items: center;
 }
 
@@ -72,18 +72,19 @@
 }
 
 .update-score-button {
-    height: 40px;
-    width: 80px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 15px;
-    font-weight: 500;
-    border: 1px solid #099d5e;
+    background-color: #006d3a;;
+    color: white;
+    width: 120px;
+    height: 50px;
+    margin-top: 10px;
+    font-size: medium;
+    border-radius: 5px;
+    border: none;
 }
 
 .update-score-button:hover {
-    background-color: #099d5e;
-    color: white;
+    cursor: pointer;
+    opacity: 0.9;
 }
 
 .check-cdr-msg {

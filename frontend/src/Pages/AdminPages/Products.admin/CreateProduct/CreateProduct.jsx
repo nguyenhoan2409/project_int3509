@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import axios from "axios";
 import "./CreateProduct.css";
-import Layout from "~/Pages/Layout/Layout";
+import Layout from "~/components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { private_createTypography } from "@mui/material";
@@ -100,7 +100,6 @@ export const CreateProduct = () => {
       }
     }
   };
-  console.log(msg);
   return (
     <Layout>
       <div>
@@ -138,9 +137,9 @@ export const CreateProduct = () => {
                 <option value="3">Thuê</option>
               </select>
             </div>
-            <button onClick={handleCreate} className="create-product-btn">Thêm sản phẩm</button>
             {!isFilled && <p className="msg-create-error">{msg}</p>}
             {isFilled && <p className="msg-create">{msg}</p>}
+            <button onClick={handleCreate} className="create-product-btn">THÊM SẢN PHẨM</button>
           </div>
         </div>
       </div>

@@ -5,13 +5,13 @@
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 200px;
+    font-size: large;
 }
 .table-data-score-student {
     border-collapse: collapse;
 }
 
 .table-data-head {
-    font-size: 18px;
     text-align: center;
     padding-bottom: 10px;
     padding-top: 10px;
@@ -21,20 +21,17 @@
 }
 
 .table-data-row {
-    font-size: 15px;
     text-align: center;
     border: 1px solid;
     padding-bottom: 5px;
     padding-top: 5px;
 }
 .no-data {
-    font-size: 18px;
     width: 600px;
     justify-content: center;
     align-items: center;
 }
 .no-data-msg {
-    font-size: 18px;
     color: red;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -49,10 +46,24 @@
     align-items: center;
 }
 .score-student-add-input {
-    font-size: 18px;
+    font-size: large;
     width: 300px;
 }
 .score-student-add-button {
-    font-size: 18px;
-    width:100px;
+    background-color: #006d3a;;
+    color: white;
+    width: 120px;
+    height: 45px;
+    margin-top: 10px;
+    font-size: medium;
+    border-radius: 5px;
+    border: none;
+}
+.score-student-add-button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.text-message {
+    font-size: medium;
 }

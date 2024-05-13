@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ShopCategory.css";
-import { Item } from "./../../Components/Item/Item";
-import Layout from "../Layout/Layout";
+import { Item } from "../../../components/Item/Item";
+import Layout from "../../../components/Layout/Layout";
 import axios from "axios";
 
 

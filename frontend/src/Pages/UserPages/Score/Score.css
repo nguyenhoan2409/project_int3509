@@ -1,5 +1,7 @@
 .score-container {
-    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: medium;
 }
 
 .score-header {
@@ -7,7 +9,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin: 30px 20px 10px 20px;
+    margin: 30px 0 10px 0;
 }
 
 .search {
@@ -18,12 +20,11 @@
 }
 
 .search-btn-users {
-    height: 33px;
-    width: 20%;
+    height: 40px;
+    width: 15%;
     border: 1px solid #006d3a;
     border-radius: 5px;
     color: white;
-    font-size: 12px;
     background: #006d3a;
 }
 
@@ -33,19 +34,16 @@
 }
 
 .search .search-input-user {
-    height: 30px;
+    height: 37px;
     width: 40%;
     padding-left: 10px;
-    border: 1px solid #006d3a;
+    border: 1px solid grey;
     border-radius: 5px;
     color: gray;
-    font-size: 12px;
 }
 .score-table {
     justify-content: center;
     align-items: center;
-    /* margin-left: 10px;
-    margin-right: 10px; */
     width: 100%;
 }
 
@@ -82,7 +80,7 @@
     border: black 1px solid;
 }
 .class {
-    width: 10%;
+    width: 15%;
     border: black 1px solid;
 }
 .university {

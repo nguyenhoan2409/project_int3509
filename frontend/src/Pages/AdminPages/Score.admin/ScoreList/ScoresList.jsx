@@ -4,7 +4,7 @@ import "./ScoresList.css";
 import axios from "axios";
 import { FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import Layout from "~/Pages/Layout/Layout";
+import Layout from "~/components/Layout/Layout";
 import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { useDispatch } from "react-redux";
 import TablePagination from "@mui/material/TablePagination";

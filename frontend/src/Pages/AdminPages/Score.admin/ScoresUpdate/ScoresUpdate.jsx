@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { ScoresManagement } from "../ScoreLayout/ScoreLayout";
 import "./ScoresUpdate.css";
 import { PiStudentDuotone } from "react-icons/pi";
-import Layout from "~/Pages/Layout/Layout";
+import Layout from "~/components/Layout/Layout";
 
 export const UpdateScores = () => {
   const { id } = useParams();
@@ -224,16 +224,16 @@ export const UpdateScores = () => {
               </div>
             </form>
 
-            <button onClick={handleUpdate} className="update-score-button">
-              {" "}
-              Cập nhật{" "}
-            </button>
             {checkValue === true && (
               <p className="check-cdr-msg"> {msg} </p>
             )}
             {checkValue === false && (
               <p className="check-cdr-msg-error"> {msg} </p>
             )}
+
+            <button onClick={handleUpdate} className="update-score-button">
+              CẬP NHẬT
+            </button>
           </div>
         </div>
       </div>

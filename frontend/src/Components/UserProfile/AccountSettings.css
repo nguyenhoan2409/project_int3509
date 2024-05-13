@@ -54,7 +54,9 @@
 }
 
 .profile-input {
-    border-radius: 5px;
+    border-radius: 4px;
+    height: 30px;
+    font-size: medium;
     border: 1px black solid;
 }
 

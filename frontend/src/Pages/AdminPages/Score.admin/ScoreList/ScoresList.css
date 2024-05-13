@@ -1,10 +1,12 @@
 .scores-list-admin {
-    width: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: medium;
 }
 
 
 .score-header-admin {
-    margin: 10px 20px;
+    margin: 10px 0px;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -17,38 +19,34 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
 }
 
 .search-input-admin {
-    height: 30px;
-    width: 14%;
-    font-size: 12px;
+    height: 37px;
+    width: 16%;
+    border-radius: 5px;
+    border: 1px solid grey;
     padding-left: 10px;
-    border-radius: 2px;
-    border: 1px solid #252323;
 }
 .search-select-admin {
-    height: 32px;
-    width: 15%;
-    font-size: 12px;
+    height: 40px;
+    width: 16%;
     padding-left: 10px;
-    border-radius: 2px;
-    border: 1px solid #252323;
+    border-radius: 5px;
+    border: 1px solid grey;
 }
 .search-score-btn-admin {
-    height: 33px;
+    height: 40px;
     width: 80px;
-    border: 1px solid #c9c9c9;
-    border-radius: 2px;
+    border: none;
+    border-radius: 5px;
     color: white;
-    font-size: 12px;
     background: #006d3a;
 }
 
 .search-score-btn-admin:hover {
     cursor: pointer;
-    background: #0fab62;
+    opacity: 0.9;
 }
 
 
@@ -57,8 +55,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left: 20px;
-    margin-right: 20px;
 }
   
  .table-admin .score-table-admin {
@@ -68,15 +64,17 @@
     text-align: center;
     background-color: #006d3a;
     color: white;
+    font-weight: 450;
     padding-top: 5px;
     padding-bottom: 5px;
-    border:#006d3a 1px solid;
+    border:black 1px solid;
     border-radius: 2px;
 }
 
 .score-table-admin .mssv-admin-td, .fullname-admin-td, .class-admin-td, .university-admin-td, .football-admin-td, .badminton-admin-td, .tabletennis-admin-td, .basketball-admin-td, .volleyball-admin-td, .air_volleyball-admin-td, .taekwondo-admin-td, .golf-admin-td, .CDR-admin-td, .action-admin-td{
     text-align: center;
     border: 1px solid;
+    font-size: medium;
 }
 .score-table-admin .score-tr-admin {
     padding-top: 8px;

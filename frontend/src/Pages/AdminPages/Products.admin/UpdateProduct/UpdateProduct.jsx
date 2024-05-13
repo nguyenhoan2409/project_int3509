@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import './UpdateProduct.css'
-import Layout from "~/Pages/Layout/Layout";
+import Layout from "~/components/Layout/Layout";
 
 export const UpdateProduct = () => {
   const { id } = useParams();
@@ -127,7 +127,7 @@ export const UpdateProduct = () => {
               <option value="3">Thuê</option>
              </select>
           </div>
-            <button onClick={handleUpdate} className="btn-update-product">Cập nhật</button>
+            <button onClick={handleUpdate} className="btn-update-product">CẬP NHẬT</button>
             {!isFilled && <p className="msg-update-error">{msg}</p>}
             {isFilled && <p className="msg-update">{msg}</p>}
           </div>

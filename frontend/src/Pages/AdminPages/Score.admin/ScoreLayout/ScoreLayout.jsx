@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import "./ScoreLayout.css"
 import { Box, Typography } from '@mui/material';
-import Layout from '~/Pages/Layout/Layout';
+import Layout from '~/components/Layout/Layout';
 
 export const ScoresManagement = () => {
   const navigate = useNavigate();

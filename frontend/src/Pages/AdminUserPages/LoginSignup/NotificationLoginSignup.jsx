@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
-import "./Login.css";
+import "./LoginSignup.css";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineMail } from "react-icons/md";
-import { RiLockPasswordLine } from "react-icons/ri";
 import axios from "axios";
 
 

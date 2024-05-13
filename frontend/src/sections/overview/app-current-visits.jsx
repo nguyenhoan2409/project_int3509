@@ -6,7 +6,7 @@ import { styled, useTheme } from "@mui/material/styles";
 
 import { fNumber } from "~/utils/format-number";
 
-import Chart, { useChart } from "~/Components/chart";
+import Chart, { useChart } from "~/components/chart";
 
 // ----------------------------------------------------------------------
 

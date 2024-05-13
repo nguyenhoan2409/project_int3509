@@ -1,6 +1,6 @@
 import React, {useState } from 'react'
 import axios from 'axios';
-import Layout from '~/Pages/Layout/Layout';
+import Layout from '~/components/Layout/Layout';
 import './ScoreStudentAdd.css'
 import * as XLSX from 'xlsx';
 import { ScoresManagement } from '../ScoreLayout/ScoreLayout';
@@ -112,7 +112,7 @@ export const ScoreStudentAdd = () => {
             onChange={handleFile}
             className='score-student-add-input'
           />
-          <button className='score-student-add-button' type = "submit"> Xác nhận </button>
+          <button className='score-student-add-button' type = "submit"> XÁC NHẬN </button>
           </form>
 
           <div className='data-view'>
@@ -147,9 +147,9 @@ export const ScoreStudentAdd = () => {
                   <p style={{width: '100px'}}> Lưu ý </p> 
                   <p style={{color: 'red', marginLeft: '5px', marginRight: '5px'}}>*</p> 
                   <div> 
-                      <p>: File tải lên phải chỉ bao gồm các trường dữ liệu : </p>
-                      <p> 1. Đối với tải danh sách sinh viên : mssv, fullname, class, university. </p>
-                      <p> 2. Sau khi tải lên danh sách sinh viên thành công, có thể tải điểm với các trường dữ liệu :
+                      <p className = "text-message">: File tải lên phải chỉ bao gồm các trường dữ liệu : </p>
+                      <p className = "text-message"> 1. Đối với tải danh sách sinh viên : mssv, fullname, class, university. </p>
+                      <p className = "text-message"> 2. Sau khi tải lên danh sách sinh viên thành công, có thể tải điểm với các trường dữ liệu :
                          mssv, fullname, class, university, subject (football, badminton,...). </p>
                   </div>
                </div>

@@ -56,20 +56,20 @@ export const ChangePassword = () => {
     }
   return (
     <div className="accountsettings">
-      <h1>Đổi mật khẩu</h1>
+      <div className='title'>Đổi mật khẩu</div>
       <div className="profile-form-container">
         <div className="form-group">
           <label htmlFor="password">Mật khẩu cũ<span>*</span></label>
-          <input required type="password" name='password' value={password} onChange={(e) => {setMsg(""); setPassword(e.target.value)}}/>
+          <input required type="password" name='password' value={password} onChange={(e) => {setMsg(""); setPassword(e.target.value)}} className='profile-input'/>
         </div>
 
         <div className="form-group">
           <label htmlFor="password">Mật khẩu mới<span>*</span></label>
-          <input required type="password" name='newPassword' value={newPassword} onChange={newPasswordChange}/>
+          <input required type="password" name='newPassword' value={newPassword} onChange={newPasswordChange} className='profile-input'/>
         </div>
         <div className="form-group">
           <label htmlFor="password">Nhập lại mật khẩu mới<span>*</span></label>
-          <input required type="password" name='cfPassword' value={cfPassword} onChange={cfPasswordChange} onBlur={() => checkPassword()}/>
+          <input required type="password" name='cfPassword' value={cfPassword} onChange={cfPasswordChange} onBlur={() => checkPassword()} className='profile-input'/>
         </div>
       </div>
 

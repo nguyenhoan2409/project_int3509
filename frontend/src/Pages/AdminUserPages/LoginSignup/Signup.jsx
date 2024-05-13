@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "./LoginSignup.css";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { GoNumber } from "react-icons/go";
 import { MdDriveFileRenameOutline, MdOutlinePhone } from "react-icons/md";
 import { FaRegAddressCard } from "react-icons/fa";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import logoLogin from "../../Components/Assets/logo.svg";
+import logoLogin from "../../../components/Assets/logo.svg";
 
 export const Signup = () => {
   const [mssv, setMssv] = useState();
@@ -146,34 +145,6 @@ export const Signup = () => {
       <div className="signup-container-right">
         <h1>Đăng ký</h1>
         <form onSubmit={Register} className="signup-fields">
-          {/* <div style={{ display: "flex", flexDirection: "row" }}>
-            <TextField
-              label="Mã số sinh viên"
-              type="number"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <GoNumber size={24} />
-                  </InputAdornment>
-                ),
-              }}
-              error={!!errorMssv}
-              helperText={errorMssv}
-              onChange={(e) => {
-                setMssv(e.target.value);
-                setErrorMssv("");
-                setMsg("");
-              }}
-              variant="outlined"
-              className="signUpInput"
-              sx={{ flex: "50%", marginRight: "10px" }}
-              size="small"
-              fullWidth
-              
-            />
-            
-          </div> */}
-
           <TextField
               name="email"
               label="Email"

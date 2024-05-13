@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ProductDetail.css";
 import axios from "axios";
-import Layout from "../Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 import { RiProductHuntLine } from "react-icons/ri";
 import { AiOutlineDollar } from "react-icons/ai";

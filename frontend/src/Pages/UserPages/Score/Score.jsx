@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./Score.css";
 import axios from "axios";
-import Layout from "../Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { TbCertificate } from "react-icons/tb";
 import TablePagination from "@mui/material/TablePagination";
@@ -73,8 +73,9 @@ export const Score = () => {
 
   }
   return (
-    <div className="score-container">
-      <Layout>
+    <div>
+       <Layout>
+      <div className="score-container">
         <div className="title">Tra cứu điểm</div>
 
         <div>
@@ -166,7 +167,8 @@ export const Score = () => {
               </ThemeProvider>
           </div>
         </div>
-      </Layout>
+    </div>
+    </Layout>
     </div>
   );
 };

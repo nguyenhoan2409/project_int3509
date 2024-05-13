@@ -4,7 +4,7 @@ import axios from "axios";
 import { Button, TextField } from "@mui/material";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdError } from "react-icons/md";
-import "./Login.css";
+import "./LoginSignup.css";
 
 export const EmailVerify = () => {
   const [valid, setValid] = useState();

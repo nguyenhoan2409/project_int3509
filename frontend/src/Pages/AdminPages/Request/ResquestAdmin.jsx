@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import Layout from "../../Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import "./RequestAdmin.css";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
@@ -126,7 +126,7 @@ export const RequestAdmin = () => {
 
   return (
     <Layout>
-      <div style={{marginLeft: '30px'}}>
+      <div style={{marginLeft: '20px'}}>
       <div className="title">Quản lý yêu cầu</div>
       <Snackbar open={openSnackBar} autoHideDuration={5000} onClose={handleCloseSnackBar} anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
         <Alert
@@ -152,6 +152,7 @@ export const RequestAdmin = () => {
             <Tabs
               value={value}
               onChange={handleChange}
+              sx={{ backgroundColor: "#006d3a" }}
               indicatorColor="secondary"
               textColor="inherit"
               variant="fullWidth"

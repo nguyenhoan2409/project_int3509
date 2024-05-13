@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./UserManagement.css";
-import Layout from "~/Pages/Layout/Layout";
+import Layout from "~/components/Layout/Layout";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -185,7 +185,7 @@ export const UserManagement = () => {
      <div style={{marginLeft : "20px", marginRight : "20px"}} >
      <TableContainer component={Paper}>
         <Table sx={{ minWidth: 600 }} aria-label="customized table">
-          <TableHead>
+          <TableHead sx={{backgroundColor: "#006d3a"}}>
             <TableRow>
               <StyledTableCell align="right">STT</StyledTableCell>
               <StyledTableCell align="right">Họ và tên</StyledTableCell>

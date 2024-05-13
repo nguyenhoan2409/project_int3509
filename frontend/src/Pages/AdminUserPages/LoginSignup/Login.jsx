@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "./Login.css";
+import "./LoginSignup.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import logoLogin from "../../Components/Assets/logo.svg";
+import logoLogin from "../../../components/Assets/logo.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser, reset } from "~/features/authSlice";
 

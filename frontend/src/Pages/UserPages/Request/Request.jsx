@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import "./Request.css";
-import Layout from "../Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
@@ -348,7 +348,7 @@ export const Request = () => {
             <Paper sx={{ width: "100%", overflow: "hidden" }}>
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader aria-label="sticky table">
-                  <TableHead sx={{ backgroundColor: "green" }}>
+                  <TableHead sx={{ backgroundColor: "#006d3a" }}>
                     <TableRow>
                       <StyledTableCell style={{ minWidth: 80 }} key="id">
                         ID

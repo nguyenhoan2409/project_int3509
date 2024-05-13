@@ -2,7 +2,7 @@ import { Backdrop, CircularProgress, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getMe, LogOut, reset } from "~/features/authSlice";
-import Layout from "~/Pages/Layout/Layout";
+import Layout from "~/components/Layout/Layout";
 import { AppView } from "~/sections/overview/view";
 import "./AdminHome.scss";
 import axios from "axios";

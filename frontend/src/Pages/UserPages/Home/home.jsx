@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import "./home.css";
-import { Navbar } from "~/Components/Navbar/Navbar";
-import Cookies from "universal-cookie";
-import { Footer } from "~/Components/Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe } from "~/features/authSlice";
-import Layout from "../Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 
 export const Home = () => {
   const dispatch = useDispatch();

@@ -4,31 +4,28 @@
     align-items: center;
     justify-content: center;
     margin: 10px;
+    width: 100%;
 }
 
 .search-user-input-admin {
-    height: 30px;
+    height: 35px;
     width: 15%;
-    font-size: 12px;
     padding-left: 10px;
-    border-radius: 2px;
-    border: 1px solid #252323;
+    border-radius: 5px;
+    border: 1px solid grey;
 }
 .search-user-select-admin {
-    height: 32px;
+    height: 37px;
     width: 15%;
-    font-size: 12px;
     padding-left: 10px;
-    border-radius: 2px;
-    border: 1px solid #252323;
+    border-radius: 5px;
+    border: 1px solid grey;
 }
 .search-user-btn-admin {
-    height: 32px;
-    width: 80px;
-    color: azure;
-    font-size: 12px;
-    padding-left: 10px;
-    border-radius: 2px;
-    border: 1px solid #252323;
+    height: 37px;
+    width: 100px;
+    color: #FFFFFF;
+    border-radius: 5px;
+    border: none;
     background-color: #006d3a;
 }

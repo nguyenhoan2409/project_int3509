@@ -20,7 +20,7 @@ export const YourOrders = () => {
 
   return (
     <div className="yourorders">
-      <h1 style={{marginTop : "20px"}}>Lịch sử</h1>
+      <div className='title'>Lịch sử</div>
 
       <table className='yourorders-table'>
         <thead>

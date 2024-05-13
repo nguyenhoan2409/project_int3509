@@ -297,7 +297,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
         <Button
           variant="contained"
           size="small"
-          sx={{ textTransform: "none", m: "8px" }}
+          sx={{ textTransform: "none", backgroundColor: "#006d3a", marginRight: "10px", marginTop: "10px" }}
           onClick={handleFilter}
           color="success"
         >
@@ -307,7 +307,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
         <Button
           variant="contained"
           size="small"
-          sx={{ textTransform: "none" }}
+          sx={{ textTransform: "none", backgroundColor: "#006d3a", marginTop: "10px"  }}
           onClick={() => {
             setInitialOrderList(orderList);
             setProductName("");
@@ -327,8 +327,8 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
           <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer sx={{ maxHeight: 450 }}>
               <Table stickyHeader aria-label="sticky table">
-                <TableHead sx={{backgroundColor: 'green'}}>
-                  <TableRow>
+                <TableHead sx={{ backgroundColor: "#006d3a" }}>
+                  <TableRow >
                     <StyledTableCell style={{ minWidth: 80 }}>ID</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 50 }}>Tên sản phẩm</StyledTableCell>
                     <StyledTableCell style={{ minWidth: 50 }}>Số lượng</StyledTableCell>

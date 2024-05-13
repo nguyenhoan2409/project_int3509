@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { UserSidebar } from "~/Components/UserProfile/UserSidebar";
+import { UserSidebar } from "~/components/UserProfile/UserSidebar";
 import "./Profile.css";
-import { AccountSetting } from "~/Components/UserProfile/AccountSettings";
-import { ChangePassword } from "~/Components/UserProfile/ChangePassword";
-import { YourOrders } from "~/Components/UserProfile/YourOrders";
+import { AccountSetting } from "~/components/UserProfile/AccountSettings";
+import { ChangePassword } from "~/components/UserProfile/ChangePassword";
+import { YourOrders } from "~/components/UserProfile/YourOrders";
 import AvatarEditor from "react-avatar-editor";
-import Layout from "../Layout/Layout";
+import Layout from "../../../components/Layout/Layout";
 import { useSelector } from "react-redux";
 
 export const Profile = () => {
