@@ -19,6 +19,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .search-input-admin {
@@ -37,11 +38,12 @@
 }
 .search-score-btn-admin {
     height: 40px;
-    width: 80px;
+    width: 90px;
     border: none;
     border-radius: 5px;
     color: white;
     background: #006d3a;
+    margin-right: 0px;
 }
 
 .search-score-btn-admin:hover {

@@ -13,6 +13,7 @@ export const ScoreStudentAdd = () => {
   const [msg, setMsg] = useState("Đã thêm thành công!");
   const [msgError, setMsgError] = useState("File không hợp lệ!");
   const [check, setCheck] = useState(false);
+
   const handleFile = (e) => {
     let selectedFile = e.target.files[0];
     if(selectedFile){
@@ -94,7 +95,7 @@ export const ScoreStudentAdd = () => {
       await axios.get("http://localhost:8080/score/CDR", {
           withCredentials: true
         })
-    } catch (error) {
+    } catch (error) { 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);

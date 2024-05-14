@@ -16,7 +16,6 @@ import Alert from '@mui/material/Alert';
 import moment from "moment/moment";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { LogOut, reset } from "~/features/authSlice";
 
 
 function TabPanel(props) {
@@ -65,8 +64,8 @@ export const RequestAdmin = () => {
   const [orderListCompleted, setOrderListCompleted] = useState([]); 
   const [openSnackBar, setOpenSnackBar] = useState(false); 
   const [msg, setMsg] = useState("");
-  const [messageStackBar, setMessageStackBar] = useState("");
-  
+  const [messageStackBar, setMessageStackBar] = useState(""); 
+
   const getAllOrder = async () => {
     try {
       const response1 = await axios.get(`http://localhost:8080/order/getAllOrder`, {
@@ -87,12 +86,7 @@ export const RequestAdmin = () => {
       setOrderListAccepted(response.filter(order => order.status == 2 || order.status == 6 || order.status == 10 || order.status == 14)); 
       setOrderListDenied(response.filter(order => order.status == 3 || order.status == 7 || order.status == 11 || order.status == 15)); 
       setOrderListCompleted(response.filter(order => order.status == 4 || order.status == 8 || order.status == 12 || order.status == 16))
-    } catch (error) {
-      if (error?.response?.data?.msg?.message === "jwt expired") { 
-        dispatch(reset());
-        dispatch(LogOut());
-        navigate("/");
-      }
+    } catch (error) { 
       if (error?.response) {
         setMsg(error?.response?.data?.msg);
       }

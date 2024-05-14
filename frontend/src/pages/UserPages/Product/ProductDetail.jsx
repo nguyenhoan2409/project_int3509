@@ -8,11 +8,13 @@ import { AiOutlineDollar } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const ProductDetail = ({ navigation }) => {
   const { id } = useParams(); 
   const navigate = useNavigate(); 
   const [product, setProduct] = useState([]);
+  const handleJwtExpired = useJwtExpiration(); 
   const getDetail = async () => {
     try {
       const response = await axios.get(
@@ -20,6 +22,7 @@ export const ProductDetail = ({ navigation }) => {
       );
       setProduct(response.data);
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);

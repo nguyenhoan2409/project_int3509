@@ -6,13 +6,13 @@ import Layout from "~/components/Layout/Layout";
 import { AppView } from "~/sections/overview/view";
 import "./AdminHome.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const AdminHome = () => {
   const dispatch = useDispatch();
   const [statisticalData, setStatisticalData] = useState(null);
   const [loading, setLoading] = useState(false); 
-  const navigate = useNavigate();
+  const handleJwtExpired = useJwtExpiration(); 
 
   const getStatisticalData = async () => {
     try {
@@ -20,15 +20,10 @@ export const AdminHome = () => {
       const response = await axios.get("http://localhost:8080/admin/statisticalData", {
         withCredentials: true,
       });
-      // console.log(`response::`, response.data);
       setStatisticalData(response.data);
     } catch (error) {
+      handleJwtExpired(error); 
       console.log(error);
-      if (error?.response?.data?.msg?.message === "jwt expired") { 
-        dispatch(reset());
-        dispatch(LogOut());
-        navigate("/");
-      }
     } finally {
       setLoading(false);
     }

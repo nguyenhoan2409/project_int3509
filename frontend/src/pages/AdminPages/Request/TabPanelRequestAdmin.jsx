@@ -23,6 +23,7 @@ import { Button, TextField } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { IoMdClose } from "react-icons/io";
 import moment from "moment";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 const style = {
   position: "absolute",
@@ -54,10 +55,11 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
     () => createTheme(theme, locales["viVN"]),
     []
   );
+  const handleJwtExpired = useJwtExpiration(); 
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: '#007e43',
+      backgroundColor: '#006d3a',
       color: theme.palette.common.white,
     }
   }));
@@ -86,6 +88,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
       handleOpenSnackBar(); 
       getAllOrder(); 
     } catch (error) {
+      handleJwtExpired(error); 
       setMsg(error.response.data.error); 
     }
   }
@@ -102,6 +105,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
       handleOpenSnackBar(); 
       getAllOrder();
     } catch (error) {
+      handleJwtExpired(error); 
       setMsg(error.response.data.error); 
     }
   }
@@ -119,6 +123,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
       handleOpenSnackBar(); 
       getAllOrder();
     } catch (error) {
+      handleJwtExpired(error); 
       setMsg(error.response.data.error); 
     }
   }
@@ -133,6 +138,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
       handleOpenSnackBar(); 
       getAllOrder();
     } catch (error) {
+      handleJwtExpired(error); 
       setMsg(error?.response?.data?.error); 
     }
   }
@@ -144,9 +150,8 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
       });
       setProductList([...response.data, {product_id: 0, product_name: "Giấy chuẩn đầu ra"}]); 
     } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.msg);
-      }
+      handleJwtExpired(error); 
+      setMsg(error?.response?.data?.msg);
     }
   };
 
@@ -298,9 +303,12 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
         <Button
           variant="contained"
           size="small"
-          sx={{ textTransform: "none", m: "8px" }}
+          sx={{ textTransform: "none", m: "8px", backgroundColor: '#006d3a', '&:hover': {
+            backgroundColor: '#006d3a', 
+            opacity: 0.9
+          } }}
           onClick={handleFilter}
-          color="success"
+          
         >
           Lọc
         </Button>
@@ -308,7 +316,10 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
         <Button
           variant="contained"
           size="small"
-          sx={{ textTransform: "none" }}
+          sx={{ textTransform: "none", backgroundColor: '#006d3a', '&:hover': {
+            backgroundColor: '#006d3a', 
+            opacity: 0.9
+          } }}
           onClick={() => {
             setInitialOrderList(orderList);
             setProductName("");
@@ -317,7 +328,6 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
             setOrderStatus("");
             setCheckExpired("");
           }}
-          color="success"
         >
           Về mặc định
         </Button>
@@ -336,8 +346,8 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                     <StyledTableCell style={{ minWidth: '30%' }}>Thời gian bắt đầu</StyledTableCell>
                     <StyledTableCell style={{ minWidth: '30%' }}>Thời gian kết thúc {(index == 3) ? '' : 'dự kiến'}</StyledTableCell>
                     {(index === 1) && <StyledTableCell style={{ minWidth: '20%' }}>Kiểm tra quá hạn</StyledTableCell>}
-                    <StyledTableCell style={{ minWidth: '30%' }}>Trạng thái yêu cầu</StyledTableCell>
-                    <StyledTableCell style={{ minWidth: '40%' }}>Tác vụ</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '25%' }}>Trạng thái yêu cầu</StyledTableCell>
+                    <StyledTableCell style={{ minWidth: '50%' }}>Tác vụ</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -489,7 +499,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                     if (row.product_type != 4) handleConfirmToDenied(row.order_id, row.product_id, row.quantity, row.status)
                                     else handleConfirmCertificate(row.certificate_id, 15)
                                   }}
-                                  sx={{ textTransform: "none", marginLeft: '5px' }}
+                                  sx={{ textTransform: "none", marginTop: '5px' }}
                                   variant="contained"
                                   color="error"
                                   size="small"
@@ -503,7 +513,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
                                     if(row.product_type != 4) handleConfirmToCompleted(row.order_id, row.product_id, row.quantity, row.status)
                                     else handleConfirmCertificate(row.certificate_id, 16)
                                   }}
-                                  sx={{ textTransform: "none", marginLeft: '5px' }}
+                                  sx={{ textTransform: "none", marginTop: '5px' }}
                                   variant="contained"
                                   color="error"
                                   size="small"

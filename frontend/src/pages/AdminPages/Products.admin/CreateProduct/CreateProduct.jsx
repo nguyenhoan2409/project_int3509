@@ -4,8 +4,8 @@ import axios from "axios";
 import "./CreateProduct.css";
 import Layout from "~/components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { private_createTypography } from "@mui/material";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
+
 export const CreateProduct = () => {
   const [product_name, setProductName] = useState("");
   const [product_type, setProductType] = useState(2);
@@ -15,11 +15,9 @@ export const CreateProduct = () => {
   const [thumbnail, setThumbnail] = useState();
   const [isFilled, setIsFilled] = useState(false);
   const [msg, setMsg] = useState();
-
   const navigate = useNavigate();
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
+  const handleJwtExpired = useJwtExpiration(); 
+
   const handleCreate = () => {
     // Kiểm tra các trường bắt buộc trước khi thêm sản phẩm
     if (!product_name || !price || !quantity || !thumbnail || !product_type) {
@@ -86,6 +84,7 @@ export const CreateProduct = () => {
       setMsg("Thêm sản phẩm thành công");
       navigate("/admin/products/list");
     } catch (error) {
+      handleJwtExpired(error); 
       if (error.response) {
         setIsFilled(false);
         setMsg(error.response.data);

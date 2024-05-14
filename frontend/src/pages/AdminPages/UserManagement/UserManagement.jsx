@@ -14,10 +14,11 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LogOut, reset } from "~/features/authSlice";
 import TablePagination from "@mui/material/TablePagination";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#007e43",
+    backgroundColor: "#006d3a",
     color: "white",
   },
   [`&.${tableCellClasses.body}`]: {
@@ -47,6 +48,8 @@ export const UserManagement = () => {
   const [roleId, setRoleId] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const handleJwtExpired = useJwtExpiration(); 
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -64,14 +67,10 @@ export const UserManagement = () => {
       setUsers(users.users);
       setInitialUserList(users.users);
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
-      }
-      if (error?.response?.data?.msg?.message === "jwt expired") { 
-        dispatch(reset());
-        dispatch(LogOut());
-        navigate("/");
       }
     }
   };
@@ -127,6 +126,7 @@ export const UserManagement = () => {
       );
       getUserList();
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);

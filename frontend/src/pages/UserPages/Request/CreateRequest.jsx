@@ -24,6 +24,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import moment from "moment";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const CreateRequest = () => {
   const { product_id } = useParams();
@@ -46,6 +47,7 @@ export const CreateRequest = () => {
   const [errorTotalMoney, setErrorTotalMoney] = useState("");
   const navigate = useNavigate();
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const handleJwtExpired = useJwtExpiration(); 
   const handleOpenSnackBar = () => {
     setOpenSnackBar(true);
   };
@@ -107,6 +109,7 @@ export const CreateRequest = () => {
       setTotalMoney(response.data[0].price);
       setProduct(response.data[0]);
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
@@ -184,6 +187,7 @@ export const CreateRequest = () => {
         }, 1000);
       }
     } catch (error) {
+      handleJwtExpired(error); 
       setMsg(error.response.data.message);
     }
   };
@@ -211,6 +215,7 @@ export const CreateRequest = () => {
         navigate("/request");
       }, 1000);
     } catch (error) {
+      handleJwtExpired(error); 
       console.log(error); 
       setMsg(error.response.data.message);
     }

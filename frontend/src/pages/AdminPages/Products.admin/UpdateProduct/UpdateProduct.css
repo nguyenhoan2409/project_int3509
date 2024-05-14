@@ -3,27 +3,30 @@
     margin-top: 50px;
     display: flex;
     flex-direction: row;
-    gap: 40px;
     justify-content: center;
     align-items: center;
     font-size: large;
 }
 
+.update-product-left {
+    flex: 1;
+}
+
 .update-product-left img {
     height: 400px;
-    width: 400px;
+    width: 70%;
+    float: right;
 }
 
 .update-product-right {
+    flex: 1.2;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.update-product-right {
-    display: flex;
+    font-size: 20px;
     align-items: center;
 }
+
 .update-product-row {
     display: flex;
     flex-direction: row;
