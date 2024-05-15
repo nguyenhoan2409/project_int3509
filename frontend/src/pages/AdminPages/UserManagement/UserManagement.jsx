@@ -9,7 +9,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { LogOut, reset } from "~/features/authSlice";
@@ -60,9 +60,7 @@ export const UserManagement = () => {
 
   const getUserList = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/user/list", {
-        withCredentials: true,
-      });
+      const response = await axios.get("/user/list");
       const users = response.data;
       setUsers(users.users);
       setInitialUserList(users.users);
@@ -118,11 +116,10 @@ export const UserManagement = () => {
   const userToAdmin = async (user_id) => {
     try {
       const response = await axios.patch(
-        `http://localhost:8080/user/user-to-admin/${user_id}`,
+        `/user/user-to-admin/${user_id}`,
         {
           role_id: 1,
-        },
-        { withCredentials: true }
+        }
       );
       getUserList();
     } catch (error) {

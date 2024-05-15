@@ -4,7 +4,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import "./LoginSignup.css";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineMail } from "react-icons/md";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 
 
 export const NotificationLoginSignup = () => {
@@ -45,7 +45,7 @@ export const NotificationLoginSignup = () => {
       e.preventDefault();
       validate('email');
       if (email && !errorEmail) {
-        const response = await axios.post('http://localhost:8080/user/checkEmailForForgottenPassword', {email: email}, {withCredentials: true}); 
+        const response = await axios.post('/user/checkEmailForForgottenPassword', {email: email}); 
         navigate("/notificationLoginSignup", {state: {type: "aftersignup"}}); 
         if (response) {
           console.log(response?.data); 

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./Score.css";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import Layout from "../../../components/Layout/Layout";
 import { Link } from "react-router-dom";
 import { TbCertificate } from "react-icons/tb";
@@ -34,7 +34,7 @@ export const Score = () => {
 
   const getScoreList = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
+      const response = await axios.get("/score/list");
       setScores(response.data);
       setInitialScoreList(response.data);
     } catch (error) {

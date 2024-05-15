@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Stack } from "@mui/material";
 import "./Request.css";
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import Layout from "../../../components/Layout/Layout";
 import { useSelector } from "react-redux";
 import { CreateRequest } from "./CreateRequest";
@@ -24,9 +24,7 @@ export const Certificate = () => {
 
     const getScoreDetail = async () => {
         try {
-          const response = await axios.get(`http://localhost:8080/score/search/${id}`, {
-            withCredentials: true,
-          });
+          const response = await axios.get(`/score/search/${id}`);
           const scores = response.data.student;
           const score = scores[0];
           setStudent(score);
@@ -50,7 +48,7 @@ export const Certificate = () => {
       const CertificateRequest = async () => {
         try {
           if(msg.length === 0) {
-            const response = await axios.post("http://localhost:8080/certificate/create", {
+            const response = await axios.post("/certificate/create", {
             mssv: student.mssv,
             fullname: student.fullname,
             class: student.class,
@@ -59,8 +57,6 @@ export const Certificate = () => {
             phonenumber: phonenumber,
             status: 13, 
             user_id: user?.user_id
-          }, {
-            withCredentials: true,
           });
           navigate("/request");
           }

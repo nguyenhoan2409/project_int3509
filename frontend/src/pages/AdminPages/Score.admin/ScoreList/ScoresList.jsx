@@ -1,7 +1,7 @@
 import { ScoresManagement } from "../ScoreLayout/ScoreLayout";
 import React, { useEffect, useState, useRef } from "react";
 import "./ScoresList.css";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "~/components/Layout/Layout";
@@ -32,7 +32,7 @@ export const ScoresList = () => {
 
   const getScoreList = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
+      const response = await axios.get("/score/list");
       setScores(response.data);
       setInitialScoreList(response.data);
     } catch (error) {

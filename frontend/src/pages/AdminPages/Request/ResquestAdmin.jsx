@@ -8,7 +8,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { TabPanelRequestAdmin } from "./TabPanelRequestAdmin";
 import { useTheme } from "@mui/material/styles";
 import Snackbar from '@mui/material/Snackbar';
@@ -68,13 +68,9 @@ export const RequestAdmin = () => {
 
   const getAllOrder = async () => {
     try {
-      const response1 = await axios.get(`http://localhost:8080/order/getAllOrder`, {
-        withCredentials: true,
-      });
+      const response1 = await axios.get(`/order/getAllOrder`);
 
-      const response2 = await axios.get('http://localhost:8080/certificate/getAll', {
-        withCredentials: true,
-      })
+      const response2 = await axios.get('/certificate/getAll');
 
       const response = [...response1?.data, ...response2?.data]; 
       response.map((order, index) => {

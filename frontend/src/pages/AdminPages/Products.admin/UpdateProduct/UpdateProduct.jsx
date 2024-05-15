@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import './UpdateProduct.css'
@@ -63,9 +63,7 @@ export const UpdateProduct = () => {
   }
   const getDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/product/detail/${id}`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(`/product/detail/${id}`);
       const products = response.data;
       const product = products[0];
       setProduct(product);
@@ -84,14 +82,12 @@ export const UpdateProduct = () => {
   }
   const getUpdate = async () => {
     try {
-      const response = await axios.put(`http://localhost:8080/product/update/${id}`, {
+      const response = await axios.put(`/product/update/${id}`, {
         price,
         description,
         quantity,
         thumbnail,
         product_type
-      }, {
-        withCredentials: true,
       });
       setMsg(response.data.msg);
       setIsFilled(true)

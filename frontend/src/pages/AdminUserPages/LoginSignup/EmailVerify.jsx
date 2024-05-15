@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { Button, TextField } from "@mui/material";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdError } from "react-icons/md";
@@ -14,10 +14,7 @@ export const EmailVerify = () => {
   useEffect(() => {
     const verifyEmailUrl = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/user/${param.id}/verify/${param.code}`,
-          { withCredentials: true }
-        );
+        const response = await axios.get(`/user/${param.id}/verify/${param.code}`);
         setValid(true);
       } catch (error) {
         console.log(error);

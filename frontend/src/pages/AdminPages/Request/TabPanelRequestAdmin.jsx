@@ -3,7 +3,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import "./RequestAdmin.css";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -78,12 +78,12 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
 
   const handleConfirmToApproved = async (order_id, product_id, quantity, status) => {
     try {
-      await axios.put('http://localhost:8080/order/confirmOrderStatus', {
+      await axios.put('/order/confirmOrderStatus', {
           orderId: order_id, 
           productId: product_id, 
           quantity: quantity, 
           newStatus: (status == 1) ? 2 : ((status == 5) ? 6 : 10)
-      }, {withCredentials: true}); 
+      }); 
       setMessageStackBar('Đã chấp nhận yêu cầu thành công'); 
       handleOpenSnackBar(); 
       getAllOrder(); 
@@ -95,12 +95,12 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
 
   const handleConfirmToDenied = async (order_id, product_id, quantity, status) => {
     try {
-      await axios.put('http://localhost:8080/order/confirmOrderStatus', {
+      await axios.put('/order/confirmOrderStatus', {
           orderId: order_id, 
           productId: product_id, 
           quantity: quantity, 
           newStatus: (status == 1) ? 3 : ((status == 5) ? 7 : 11)
-      }, {withCredentials: true}); 
+      }); 
       setMessageStackBar('Đã từ chối yêu cầu thành công')
       handleOpenSnackBar(); 
       getAllOrder();
@@ -112,12 +112,12 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
 
   const handleConfirmToCompleted = async (order_id, product_id, quantity, status) => {
     try {
-      await axios.put('http://localhost:8080/order/confirmOrderStatus', {
+      await axios.put('/order/confirmOrderStatus', {
           orderId: order_id, 
           productId: product_id, 
           quantity: quantity, 
           newStatus: (status == 2) ? 4 : ((status == 6) ? 8 : 12)
-      }, {withCredentials: true}); 
+      }); 
 
       setMessageStackBar('Yêu cầu đã hoàn tất và cập nhật thành công')
       handleOpenSnackBar(); 
@@ -130,10 +130,10 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
 
   const handleConfirmCertificate = async (certificate_id, status) => {
     try {
-      await axios.patch('http://localhost:8080/certificate/confirm', {
+      await axios.patch('/certificate/confirm', {
           certificateId: certificate_id, 
           newStatus: status
-      }, {withCredentials: true}); 
+      }); 
       setMessageStackBar((status === 14) ? 'Đã chấp nhận yêu cầu thành công' : ((status === 15) ? 'Đã từ chối yêu cầu thành công' : 'Yêu cầu đã hoàn tất và cập nhật thành công'));
       handleOpenSnackBar(); 
       getAllOrder();
@@ -145,9 +145,7 @@ export const TabPanelRequestAdmin = ({ orderList, getAllOrder, index, handleOpen
 
   const getAllProduct = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/product/list", {
-        withCredentials: true,
-      });
+      const response = await axios.get("/product/list");
       setProductList([...response.data, {product_id: 0, product_name: "Giấy chuẩn đầu ra"}]); 
     } catch (error) {
       handleJwtExpired(error); 

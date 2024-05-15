@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import "./Request.css";
 import Layout from "../../../components/Layout/Layout";
 import InputLabel from "@mui/material/InputLabel";
@@ -68,13 +68,9 @@ export const Request = () => {
 
   const getUserOrders = async () => {
     try {
-      const response1 = await axios.get(`http://localhost:8080/user/getMe`, {
-        withCredentials: true,
-      });
+      const response1 = await axios.get(`/user/getMe`);
 
-      const response2 = await axios.get(`http://localhost:8080/certificate/getById/${user?.user_id}`, {
-        withCredentials: true,
-      })
+      const response2 = await axios.get(`/certificate/getById/${user?.user_id}`)
 
       const response = [...response1?.data.orderList, ...response2?.data]
       response.map((order, index) => {
@@ -95,9 +91,7 @@ export const Request = () => {
 
   const getAllProduct = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/product/list", {
-        withCredentials: true,
-      });
+      const response = await axios.get("/product/list");
       setProductList([...response.data, {product_id: 0, product_name: "Giấy chuẩn đầu ra"}]); 
     } catch (error) {
       handleJwtExpired(error); 
@@ -161,14 +155,13 @@ export const Request = () => {
   const handleConfirmToCompleted = async (order_id, product_id, quantity) => {
     try {
       await axios.put(
-        "http://localhost:8080/order/confirmOrderStatus",
+        "/order/confirmOrderStatus",
         {
           orderId: order_id,
           productId: product_id,
           quantity: quantity,
           newStatus: 12,
-        },
-        { withCredentials: true }
+        }
       );
       handleOpenSnackBar();
       getUserOrders();

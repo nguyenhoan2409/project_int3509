@@ -5,11 +5,10 @@ import "./LoginSignup.css";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { MdError } from "react-icons/md";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-
 
 export const NewPasswordForForgottenPassword = () => {
   const [password, setPassword] = useState("");
@@ -51,14 +50,11 @@ export const NewPasswordForForgottenPassword = () => {
     }
   };
 
-  
-
   useEffect(() => {
     const verifyUrl = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/user/forgottenPassword/${param.id}/verify/${param.code}`,
-          { withCredentials: true }
+          `/user/forgottenPassword/${param.id}/verify/${param.code}`
         );
         setValid(true);
       } catch (error) {
@@ -71,28 +67,33 @@ export const NewPasswordForForgottenPassword = () => {
 
   const handleSubmit = async (e) => {
     try {
-      e.preventDefault(); 
-      validate("password"); 
-      if (password && confirmPassword && !errorConfirmPassword && !errorPassword) {
-        const response = await axios.patch('http://localhost:8080/user/createNewPassword', {
-          user_id: param.id, 
-          newPassword: password, 
-          code: param.code
-        }, {withCredentials: true}); 
+      e.preventDefault();
+      validate("password");
+      if (
+        password &&
+        confirmPassword &&
+        !errorConfirmPassword &&
+        !errorPassword
+      ) {
+        const response = await axios.patch("/user/createNewPassword", {
+          user_id: param.id,
+          newPassword: password,
+          code: param.code,
+        });
         if (response) {
-          handleOpenSnackBar(); 
+          handleOpenSnackBar();
           setTimeout(() => {
-            navigate('/'); 
-          }, 2000)
+            navigate("/");
+          }, 2000);
         }
       }
-    } catch(error) {
-      console.log(error); 
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   return (
     <>
-    <Snackbar
+      <Snackbar
         open={openSnackBar}
         autoHideDuration={1000}
         onClose={handleOpenSnackBar}
@@ -113,74 +114,74 @@ export const NewPasswordForForgottenPassword = () => {
         </div>
       ) : valid === true ? (
         <div className="submitEmailForForgottenPassword">
-        <form
-          onSubmit={handleSubmit}
-          className="submitEmailForForgottenPasswordFormContainer"
-        >
-          <TextField
-            label="Mật khẩu mới"
-            type="password"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
-                </InputAdornment>
-              ),
-            }}
-            error={!!errorPassword}
-            helperText={errorPassword}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              setErrorPassword("");
-              setMsg("");
-            }}
-            variant="outlined"
-            size="small"
-            fullWidth
-            sx={{mb: 2}}
-          />
-
-          <TextField
-            label="Nhập lại mật khẩu mới"
-            type="password"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <RiLockPasswordLine size={24} />
-                </InputAdornment>
-              ),
-            }}
-            error={!!errorConfirmPassword}
-            helperText={errorConfirmPassword}
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-              setErrorConfirmPassword("");
-              setMsg("");
-            }}
-            onBlur={() => {
-              validate("password");
-            }}
-            variant="outlined"
-            size="small"
-            fullWidth
-          />
-
-          {!errorPassword && <p className="erroInfo">{msg}</p>}
-
-          <Button
-            type="submit"
-            variant="contained"
-            size="large"
-            color="success"
-            fullWidth
-            sx={{
-              marginTop: "10px",
-            }}
+          <form
+            onSubmit={handleSubmit}
+            className="submitEmailForForgottenPasswordFormContainer"
           >
-            Đổi mật khẩu
-          </Button>
-        </form>
-      </div>
+            <TextField
+              label="Mật khẩu mới"
+              type="password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <RiLockPasswordLine size={24} />
+                  </InputAdornment>
+                ),
+              }}
+              error={!!errorPassword}
+              helperText={errorPassword}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrorPassword("");
+                setMsg("");
+              }}
+              variant="outlined"
+              size="small"
+              fullWidth
+              sx={{ mb: 2 }}
+            />
+
+            <TextField
+              label="Nhập lại mật khẩu mới"
+              type="password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <RiLockPasswordLine size={24} />
+                  </InputAdornment>
+                ),
+              }}
+              error={!!errorConfirmPassword}
+              helperText={errorConfirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                setErrorConfirmPassword("");
+                setMsg("");
+              }}
+              onBlur={() => {
+                validate("password");
+              }}
+              variant="outlined"
+              size="small"
+              fullWidth
+            />
+
+            {!errorPassword && <p className="erroInfo">{msg}</p>}
+
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              color="success"
+              fullWidth
+              sx={{
+                marginTop: "10px",
+              }}
+            >
+              Đổi mật khẩu
+            </Button>
+          </form>
+        </div>
       ) : (
         <div className="emailVerifyContainer">
           <MdError size={80} color="red" />

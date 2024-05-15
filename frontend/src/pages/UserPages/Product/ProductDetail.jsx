@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductDetail.css";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import Layout from "../../../components/Layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 import { RiProductHuntLine } from "react-icons/ri";
@@ -17,9 +17,7 @@ export const ProductDetail = ({ navigation }) => {
   const handleJwtExpired = useJwtExpiration(); 
   const getDetail = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/product/detail/${id}`, {withCredentials: true}
-      );
+      const response = await axios.get(`/product/detail/${id}`);
       setProduct(response.data);
     } catch (error) {
       handleJwtExpired(error); 

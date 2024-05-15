@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { useParams } from "react-router-dom";
 import { ScoresManagement } from "../ScoreLayout/ScoreLayout";
 import "./ScoresUpdate.css";
@@ -25,11 +25,7 @@ export const UpdateScores = () => {
 
   const getScoreDetail = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/score/search/${id}`, {
-          withCredentials: true
-        }
-      );
+      const response = await axios.get(`/score/search/${id}`);
       const scores = response.data.student;
       const score = scores[0];
       setScores(score);
@@ -62,7 +58,7 @@ export const UpdateScores = () => {
 
   const scoreUpdate = async () => {
     try {
-        const response = await axios.patch("http://localhost:8080/score/update", {
+        const response = await axios.patch("/score/update", {
           football_score: footballScore,
           basketball_score: basketballScore,
           tabletennis_score: tabletennisScore,
@@ -72,13 +68,8 @@ export const UpdateScores = () => {
           taekwondo_score: taekwondoScore,
           golf_score: golfScore,
           mssv: id,
-        },
-        {
-          withCredentials: true
-        })
-        await axios.get("http://localhost:8080/score/CDR", {
-          withCredentials: true
-        })
+        });
+        await axios.get("/score/CDR");
         getScoreDetail();
     } catch(error) {
       handleJwtExpired(error); 

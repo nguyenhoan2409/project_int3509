@@ -6,7 +6,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { MdDriveFileRenameOutline, MdOutlinePhone } from "react-icons/md";
 import { FaRegAddressCard } from "react-icons/fa";
 
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { Link, useNavigate } from "react-router-dom";
 import logoLogin from "../../../components/Assets/logo.svg";
 
@@ -111,7 +111,7 @@ export const Signup = () => {
          fullname &&
          phone && !errorEmail && !errorConfirmPassword && !errorPhone) {
             const response = await axios.post(
-            "http://localhost:8080/register",
+            "/register",
             {
               password: password,
               fullname: fullname,
@@ -119,8 +119,7 @@ export const Signup = () => {
               phone_number: phone,
               address: address,
               role_id: 2,
-            },
-            { withCredentials: true }
+            }
           );
           if (response?.data) {
             console.log(response.data);

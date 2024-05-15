@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ProductsManagement } from "../ProductsLayout/Products.admin";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import "./CreateProduct.css";
 import Layout from "~/components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
@@ -71,15 +71,13 @@ export const CreateProduct = () => {
 
   const addProduct = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/product/add", {
+      const response = await axios.post("/product/add", {
         product_name,
         price,
         quantity,
         thumbnail,
         description,
         product_type,
-      }, {
-        withCredentials: true,
       });
       setMsg("Thêm sản phẩm thành công");
       navigate("/admin/products/list");

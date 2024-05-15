@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+import axios from "~/hooks/use-axios";
 import { useNavigate } from 'react-router-dom';
 import { useJwtExpiration } from '~/hooks/use-jwt-expired';
 
@@ -34,13 +34,11 @@ export const ChangePassword = () => {
 
   const updatePassword = async () => {
     try {
-      await axios.patch(`http://localhost:8080/user/update/password`, {
+      await axios.patch(`/user/update/password`, {
         user_id: user?.user_id,
         password: password,
         newPassword: newPassword,
-      },
-      { withCredentials: true }
-      );
+      });
       const result = window.confirm('Đổi mật khẩu thành công. Tiếp tục phiên đăng nhập?');
       if (!result) {
           navigate('/')

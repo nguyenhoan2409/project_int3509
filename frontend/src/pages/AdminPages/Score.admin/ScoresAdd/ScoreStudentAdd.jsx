@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import axios from 'axios';
+import axios from "~/hooks/use-axios";
 import Layout from '~/components/Layout/Layout';
 import './ScoreStudentAdd.css'
 import * as XLSX from 'xlsx';
@@ -66,13 +66,11 @@ export const ScoreStudentAdd = () => {
 
   const addStudent = async (data) => {
     try {
-      const res = await axios.post("http://localhost:8080/student/add", {
+      const res = await axios.post("/student/add", {
         mssv: data.mssv,
         fullname: data.fullname,
         class: data.class,
         university: data.university,
-      }, {
-        withCredentials: true,
       });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -85,16 +83,12 @@ export const ScoreStudentAdd = () => {
     try {
       const scoreName = subject;
       const score = data[scoreName];
-      const res = await axios.patch("http://localhost:8080/score/add", {
+      const res = await axios.patch("/score/add", {
         mssv : data.mssv,
         subject: subject,
         score: score,
-      }, {
-        withCredentials: true,
-      })
-      await axios.get("http://localhost:8080/score/CDR", {
-          withCredentials: true
-        })
+      });
+      await axios.get("/score/CDR");
     } catch (error) { 
       console.error("Error fetching data:", error);
       if (error.response) {

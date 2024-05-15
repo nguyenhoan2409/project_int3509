@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { LogOut, reset } from '~/features/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from "~/hooks/use-axios";
 import { FaEdit } from "react-icons/fa";
 import "./ProductsList.css"
 import { ProductsManagement } from '../ProductsLayout/Products.admin';
@@ -16,9 +15,7 @@ export const ProductsList = () => {
 
     const getProducts = async () => {
         try {
-            const res = await axios.get("http://localhost:8080/product/list", {
-                withCredentials: true,
-            });
+            const res = await axios.get("/product/list");
             setProducts(res.data);
         } catch (error) {
             handleJwtExpired(error); 

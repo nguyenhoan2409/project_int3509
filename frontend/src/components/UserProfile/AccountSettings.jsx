@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './AccountSettings.css'
-import axios from 'axios';
+import axios from "~/hooks/use-axios";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useJwtExpiration } from '~/hooks/use-jwt-expired';
@@ -19,7 +19,7 @@ export const AccountSetting = () => {
 
   const getUserDetail = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/user/detail/${user?.user_id}`, {withCredentials: true}); 
+      const response = await axios.get(`/user/detail/${user?.user_id}`); 
       setFullname(response.data.fullname); 
       setEmail(response.data.email); 
       setPhoneNumber(response.data.phone_number); 
@@ -36,15 +36,13 @@ export const AccountSetting = () => {
 
   const updateUser = async () => {
     try {
-      await axios.put(`http://localhost:8080/user/update`, {
+      await axios.put(`/user/update`, {
           fullname : fullname,
           email : email,
           phone_number : phone_number,
           address : address,
           user_id: user?.user_id
-      }, {
-        withCredentials: true
-      })
+      });
       alert("Cập nhật thông tin người dùng thành công"); 
       navigate('/user/:activepage');
     } catch (error) {

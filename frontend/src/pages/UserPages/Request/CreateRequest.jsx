@@ -19,7 +19,7 @@ import Layout from "../../../components/Layout/Layout";
 import { RiSubtractFill } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import InputAdornment from "@mui/material/InputAdornment";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -92,9 +92,7 @@ export const CreateRequest = () => {
 
   const getTimelineList = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/timeline/getAll", {
-        withCredentials: true,
-      });
+      const res = await axios.get("/timeline/getAll");
       setTimelineList(res.data);
     } catch (error) {
       console.log(error);
@@ -103,9 +101,7 @@ export const CreateRequest = () => {
 
   const getProductDetail = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/product/detail/${product_id}`, {withCredentials: true}
-      );
+      const response = await axios.get(`/product/detail/${product_id}`);
       setTotalMoney(response.data[0].price);
       setProduct(response.data[0]);
     } catch (error) {
@@ -166,7 +162,7 @@ export const CreateRequest = () => {
       validate("timeline");
       if (rentalDate && returnDate && timelineId && !errorReturnDate) {
         const res = await axios.post(
-          "http://localhost:8080/order/createOrder",
+          "/order/createOrder",
           {
             user_id: user?.user_id,
             product_id: product.product_id,
@@ -178,8 +174,7 @@ export const CreateRequest = () => {
             status:
               product.product_type == 1 ? 1 : product.product_type == 2 ? 9 : 5,
             note: note,
-          },
-          { withCredentials: true }
+          }
         );
         handleOpenSnackBar();
         setTimeout(() => {
@@ -196,7 +191,7 @@ export const CreateRequest = () => {
     try {
       e.preventDefault(); 
       const res = await axios.post(
-        "http://localhost:8080/order/createOrder",
+        "/order/createOrder",
         {
           user_id: user?.user_id,
           product_id: product.product_id,
@@ -207,8 +202,7 @@ export const CreateRequest = () => {
           return_date: moment().locale('vi').add(5, "days").format('YYYY-MM-DD'),
           status: 9,
           note: (!note) ? ('M' + ', ' + phone + ', ' + address) : (note + ', ' + phone + ', ' + address)
-        },
-        { withCredentials: true }
+        }
       );
       handleOpenSnackBar();
       setTimeout(() => {

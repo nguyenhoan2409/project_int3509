@@ -5,7 +5,7 @@ import { getMe, LogOut, reset } from "~/features/authSlice";
 import Layout from "~/components/Layout/Layout";
 import { AppView } from "~/sections/overview/view";
 import "./AdminHome.scss";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const AdminHome = () => {
@@ -17,9 +17,7 @@ export const AdminHome = () => {
   const getStatisticalData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:8080/admin/statisticalData", {
-        withCredentials: true,
-      });
+      const response = await axios.get("/admin/statisticalData");
       setStatisticalData(response.data);
     } catch (error) {
       handleJwtExpired(error); 

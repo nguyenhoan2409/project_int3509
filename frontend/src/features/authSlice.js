@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "~/hooks/use-axios";
 import Cookies from "universal-cookie";
 
 const initialState = {
@@ -12,10 +12,10 @@ const initialState = {
 
 export const LoginUser = createAsyncThunk("user/login", async(user, thunkAPI) => {
     try {
-        const response = await axios.post('http://localhost:8080/login', {
+        const response = await axios.post('/login', {
             email: user.email,
             password: user.password
-        }, {withCredentials: true});
+        });
         return response.data.user;
     } catch (error) {
         if(error.response){
@@ -27,7 +27,7 @@ export const LoginUser = createAsyncThunk("user/login", async(user, thunkAPI) =>
 
 export const getMe = createAsyncThunk("user/getMe", async(cookies, thunkAPI) => {
     try {
-        const response = await axios.get('http://localhost:8080/user/getMe', {withCredentials: true});
+        const response = await axios.get('/user/getMe');
         return response.data;
     } catch (error) {
         if(error.response){
@@ -38,7 +38,7 @@ export const getMe = createAsyncThunk("user/getMe", async(cookies, thunkAPI) => 
 });
 
 export const LogOut = createAsyncThunk("user/logout", async() => {
-    await axios.delete('http://localhost:8080/logout', {withCredentials: true});
+    await axios.delete('/logout');
 });
 
 export const authSlice = createSlice({
