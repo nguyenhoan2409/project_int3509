@@ -26,6 +26,7 @@ import moment from "moment/moment";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useSelector } from "react-redux";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const Request = () => {
   const theme = useTheme();
@@ -43,6 +44,7 @@ export const Request = () => {
   const {user} = useSelector((state) => state.auth); 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const handleJwtExpired = useJwtExpiration(); 
   const themeWithLocale = useMemo(
     () => createTheme(theme, locales["viVN"]),
     []
@@ -86,9 +88,8 @@ export const Request = () => {
       setOrderList(response);
       setInitialOrderList(response);
     } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data?.msg);
-      }
+      handleJwtExpired(error); 
+      setMsg(error?.response?.data?.msg);
     }
   };
 
@@ -99,9 +100,8 @@ export const Request = () => {
       });
       setProductList([...response.data, {product_id: 0, product_name: "Giấy chuẩn đầu ra"}]); 
     } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.msg);
-      }
+      handleJwtExpired(error); 
+      setMsg(error?.response?.data?.msg);
     }
   };
 

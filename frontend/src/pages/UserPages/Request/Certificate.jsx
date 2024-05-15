@@ -6,6 +6,7 @@ import axios from "axios";
 import Layout from "../../../components/Layout/Layout";
 import { useSelector } from "react-redux";
 import { CreateRequest } from "./CreateRequest";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const Certificate = () => {
     const { id } = useParams();
@@ -16,6 +17,7 @@ export const Certificate = () => {
     const [msg, setMsg] = useState("");
     const {user} = useSelector((state) => state.auth); 
     const navigate = useNavigate();
+    const handleJwtExpired = useJwtExpiration(); 
     function handleSubmit(event) {
         event.preventDefault();
     }
@@ -35,6 +37,7 @@ export const Certificate = () => {
             setMsg("Bạn chưa đạt chuẩn đầu ra")
           }
         } catch (error) {
+          handleJwtExpired(error); 
           console.error("Error fetching data:", error);
           if (error.response) {
             console.error("Server responded with:", error.response.data);
@@ -62,6 +65,7 @@ export const Certificate = () => {
           navigate("/request");
           }
         } catch (error) {
+          handleJwtExpired(error); 
           console.error("Error fetching data:", error);
           if (error.response) {
             console.error("Server responded with:", error.response.data);

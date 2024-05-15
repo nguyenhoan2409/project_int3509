@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ProductsManagement } from "../ProductsLayout/Products.admin";
 import './UpdateProduct.css'
 import Layout from "~/components/Layout/Layout";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const UpdateProduct = () => {
   const { id } = useParams();
@@ -16,6 +17,8 @@ export const UpdateProduct = () => {
   const [isFilled, setIsFilled] = useState(false);
   const [msg, setMsg] = useState();
   const navigate = useNavigate();
+  const handleJwtExpired = useJwtExpiration(); 
+
   const handleUpdate = () => {
     // Kiểm tra các trường bắt buộc trước khi cập nhật sản phẩm
     if  (price === ''|| quantity === '' || thumbnail === '' || product_type=== '') {
@@ -72,6 +75,7 @@ export const UpdateProduct = () => {
       setThumbnail(product.thumbnail);
       setOrderType(product.product_type);
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
@@ -95,6 +99,7 @@ export const UpdateProduct = () => {
         navigate('/admin/products/list'); 
       }, 1000)
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);

@@ -8,6 +8,7 @@ import Layout from "~/components/Layout/Layout";
 import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { useDispatch } from "react-redux";
 import TablePagination from "@mui/material/TablePagination";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const ScoresList = () => {
   const [mssv, setMssv] = useState("");
@@ -27,12 +28,15 @@ export const ScoresList = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const handleJwtExpired = useJwtExpiration(); 
+
   const getScoreList = async () => {
     try {
       const response = await axios.get("http://localhost:8080/score/list", {withCredentials: true});
       setScores(response.data);
       setInitialScoreList(response.data);
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);

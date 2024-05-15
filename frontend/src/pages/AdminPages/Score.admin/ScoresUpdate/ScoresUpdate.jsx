@@ -5,6 +5,7 @@ import { ScoresManagement } from "../ScoreLayout/ScoreLayout";
 import "./ScoresUpdate.css";
 import { PiStudentDuotone } from "react-icons/pi";
 import Layout from "~/components/Layout/Layout";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const UpdateScores = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ export const UpdateScores = () => {
   const [checkCDR, setCheckCDR] = useState();
   const [checkValue, setCheckValue] = useState(false);
   const [msg, setMsg] = useState("");
+  const handleJwtExpired = useJwtExpiration(); 
 
   const getScoreDetail = async () => {
     try {
@@ -47,6 +49,7 @@ export const UpdateScores = () => {
         setCheckValue(false);
       }
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
@@ -78,6 +81,7 @@ export const UpdateScores = () => {
         })
         getScoreDetail();
     } catch(error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
     }
   }

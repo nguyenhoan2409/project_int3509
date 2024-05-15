@@ -44,7 +44,7 @@ describe('Update Product Test', () => {
 
     // Test thumbnail
     it('Thumbnail Test 1', () => {
-        cy.get('.update-product-right').find('input[name="thumbnail"]').selectFile('c:/Workspace/project_int3509/testing/cypress/e2e/image/test.jpg')
+        cy.get('.update-product-right').find('input[name="thumbnail"]').selectFile('cypress/e2e/image/test.jpg')
         cy.get('.update-product-right').find('.btn-update-product').click()
         cy.get('.msg-update').should('contain', "Đã cập nhật sản phẩm thành công")
         cy.url().should('eq', 'http://localhost:3000/admin/products/list')

@@ -3,11 +3,13 @@ import "./ShopCategory.css";
 import { Item } from "../../../components/Item/Item";
 import Layout from "../../../components/Layout/Layout";
 import axios from "axios";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 
 export const ShopCategory = () => {
   const [productList, setProducts] = useState([]);
   const [orderType, setOrderType] = useState("");
+  const handleJwtExpired = useJwtExpiration(); 
   const getProducts = async () => {
     try {
       const res = await axios.get("http://localhost:8080/product/list", {
@@ -15,6 +17,7 @@ export const ShopCategory = () => {
       });
       setProducts(res.data);
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);

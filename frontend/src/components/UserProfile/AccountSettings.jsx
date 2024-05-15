@@ -3,10 +3,10 @@ import './AccountSettings.css'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useJwtExpiration } from '~/hooks/use-jwt-expired';
 
 export const AccountSetting = () => {
-  const [userInfo, setUserInfo] = useState({});
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
+  const { user } = useSelector(
     (state) => state.auth
   );
   const [fullname, setFullname] = useState();
@@ -15,6 +15,7 @@ export const AccountSetting = () => {
   const [address, setAddress] = useState();
   const [msg, setMsg] = useState(); 
   const navigate = useNavigate(); 
+  const handleJwtExpired = useJwtExpiration(); 
 
   const getUserDetail = async () => {
     try {
@@ -24,6 +25,7 @@ export const AccountSetting = () => {
       setPhoneNumber(response.data.phone_number); 
       setAddress(response.data.address); 
     } catch (error) {
+      handleJwtExpired(error); 
       console.log(error); 
     }
   }
@@ -46,6 +48,7 @@ export const AccountSetting = () => {
       alert("Cập nhật thông tin người dùng thành công"); 
       navigate('/user/:activepage');
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
@@ -68,7 +71,7 @@ export const AccountSetting = () => {
 
         <div className="form-group">
           <label htmlFor="email">Email<span>*</span></label>
-          <input type="email" name='email' id='email' value={email} className='profile-input' disabled/>
+          <input type="email" name='email' id='email' defaultValue={email} className='profile-input' disabled/>
         </div>
         <div className="form-group">
           <label htmlFor="text">Địa chỉ<span>*</span></label>

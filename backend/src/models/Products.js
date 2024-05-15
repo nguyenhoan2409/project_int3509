@@ -9,10 +9,6 @@ const Products = database.define(
         allowNull: false, 
         primaryKey: true
     },
-    category_id: {
-        type: DataTypes.INTEGER, 
-        allowNull: true,
-    },
     product_type: {
         type: DataTypes.INTEGER, 
         allowNull: true,
@@ -34,10 +30,6 @@ const Products = database.define(
         allowNull: true,
     },
     description: {
-        type: DataTypes.STRING, 
-        allowNull: true,
-    },
-    status: {
         type: DataTypes.STRING, 
         allowNull: true,
     },

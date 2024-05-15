@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useJwtExpiration } from '~/hooks/use-jwt-expired';
 
 export const ChangePassword = () => {
   const [password, setPassword] = useState("");
@@ -9,7 +10,8 @@ export const ChangePassword = () => {
   const [cfPassword, setCfPassword] = useState("");
   const [msg, setMsg] = useState("");
   const navigate = useNavigate(); 
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
+  const handleJwtExpired = useJwtExpiration(); 
+  const { user } = useSelector(
     (state) => state.auth
   )
 
@@ -44,6 +46,7 @@ export const ChangePassword = () => {
           navigate('/')
       } 
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       setMsg("Nhập mật khẩu cũ sai, vui lòng thử lại")
     }

@@ -4,20 +4,10 @@ import { useSelector } from 'react-redux';
 import { TbListDetails } from "react-icons/tb";
 
 export const YourOrders = () => {
-  const [orders, setOrders] = useState([])
-  const [msg, setMsg] = useState()
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
+  const {user} = useSelector(
     (state) => state.auth
   )
-  useEffect(() => {
-    if (user) {
-      setOrders(user.orderList)
-    }
-    if (isError) {
-      setMsg(message); 
-    }
-  }, [user, isError])
-
+  const orders = user?.orderList; 
   return (
     <div className="yourorders">
       <div className='title'>Lịch sử</div>

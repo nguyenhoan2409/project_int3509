@@ -7,6 +7,7 @@ import { TbCertificate } from "react-icons/tb";
 import TablePagination from "@mui/material/TablePagination";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import * as locales from "@mui/material/locale";
+import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const Score = () => {
   const theme = useTheme();
@@ -18,6 +19,7 @@ export const Score = () => {
   const [initialScoreList, setInitialScoreList] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const handleJwtExpired = useJwtExpiration(); 
   const themeWithLocale = useMemo(
     () => createTheme(theme, locales["viVN"]),
     []
@@ -36,6 +38,7 @@ export const Score = () => {
       setScores(response.data);
       setInitialScoreList(response.data);
     } catch (error) {
+      handleJwtExpired(error); 
       console.error("Error fetching data:", error);
       if (error.response) {
         console.error("Server responded with:", error.response.data);
