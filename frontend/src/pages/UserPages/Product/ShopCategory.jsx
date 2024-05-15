@@ -27,7 +27,6 @@ export const ShopCategory = () => {
   return (
     <div className="shop-category">
       <Layout>
-        {/* <img className="shopcategory-banner" src={image} /> */}
         <div className="title">Danh sách sản phẩm</div>
         <div className="shopcategory-products">
           {productList?.map((product) => (
