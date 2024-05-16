@@ -1,5 +1,6 @@
 const { QueryTypes } = require("sequelize");
 const { database } = require("../config/database");
+const moment = require('moment/moment');
 
 exports.getNotificationList = async function (req, res) {
   try {
@@ -34,15 +35,13 @@ exports.getNotificationDetail = async function (req, res) {
 
 exports.updateNotification = async function (req, res) {
   try {
-    const notification_id = req.body.notification_id;
     await database.query(
-      "UPDATE notifications SET tittle=:tittle, content=:content, url=:url WHERE notification_id =:notification_id ",
+      "UPDATE notification SET tittle=:tittle, content=:content WHERE notification_id =:notification_id ",
       {
         replacements: {
           tittle: req.body.tittle,
-          email: req.body.email,
-          url: req.body.url,
-          notification_id: notification_id,
+          content: req.body.content,
+          notification_id: req.body.notification_id,
         },
         type: QueryTypes.UPDATE,
       }
@@ -57,13 +56,14 @@ exports.createNotification = async function(req,res) {
         const tittle = req.body.tittle
         const content = req.body.content
         const url = req.body.url
+        const create_time = req.body.create_time
     
-        await database.query("INSERT INTO notification (tittle,content,url, create_time) VALUES (:tittle,:content,:url, :create_time)", {
+        await database.query("INSERT INTO notification (tittle, content,url, create_time) VALUES (:tittle,:content,:url, :create_time)", {
             replacements: {
                 tittle: tittle, 
                 content: content, 
                 url: url, 
-                create_time : create_time
+                create_time : create_time + " " + moment().locale('vi').format('HH:mm:ss')
             }, type: QueryTypes.INSERT
         })
         return res.status(200).json({msg: "Đã thêm thông báo thành công"});

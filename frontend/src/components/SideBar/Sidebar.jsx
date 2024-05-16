@@ -15,6 +15,7 @@ import {
   BsFilePersonFill,
   BsListCheck,
 } from "react-icons/bs";
+import { MdNotificationAdd } from "react-icons/md";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
@@ -49,8 +50,16 @@ export const Sidebar = () => {
               </div>
             </Link>
           </li>
+          <li className={`menu-list-item ${location.pathname === '/admin/notification' ? 'sidebar-active' : ''}`}>
+            <Link to={"/admin/notification"} onClick={() => window.scrollTo(0, 0)}>
+              <div className="menu-list-item-container">
+                <MdNotificationAdd className="menu-list-icon" size={24} />
+                <div>Quản lý thông báo</div>
+              </div>
+            </Link>
+          </li>
           <li className={`menu-list-item ${location.pathname === '/admin/products/list' || location.pathname === '/admin/products/add' ? 'sidebar-active' : ''}`}>
-            <Link to={"/admin/products/list"}>
+            <Link to={"/admin/products/list"} onClick={() => window.scrollTo(0, 0)}>
               <div className="menu-list-item-container">
                 <BsBagCheckFill className="menu-list-icon" size={24} />
                 <div>Quản lý sản phẩm</div>

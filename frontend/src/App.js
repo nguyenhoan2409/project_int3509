@@ -8,6 +8,7 @@ import { Login } from "./pages/AdminUserPages/LoginSignup/Login";
 import { CreateRequest } from "./pages/UserPages/Request/CreateRequest";
 import { RequestAdmin } from "./pages/AdminPages/Request/ResquestAdmin";
 import {HomePage} from "./pages/UserPages/Home/HomePage"
+import { NotificationPage } from "./pages/AdminPages/Notification/Notification";
 
 
 import { ProductDetail } from "./pages/UserPages/Product/ProductDetail";
@@ -52,6 +53,7 @@ function App() {
             {/* Admin routes */}
           
             <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
+            <Route path="/admin/notification" element={<NotificationPage />}></Route>
             <Route path="/admin/request" element={<RequestAdmin />}></Route>
             <Route path="/admin/users/list" element={<UserManagement/>}></Route>
             <Route path="/admin/products" element={<ProductsManagement/>}></Route>

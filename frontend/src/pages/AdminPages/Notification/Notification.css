@@ -1,0 +1,141 @@
+
+.hero-main-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 20px;
+}
+
+.notification-container-admin{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+} 
+.notification-admin {
+    height: 200px;
+    width: 100%;
+    box-shadow: 0 2px 3px 2px grey;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.notification-title-admin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    font-size: large;
+    font-weight: 500;
+}
+.notification-title-admin:hover {
+    color: green;
+}
+
+.notification-content-admin {
+    margin-right: 20px;
+    height: 100px;
+    font-size: medium;
+}
+
+.notification-img-admin {
+    padding: 10px;
+    height: 180px;
+    width: 180px;
+}
+.notification-btn-admin {
+    float: right;
+    margin-right: 20px;
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: #006d3a;
+}
+.notification-btn-admin:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+.create-notification-btn-admin {
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: #006d3a;
+}
+.create-notification-btn-admin:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.notification-header-admin {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.notification-close-admin {
+    color: black;
+    float: right;
+    font-weight: 700;
+}
+
+.notification-close-admin:hover {
+    cursor: pointer;
+    color: #006d3a;
+}
+
+.create-notification-form {
+    height: 200px;
+    box-shadow: 1px 2px 2px 1px grey;
+    margin-bottom: 20px ;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification-tittle {
+    margin-bottom: 10px;
+    font-size: large;
+    font-weight: 600;
+}
+.create-noti-header {
+    height: 40px;
+    width: 90%;
+    font-size: large;
+    text-align: center;
+    padding: 0 20px;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+
+.create-noti-content {
+    height: 100px;
+    width: 90%;
+    font-size: large;
+    text-align: center;
+    padding: 10px 20px;
+    border: none;
+    border-bottom: 1px solid grey;
+}
+
+.notification-time-admin {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: small;
+    color : rgb(68, 34, 236);
+}
+
+.update-notification-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

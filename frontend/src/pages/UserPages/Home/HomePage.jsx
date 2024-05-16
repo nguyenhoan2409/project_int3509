@@ -12,6 +12,7 @@ export const HomePage = () => {
   const [notificationList, setNotificationList] = useState([]);
   const [notificationDetail, setNotificationDetail] = useState([]);
   const [open, setOpen] = useState(false)
+  const [isSeen, setIsSeen] = useState(false)
   useEffect(() => {
     dispatch(getMe());  
     getNotification();
@@ -41,15 +42,15 @@ export const HomePage = () => {
   } 
 };
 
-const handleOpen = async (notification) => {
+const handleOpen =  (notification) => {
   setOpen(true)
   setNotificationDetail(notification)
 }
-console.log(notificationDetail)
-const handleClose = async (notification) => {
+
+const handleClose = () => {
    setOpen(false)  
 }
-console.log(open, notificationDetail)
+
   return (
     <div className="hero">
       <Layout>
@@ -62,9 +63,12 @@ console.log(open, notificationDetail)
                 <div className="notification">
                       <img src={notification.url} alt="" className="notification-img"/>
                 <div className="notification-right">
+                      <div style={{display: 'flex', justifyContent: 'space-between'}}>
                       <div className="notification-title">{notification.tittle}</div>
+                      <div style={{color: 'green', fontSize: '20px'}}>...</div>
+                        </div>
                       <div className="notification-content">
-                        {notification.content.length > 20 ? notification.content.slice(0, 150) + "..." : notification.content} 
+                        {notification.content.length > 150 ? notification.content.slice(0, 150) + "..." : notification.content} 
                         <div className="notification-time"> Ngày đăng : {notification.create_time}</div>
                         </div>
                     
@@ -84,7 +88,7 @@ console.log(open, notificationDetail)
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            width: 600,
             boxShadow: "2px black",
             p: 4,
           },
@@ -94,7 +98,9 @@ console.log(open, notificationDetail)
                 <h2>Chi tiết thông báo</h2> 
                  <p className="notification-close" onClick={handleClose}>X </p>
           </div>
+        <div>{notificationDetail.tittle}</div>
         <div>{notificationDetail.content}</div>
+        <div className="notification-time"> Ngày đăng : {notificationDetail.create_time}</div>
       </Modal>
       }
           </div>

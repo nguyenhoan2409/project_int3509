@@ -1,12 +1,11 @@
 .hero {
-    background: #eef0ef;
+    background: white;
 }
 .hero-main {
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 20px;
+    margin-right: 20px;
     padding-bottom: 25px;
     flex: 1;
-    background-color: white;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -22,6 +21,7 @@
 .notification {
     height: 200px;
     width: 95%;
+    padding-right: 20px;
     box-shadow: 0 2px 3px 2px grey;
     display: flex;
     flex-direction: row;
@@ -30,7 +30,7 @@
 
 .notification-title {
     margin-top: 10px;
-    font-size: x-large;
+    font-size: large;
     font-weight: 500;
 }
 .notification-title:hover {
@@ -77,4 +77,11 @@
 
 .notification-close:hover {
     color: green;
+}
+
+.notification-time {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: small;
+    color : rgb(68, 34, 236);
 }
