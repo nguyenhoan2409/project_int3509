@@ -22,6 +22,10 @@ const Notification = database.define(
         type: DataTypes.STRING, 
         allowNull: true,
     },
+    create_time: {
+        type: DataTypes.STRING, 
+        allowNull: true,
+    },
 }
 );
 

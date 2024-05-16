@@ -1,13 +1,11 @@
 import React, { useEffect, useState} from "react";
 import "./HomePage.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { getMe } from "~/features/authSlice";
 import Layout from "../../../components/Layout/Layout";
 import axios from "axios";
 import Modal from 'react-modal';
-import { IoMdClose } from "react-icons/io";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
+import moment from "moment/moment";
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -24,10 +22,15 @@ export const HomePage = () => {
       const response = await axios.get("http://localhost:8080/home/notification", {
         withCredentials: true,
       });
-      const notification = response.data;
       setNotificationList([]);
-      for(let i = notification.length - 1; i >= 0; i--) {
-        setNotificationList((notificationList) => [...notificationList, notification[i]]);
+      const response2 = response.data;
+      response2.map((notice, index) => {
+        notice.create_time = moment
+          .utc(notice.create_time)
+          .format("DD-MM-YYYY, HH:mm:ss");
+      });
+      for(let i = response2.length - 1; i >= 0; i--) {
+        setNotificationList((notificationList) => [...notificationList, response2[i]]);
       }
 
     } catch (error) {
@@ -62,7 +65,9 @@ console.log(open, notificationDetail)
                       <div className="notification-title">{notification.tittle}</div>
                       <div className="notification-content">
                         {notification.content.length > 20 ? notification.content.slice(0, 150) + "..." : notification.content} 
+                        <div className="notification-time"> Ngày đăng : {notification.create_time}</div>
                         </div>
+                    
                       <button className="notification-btn" onClick={() => handleOpen(notification)}> Chi tiết </button>
               </div>
               </div>

@@ -58,11 +58,12 @@ exports.createNotification = async function(req,res) {
         const content = req.body.content
         const url = req.body.url
     
-        await database.query("INSERT INTO notification (tittle,content,url) VALUES (:tittle,:content,:url)", {
+        await database.query("INSERT INTO notification (tittle,content,url, create_time) VALUES (:tittle,:content,:url, :create_time)", {
             replacements: {
                 tittle: tittle, 
                 content: content, 
                 url: url, 
+                create_time : create_time
             }, type: QueryTypes.INSERT
         })
         return res.status(200).json({msg: "Đã thêm thông báo thành công"});
