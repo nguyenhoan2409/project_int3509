@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {Home} from "./pages/UserPages/Home/home"
 import { Request } from "./pages/UserPages/Request/Request";
 import { Score } from "./pages/UserPages/Score/Score";
 import { Profile } from "./pages/AdminUserPages/Profile/Profile";
@@ -8,6 +7,8 @@ import { Signup } from "./pages/AdminUserPages/LoginSignup/Signup";
 import { Login } from "./pages/AdminUserPages/LoginSignup/Login";
 import { CreateRequest } from "./pages/UserPages/Request/CreateRequest";
 import { RequestAdmin } from "./pages/AdminPages/Request/ResquestAdmin";
+import {HomePage} from "./pages/UserPages/Home/HomePage"
+import { NotificationPage } from "./pages/AdminPages/Notification/Notification";
 
 
 import { ProductDetail } from "./pages/UserPages/Product/ProductDetail";
@@ -31,7 +32,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />}></Route>
+          <Route path="/" element={<Login/>}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/user/:id/verify/:code" element={<EmailVerify />}></Route>
           <Route path="/user/forgottenPassword/:id/verify/:code" element={<NewPasswordForForgottenPassword />}></Route>
@@ -39,7 +40,7 @@ function App() {
           
             {/* User routes */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/home" element={<Home />}></Route>
+            <Route path="/home" element={<HomePage />}></Route>
             <Route path="/score" element={<Score />}></Route>
             <Route path="/request" element={<Request />}></Route>
             <Route path="/create-request/:product_id" element={<CreateRequest />}></Route>
@@ -52,6 +53,7 @@ function App() {
             {/* Admin routes */}
           
             <Route path="/admin/dashboard" element={<AdminHome/>}></Route>
+            <Route path="/admin/notification" element={<NotificationPage />}></Route>
             <Route path="/admin/request" element={<RequestAdmin />}></Route>
             <Route path="/admin/users/list" element={<UserManagement/>}></Route>
             <Route path="/admin/products" element={<ProductsManagement/>}></Route>

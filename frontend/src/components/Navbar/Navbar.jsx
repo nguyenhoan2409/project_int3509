@@ -77,7 +77,7 @@ export const Navbar = () => {
           <li>
             <hr className={`${location.pathname === '/home' ? 'navbar-active' : 'navbar-inactive'}`}></hr>
             <Link to="/home" className={`nav-link ${scrolled ? 'nav-link-scrolled' : ''}`} onClick={handleTabClick}>
-              Giới thiệu
+              Trang chủ
             </Link>
           </li>
           <li>

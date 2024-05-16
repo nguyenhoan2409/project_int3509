@@ -35,6 +35,7 @@ require('./routes/OrderRoutes')(app);
 require('./routes/UserRoute')(app); 
 require('./routes/TimelineRoute')(app); 
 require('./routes/CertificateRoutes')(app); 
+require('./routes/NotificationRoutes')(app);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

@@ -168,15 +168,12 @@ export const UserManagement = () => {
            <option>Người dùng </option>
            <option>Quản trị viên </option>
           </select>
-
-        <div className="search-btn-admin">
           <button
             className="search-user-btn-admin"
             onClick={handleFilterUser}
           >
             Tìm kiếm
           </button>
-        </div>
       </div>
 
      <div style={{marginLeft : "20px", marginRight : "20px"}} >
