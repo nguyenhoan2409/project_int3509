@@ -3,11 +3,7 @@ import "./ProductDetail.css";
 import axios from "axios";
 import Layout from "../../../components/Layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
-import { RiProductHuntLine } from "react-icons/ri";
 import { AiOutlineDollar } from "react-icons/ai";
-import { FaStar } from "react-icons/fa";
-import { FaStarHalfAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { useJwtExpiration } from "~/hooks/use-jwt-expired";
 
 export const ProductDetail = ({ navigation }) => {

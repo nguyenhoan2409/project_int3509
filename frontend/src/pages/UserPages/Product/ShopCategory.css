@@ -2,7 +2,7 @@
 .shopcategory-products {
     margin: 0px 60px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr ;
     row-gap: 80px;
-    column-gap : 10px;
+    column-gap : 15px;
 }

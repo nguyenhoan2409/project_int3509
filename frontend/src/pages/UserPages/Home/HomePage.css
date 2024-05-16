@@ -1,0 +1,80 @@
+.hero {
+    background: #eef0ef;
+}
+.hero-main {
+    margin-left: 200px;
+    margin-right: 200px;
+    padding-bottom: 25px;
+    flex: 1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+} 
+.notification {
+    height: 200px;
+    width: 95%;
+    box-shadow: 0 2px 3px 2px grey;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.notification-title {
+    margin-top: 10px;
+    font-size: x-large;
+    font-weight: 500;
+}
+.notification-title:hover {
+    color: green;
+}
+
+.notification-content {
+    height: 100px;
+    font-size: medium;
+    margin-top: 10px;
+}
+
+.notification-img {
+    padding: 10px;
+    height: 180px;
+    width: 180px;
+}
+.notification-btn {
+    flex: 1;
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: #006d3a;
+}
+.notification-btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.notification-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.notification-close {
+    color: black;
+    font-weight: 700;
+}
+
+.notification-close:hover {
+    color: green;
+}
