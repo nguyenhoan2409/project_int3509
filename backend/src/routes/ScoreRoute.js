@@ -3,20 +3,20 @@ module.exports = function (router) {
     var scoreController = require('../controllers/ScoreController')
     var verifyUser = require('../middleware/AuthUser'); 
 
-    router.get('/score/list', verifyUser.isAuth, scoreController.getAllScore)
+    router.get('/api/score/list', verifyUser.isAuth, scoreController.getAllScore)
     
-    router.get('/score/search/:id', verifyUser.isAuth, scoreController.searchScore)
+    router.get('/api/score/search/:id', verifyUser.isAuth, scoreController.searchScore)
 
-    router.patch('/score/update', verifyUser.isAuth,scoreController.updateScore)
+    router.patch('/api/score/update', verifyUser.isAuth,scoreController.updateScore)
 
-    router.get('/score/CDR', verifyUser.isAuth, scoreController.updateCDR)
+    router.get('/api/score/CDR', verifyUser.isAuth, scoreController.updateCDR)
 
-    router.get('/score/check/:id', verifyUser.isAuth, scoreController.checkCDR)
+    router.get('/api/score/check/:id', verifyUser.isAuth, scoreController.checkCDR)
 
-    router.delete('/score/delete/list', scoreController.deleteSTudentList)
+    router.delete('/api/score/delete/list', scoreController.deleteSTudentList)
 
-    router.post('/student/add', verifyUser.isAuth, scoreController.createStudent)
+    router.post('/api/student/add', verifyUser.isAuth, scoreController.createStudent)
 
-    router.patch('/score/add', verifyUser.isAuth, scoreController.addScore)
+    router.patch('/api/score/add', verifyUser.isAuth, scoreController.addScore)
 
 }
