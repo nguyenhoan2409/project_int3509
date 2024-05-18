@@ -4,7 +4,6 @@ import { UserSidebar } from "~/components/UserProfile/UserSidebar";
 import "./Profile.css";
 import { AccountSetting } from "~/components/UserProfile/AccountSettings";
 import { ChangePassword } from "~/components/UserProfile/ChangePassword";
-import { YourOrders } from "~/components/UserProfile/YourOrders";
 import AvatarEditor from "react-avatar-editor";
 import Layout from "../../../components/Layout/Layout";
 import { useSelector } from "react-redux";
@@ -31,7 +30,6 @@ export const Profile = () => {
             <div>
               {activepage === "accountsettings" && <AccountSetting />}
               {activepage === "changepassword" && <ChangePassword />}
-              {activepage === "yourorders" && user?.role_id === 2 && <YourOrders />}
             </div>
           </div>
         </div>

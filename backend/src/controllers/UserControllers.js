@@ -361,7 +361,7 @@ exports.checkEmailForForgottenPassword = async function (req, res) {
         user_id: user.user_id,
         code: crypto.randomBytes(32).toString('hex')
       });
-      const url = `http://localhost:3000/user/forgottenPassword/${user.user_id}/verify/${code.code}`;
+      const url = `http://14.225.218.250/user/forgottenPassword/${user.user_id}/verify/${code.code}`;
       await sendEmail(user.email, "Xác thực tài khoản", url);
     }
 

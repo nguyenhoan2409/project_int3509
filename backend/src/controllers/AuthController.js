@@ -39,7 +39,7 @@ exports.login = async function (req, res) {
 					user_id: user.user_id,
 					code: crypto.randomBytes(32).toString('hex')
 				});
-				const url = `http://localhost:3000/user/${user.user_id}/verify/${code.code}`;
+				const url = `http://14.225.218.250/user/${user.user_id}/verify/${code.code}`;
 				await sendEmail(user.email, "Xác thực tài khoản", url);
 			}
 
@@ -118,7 +118,7 @@ exports.register = async function (req, res) {
       user_id: user[0],
       code: crypto.randomBytes(32).toString('hex')
     });
-    const url = `http://localhost:3000/user/${user[0]}/verify/${code.code}`;
+    const url = `http://14.225.218.250/user/${user[0]}/verify/${code.code}`;
     await sendEmail(req.body.email, "Xác thực tài khoản", url);
     return res
       .status(201)

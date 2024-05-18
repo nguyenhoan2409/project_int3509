@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  int3509:
+    container_name: int3509-springboot
+    image: linhnv2002/int3509
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysqld:
+        condition: service_healthy
+    networks:
+      - java-app
+  mysqld:
+    container_name: int3509-mysql
+    image: mysql:8.3.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=int3509
+      - MYSQL_ROOT_PASSWORD=dw
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3306"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - java-app
+  int3509-fe:
+    container_name: int3509-react
+    image: linhnv2002/int3509-fe
+    ports:
+      - "3000:3000"
+volumes:
+  db_data:
+networks:
+  java-app:

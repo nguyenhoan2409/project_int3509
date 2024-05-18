@@ -56,18 +56,7 @@
     height: 55px;
 }
 
-.createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
-    background-color: #006d3a;;
-    color: white;
-    width: 150px;
-    height: 50px;
-    margin-top: 10px;
-}
 
-.createRequestBtn.css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {
-    background-color: #03924f;
-    color: white;
-}
 
 .request-filter-container {
     margin-left: 50px;

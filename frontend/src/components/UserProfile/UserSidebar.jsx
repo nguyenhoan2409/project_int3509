@@ -30,24 +30,6 @@ export const UserSidebar = ({ activepage }) => {
       }
 
       {
-        (user?.role_id === 2) ? ((activepage === 'yourorders') ?
-          <div className='s2'>
-            <div className='usersidebar-icon'> <IoCartOutline /> </div>
-
-            <span className='usersidebar-title'>Lịch sử</span>
-          </div>
-          :
-          <Link to='/user/yourorders' className='stylenone'>
-            <div className='s1'>
-              <div className='usersidebar-icon'> <IoCartOutline /></div>
-              <span className='usersidebar-title'>Lịch sử</span>
-            </div>
-          </Link>)
-          : <></>
-
-      }
-
-      {
         activepage === 'changepassword' ?
           <div className='s2'>
             <div className='usersidebar-icon'> <FaRegEye /> </div>

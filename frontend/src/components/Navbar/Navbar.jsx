@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { LogOut, reset } from "~/features/authSlice";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import logoLogin from "../Assets/logo.svg"
 
 export const Navbar = () => {
   const navigate = useNavigate(); 
@@ -69,7 +70,7 @@ export const Navbar = () => {
         </Alert>
       </Snackbar>
       <div className="nav-logo">
-        <img src="https://www.vnu.edu.vn/home/images/logo.png" alt="" className="logo-img" />
+        <img src={logoLogin} alt="" className="logo-img" />
       </div>
 
       <div className="nav-menu-container">

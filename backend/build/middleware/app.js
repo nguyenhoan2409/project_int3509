@@ -1,8 +1,0 @@
-"use strict";
-
-var ACCESS_TOKEN = "ABCDEF";
-var TOKEN_TIMELIFE = "45m";
-module.exports = {
-  ACCESS_TOKEN: ACCESS_TOKEN,
-  TOKEN_TIMELIFE: TOKEN_TIMELIFE
-};

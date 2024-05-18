@@ -427,9 +427,17 @@ export const CreateRequest = () => {
               {msg}
             </p>
             <Button
-              variant="outlined"
+              variant="contained"
               type="submit"
               className="createRequestBtn"
+              sx={{
+                backgroundColor: '#006d3a', 
+                color: 'white', 
+                '&:hover': {
+                  opacity: 0.9, 
+                  backgroundColor: '#006d3a'
+                }
+              }}
             >
               Tạo yêu cầu
             </Button>

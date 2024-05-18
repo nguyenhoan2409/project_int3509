@@ -83,7 +83,7 @@ export const NotificationPage = () => {
         const response = await axios.post("/admin/notification/create", {
           tittle: tittle,
           content: content,
-          url: "https://www.vnu.edu.vn/upload/2010/08/79/image/TT%20Giao%20duc%20The%20chat%20&%20The%20thao.jpg",
+          url: "https://i.ibb.co/GTBByjp/TT-Giao-duc-The-chat-The-thao.jpg",
           create_time: moment().locale("vi").format("YYYY-MM-DD"),
         });
         getNotification();
